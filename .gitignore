@@ -22,13 +22,31 @@
 *Notes.bib
 
 # Build output
+# (design/sim/out/ is intentionally tracked: sim plots + summaries)
 *.pdf
 build/
-out/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+
+# Obsidian per-user state (shared app/appearance/core-plugins config is kept)
+**/.obsidian/workspace*.json
+**/.obsidian/cache
+.trash/
+
+# Claude Code local settings
+**/.claude/settings.local.json
 
 # Editor / OS files
 .DS_Store
 Thumbs.db
+desktop.ini
 *.swp
 *~
 .vscode/
+*.gds.bak

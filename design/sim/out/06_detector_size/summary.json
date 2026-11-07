@@ -1,0 +1,42 @@
+[
+ {
+  "window_axial": 20,
+  "window_radial": 20,
+  "collection_pct": 1.4606656642678701,
+  "wire_length_mm": 2.0,
+  "L_uH": 2.0999999999999996,
+  "tau_ns": 42.0,
+  "dh_um": null,
+  "axial_grad": null
+ },
+ {
+  "window_axial": 30,
+  "window_radial": 30,
+  "collection_pct": 3.253931801257462,
+  "wire_length_mm": 4.5,
+  "L_uH": 4.725,
+  "tau_ns": 94.49999999999999,
+  "dh_um": -1.19,
+  "axial_grad": 0.000135
+ },
+ {
+  "window_axial": 45,
+  "window_radial": 30,
+  "collection_pct": 4.458868808299426,
+  "wire_length_mm": 6.75,
+  "L_uH": 7.0875,
+  "tau_ns": 141.75,
+  "dh_um": null,
+  "axial_grad": null
+ },
+ {
+  "window_axial": 60,
+  "window_radial": 30,
+  "collection_pct": 5.9218616724631135,
+  "wire_length_mm": 9.0,
+  "L_uH": 9.45,
+  "tau_ns": 188.99999999999997,
+  "dh_um": -2.04,
+  "axial_grad": 0.000245
+ }
+]

@@ -1,0 +1,17 @@
+{
+ "493 nm (cool/detect)": {
+  "full_chip_10mm": 0.01688840160624183,
+  "max_isthmus_mm_clip_1em6": 1.9879699248120304,
+  "max_isthmus_mm_clip_1em4": 3.239097744360903
+ },
+ "650 nm (repump)": {
+  "full_chip_10mm": 0.03225231914765824,
+  "max_isthmus_mm_clip_1em6": 1.5067669172932332,
+  "max_isthmus_mm_clip_1em4": 2.4691729323308276
+ },
+ "405 nm (PI step 2)": {
+  "full_chip_10mm": 0.00958993689788719,
+  "max_isthmus_mm_clip_1em6": 2.421052631578948,
+  "max_isthmus_mm_clip_1em4": 3.9609022556390983
+ }
+}

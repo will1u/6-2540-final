@@ -1,0 +1,5 @@
+* text=auto
+*.gds binary
+*.png binary
+*.pdf binary
+*.sh text eol=lf

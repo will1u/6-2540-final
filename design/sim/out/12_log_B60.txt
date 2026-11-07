@@ -1,0 +1,3 @@
+loading  y=   -600: null z = 50.06 um (x -0.00); RF-only [2.98740652 2.98800401] MHz, q = 0.302; DC freqs [0.8   2.899 2.967] MHz; |V|max 8.71 V; bounded False; radial axes at -100.7 deg
+readout  y=      0: null z = 50.02 um (x -0.02); RF-only [2.99474527 2.99520358] MHz, q = 0.303; DC freqs [0.8   2.892 2.989] MHz; |V|max 9.23 V; bounded False; radial axes at -100.3 deg
+transport: 61 steps, max |V| 7.38 V, max change per 10 um step 1.606 V, axial 0.800-0.800 MHz, height 50.02-50.07 um, bounded steps: 0
