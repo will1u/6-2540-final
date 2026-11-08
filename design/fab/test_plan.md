@@ -1,4 +1,4 @@
-> **Claude-authored.** Test plan from finished wafer to first trapped-ion readout, for the v2 dies `trap_die_v2_A30` (A30) and `trap_die_v2_B60` (B60); all test structures (T1–T7) are on the separate test die `test_die_v2` (one per 10 × 10.8 mm wafer tile). Numbers marked [team calc] were computed for this project. [verify] marks values to confirm against the source figure, the instrument or the lab. Pass criteria are starting points.
+> **Claude-authored.** Test plan from finished wafer to first trapped-ion readout, for the v3 10 × 10 mm dies `trap_die_v3_A30` (A30), `trap_die_v3_B60` (B60) and `trap_die_v3_NODET`; the test structures (T1–T4b, T6, T8) are on the separate 10 × 2.5 mm test die `test_die_v3`. v3 has no indium tin oxide (ITO): the readout window floor is bare SiO₂ (DESIGN_LOG step 17). Numbers marked [team calc] were computed for this project. [verify] marks values to confirm against the source figure, the instrument or the lab. Pass criteria are starting points.
 
 # Test plan
 
@@ -7,7 +7,7 @@
 **When:** step 17 (wafer, before dicing) and again after packaging (step 19, through the carrier pins).
 **Tool:** ProbeStation-Summit-11000 + SMUs.
 **Reference:** Dietl 2025 used a 120-needle card; we probe manually, so the tests are prioritised.
-**Pads:** trap-die pad names and coordinates from `gds/trap_die_v2_A30_pads.csv` (TL/TR/BL/BR rows, RF, C, SNS, SNG, GND-n, M1-n). Test-die structures are probed on their own pads; the test dies stand in for the trap dies of their run.
+**Pads:** trap-die pad names and coordinates from `gds/trap_die_v3_A30_pads.csv` (TL/TR/BL/BR rows, RF, C, SNS, SNG, GND-n, M1-n). Test-die structures are probed on their own pads; the test dies stand in for the trap dies of their run.
 
 **Safety rules for the SNSPD**
 - Never put more than 1 V or 100 nA across the meander.
@@ -24,21 +24,22 @@
 | a6 | NbN Rsq | T3 4-wire (test die) | ≤ 1 µA | Matches the step-7 value within 10 % | – |
 | a7 | **Meander R** | trap die SNS ↔ SNG; test die T4 (A30 meander) and T4b (B60 meander) | ≤ 1 V, ≤ 100 nA | ≈ 18 MΩ (A30) / 36 MΩ (B60) [team calc]; **ΔR/R₀ ≤ 10 %** (Todaro saw 12–30 % rises) | Todaro Supp. "Trap fabrication" |
 | a8 | SNSPD isolation | SNS + SNG tied ↔ M1; ↔ C | ≤ 1 V to M1; ≤ 10 V to C [verify] | > 1 GΩ | – |
-| a9 | Top ITO | T5 4-wire (test die); T5 outer finger ↔ M1 | ≤ 1 mA; 50 V | Rsq within 30 % of the witness; isolation ≤ 100 nA | – |
 | a10 | RF capacitance (packaged only) | RF pin ↔ ground pins | LCR at 1 MHz | A few pF from the chip [team calc from DESIGN_LOG step 10: 0.36 pF/mm per rail], plus the carrier. Record it to predict the resonator frequency | Stick 2010 (7 pF trap + CPGA) |
-| a11 | Buried-ITO grounding | T7 via chain (test die), end M1 pads | ≤ 100 µA [verify] | ITO links ≈ 4–7 kΩ + 14 × R_via; R_via ≤ 1 kΩ [team calc; verify] (`process_checks.md` section 3) | DESIGN_LOG step 10 (a floating buried ITO is 9× worse than none) |
+| a13 | **Ground link** (step 22) | each GND-n ↔ the nearest M1-n (trap die; the Au fill and M1 are one net through the eight fill-to-M1 vias) | 10 mA, 2-wire (4-wire if two probes fit per pad) | **< 10 Ω** 2-wire, probe contacts included. Expect ≲ 1 Ω: one Al square at ~0.3 Ω/sq plus the via contacts [team calc; contact resistance unknown, verify on W3]. Open or ≫ 10 Ω means AlF₃ / native oxide left at the via floor, or a broken seed on the via sidewall. The die is still usable with an M1 bond (step 19) | Hampel 2023 (mirror grounded through vias) |
 | a12 | Dose array | T8 D1–D7 (test die), each meander's two pads | ≤ 1 V, ≤ 100 nA | R vs dose factor: R ∝ 1/width. Breaks (open) or bridges (low R) mark the usable dose window [team inference] | `mask_list.md` section 2 |
 
 The trap's DC electrodes have one pad each (no Dietl loop), so continuity is only tested on T6 (test die). A broken lead shows up later as a missing DC response.
 
-**Order per die:** trap die a7 → a8 → a2 → a1 (a10 after packaging); test die a7 → a12 → a6 → a3 → a11 → a9 → a4 → a5. Low-voltage SNSPD tests come first.
+Since step 22, M1 and the Au ground fill are one net on chip, so in a1 and a2 "↔ M1" and "↔ ground fill" are the same measurement; probing both still checks the vias.
+
+**Order per die:** trap die a7 → a8 → a13 → a2 → a1 (a10 after packaging); test die a7 → a12 → a6 → a3 → a4 → a5. Low-voltage SNSPD tests come first.
 
 **Record:** pass/fail per die ID of `gds/run_<name>_map.csv`, per-die ΔR/R₀, leakage values.
 
 ## (b) Cryogenic SNSPD characterisation before trapping
 
 **Order:**
-1. **Test die**: T4 (A30 meander) or T4b (B60 meander) spare SNSPD, both with buried ITO + via + top ITO. Bond the T4/T4b pads (150 µm L22 pads at the bottom of 10 µm D2 wells, 110 × 110 µm openings; the test die was laid out for probing, so check the bond fits [verify]) and test in a dipstick or the trap cryostat [verify available cryostat].
+1. **Test die**: T4 (A30 meander) or T4b (B60 meander) spare SNSPD, under SiO₂ cap + D2 only (same stack as the trap-die detectors). Bond the T4/T4b pads (150 µm L22 pads at the bottom of 10 µm D2 wells, 110 × 110 µm openings; the test die was laid out for probing, so check the bond fits [verify]) and test in a dipstick or the trap cryostat [verify available cryostat].
 2. **Trap die** in the trap cryostat with the RF resonator connected.
 
 **Expected numbers** [team calc unless noted]:
@@ -49,7 +50,7 @@ The trap's DC electrodes have one pad each (no Dietl loop), so continuity is onl
 | L_k | ≈ 3.2–4.7 µH for A30 (70–105 pH/sq), so τ = L/50 Ω ≈ 64–94 ns (B60 ≈ 2×) |
 | I_sw at ~5 K | ~15–25 µA (scaled from Najafi 2015 for ~5 nm; 7 nm may be higher) |
 | Pulse height | ≈ 50 Ω × I_b ≈ 0.75–1.25 mV |
-| RF pickup bound | ≈ 0 with grounded buried ITO (2-D); 0.72 µA if the ITO ground is ineffective (Al only); 6.6 µA if the buried ITO floats (DESIGN_LOG step 10) |
+| RF pickup bound | ≈ 1.4 µA (Al mirror only, 10 µm SiO₂ kept over the window, no ITO; 2-D upper bound, DESIGN_LOG step 17), ~7–9 % of the estimated NbN switching current |
 
 | # | Measurement | Conditions | Plot | Compare with |
 |---|---|---|---|---|
@@ -106,12 +107,12 @@ SNSPD_G ─ bond ─ ground (or a matched 50 Ω for symmetric termination, see b
    - Set the bias gate to off.
 3. **RF:** 28 MHz, ramp to **53 V** (q ≈ 0.30, radial ≈ 3 MHz, depth ≈ 52 meV; DESIGN_LOG steps 1–2).
 4. **DC: load-zone set**
-   - The first row of `sim/out/12_final_chip/trap_die_v2_A30/waveforms.csv` (`sim/12_final_chip_check.py`; numbers in `summary.json` and `transport.png` in the same folder).
-   - Loading zone: GDS (−300, 0), ITVG y = −600 µm (readout zone GDS (300, 0) is the ITVG origin). Expected (DESIGN_LOG step 13, v2 GDS): null height 50.08 µm, axial 0.80 MHz, radial 2.89 / 2.97 MHz, radial axes tilted 10.7°, max |V| 9.05 V (`summary.json` → `loading`).
+   - The first row of `sim/out/12_final_chip/trap_die_v3_A30/waveforms.csv` (`sim/12_final_chip_check.py`; numbers in `summary.json` and `transport.png` in the same folder).
+   - Loading zone: GDS (−300, 0), ITVG y = −600 µm (readout zone GDS (300, 0) is the ITVG origin). Expected (DESIGN_LOG step 19, v3 GDS; same as v2 at the loading zone): null height 50.08 µm, axial 0.80 MHz, radial 2.89 / 2.97 MHz, radial axes tilted 10.7°, max |V| 9.05 V (`summary.json` → `loading`).
 5. **Load at the loading zone.**
    - 493 + 650 nm cooling; photoionisation (791 + 337/450 nm or 553/554 + 405 nm per the lab; Graham 2014, Shi 2023); oven with shutter, or ablation.
    - **SNSPD bias off**, because the PI beams scatter (DESIGN_LOG step 9: no stray-light rejection in the stack).
-   - Beam clipping on the narrow die (`sim/11_beam_clearance.py`) [team calc]: fraction of beam power hitting the surface 1.1 × 10⁻⁵ (493 nm), 1.1 × 10⁻⁴ (650 nm), 1.4 × 10⁻⁶ (405 nm). Bond wires at |x| ≥ 2.4 mm are outside the beam paths.
+   - Beam clipping on the 10 × 10 mm die (`sim/11_beam_clearance.py`, full-chip row) [team calc]: about 1.7 × 10⁻² of the 493 nm beam (3.2 × 10⁻² at 650 nm, 9.6 × 10⁻³ at 405 nm) hits the surface. Expect much more scattered light than on the v2 narrow die. Bond wires stay out of the beam-exit corners.
    - Detect with the external imaging system.
 6. **Micromotion at the loading zone**
    - Shim with the DC solution sets. Shim cost ≈ 0.45 / 0.16 / 0.02 V per 100 V/m in x / y / z (DESIGN_LOG step 3).
@@ -131,7 +132,7 @@ SNSPD_G ─ bond ─ ground (or a matched 50 Ω for symmetric termination, see b
 11. **Readout fidelity**
     - Prepare bright (S₁/₂) and dark (shelved to D₅/₂, method per the lab; 614 nm deshelve).
     - Compare threshold and adaptive analysis against Todaro (F = 0.9991 in a mean of 46 µs, adaptive; 0.9988 at 125 µs, threshold; PRL p. 4).
-12. **Heating:** sideband or Doppler-recooling heating rate at the loading zone vs the readout zone, bias off and on. Click-kick heating vs click rate (Todaro: 0.009(5) quanta/click unshielded). Expect less with the grounded top ITO; there is no published shielded number.
+12. **Heating:** sideband or Doppler-recooling heating rate at the loading zone vs the readout zone, bias off and on. Click-kick heating vs click rate (Todaro: 0.009(5) quanta/click unshielded). v3 has no conducting film over the window (bare SiO₂), so expect roughly Todaro's unshielded value; compare with NODET.
 
 ### Plots to make
 
@@ -146,4 +147,4 @@ SNSPD_G ─ bond ─ ground (or a matched 50 Ω for symmetric termination, see b
 | 7 | Micromotion-compensation fields at both zones | d6, d9 |
 | 8 | Bright / dark count histograms; fidelity vs readout time (threshold and adaptive) | d11 |
 | 9 | Heating rate at both zones; heating vs click rate | d12 |
-| 10 | Measured ion height vs prediction along the axis | d10, `sim/out/12_final_chip/trap_die_v2_A30/summary.json` (`null_along_axis`) |
+| 10 | Measured ion height vs prediction along the axis | d10, `sim/out/12_final_chip/trap_die_v3_A30/summary.json` (`null_along_axis`) |

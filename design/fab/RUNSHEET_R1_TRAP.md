@@ -1,4 +1,4 @@
-> **Claude-authored** run sheet for run 1a, `gds/run_R1_TRAP.gds`. William chose to run the trap-only process first on 2026-11-02; log that decision in `notes/decisions.md`.
+> **Claude-authored** run sheet for run 1a, `gds/run_R1_TRAP.gds`. The team chose to run the trap-only process first on 2026-11-02; log that decision in `notes/decisions.md`.
 > - This file lists only the steps this run uses, with the changes from the full traveler.
 > - Full recipes, sources and hazards are in `TRAVELER.md` under the same step numbers.
 > - **[verify]** marks values not yet checked on the MIT.nano tool.
@@ -9,12 +9,12 @@ Wafer ID: ________ Start date: ________ Operator: ________ GDS generated (date /
 
 ## 1. What this run is
 
-- **Wafer:** one 100 mm HR float-zone Si wafer. Only an 8-die block at the centre (20.4 × 10.8 mm) is written. Dies (`gds/run_R1_TRAP_map.csv`, die-centre coordinates in µm):
+- **Wafer:** one 100 mm HR float-zone Si wafer. Only an 8-die block at the centre (20.2 × 33.1 mm; v3 10 × 10 mm trap dies and 10 × 2.5 mm test dies) is written. Dies (`gds/run_R1_TRAP_map.csv`, die-centre coordinates in µm):
 
   | Die | Type | Centre (x, y) |
   |---|---|---|
-  | R1_TRAP-01, -03, -04, -05, -06, -08 | NODET trap die (`trap_die_v2_NODET`) | (∓5100, −4050 / 1350 / 4050) and (5100, −4050 / −1350 / 4050) |
-  | R1_TRAP-02, -07 | Trap-only test die (`test_die_v2_TRAP`): T1 Au comb, T2 Au/D2/M1 capacitor + M1 pad, T6 Au loop | (−5100, −1350), (5100, 1350) |
+  | R1_TRAP-01, -03, -04, -05, -07, -08 | NODET trap die (`trap_die_v3_NODET`, 10 × 10 mm) | (±5100, −11550 / 1350 / 11550) |
+  | R1_TRAP-02, -06 | Trap-only test die (`test_die_v3_TRAP`, 10 × 2.5 mm): T1 Au comb, T2 Au/D2/M1 capacitor + M1 pad, T6 Au loop | (±5100, −5100) |
 
 - **Goal:** qualify the trap process (thick oxide, plating, gap etch, dicing, packaging) and trap ions on a die with no detector stack. The resulting NODET die becomes the reference for the SNSPD dies in run 1b (`SIMPLIFICATIONS.md` S2).
 - **Stack (bottom to top):**
@@ -26,16 +26,16 @@ Wafer ID: ________ Start date: ________ Operator: ________ GDS generated (date /
   - 6 µm plated Au.
   - Gaps are etched to ~0.75 µm above the Al.
   - The ground plane sits 10.0 µm below the Au, which is the `ground_depth` used in every simulation.
-- **Skipped from the full traveler:** steps 4, 5, 6, 7, 8, 8a, 8b and 10 (spacer, NbN, leads, e-beam, cap, via, both ITOs). **No e-beam.** The NbN thermal-budget rules no longer apply, but the Al rule does: ≤ 300 °C after step 3.
+- **Skipped from the full traveler:** steps 4, 5, 6, 7, 8, 8a, 8b and 10 (spacer, NbN, leads, e-beam, cap; 8a, 8b and 10 no longer exist in v3). **No e-beam.** The NbN thermal-budget rules no longer apply, but the Al rule does: ≤ 300 °C after step 3.
 
 ### Lithography jobs (MLA150, all on `run_R1_TRAP.gds`)
 
 | Order | Step | Layer | Expose | Resist | Written area (whole run) | Align to |
 |---|---|---|---|---|---|---|
 | 1 | 1 | L1 MARK | drawn | positive ~1.3 µm | 0.03 mm² | wafer flat |
-| 2 | 3 | L10 M1 | **inverted** | positive 1.3–2 µm | Al kept on 1.69 cm²; the edge ring and mark cut-outs are exposed | L1 (±5 µm) |
-| 3 | 11 | L40 D2OPEN | drawn | thick positive ≥ 8 µm | 0.74 mm² (M1 bond openings, T2 M1 pad, L50 alignment crosses) | L1 (±5 µm) |
-| 4 | 13 | L50 AU mold | **inverted** | AZ nLOF 2070 ≥ 8 µm | Au plated on 1.65 cm² | L40 crosses (±1 µm) |
+| 2 | 3 | L10 M1 | **inverted** | positive 1.3–2 µm | Al kept on 6.06 cm²; the edge ring and mark cut-outs are exposed | L1 (±5 µm) |
+| 3 | 11 | L40 D2OPEN | drawn | thick positive ≥ 8 µm | 1.82 mm² (M1 bond openings, fill-to-M1 ground vias, T2 M1 pad, L50 alignment crosses) | L1 (±5 µm) |
+| 4 | 13 | L50 AU mold | **inverted** | AZ nLOF 2070 ≥ 8 µm | Au plated on 5.93 cm² | L40 crosses (±1 µm) |
 | 5 | 16a | L45 PROTECT | **inverted** | thick positive ≥ 10 µm | resist kept on 0.92 mm² (M1 openings + 10 µm) | L40/L50 (±2 µm) |
 
 Export each layer alone. Exclude layers 100 (notes) and 101 (outlines). Enter the mark coordinates as die coordinates plus the die centres above (`mask_list.md` section 4).
@@ -48,14 +48,14 @@ From TRAVELER section E, only these matter for R1_TRAP:
 |---|---|---|
 | **D2 stress** (part of W3) | 10 µm PECVD SiO₂ in 1–2 µm increments on a dummy Si/D1/Al wafer, with backside compensation; bow after each increment | Bow must stay ≤ 50 µm for the MLA chuck [verify limit] |
 | **Gap-etch rate** (part of W3) | The step-16 recipe on that D2 dummy | Etch rate and uniformity, so the stop lands ~0.75 µm above Al |
-| **W5 plating** | Seed + the real L50 job from `run_R1_TRAP.gds` on a bare-oxide dummy, plated to 6 µm | Current for this 1.65 cm² plated area, thickness map, gap profile |
+| **W5 plating** | Seed + the real L50 job from `run_R1_TRAP.gds` on a bare-oxide dummy, plated to 6 µm | Current for this 5.93 cm² plated area, thickness map, gap profile |
 
 Facility questions to settle first (TRAVELER A.3):
 - which tools accept wafers with Au on them (steps 15–19 come after plating);
 - whether a gold plating tank exists, its chemistry, and its minimum area;
 - the order of tool trainings.
 
-NbN and ITO questions can wait for run 1b.
+NbN questions can wait for run 1b.
 
 ## 3. Steps
 
@@ -91,14 +91,15 @@ Step numbers match `TRAVELER.md`. Only the changes for this run are spelled out.
 - **Change:** etch depth is ~10.0 µm over M1 (no cap or spacer), so ~28 min at 360 nm/min plus 10–15 % over-etch, in ≤ 5 min segments [verify rate].
 - Openings:
   - the four M1 bond openings per NODET die;
+  - the eight 150 × 150 µm fill-to-M1 ground vias per NODET die (DESIGN_LOG step 22); the Au ground fill plates over them in step 14;
   - the T2 M1 pad on the test dies;
   - the L50 alignment crosses at the mark sites.
 - The crosses sit over the M1 cut-outs, so the over-etch continues into D1 there. That only deepens the alignment topography, which is fine.
-- **Inspect:** Dektak depth; bright Al at each bond opening.
+- **Inspect:** Dektak depth; bright Al at each bond opening and each ground via.
 - [ ] Done — date: ____ etch time: ____ depth: ____
 
 ### 12. Plating seed Ti 15 nm / Au 50 nm
-- As in the traveler. No ITO or SNSPD pads to worry about.
+- As in the traveler, **including the in-situ Ar pre-clean** of the Al at the via floors and the sidewall-coverage note. No SNSPD pads to worry about.
 - [ ] Done — date: ____
 
 ### 13. L50 plating mold (nLOF ≥ 8 µm, inverted)
@@ -107,7 +108,7 @@ Step numbers match `TRAVELER.md`. Only the changes for this run are spelled out.
 - [ ] Done — date: ____ t_resist: ____ overlay: ____
 
 ### 14. Au electroplating, 6.0 µm
-- **Plated area:** 1.65 cm² for the whole run (6 NODET at ~0.204 cm² + 2 test dies) plus any open edge contact. Use the current calibrated on W5 [verify the bath's minimum area].
+- **Plated area:** 5.93 cm² for the whole run (6 NODET at ~0.92 cm² + 2 test dies at ~0.21 cm²) plus any open edge contact. Use the current calibrated on W5 [verify the bath's minimum area].
 - Plate in two halves and measure between them.
 - **Target:** 6.0 ± 0.5 µm; no nodules.
 - [ ] Done — date: ____ I / t: ____ thickness: ____
@@ -136,28 +137,29 @@ Step numbers match `TRAVELER.md`. Only the changes for this run are spelled out.
   - **a2:** DC leakage, 50 V, > 100 MΩ;
   - **a3:** T6 continuity;
   - **a4:** T2 capacitor;
-  - **a5:** T1 comb.
+  - **a5:** T1 comb;
+  - **a13:** ground link, GND-n ↔ M1-n < 10 Ω (step 22 vias).
 - The SNSPD safety rules and tests a6–a9, a11, a12 do not apply.
 - Record per die ID.
 - [ ] Done — date: ____ yield: ____
 
 ### 18. Protect, dice, strip
-- As in the traveler. Only the 8-die block needs cutting: 3 x-cuts and 5 y-cuts on the 10.2 / 2.7 mm pitch around the block centre.
+- As in the traveler. Only the 8-die block needs cutting: 3 x-cuts (x = −10 200, 0, +10 200 µm ± street) and 5 y-cuts at the block edges and between the stacked dies (the trap-die / test-die row heights are the same in both columns, so every cut runs straight through; positions from `gds/run_R1_TRAP_map.csv`).
 - [ ] Done — date: ____ chipping: ____
 
 ### 19. Package
 - As in the traveler, without the SNSPD pads.
-- Bond map: `gds/trap_die_v2_NODET_pads.csv` — 36 signal pads (RF, C, TL1–8, TR1–9, BL1–8, BR1–9), plus GND-1…4 on the Au fill and M1-1…4 on the Al (Al wedge wire).
-- **Bond ≥ 2 GND spots and ≥ 1 M1 opening to carrier ground.** There is no on-chip link between the Au fill and the Al.
+- Bond map: `gds/trap_die_v3_NODET_pads.csv` — 36 signal pads (RF, C, TL1–8, TR1–9, BL1–8, BR1–9), plus GND-1…4 on the Au fill and M1-1…4 on the Al (Al wedge wire).
+- **Bond ≥ 2 GND spots to carrier ground.** The eight ground vias tie the Au fill to the Al on chip (step 22). Bond ≥ 1 M1 opening as well, as a backup; if step 17 found the fill-to-M1 link open, the M1 bond is required.
 - RF capacitance (a10) after packaging.
 - [ ] Done — date: ____ die used: ____ carrier: ____
 
 ## 4. First trapping on a NODET die: expected values
 
-From DESIGN_LOG step 14 (`sim/out/12_log_v2_NODET.txt`, waveforms in `sim/out/12_final_chip/trap_die_v2_NODET/`):
+From DESIGN_LOG steps 14 and 19 (`sim/out/12_log_v3_NODET.txt`, waveforms in `sim/out/12_final_chip/trap_die_v3_NODET/`; identical to the v2 numbers):
 - **Drive:** 53 V at 28 MHz → radial ~2.98 MHz RF-only, q ≈ 0.30, depth ≈ 52 meV.
 - **Loading zone,** GDS (−300, 0): height 50.08 µm; axial 0.80 MHz; radial 2.89 / 2.97 MHz; radial axes tilted ~10°; max |V| 9.05 V.
-- **Readout zone,** GDS (300, 0): height 50.09 µm. There is no window recess on this die, so no −1.2 µm correction.
+- **Readout zone,** GDS (300, 0): height 50.09 µm. There is no window on this die, so no recess correction.
 - **Transport between them:** 61 steps; max |V| 7.33 V; ≤ 1.59 V per 10 µm step.
 - **Measurements that become the run-1b reference:**
   - secular frequencies against these numbers;
