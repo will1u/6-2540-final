@@ -1,0 +1,48 @@
+V_RF = 53.0 V at 28.0 MHz; stack {'t_ito': 0.06, 't_cap': 0.08, 't_nbn': 0.007, 't_sp': 0.234}; detector length 30.0 um
+case                            E_max V/m/V     E(x=0)    C_RN fF    I_pk uA  I@Todaro
+a: no Al, gnd 1 um below           1.48e+04   2.06e+03      0.106      0.986     0.392
+a2: no Al, Si substrate            1.79e+04   4.89e+03       2.44       22.7      9.04
+b: Al only                         1.12e+04   2.04e+03     0.0775      0.723     0.287
+c1: Al + ITO |x|<=25 gnd              6e-38  2.19e-101   1.51e-44   1.41e-43  5.59e-44
+c2: Al + ITO under RF gnd         3.96e-248  1.44e-311  9.95e-255  9.28e-254 3.69e-254
+d: Al + ITO floating               1.63e+04   1.63e+04       0.71       6.62      2.63
+e: Al + ITO on D2 (no etch)        9.04e+03        217     0.0703      0.656     0.261
+f: Al only, D2 kept, no ITO        1.03e+04   3.55e+03      0.153       1.42     0.565
+spacer 66 nm instead of 234 nm:
+  b: Al only                   E_max 1.03e+04  C_RN 0.0671 fF  I_pk 0.626 uA
+  c1: Al + ITO |x|<=25 gnd     E_max 8e-78  C_RN 6.96e-85 fF  I_pk 6.49e-84 uA
+  e: Al + ITO on D2 (no etch)  E_max 8.89e+03  C_RN 0.0598 fF  I_pk 0.558 uA
+v3 case f with the no-ITO stack {'t_ito': 0.0, 't_cap': 0.08, 't_nbn': 0.007, 't_sp': 0.238}: E_max 1.03e+04  C_RN 0.152 fF  I_pk 1.42 uA
+floating ITO potential (case d) per V of RF: 0.005218349358815546
+RF capacitance: {
+ "per_rail_pF_per_mm": {
+  "with_Al": 0.3604909935399207,
+  "without_Al_Si": 0.16246487596595083,
+  "ITO_under_rail": 0.3708236114062602
+ },
+ "both_rails_total_pF": {
+  "with_Al": 3.604909935399207,
+  "without_Al_Si": 1.6246487596595083
+ },
+ "displacement_current_both_rails_mA": {
+  "with_Al": 33.61307063547211,
+  "without_Al_Si": 15.148626316573916
+ },
+ "c2_rail_to_ITO_pF_per_mm": 0.3022376073713053,
+ "c1_rail_to_ITO_pF_per_mm": 0.014544370900247879,
+ "ITO_dissipation_mW_per_mm_both_rails": {
+  "Rs=40": 0.010098604211665745,
+  "Rs=400": 0.10098604211665745
+ },
+ "ITO_dissipation_c1_mW_per_mm_both_rails": {
+  "Rs=40": 7.148226675086798e-07,
+  "Rs=400": 7.148226675086797e-06
+ }
+}
+v3.1 scan, case f (no ITO), 5 nm grid:
+  W100_x15_dc0       C_RN 0.1509 fF (1.000 x ref)  I_pk 1.41 uA
+  W130_x15_dc0       C_RN 0.1542 fF (1.022 x ref)  I_pk 1.44 uA
+  W130_x16_dc0       C_RN 0.1796 fF (1.190 x ref)  I_pk 1.67 uA
+  W130_x17_dc0       C_RN 0.2113 fF (1.400 x ref)  I_pk 1.97 uA
+  W100_x17_dc0       C_RN 0.2068 fF (1.370 x ref)  I_pk 1.93 uA
+  W130_x15_dc0.01    C_RN 0.1676 fF (1.110 x ref)  I_pk 1.56 uA

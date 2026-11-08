@@ -24,7 +24,7 @@ import trapcalc as tc
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out", "01_analytic_fivewire")
 os.makedirs(OUT, exist_ok=True)
 
-H_TARGET = 50.0      # um, ion height (William's choice)
+H_TARGET = 50.0      # um, ion height (team choice)
 GAP = 5.0            # um, electrode gap (aspect ratio >= 1 with ~6 um plated Au)
 F_RF = tc.F_RF       # Hz
 F_RADIAL = 3.0e6     # Hz, target RF-only radial frequency

@@ -116,7 +116,8 @@ CASES = [("none", 0, 0, "etched"),
          ("30x30 etched", 30, 30, "etched"), ("30x30 oxide", 30, 30, "oxide"),
          ("30x60 etched", 30, 60, "etched"), ("20x20 etched", 20, 20, "etched"),
          ("50x30 cut-through etched", 50, 30, "etched"),
-         ("30x30 ito6", 30, 30, "ito6"), ("30x60 ito6", 30, 60, "ito6")]
+         ("30x30 ito6", 30, 30, "ito6"), ("30x60 ito6", 30, 60, "ito6"),
+         ("30x60 oxide", 30, 60, "oxide")]   # v3: no ITO, bare D2 floor (DESIGN_LOG step 17)
 TAG = ""
 if len(sys.argv) > 1:          # e.g. "ito6": run only cases whose name contains it (+ reference)
     TAG = "_" + sys.argv[1]

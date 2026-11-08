@@ -1,6 +1,11 @@
-> **Claude-authored.** In-line measurements and acceptance windows for `TRAVELER.md` (v3 dies: `trap_die_v3_A30/B60/NODET.gds` and the test die `test_die_v3.gds`, which carries the test structures T1–T4b, T6 and T8). v3 has no indium tin oxide (ITO). Targets come from DESIGN_LOG steps 2, 9, 9b, 10 and 17 and the research report. Windows marked **[verify]** are first guesses to tighten after the witness wafers (TRAVELER section E).
+> **Claude-authored.** In-line measurements and acceptance windows for [traveler](TRAVELER.md) (v3 dies: `trap_die_v3_A30/B60/NODET.gds` and the test die `test_die_v3.gds`, which carries the test structures T1–T4b, T6, T8 and current T9). v3 has no indium tin oxide (ITO). Targets come from DESIGN_LOG steps 2, 9, 9b, 10 and 17 and the research report. Windows marked **[verify]** are first guesses to tighten after the witness wafers ([qualification](QUALIFICATION.md)).
 
 # Process checks
+
+[Fab overview](README.md) · [Qualification](QUALIFICATION.md) · [Test plan](test_plan.md)
+
+> [!important] Use the correct run and detector revision
+> R1_TRAP omits steps 4–8 and detector checks; its L40 depth is ~10.0 µm and gap-etch depth ~9.25 µm. Full-stack depths below include spacer/cap. Earlier v3 resistance/absorption estimates need [reconciliation](OPEN_DECISIONS.md#detector-documents-and-generated-layouts). “Dietl 2025” is unresolved; its draft limits are **[verify]**.
 
 ## 1. Film thickness and wafer shape
 
@@ -29,13 +34,13 @@
 | 5 | **NbN Rsq** | 4-pt on the thermal-SiO₂ witness | ≈ 400 Ω/sq at 7 nm (≈ 600 at 5 nm) [team calc from the Medeiros fit; Toomey 2018] | ±15 % [verify] |
 | 5 | **NbN Tc** | Dipstick / PPMS on both witnesses (thermal SiO₂ and spacer-over-Al) [verify access] | 7.8–8 K (Dane 2017; Toomey 2018) | ≥ 7.5 K (Todaro: Tc ≳ 1.25 × T_surface, so T_surface ≲ 6 K) |
 | 7, 11, 15 | T3 4-wire bar Rsq (test dies) | 4-wire on T3 pads: inner taps 80 µm apart, w = 10 µm, so ~8 squares (±12 % from the 10 µm tap width) | ≈ 3.2 kΩ at 400 Ω/sq [team calc] | Within ±10 % of the step-7 value |
-| 7 | Line width | SEM on T4 / T4b (test dies) | 100 nm | 90–110 nm; no bridges or breaks |
-| 7 | **Dose array** | SEM on T8 D1–D7 (test dies), before the cap; later 2-wire R at room temperature (`test_plan.md` a12) | Width vs dose factor 0.80–1.20 | Record width and breaks per D-element. The best element sets the next run's nominal dose (`mask_list.md` section 2) |
+| 7 | Line width | SEM on T4 / T4b | v3.1: 130 nm wires / 70 nm spaces | Calibrate tolerance on W2 [verify]; no bridges/breaks. T9 controls have separate widths |
+| 7 | **Dose array** | SEM on T8 D1–D7 (test dies), before the cap; later 2-wire R at room temperature ([dose-array test a12](tests/01_ELECTRICAL.md)) | Width vs dose factor 0.80–1.20 | Record width and breaks per D-element. The best element sets the next run's nominal dose (`mask_list.md` section 2) |
 | W1-b | NbN after thermal history (5 × 300 °C PECVD) | Rsq, Tc on witness | – | ΔTc ≤ 0.3 K, ΔRsq ≤ 10 % [verify] |
 
 ### Meander room-temperature resistance tracking
 
-- **Expected R = N_sq × Rsq**: N_sq ≈ 45 400 (A30) and ≈ 90 400 (B60). So **≈ 18 MΩ (A30) / ≈ 36 MΩ (B60) at 7 nm** [team calc from GDS].
+- **Expected R = N_sq × Rsq.** Use the current [electrical test a7](tests/01_ELECTRICAL.md#a7-meander-r) and the released GDS square counts. Earlier v3 estimates were ~18 / 36 MΩ at 400 Ω/sq.
 - **Where:** trap dies between pads SNS and SNG; test dies on T4 (same meander as A30) and T4b (same as B60).
 - **Measurement rules.** Probe at ≤ 1 V and ≤ 100 nA compliance. Touch down at 0 V and wear a grounded strap. ESD on the open meander is the main handling risk [inference].
 - **Flag:** **> 10 % rise** from R₀ at any checkpoint. Todaro saw 12–30 % rises (mostly while the plating resist was applied and stripped), and the large rises correlated with low switching current or no superconductivity (Todaro Supp. "Trap fabrication").
@@ -69,14 +74,24 @@
 |---|---|---|
 | 11 | SNSPD pads (tied together) ↔ M1 at ≤ 1 V. Checks for a short through the spacer to the Al | > 1 GΩ [verify] |
 | 15 | Every electrode pad ↔ its neighbours at 10 V (seed fully removed) | > 100 MΩ (Stick 2010) |
-| 16, 17 | Full Dietl 2025 set (`test_plan.md` (a)) | DC 50 V ≤ 100 nA; RF 300 V DC ≤ 100 nA, run twice |
+| 16, 17 | Full Dietl 2025 set ([electrical tests](tests/01_ELECTRICAL.md)) | DC 50 V ≤ 100 nA; RF 300 V DC ≤ 100 nA, run twice |
 | 16 | T1 comb leakage (test dies) at 50 V: detects Au redeposition bridges from the gap etch (Sussex) | ≤ 100 nA; ideally < 1 nA [verify] |
 | 16 | T2 Au/D2/M1 capacitor (test dies; Au plate ↔ its M1 pad) | C ≈ 2.1 pF (ε_r 3.9, 0.8 × 0.8 mm = 0.64 mm², 10.3 µm) [team calc]; leakage at 50 V ≤ 100 nA |
 | 16 | **Gap clearing** | SEM top view on 3 dies (plus a cross-section on W3 / sacrificial die): gaps open to the target depth, no sidewall films bridging Au to the floor, no Au stringers |
-| 17 | Au ground fill (GND-n) ↔ M1 (M1-n opening): continuity through the eight fill-to-M1 vias (DESIGN_LOG step 22; `test_plan.md` a13) | < 10 Ω 2-wire. Open: the die needs an M1 bond in step 19; log it, and check the via floors on W3 |
+| 17 | Au ground fill (GND-n) ↔ M1 (M1-n opening): continuity through the eight fill-to-M1 vias (DESIGN_LOG step 22; [ground-link test a13](tests/01_ELECTRICAL.md)) | < 10 Ω 2-wire. Open: the die needs an M1 bond in step 19; log it, and check the via floors on W3 |
 
-## 5. Record sheet (per wafer)
+## 5. Records per die
 
-| Die ID | Variant | R₀ | R₁ | R₂ | R₃ | R₄ | R₅ | max ΔR/R₀ | SNSPD–M1 | Dietl pass | Package? |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | | | | |
+Use the run-map die ID in both records. NODET has no R₀–R₅ entries. Record T9 structure identity separately.
+
+### Detector resistance history
+
+| Die ID / structure | R₀ | R₁ | R₂ | R₃ | R₄ | R₅ | Max ΔR/R₀ |
+|---|---|---|---|---|---|---|---|
+| | | | | | | | |
+
+### Electrical disposition
+
+| Die ID | Variant | SNSPD–M1 | Ground link a13 | Leakage pass [verify] | Package? |
+|---|---|---|---|---|---|
+| | | | | | |

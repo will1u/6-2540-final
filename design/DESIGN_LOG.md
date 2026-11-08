@@ -1,6 +1,6 @@
 # Design log: five-wire Ba⁺ trap with integrated NbN SNSPD
 
-> **Claude-authored.** This is Claude's working log of design steps, numbers and choices. It does not replace William's own `notes/decisions.md`.
+> **Claude-authored.** This is Claude's working log of design steps, numbers and choices. It does not replace the team's own `notes/decisions.md`.
 >
 > Every entry gives: the script and its parameters, the key numbers, the decision taken, and the literature it rests on. Citation keys refer to `design/references_design.bib`. Scripts live in `design/sim/` and run with `./run.sh <script>.py`, which uses the `electrode` conda env.
 
@@ -8,14 +8,14 @@
 
 ## 2026-11-02: Step 0, scope and fixed inputs
 
-**Fixed inputs** (from William's request and "Notes for 6.2540"):
+**Fixed inputs** (from the team's request and "Notes for 6.2540"):
 
 | Item | Value |
 |---|---|
 | Ion | ¹³⁸Ba⁺; detection on 493 nm fluorescence |
 | Cryostat | ~5 K |
 | Chip | 1 cm × 1 cm |
-| Substrate | high-resistivity Si (William's choice 2026-11-02), with sapphire and fused silica deltas |
+| Substrate | high-resistivity Si (team choice 2026-11-02), with sapphire and fused silica deltas |
 | Ground plane | Al |
 | Electrodes | plated Au |
 | SNSPD | NbN, written with e-beam |
@@ -25,9 +25,9 @@
 - A loading zone.
 - A readout zone placed directly above the SNSPD.
 
-**Working hypothesis (William):** Todaro et al. report a lower ion height above the detector. We attribute this to the electrode metal missing over the detector (an electrostatic boundary condition), not to any field the SNSPD itself makes. The hypothesis is checked in steps 3–4 below.
+**Working hypothesis (team):** Todaro et al. report a lower ion height above the detector. We attribute this to the electrode metal missing over the detector (an electrostatic boundary condition), not to any field the SNSPD itself makes. The hypothesis is checked in steps 3–4 below.
 
-**Height policy (William):** the ion height does not have to be uniform from zone to zone. What matters is:
+**Height policy (team):** the ion height does not have to be uniform from zone to zone. What matters is:
 - confinement at both zones,
 - transport between them that can actually be done,
 - micromotion at readout that can be compensated.
@@ -62,7 +62,7 @@
 
 At a fixed detector size, the collection gain from going lower is roughly ∝ h⁻², so heating rises faster than collection does.
 
-**Decision: keep h = 50 µm** (William's choice). Detector size, not height, is the cheaper lever for collection. This is quantified later in the window study (step 4).
+**Decision: keep h = 50 µm** (team choice). Detector size, not height, is the cheaper lever for collection. This is quantified later in the window study (step 4).
 
 **Geometry family at h = 50 µm** (c = centre-DC width, a = RF-rail width, V_RF for 3 MHz radial at 28 MHz). Figure `out/01_analytic_fivewire/geometry_sweep.png`.
 
@@ -149,7 +149,7 @@ Literature check on segment pitch versus height is pending; see `research/report
 | 650 nm | 3.2e-2 | 1.5 mm | 2.5 mm |
 | 405 nm | 9.6e-3 | 2.4 mm | 4.0 mm |
 
-**Problem.** On a plain 1 cm square chip, 1–3 % of every beam hits the surface. Light scattered near the readout zone goes straight into the SNSPD, so this is not acceptable. William's notes flag the same issue, citing Todaro's 1.8 mm bowtie isthmus.
+**Problem.** On a plain 1 cm square chip, 1–3 % of every beam hits the surface. Light scattered near the readout zone goes straight into the SNSPD, so this is not acceptable. The team's notes flag the same issue, citing Todaro's 1.8 mm bowtie isthmus.
 
 **Decision: bowtie chip.**
 - **Isthmus:** ≤ 1.4 mm wide across the zone region, limited by the 650 nm repump.
@@ -174,7 +174,7 @@ Implemented in `gds/make_chip.py` (step 8).
 - RF end effects (named first);
 - the planar model breaking down over the deep recess.
 
-No source attributes the drop to a field from the SNSPD itself. That supports half of William's hypothesis. The "missing metal" half needs a qualifier: in a flat model, a grounded hole inside an RF-grounded electrode does not move the RF null. What matters is depth and RF boundaries, which is tested next.
+No source attributes the drop to a field from the SNSPD itself. That supports half of the team's hypothesis. The "missing metal" half needs a qualifier: in a flat model, a grounded hole inside an RF-grounded electrode does not move the RF null. What matters is depth and RF boundaries, which is tested next.
 
 **Other literature constraints for the window:**
 - Todaro Supp. "Trap fabrication" and Hampel 2023 (published version, after Fig. 2): any dielectric over the detector needs a **grounded conducting film or mesh on top**, both against surface charging and to screen the field kick from each click (0.009 quanta/click, PRL p. 4).
@@ -276,7 +276,7 @@ Both come from the same `make_chip.py`, using the `--det60` flag.
 
 ## 2026-11-02: Step 8, full-chip layout on a plain square die (`gds/make_chip.py`, `gds/check_chip.py`)
 
-**Change of plan (William):** no bowtie; use a regular diced 10 × 10 mm chip. This replaces the bowtie decision in step 4.
+**Change of plan (team):** no bowtie; use a regular diced 10 × 10 mm chip. This replaces the bowtie decision in step 4.
 
 **Consequence.** Beam clearance was recomputed in `sim/11_beam_clearance.py` (corner section). With the trap on the chip centre line, 1–3 % of each beam would hit the surface. Instead the trap runs **parallel to the top edge, 800 µm from it**, with both zones close to the **top-right corner**. Beams at 45° to the axis then only cut across that corner:
 
@@ -589,12 +589,12 @@ An earlier run that let the active set change with position gave jumps of 3.2 V 
 
 ## 2026-11-02: Step 12, floorplan redone as a narrow 10 × 2.5 mm die (`gds/make_chip.py` v2, `make_test_die.py`, `make_wafer.py`)
 
-**Why.** William reviewed the square-die layout from step 8 (trap in the top-right corner):
+**Why.** The team reviewed the square-die layout from step 8 (trap in the top-right corner):
 - only the corner held the trap;
 - every lead ran 7–9 mm to one pad column;
 - about three quarters of the die was empty ground with scattered test structures.
 
-That layout was lopsided and wasteful. Long leads add capacitance and defect area, and the bonding is awkward. William chose a narrow die (offered options: two traps on the square die; a tidier single corner trap).
+That layout was lopsided and wasteful. Long leads add capacitance and defect area, and the bonding is awkward. The team chose a narrow die (offered options: two traps on the square die; a tidier single corner trap).
 
 **Beam clearance** (`sim/11_beam_clearance.py`, narrow section). Trap on the die centre line, beams at 45° crossing only the width:
 
@@ -686,7 +686,7 @@ These numbers agree with the v1 run (step 11) to within 0.07 µm and 0.2 V. The 
 
 ## 2026-11-02: Step 14, plain trap die without an SNSPD (`gds/make_chip.py --nodet`)
 
-**Request.** William asked for a trap-only die with no SNSPD.
+**Request.** The team asked for a trap-only die with no SNSPD.
 
 **What `--nodet` changes** relative to A30. Everything else is identical: electrodes, leads, pads, ground fill, marks, M1 bond openings.
 
@@ -709,13 +709,13 @@ These numbers agree with the v1 run (step 11) to within 0.07 µm and 0.2 V. The 
 - A control die: trapping, transport and heating rate without the window, ITO or nanowire. It isolates any effect the detector stack has on the ion.
 - A trap-only wafer, which skips traveler steps 4–8b and 10 and needs no EBL (TRAVELER section A).
 
-**Wafer.** NODET is not placed on `wafer_v2.gds`. Adding it, and in what ratio, is William's call.
+**Wafer.** NODET is not placed on `wafer_v2.gds`. Adding it, and in what ratio, is the team's call.
 
 ---
 
 ## 2026-11-02: Step 15, R&D run layouts and an EBL dose array (`gds/make_run.py`, `gds/make_test_die.py`)
 
-**Context.** William will fabricate at MIT.nano as an R&D workflow, not as one production wafer. So:
+**Context.** The team will fabricate at MIT.nano as an R&D workflow, not as one production wafer. So:
 - Each run is a full 100 mm wafer with only a small central block written. Spin coating, PECVD and plating then behave as on a full wafer; small pieces are kept for short loops.
 - The MLA150 is maskless, so the die mix and designs can change between runs at no mask cost.
 
@@ -749,7 +749,7 @@ These numbers agree with the v1 run (step 11) to within 0.07 µm and 0.2 V. The 
 
 ## 2026-11-02: Step 16, first run set to trap-only R1_TRAP (`fab/RUNSHEET_R1_TRAP.md`)
 
-**Decision (William):** run 1a, the trap-only process, comes first (`SIMPLIFICATIONS.md` S2; TRAVELER A.3).
+**Decision (team):** run 1a, the trap-only process, comes first (`SIMPLIFICATIONS.md` S2; TRAVELER A.3).
 
 **Layout change.** The full test die would put D2 openings over SNSPD-pad areas with no metal under them; on a trap-only run those etches would land on bare D1 oxide. So `make_test_die.py --trap-only` writes `test_die_v2_TRAP.gds` with only T1 (Au comb), T2 (Au/D2/M1 capacitor + M1 pad) and T6 (Au loop).
 - 5 Au conductors, ≥ 5.0 µm spacing.
@@ -776,3 +776,303 @@ These numbers agree with the v1 run (step 11) to within 0.07 µm and 0.2 V. The 
 - the tests that apply (a1–a5, a10);
 - the expected trapping numbers from step 14;
 - what carries over to run 1b.
+
+---
+
+## 2026-11-07: Step 17, no ITO: readout window over bare SiO₂ (`gds/make_chip.py` v3; `sim/04b`, `09b`, `10`, `12`)
+
+**Decision (team, 2026-11-07).** Remove both indium tin oxide (ITO) layers: the top ITO on the D2 SiO₂ (L30, tied to the centre DC) and the buried ITO on the cap (L31, grounded through the L24 via). The detector now sits under SiO₂ only. The buried ITO was not a mirror (the Al M1 plane is the mirror); it was an optical matching layer and an RF shield above the wire, and it has to be transparent, so Al cannot replace it.
+
+**Layout.** L24, L30 and L31 are empty on every die (`check_chip.py` checks this). The readout window is a 30 µm opening in the centre-DC Au; its floor, 6 µm below the Au top, is the bare top surface of the 10 µm D2 SiO₂. The L45 protect patch over the window (+2.5 µm) is now essential: nothing else keeps the Au-masked gap etch out of the window SiO₂. Test die: T5 (ITO bar) and T7 (ITO→Al via chain) removed; T4/T4b have no ITO.
+
+**Simulation layout.** `*_sim.json` no longer fills the window with electrode 2; `max_gap` is 20 µm (was 30), so the 30 µm hole fringes over the dielectric instead of being split at its midline. A `_window` entry gives the size; `12_final_chip_check.py` now looks up the 3-D recess correction for that size (it previously applied the A30 value to B60 as well).
+
+**3-D window drop, bare-SiO₂ floor** (`04b_window_3d_fd.py oxide`; box puts the ion at ~37 µm, so Δh is a conservative upper bound at 50 µm):
+
+| Window (radial × axial) | floor | Δh at the window centre | half of the drop at | \|Δh\| < 0.1 µm beyond | peak axial RF gradient (per V) | axial pseudopotential at that point, 53 V |
+|---|---|---|---|---|---|---|
+| 30 × 30 (A30) | bare SiO₂ | **−1.38 µm** | 25 µm | 45 µm | 1.55e-4 /µm | 0.38 meV |
+| 30 × 60 (B60) | bare SiO₂ | **−2.50 µm** | 30 µm | 60 µm | 2.93e-4 /µm | 1.37 meV |
+| 30 × 30 (v2) | ITO on SiO₂ | −1.19 µm | 25 µm | 45 µm | 1.35e-4 /µm | 0.29 meV |
+| 30 × 60 (v2) | ITO on SiO₂ | −2.04 µm | 30 µm | 60 µm | 2.45e-4 /µm | 0.95 meV |
+
+The 30 × 30 bare-SiO₂ case reproduces the step-6 run exactly (−1.38 µm). Removing the ITO deepens the drop by 0.2 µm (A30) and 0.5 µm (B60). The model treats the SiO₂ as an ideal dielectric with no surface charge; any charging of the exposed SiO₂ comes on top and is not modelled.
+
+**Optics** (`09b_itoD2_matching.py`, no-ITO section; `out/09b_itoD2_matching/summary_noito.json`):
+
+| Stack | NbN absorption at 493 nm | worst ±10 nm corner |
+|---|---|---|
+| no ITO, 1st-order spacer 66 nm | 0.402 | 0.392 |
+| no ITO, 2nd-order spacer 234 nm | 0.402 | 0.391 |
+| no ITO, v2 thicknesses (spacer 238, cap 80 nm) | 0.401 | – |
+| v2 two-ITO stack (step 9b) | 0.532 | 0.408 |
+
+With no ITO the SiO₂ cap merges optically with the 10 µm D2 SiO₂ (same material), so the cap thickness hardly matters; the spacer and cap are kept at 238 / 80 nm. Absorption drops by about 25 % relative (0.53 → 0.40).
+
+**RF pickup** (`10_rf_pickup_2d.py`, new case f: Al mirror only, 10 µm SiO₂ kept over the window, no ITO; 2-D upper bound at 53 V, 28 MHz):
+
+| Case | C_RN | I_pk |
+|---|---|---|
+| f, v3 stack | 0.152 fF | **1.42 µA** |
+| b, Al only, window SiO₂ etched | 0.078 fF | 0.72 µA |
+| e, v2 top ITO on SiO₂ | 0.070 fF | 0.66 µA |
+| c1, v2 grounded buried ITO | ~0 | ~0 |
+
+About 7–9 % of the estimated NbN switching current (15–20 µA). Twice case b because the SiO₂ (ε 3.9) left in the window pulls more RF field toward the wire.
+
+**Planar simulation of the v3 dies** (`12_final_chip_check.py`, `out/12_log_v3_*.txt`): see step 19; with the hole now in the model, A30 and B60 no longer match NODET at the readout zone.
+
+---
+
+## 2026-11-07: Step 18, 10 × 10 mm trap die with pads at the die edges (`gds/make_chip.py`, `make_run.py`, `make_wafer.py`)
+
+**Decision (team, 2026-11-07).** Go back to a 1 cm × 1 cm trap die with the trap centred and the bond pads at the die edges. Cost (sim 11, full-chip row, step 4): about **1.7 × 10⁻² of the 493 nm beam** (3.2 × 10⁻² at 650 nm, 9.6 × 10⁻³ at 405 nm) hits the surface, vs 1.1 × 10⁻⁵ on the 2.5 mm die. Light scattered near the readout zone reaches the SNSPD.
+
+**Layout** (trap core, electrodes and lead topology unchanged):
+
+| Item | v3 |
+|---|---|
+| Die | 10 × 10 mm (`CX = CY = 5000`) |
+| Segment and cap pads | four rows on the top/bottom die edges, y = ±4780; TL1–8 at x = −3500 … −2240, TR1–9 at x = +3500 … +2060 (same for BL/BR); leads rise ~4.4 mm to them |
+| Beam exits | 45° beams through the zones leave at the top/bottom edges near \|x\| ≈ 4.7 mm and the side edges near \|y\| ≈ 4.7 mm; `check_chip.py` now checks that no pad sits in the corners \|x\|, \|y\| > 4 mm |
+| RF, centre DC, SNSPD pads | unchanged, already on the side edges: RF (4700, 0); C (−4650, 0); SNS/SNG (−4750, ±260) |
+| GND spots / M1 openings | moved to the side edges: (±4700, ±1500) / (±4700, ±2000) |
+| L1 / L40 marks | (±4300, ±4830) |
+| Plated Au | 0.92 cm² per trap die (fraction 0.916) |
+
+**Checks.** `check_chip.py` prints ALL CHECKS PASS on A30, B60 and NODET. Test die (`test_die_v3`, still 10 × 2.5 mm): 5 Au conductors, ≥ 5.00 µm spacing, every NbN structure touches exactly its own leads, nothing on L24/L30/L31.
+
+**Runs and wafer.** `make_run.py` and `make_wafer.py` now stack each column at each die's own height. Every column of a run must stack the same heights so the saw's y cuts run straight across (asserted); `R1_TRAP` and `R1_FULL` were reordered so the test dies share a row. Runs are 20.2 × 33.1 mm blocks (8 dies). `wafer_v3.gds`: 56 dies (25 A30, 14 B60, 17 TEST).
+
+**Archive.** v2 outputs and generators are in `gds/archive_v2_narrow/`.
+
+---
+
+## 2026-11-07: Step 19, A30 vs B60 over the bare-SiO₂ window, and DC height tuning (`sim/12_final_chip_check.py`, `sim/13_dc_height_tuning.py`)
+
+### A30 vs B60 (v3 GDS; planar model + 3-D recess correction from step 17)
+
+| | NODET | A30 (30 × 30 µm window) | B60 (60 × 30 µm window) |
+|---|---|---|---|
+| RF null, readout (planar) | 50.09 µm | 50.09 µm | 50.09 µm |
+| 3-D window drop (bare SiO₂) | 0 | −1.38 µm | −2.50 µm |
+| Readout height with the drop | 50.09 µm | ≈ 48.7 µm | ≈ 47.6 µm |
+| Drop footprint (half / < 0.1 µm) | – | ±25 / ±45 µm | ±30 / ±60 µm |
+| Peak axial RF pseudopotential at 53 V | 0 | 0.38 meV | 1.37 meV |
+| Readout radial modes, no tilt (planar DC) | 2.89 / 2.97 MHz | 2.76 / 3.09 MHz | 2.55 / 3.27 MHz |
+| Readout DC, no tilt | 7.33 V | 6.64 V | 3.38 V |
+| Readout DC, 10° tilt | 9.05 V | **13.2 V** | **15.2 V** |
+| Transport, max change per 10 µm step | 1.59 V | 1.61 V | **4.47 V** |
+| Geometric collection (step 7) | – | 3.25 % | 5.9 % |
+| Meander reset time τ (step 7) | – | 94 ns | 189 ns |
+
+- With the ITO fill gone, the planar model sees the window hole in the centre DC. The hole gives the centre DC its own axial curvature; Laplace's equation then forces the two radial curvatures apart, which splits the radial modes. Rotating the radial axes by a fixed 10° costs an x–z curvature proportional to that split, so the tilt set goes over the ±10 V DACs. Without tilt both windows are cheap. (`12_final_chip_check.py` clips at 10 V, so its A30/B60 readout rows show a bounded, slightly off solution: axial 0.796 / 0.753 MHz.)
+- The larger B60 window also makes the transport waveforms jump near it (4.47 V per step vs 1.6 V).
+- The window drop and the axial bump both grow with the window's axial length: B60 has 1.8× the drop and 3.6× the axial pseudopotential of A30, for 1.8× the collection.
+
+### Can the DC electrodes put the ion back at 50 µm? (`13_dc_height_tuning.py`)
+
+The RF null is set by the RF electrodes; a DC field cannot move it. A vertical DC field pushes the ion off the null like a spring, so the ion then sits in a non-zero RF field and has excess micromotion. The script solves for the DC set (0.8 MHz axial, 14 nearest electrodes, no voltage clip) that gives the needed upward push, checks the real equilibrium by minimising the full energy, and reads the cost off at the shift actually reached:
+
+| | A30, 0° | A30, 10° | B60, 0° | B60, 10° |
+|---|---|---|---|---|
+| Upward shift needed | 1.38 µm | 1.38 µm | 2.50 µm | 2.50 µm |
+| max \|V\| | 6.77 V | 13.43 V | 2.81 V | 15.51 V |
+| Vertical DC field | 542 V/m | 537 V/m | 1287 V/m | 1287 V/m |
+| RF field amplitude left at the ion | 8.8 kV/m | 8.8 kV/m | 15.5 kV/m | 15.5 kV/m |
+| Excess micromotion amplitude (along z) | 200 nm | 200 nm | 350 nm | 350 nm |
+| Modulation index β at 493 nm, k along z | 2.5 | 2.5 | 4.5 | 4.5 |
+
+- **Possible in voltage terms:** without tilt the push fits easily in ±10 V. With the 10° tilt the tilt set itself is the problem, not the push.
+- **Cost:** the ion is no longer at the RF null. 200–350 nm of vertical micromotion, β ≈ 2.5–4.5 for a beam with k along z. In-plane beams (k_z = 0) barely see vertical micromotion, so it would also be hard to detect and compensate with the current beam geometry.
+- **Checks:** zero push reproduces the diagnostic voltages (A30 6.64 / 13.19 V, B60 3.38 / 15.24 V). The micromotion matches (q/2)·Δz (0.15 × 1.38 µm ≈ 207 nm vs 200 nm). The real shift runs ahead of the linear spring estimate (target 2.50 µm gives 3.36 µm on A30) because the pseudopotential softens above the null.
+- **Limits:** planar model for the trap fields; the drop itself is from the 3-D box (ion at ~37 µm, an upper bound); no charging of the bare SiO₂.
+
+Outputs: `out/12_final_chip/trap_die_v3_*`, `out/12_log_v3_*.txt`, `out/13_dc_height_tuning/` (`summary.json`, `dc_height.png`), `out/13_log.txt`.
+
+---
+
+## 2026-11-08: Step 20, do the staircase fingers change the DC electrodes? (`sim/14_staircase_check.py`, `gds/make_chip.py --uniform`)
+
+**Question (team).** On the real die every outer DC electrode continues as a full-width finger to its own lead track, so finger tops step by 12 µm (340–424 µm from the axis) and 6 µm tracks run along the axis above them. Did this ever show up as a difference from a plain five-wire? Earlier final-chip checks (steps 11–19) only compared RF quantities, which cannot see it: for the RF solution every DC electrode is ground.
+
+**Layouts compared** (same device-stack model as step 11; unit potentials evaluated at the RF null):
+
+| | Layout | Outer DC electrodes |
+|---|---|---|
+| FW | `electrode/examples/fivewire` (the electrode repo's reference example) | five identical 120 µm fingers per side, equal-depth rectangles, guard ring |
+| U | `trap_die_v3_UNIFORM` (`make_chip.py --uniform`, simulation reference only, not for fab) | our trap, every outer DC electrode a plain 200 µm deep rectangle (y = 114–314 µm), no leads, ground fill around it |
+| S | `trap_die_v3_NODET` (the real die) | staircase fingers + lead tracks |
+
+**Sanity and symmetry checks:**
+
+| | FW | U | S |
+|---|---|---|---|
+| RF null height | 67.19 µm (electrode RESULTS.md: 67.2) | 50.09 µm | 50.09 µm |
+| translation mismatch, neighbouring interior segments (max / median, relative to peak) | 4.3e-5 / 3.0e-5 | 6.6e-5 / 5e-12 | **2.4e-2 / 4.9e-3** |
+| top/bottom mirror mismatch (relative to peak) | 1.5e-4 | 2.5e-4 | 5.5e-5 |
+
+FW and U both reproduce identical segments to < 1e-4; the FW mirror value is ≈ 5e-6 V per V absolute, matching RESULTS.md. S breaks translation symmetry at the 2 % level. Top/bottom stays symmetric because the two staircases are mirror images.
+
+**S vs U, per top segment, at its own centre** (S/U − 1): unit potential +6.4 % (end segments 3, 17) rising to **+10.1 %** (segment 10, the tallest finger); vertical field ∂φ/∂z +8.5 % to **+13.3 %**; axial curvature ∂²φ/∂y² −0.8 % to −1.8 %. The profile follows the finger heights exactly (tallest at segments 9–11, where the two pad groups meet). The S − U difference is broad: still ≈ 7 % of the peak 300 µm from the segment centre, and skewed toward each electrode's pad side, i.e. it includes the lead track running along the axis. Plot: `out/14_staircase_check/profiles.png`.
+
+**Effect on the zone solves and transport** (`12_final_chip_check.py`, U vs S, same settings as step 19):
+
+| | U | S |
+|---|---|---|
+| loading / readout DC freqs (MHz) | 0.80 / 2.905, 2.956 · 0.80 / 2.904, 2.954 | 0.80 / 2.887, 2.974 · 0.80 / 2.881, 2.977 |
+| max \|V\| at a zone, 10° tilt | 8.40 V | 9.05 V |
+| largest single-electrode voltage difference, U vs S | – | 1.14 V (loading), 1.27 V (readout) |
+| transport max \|V\| / max step | 7.43 / 1.625 V | 7.33 / 1.589 V |
+| largest transport waveform difference | – | 0.20 V |
+
+The NODET rerun reproduces the step-19 summary exactly.
+
+**Reading.** The staircase is visible: segments are up to 10 % stronger at the ion than plain rectangles, by different amounts, so neighbouring segments are no longer interchangeable. All final-chip numbers since step 11 were computed on the real GDS, so they already include it; voltage sets computed from an idealized uniform-segment model would be off by up to ≈ 1.3 V per electrode at the zones and 0.2 V in transport. No layout change made.
+
+**Limits.** Planar device-stack model; far geometry simplified with a tolerance ≤ 1 µm (well below the 12 µm steps); fingers and tracks were not separated.
+
+Outputs: `out/14_staircase_check/` (`summary.json`, `profiles.png`), `out/14_log.txt`, `out/12_final_chip/trap_die_v3_UNIFORM/`, `out/12_log_v3_UNIFORM.txt`, `out/12_log_v3_NODET_rerun.txt`.
+
+---
+
+## 2026-11-08: Step 21, bond pads from the literature (`research/reports/Bond pad sizing for ion traps.md`; `gds/make_chip.py`)
+
+**Question (team).** What does the literature say about bond pad size, does it matter, and what should change on our die?
+
+**Findings** (full report and sources in `research/reports/Bond pad sizing for ion traps.md`; none of its citations are in `references_design.bib` yet):
+- **Size is not the constraint.** Our 120 × 200 µm pads at 180 µm pitch are about twice the verified minimums: EPFL CMi standard 100 × 100 µm with 100 µm spacing (60 µm floor); Europractice > 55 µm opening at > 65 µm pitch for 25 µm Au ball bonds. A 25 µm Au ball is ~75 µm across. Published traps: Sandia Phoenix/Peregrine 95 µm pads at 100 µm pitch, RF on 7 bonds (arXiv:2009.02398 Sec. 5.3); Leibrandt 2009 300 × 300 µm Al pads.
+- **Electrically, pads are the smallest parasitic** [team calc]: RF pad ~0.17 pF of ≥ 3.4 pF on-chip RF; DC pad 0.11 pF vs 0.32–0.51 pF per lead; SNSPD leads ~3.4 pF each, so pad size does not affect reset or latching. Pad area is ~100× too small to act as an RF filter on the DC lines.
+- **What did matter here:** the Au ground fill came to 10.0 µm from every pad (`GAP_FAR`), leaving 40 µm fill fingers between pads and a 10 µm strip outboard of each row; a bond 33 µm off centre would short the pad to ground. The SNSPD openings (120 × 90 µm wells, 10 µm deep, over thin Ti/Au) were tight for a wedge foot (≤ 75 × 125 µm).
+
+**Layout changes (v3, all three dies):**
+
+| Item | Before | After |
+|---|---|---|
+| Au fill keep-out around bond pads (`PAD_GAP`) | 10 µm (`GAP_FAR`) | **30 µm**; no fill between neighbouring pads |
+| Pad rows | y = ±4780 (outer edge 120 µm from the die edge) | **y = ±4720**: moved in 60 µm so a 50 µm fill strip runs outboard of the rows and the fill stays one piece |
+| SNSPD D2 openings (L40) | 120 × 90 µm | **150 × 120 µm** |
+| SNSPD Ti/Au pads (L22) | 150 × 120 µm | **180 × 150 µm** |
+| Al cut-outs under the SNSPD pads (M1) | 260 × 220 µm | **290 × 250 µm** |
+
+Unchanged: pad sizes (120 × 200 µm rows, 200 × 200 µm RF and C) and pitch; Al under the Au pads.
+
+**Checks.** `check_chip.py`: ALL CHECKS PASS on A30, B60 and NODET. Measured on `trap_die_v3_A30.gds`: every Au pad is 30.0 µm from the fill. Test dies, wafer and runs regenerated. `12_final_chip_check.py` rerun on all three: loading/readout heights, DC sets and transport identical to step 19 (max |V| 9.05 → 9.06 V from rounding; the clipped A30 readout radial modes move 2.219 → 2.209 MHz, within the clipped solve's noise). The pad region is ≥ 4.4 mm from the zones.
+
+**Fab doc changes** (`fab/TRAVELER.md`): wedge-bond the SNSPD pads (no ball-bond spark); RF pad on 2–4 wires; probe and bond at opposite ends of each pad; confirm wire-bond-grade (soft) plated Au; new short loop **W7 bond-and-leak** on the test-die T2 stack before R1 (pad-to-M1 leakage before/after bonding; if it leaks, cut the Al out under the DC pads next revision). Mask list and layer map updated.
+
+**Open:** MIT.nano bonder model and wedge/capillary part numbers (to draw against the 10 µm wells); bond diagram against the real carrier; DC-to-RF coupling capacitances (field solve) to decide on filter capacitors.
+
+---
+
+## 2026-11-08: Step 22, on-chip ground vias from the Au fill to M1 (`gds/make_chip.py`, `gds/check_chip.py`)
+
+**Question (team).** A team member drafted an SNSPD process flow in FabuBlox (`SNSPD_integrated_Ion_Trap.pdf`), based on Hampel 2023. Compared with that flow and with Hampel's fabrication paragraph (arXiv:2302.01462 v1), what should change in our GDS and traveler?
+
+**Comparison.**
+- Hampel's stack: Si / 150 nm PECVD SiO₂ / 50 nm e-beam Al mirror (lift-off, only under the SNSPD and its leads) / 212 nm SiO₂ / 10 nm NbTiN (SF₆ RIE) / 130 nm PECVD SiO₂ cap (CHF₃-patterned to cover the SNSPD only) / CHF₃ vias to the Al + 20 nm Au / 350 nm Au electrodes and leads by lift-off. The mirror is **grounded through those vias via the trap electrodes**.
+- Our flow already covers Hampel's other lessons: cap right after the nanowire etch, leads over Al, spacer set for 493 nm (step 9b). Our lead-first order and blanket cap are deliberate (step-7 EBL marks on L22; the cap stays under D2) and stay as they are.
+- **Gap:** our M1 was grounded only by Al wedge bonds at M1-1…4 (traveler A4: "no on-chip link"). A missing or lifted bond leaves the mirror floating, which is the worst case for pickup (Hampel Fig. 3(a); step 10: floating conductor 9× worse than none).
+- The FabuBlox flow as drawn puts the evaporated Au electrodes ~240 nm above a blanket Al plane. From the A30 GDS the RF Au area is 0.877 mm², so C_RF–ground ≈ 127 pF on 238 nm SiO₂ vs 2.9 pF on our 10.3 µm [team calc, ε_r 3.9, parallel plate]. Hampel avoided this because the mirror was local and the chips were RF test structures. No change to our D2 follows; reported to the team only.
+
+**Decision (team, 2026-11-08): add on-chip fill-to-M1 vias.**
+- Eight 150 × 150 µm L40 openings at (±4700, ±1000) and (±1000, ±2500), each enclosed ≥ 25 µm by the Au ground fill and by M1 (asserted in `make_chip.py`, checked in `check_chip.py`). Same L40 job as the bond openings; the seed and the plated fill land on the Al. No L45: the Au masks them in the gap etch.
+- Kept out of `d2_open`, so they create no fill keep-out. M1-1…4 bond openings stay as a backup.
+
+**Checks.** `check_chip.py`: ALL CHECKS PASS on A30, B60 and NODET (new: ≥ 4 vias inside the fill; each enclosed ≥ 25 µm by Au and Al; the L45 rule now applies to bond/probe openings only). Layer diff against the step-21 GDS: only L40 (+0.180 mm² per die) and L100 labels changed; **L50 is identical, so `12_final_chip_check.py` was not rerun**. L40 area: A30/B60 0.333 mm², NODET 0.297 mm²; `run_R1_TRAP` 1.82 mm² and `run_R1_FULL` 2.50 mm², 48 vias in each block. Test dies, wafer and runs regenerated. Test die unchanged.
+
+**Fab doc changes.**
+- Traveler step 11: the vias. Step 12: an in-situ Ar pre-clean before the Ti, because the fluorine etch leaves AlF₃ / Al₂O₃ that a sputtered seed will not break through (wire bonds do) [inference]. Step 12 also notes seed sidewall coverage down the ~10.4 µm wall. Step 19: M1 bond now a backup, required if a13 fails. W3: via contact resistance with and without the pre-clean, plus a sidewall cross-section.
+- `test_plan.md` a13: GND-n ↔ M1-n < 10 Ω 2-wire; expect ≲ 1 Ω (about one Al square at ~0.3 Ω/sq plus the contacts) [team calc; contact resistance unknown]. `process_checks.md` row 17 changed from "> 100 MΩ, separate nets" to that continuity test. Run sheet, mask list and layer map updated.
+
+**Open:** whether the AJA has a substrate RF etch for the pre-clean; seed continuity on the via wall (W3 cross-section); Au–Al behaviour at the bake-out with 15 nm Ti between them [verify].
+
+---
+
+## 2026-11-08: Step 23, Hampel-style local mirror written up as a traveler variant (`fab/TRAVELER.md` section H; no GDS)
+
+**Question (team).** How big is Hampel's local mirror? Write it into our flow as a variant (team choice, 2026-11-08: a variant section, not a replacement of M1).
+
+**Measured from Hampel 2023 Fig. 1** (arXiv:2302.01462 v1, p. 2; the paper gives no dimensions) [team calc]. Scale check: the 20 × 30 µm SNSPD outline measures 20 × 30.5 µm against the 20 µm bar (13.2 px/µm at 600 dpi).
+- Small mirror ≈ 64 µm along the leads × 37–49 µm across. The light-blue mirror shows in the gaps; its edge lies under the Au before the black gaps next to the RF rails.
+- Large mirror ≥ 270 µm along the lead channel, ≈ 35–50 µm wide, running ≈ 160 µm past the RF-rail ends (2.70 px/µm against the 100 µm bar).
+- Neither goes under the RF rails.
+- Fab order from the p. 3 paragraph: nanowire → CHF₃ vias + 20 nm Au → 350 nm Au electrodes and leads by lift-off → **cap last** (blanket PECVD, then CHF₃-patterned to the SNSPD only). This corrects an earlier chat remark that Hampel capped straight after the etch. Cap-last works for them because their later steps are thin lift-offs, with no plating.
+
+**Variant as written (traveler H).**
+- Local L10 mirror at |y| ≤ 20 µm (our RF rails start at |y| = 25), from x = 328 along the leads to ≈ −2400. It is grounded through a via under the Au fill at the far end.
+- No D2; 350 nm Ti/Au lift-off electrodes (option E2: 6 µm plated on the thin stack).
+- Mirror ↔ centre DC ≈ 12 pF [team calc].
+
+**Not done / open:**
+- no GDS;
+- lead routing under the centre DC with only ≈ 80 nm SiO₂ (slot in the centre DC vs a thicker local SiO₂);
+- reruns of 09b (vacuum above the cap), 04b and 12 (`metal_thickness` 0.35, `ground_depth: null`) and 10;
+- RF loss over bare HR Si;
+- exposed SiO₂ in every 5 µm gap (aspect ratio 0.07).
+
+Baseline unchanged.
+
+**Addendum (2026-11-08): trade-off written down.** Traveler section H.0 now records why the baseline keeps a thick D2. The Al's mirror job depends on the Al-to-NbN distance (238 nm), and its ground-plane job on the Al-to-Au distance (10.3 µm), so the D2 lets one layer do both. C_RF–ground is 2.9 pF (≈ 27 mA at 53 V, 28 MHz) on 10.3 µm, against 127 pF (≈ 1.2 A) on 238 nm [team calc]. A thin stack keeps the mirror only by giving up the plane under the RF rails. Section C points to H.0.
+
+**Correction (2026-11-08).** Traveler H.0 and H.4 had listed "RF over bare HR Si" as a risk of the variant. That is how NIST builds its chips. Todaro trapped on 6 µm plated Au over 134 nm PECVD SiO₂ on intrinsic Si (ρ > 20 kΩ·cm) with no ground plane; Hampel used the same kind of substrate (`research/research_notes/Trap integrated SNSPD design/todaro_slichter.md`). The real condition is the resistivity: ρ > 20 kΩ·cm, against the > 10⁴ Ω·cm in traveler step 0. Todaro credits the 6 µm electrodes with shielding the ion from substrate charge, so option E2 (plated 6 µm on the thin stack) is the Todaro + Hampel combination.
+
+
+---
+
+## 2026-11-08: Fabrication documentation reorganized for Obsidian
+
+**Request.** Checkpoint existing fab docs, improve readability, split into linked modules, and highlight variants and open decisions. Checkpoint: `50a444d` (five fab files only; other pre-existing work retained).
+
+**Changes.** Added fab overview, variants, open decisions, layout/run/stack/qualification notes, four process stages, separate local-mirror/substrate notes and four test modules. Original traveler/test-plan filenames remain indexes with old section headings. Step numbers, test IDs, uncertainty tags and source pointers retained. Exposure and record tables narrowed.
+
+**Reconciliation.** Working generators specify v3.1: 130/200 nm, rounded turns, 36 × 32 µm A30 / 69 × 32 µm B60 line regions; T9 added. Earlier fab sheets describe 100 nm wires and no T9. Mixed detector revisions in areas, resistance/optics estimates and EBL times are labelled pending reconciliation; current v3.1 figures already present in the mask note are preserved. Simplifications catalog labelled historical v2.
+
+**Corrections against local files.** Trap L1 marks (±4300, ±4830) µm; NODET step 11 includes eight ground vias; R1_TRAP includes W7 bonding; run 1b adds 4–8 while 8a/8b/10 remain retired; local-mirror E1 removes plating, E2 retains it. “Dietl 2025” flagged unresolved as already reported by the bond-pad audit.
+
+**Inputs / sources.** Existing fab docs; working `make_chip.py`, `make_test_die.py`, `snspd_geom.py`; run-map CSVs; steps 17–23; SNSPD-geometry and bond-pad research reports. No new external source claims or design decisions. No generator or simulation was changed; no new physics or fabrication qualification run. Documentation links and content coverage checked separately.
+
+---
+
+## 2026-11-08: Step 24, SNSPD geometry v3.1 from the literature audit (`gds/snspd_geom.py`, `make_chip.py`, `make_test_die.py`, `check_chip.py`; `sim/15`, `sim/10`, `sim/06`)
+
+**Question (team).** Audit the v3 meander against the SNSPD-geometry literature, starting from Suleimen et al., Phys. Rev. Applied 25, 044091 (2026) (doi 10.1103/771x-57wg; abstract only, paywalled) and Clem & Berggren, PRB 84, 174510 (2011). Goal: RF resistant, high collection, easy to fabricate. Report: `research/reports/SNSPD geometry audit.md`; notes in `research/research_notes/SNSPD geometry audit/`.
+
+**Findings that changed the layout** (all [team calc], `sim/15_snspd_geometry.py`):
+- **Collection model.** Ba⁺ 493 nm (P₁/₂ → S₁/₂) emission is isotropic: (1/3)(3/8π)sin²θ + (2/3)(3/16π)(1+cos²θ) = 1/4π for any J = ½ state. `sim/06` used the σ pattern. Geometric collection is **2.23 % (A30) / 4.20 % (B60)**, not 3.25 % / 5.9 %. Check against an atomic-physics text.
+- **Refraction footprint.** Rays through the bottom of the 6 µm Au window spread 2.57 µm (A30) / 3.91 µm (B60) outward in 10.08 µm of SiO₂. A window-sized meander catches only **80.4 % / 82.0 %** of the photons through the window. Step 7's "spreads only ~2 µm, so a window-sized detector catches all light" was wrong.
+- **Absorption vs fill factor** (EMT, oblique incidence, cone-averaged, 7 nm NbN): f 0.5 → 0.40, 0.65 → **0.54**, 0.7 → 0.60. The E-across-wires channel limits it (0.20 at f 0.5). Spacer and cap re-optimisation gains < 0.01. EMT is the zero-pitch limit; RCWA or FDTD needed before sign-off.
+- **Turn crowding.** Clem & Berggren Eq. 100 gives R = 0.54 / 0.58 / 0.65 (ξ = 4 / 5 / 7 nm) for the v3 sharp hairpin. The crowding-free turn needs a 2W gap (f ≤ 1/3), which cannot fit in an interleaved meander at useful fill. At a fixed 200 nm pitch, widening to 130 nm lowers R to ~0.50 but raises W × R 1.12× (absolute turn-limited current).
+- **Inductance.** 7 nm NbN at 400 Ω/sq, Tc 7.9 K gives 70 pH/sq (dirty BCS), not the 105 pH/sq (5 nm) in `sim/06`.
+
+**RF scan** (`sim/10`, new v3.1 section, case f, 5 nm grid; baseline cases unchanged to 5 digits). C_RN vs the 100 nm / ±15 µm reference (0.151 fF):
+
+| Wire / radial half-extent | C_RN | I_pk (53 V, 28 MHz) |
+|---|---|---|
+| 100 nm / 15 µm (v3) | 1.00× | 1.41 µA |
+| 130 nm / 15 µm | 1.02× | 1.44 µA |
+| **130 nm / 16 µm** | **1.19×** | **1.67 µA** |
+| 130 nm / 17 µm | 1.40× | 1.97 µA |
+| 130 nm / 15 µm, centre DC at 1 % of the RF | 1.11× | 1.56 µA |
+
+Wire width barely matters; lines under the centre-DC rim do. Rule set in the plan: largest radial overhang with C_RN ≤ 1.2×, so **1 µm**. The 2-D model has no axial line extension (those ends are under centre-DC Au) and no leads.
+
+**Decision (Claude, under the `design/` exception; the team should log it in `notes/decisions.md` if it adopts it): v3.1 meander.**
+- 130 nm lines on a 200 nm pitch (f 0.65, 70 nm gaps), along the trap axis as before.
+- Lines run 3 µm (A30) / 4.5 µm (B60) past each axial window edge (36 / 69 µm long), and 1 µm past each radial edge (160 lines over 32 µm).
+- Turns: solid 0.5 µm end blocks, slot ends closed by a semicircle (diameter = gap), all outside the light footprint under the Au.
+- The outer lines run past the end blocks and flare smoothly into the 40 × 3 µm tabs (edge y = w + (H − w)(s/L)², 6 µm; no re-entrant corner), on the side towards the axis. NbN max \|y\| = 15.96 µm.
+- Predicted geometric × landing × absorption: **A30 0.71 % → 1.15 %, B60 1.37 % → 2.2 %** (internal efficiency 1). L = 3.1 / 5.9 µH, τ = 62 / 119 ns.
+- Shared code in `gds/snspd_geom.py` (`meander()`, `straight()`), used by both generators; `turn="sharp"` reproduces v3 for the control.
+
+**Test die.** T4 / T4b / T8 use the v3.1 meander. New **T9 geometry array** (8 slots, compared as ratios between neighbours): 100/200 sharp (v3 control), 100/200 rounded, 130/200 rounded, 140/200 rounded, 300/600 rounded (Suleimen width comparison), a short 130/200 meander (18 × 17 µm, length series), and straight Ic references at 100 / 130 / 140 / 300 nm. Test plan: a14 (RT resistance and SEM), b10 (Isw ratios, 493 nm plateau vs width at 2 K and 5 K).
+
+**Checks.** `check_chip.py` has new NbN rules: \|y\| ≤ 17 µm, all NbN under centre-DC Au or the window, gaps ≥ 60 nm (morphological closing), no turn or tab inside the footprint (window + refraction spread). It fails the v3 sharp layout and passes v3.1: **ALL CHECKS PASS** on A30, B60, NODET. Test die: 5 Au conductors, ≥ 5.00 µm spacing, every NbN structure touches exactly its own leads. L50 is unchanged, so `sim/12` was not rerun. L20 areas 1 928 / 2 614 / 20 270 µm² (A30 / B60 / TEST); `run_R1_FULL` EBL area 0.050 mm². R1_TRAP unaffected (no L20).
+
+**Open (not geometry):**
+- Isw at 5 K may be only ≈ 8–9 µA (Sedykh 2025 scaled), so the 1.67 µA bound is ≈ 20 % of it (≈ 10 % with symmetric drain).
+- Filter capacitor on the centre DC (each lead couples ≈ 11 µA per volt of RF on it).
+- Al RF potential under the 4.7 mm of lead (≈ 2.7 pF per lead).
+- Measured NbN thickness used in every model.
+- Whether 130 nm, 7 nm NbN keeps a saturated 493 nm plateau at 5 K (T9 b10).
+- Suleimen 2026 full text.

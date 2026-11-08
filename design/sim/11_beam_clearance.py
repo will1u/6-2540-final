@@ -64,7 +64,7 @@ for k, v in summary.items():
           f"{v['max_isthmus_mm_clip_1em6']} mm, for 1e-4: {v['max_isthmus_mm_clip_1em4']} mm")
 
 # ---------------------------------------------------------------- square chip, zones near a corner
-# (DESIGN_LOG step 8: William chose a plain diced 10 x 10 mm chip, no bowtie). A beam at 45 deg to
+# (DESIGN_LOG step 8: the team chose a plain diced 10 x 10 mm chip, no bowtie). A beam at 45 deg to
 # the trap axis through a zone at distance dx from the right edge and dy from the top edge crosses
 # the chip corner: path on chip = sqrt(2) dy before the focus and sqrt(2) dx after it. The worst-
 # case radius is minimised by a waist placed at the zone with w0 = sqrt(lambda s_max / pi).

@@ -1,0 +1,30 @@
+FW: RF null x = 0.000, z = 67.19 um; translation mismatch (interior pairs) max 4.26e-05, median 3.02e-05; top/bottom mirror 1.5e-04
+U: RF null x = 0.000, z = 50.09 um; translation mismatch (interior pairs) max 6.64e-05, median 5.10e-12; top/bottom mirror 2.5e-04
+S: RF null x = 0.000, z = 50.09 um; translation mismatch (interior pairs) max 2.44e-02, median 4.86e-03; top/bottom mirror 5.5e-05
+
+S vs U at each top segment's centre (relative difference, S/U - 1):
+ seg  y_ITVG   phi        d2phi/dy2  dphi/dz    phi_U
+   3   -1000  +6.49e-02  -8.55e-03  +8.53e-02  0.0229
+   4    -900  +7.17e-02  -1.07e-02  +9.43e-02  0.0229
+   5    -800  +7.79e-02  -1.25e-02  +1.02e-01  0.0229
+   6    -700  +8.35e-02  -1.41e-02  +1.10e-01  0.0229
+   7    -600  +8.87e-02  -1.54e-02  +1.17e-01  0.0229
+   8    -500  +9.30e-02  -1.65e-02  +1.23e-01  0.0229
+   9    -400  +9.63e-02  -1.76e-02  +1.27e-01  0.0229
+  10    -300  +1.01e-01  -1.84e-02  +1.33e-01  0.0229
+  11    -200  +9.73e-02  -1.75e-02  +1.28e-01  0.0229
+  12    -100  +9.26e-02  -1.64e-02  +1.22e-01  0.0229
+  13       0  +8.80e-02  -1.52e-02  +1.16e-01  0.0229
+  14     100  +8.29e-02  -1.39e-02  +1.09e-01  0.0229
+  15     200  +7.73e-02  -1.23e-02  +1.02e-01  0.0229
+  16     300  +7.11e-02  -1.05e-02  +9.36e-02  0.0229
+  17     400  +6.44e-02  -8.33e-03  +8.46e-02  0.0229
+max |phi_S - phi_U| along any profile, relative to peak: 1.01e-01
+
+zone solves (12_final_chip_check.py), U vs S:
+ loading  null z 50.081 / 50.081 um; DC freqs [0.8, 2.905, 2.956] / [0.8, 2.887, 2.974] MHz; max|V| 8.4 / 9.05 V; tilt -99.4 / -100.7 deg
+          largest single-electrode voltage difference 1.144 V
+ readout  null z 50.089 / 50.089 um; DC freqs [0.8, 2.904, 2.954] / [0.8, 2.881, 2.977] MHz; max|V| 8.4 / 9.05 V; tilt -99.4 / -99.4 deg
+          largest single-electrode voltage difference 1.266 V
+ transport max|V| 7.43 / 7.33 V; max step 1.625 / 1.589 V
+ largest transport waveform difference, any electrode, any step: 0.204 V

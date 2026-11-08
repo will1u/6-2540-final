@@ -2,41 +2,61 @@
  {
   "window_axial": 20,
   "window_radial": 20,
-  "collection_pct": 1.4606656642678701,
-  "wire_length_mm": 2.0,
-  "L_uH": 2.0999999999999996,
-  "tau_ns": 42.0,
+  "collection_pct": 0.9838096599407643,
+  "collection_sigma_pct": 1.4606656642678701,
+  "meander_um": [
+   26.0,
+   22.0
+  ],
+  "wire_length_mm": 2.86,
+  "L_uH": 1.54,
+  "tau_ns": 30.800000000000004,
   "dh_um": null,
   "axial_grad": null
  },
  {
   "window_axial": 30,
   "window_radial": 30,
-  "collection_pct": 3.253931801257462,
-  "wire_length_mm": 4.5,
-  "L_uH": 4.725,
-  "tau_ns": 94.49999999999999,
-  "dh_um": -1.19,
-  "axial_grad": 0.000135
+  "collection_pct": 2.2341328275076298,
+  "collection_sigma_pct": 3.2745703373832953,
+  "meander_um": [
+   36.0,
+   32.0
+  ],
+  "wire_length_mm": 5.76,
+  "L_uH": 3.1015384615384614,
+  "tau_ns": 62.030769230769224,
+  "dh_um": -1.38,
+  "axial_grad": 0.000155
  },
  {
   "window_axial": 45,
   "window_radial": 30,
-  "collection_pct": 4.458868808299426,
-  "wire_length_mm": 6.75,
-  "L_uH": 7.0875,
-  "tau_ns": 141.75,
+  "collection_pct": 3.0752579770559443,
+  "collection_sigma_pct": 4.458868808299426,
+  "meander_um": [
+   54.0,
+   32.0
+  ],
+  "wire_length_mm": 8.64,
+  "L_uH": 4.6523076923076925,
+  "tau_ns": 93.04615384615384,
   "dh_um": null,
   "axial_grad": null
  },
  {
   "window_axial": 60,
   "window_radial": 30,
-  "collection_pct": 5.9218616724631135,
-  "wire_length_mm": 9.0,
-  "L_uH": 9.45,
-  "tau_ns": 188.99999999999997,
-  "dh_um": -2.04,
-  "axial_grad": 0.000245
+  "collection_pct": 4.215259517128811,
+  "collection_sigma_pct": 6.004469667261632,
+  "meander_um": [
+   69.0,
+   32.0
+  ],
+  "wire_length_mm": 11.04,
+  "L_uH": 5.9446153846153855,
+  "tau_ns": 118.89230769230771,
+  "dh_um": -2.5,
+  "axial_grad": 0.000293
  }
 ]

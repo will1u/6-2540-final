@@ -1,0 +1,56 @@
+A30 tilt  0 dz 0.00: ion z 50.09 (x -0.00) um, |V|max 6.64 V, E_dc (+0, +0) V/m, E_RF 7 V/m, micromotion 0 nm, beta(493) 0.00
+A30 tilt  0 dz 0.25: ion z 50.35 (x -0.00) um, |V|max 6.67 V, E_dc (-0, +108) V/m, E_RF 1701 V/m, micromotion 38 nm, beta(493) 0.49
+A30 tilt  0 dz 0.50: ion z 50.62 (x -0.00) um, |V|max 6.69 V, E_dc (-0, +219) V/m, E_RF 3455 V/m, micromotion 78 nm, beta(493) 1.00
+A30 tilt  0 dz 0.75: ion z 50.90 (x -0.00) um, |V|max 6.72 V, E_dc (-0, +330) V/m, E_RF 5273 V/m, micromotion 119 nm, beta(493) 1.52
+A30 tilt  0 dz 1.00: ion z 51.20 (x -0.00) um, |V|max 6.75 V, E_dc (-0, +444) V/m, E_RF 7158 V/m, micromotion 162 nm, beta(493) 2.06
+A30 tilt  0 dz 1.25: ion z 51.52 (x -0.00) um, |V|max 6.77 V, E_dc (-0, +559) V/m, E_RF 9118 V/m, micromotion 206 nm, beta(493) 2.63
+A30 tilt  0 dz 1.50: ion z 51.85 (x -0.00) um, |V|max 6.80 V, E_dc (-0, +677) V/m, E_RF 11157 V/m, micromotion 252 nm, beta(493) 3.21
+A30 tilt  0 dz 1.75: ion z 52.21 (x -0.00) um, |V|max 6.83 V, E_dc (-0, +796) V/m, E_RF 13282 V/m, micromotion 300 nm, beta(493) 3.83
+A30 tilt  0 dz 2.00: ion z 52.59 (x -0.00) um, |V|max 6.86 V, E_dc (-0, +917) V/m, E_RF 15506 V/m, micromotion 351 nm, beta(493) 4.47
+A30 tilt  0 dz 2.25: ion z 53.00 (x -0.00) um, |V|max 6.89 V, E_dc (-0, +1040) V/m, E_RF 17835 V/m, micromotion 403 nm, beta(493) 5.14
+A30 tilt  0 dz 2.50: ion z 53.45 (x -0.00) um, |V|max 6.91 V, E_dc (-0, +1165) V/m, E_RF 20292 V/m, micromotion 459 nm, beta(493) 5.85
+A30 tilt  0 dz 2.75: ion z 53.93 (x -0.00) um, |V|max 6.94 V, E_dc (-0, +1292) V/m, E_RF 22894 V/m, micromotion 518 nm, beta(493) 6.60
+A30 tilt  0 dz 3.00: ion z 54.47 (x -0.00) um, |V|max 6.97 V, E_dc (-0, +1421) V/m, E_RF 25667 V/m, micromotion 580 nm, beta(493) 7.39
+A30 tilt 0: undoing the -1.38 um window drop needs |V|max 6.77 V (DAC 10 V), E_dc,z 542 V/m; leaves E_RF 8830 V/m, micromotion 200 nm, beta(493, k along it) 2.54
+A30 tilt 10 dz 0.00: ion z 50.09 (x -0.00) um, |V|max 13.19 V, E_dc (+0, +0) V/m, E_RF 7 V/m, micromotion 0 nm, beta(493) 0.00
+A30 tilt 10 dz 0.25: ion z 50.35 (x -0.00) um, |V|max 13.24 V, E_dc (-5, +107) V/m, E_RF 1701 V/m, micromotion 38 nm, beta(493) 0.49
+A30 tilt 10 dz 0.50: ion z 50.62 (x -0.00) um, |V|max 13.29 V, E_dc (-10, +216) V/m, E_RF 3457 V/m, micromotion 78 nm, beta(493) 1.00
+A30 tilt 10 dz 0.75: ion z 50.90 (x -0.00) um, |V|max 13.34 V, E_dc (-15, +327) V/m, E_RF 5276 V/m, micromotion 119 nm, beta(493) 1.52
+A30 tilt 10 dz 1.00: ion z 51.20 (x -0.00) um, |V|max 13.39 V, E_dc (-20, +440) V/m, E_RF 7164 V/m, micromotion 162 nm, beta(493) 2.06
+A30 tilt 10 dz 1.25: ion z 51.52 (x -0.00) um, |V|max 13.44 V, E_dc (-24, +554) V/m, E_RF 9127 V/m, micromotion 206 nm, beta(493) 2.63
+A30 tilt 10 dz 1.50: ion z 51.86 (x -0.00) um, |V|max 13.49 V, E_dc (-29, +670) V/m, E_RF 11172 V/m, micromotion 253 nm, beta(493) 3.22
+A30 tilt 10 dz 1.75: ion z 52.21 (x -0.00) um, |V|max 13.54 V, E_dc (-34, +788) V/m, E_RF 13305 V/m, micromotion 301 nm, beta(493) 3.83
+A30 tilt 10 dz 2.00: ion z 52.60 (x -0.00) um, |V|max 13.59 V, E_dc (-39, +908) V/m, E_RF 15538 V/m, micromotion 351 nm, beta(493) 4.48
+A30 tilt 10 dz 2.25: ion z 53.01 (x -0.00) um, |V|max 13.64 V, E_dc (-44, +1030) V/m, E_RF 17880 V/m, micromotion 404 nm, beta(493) 5.15
+A30 tilt 10 dz 2.50: ion z 53.46 (x -0.00) um, |V|max 13.69 V, E_dc (-49, +1154) V/m, E_RF 20353 V/m, micromotion 460 nm, beta(493) 5.86
+A30 tilt 10 dz 2.75: ion z 53.96 (x +0.07) um, |V|max 13.74 V, E_dc (-54, +1279) V/m, E_RF 23021 V/m, micromotion 520 nm, beta(493) 6.63
+A30 tilt 10 dz 3.00: ion z 54.50 (x +0.10) um, |V|max 13.79 V, E_dc (-59, +1407) V/m, E_RF 25845 V/m, micromotion 584 nm, beta(493) 7.45
+A30 tilt 10: undoing the -1.38 um window drop needs |V|max 13.43 V (DAC 10 V), E_dc,z 537 V/m; leaves E_RF 8830 V/m, micromotion 200 nm, beta(493, k along it) 2.54
+B60 tilt  0 dz 0.00: ion z 50.09 (x -0.00) um, |V|max 3.38 V, E_dc (+0, +0) V/m, E_RF 5 V/m, micromotion 0 nm, beta(493) 0.00
+B60 tilt  0 dz 0.25: ion z 50.34 (x -0.00) um, |V|max 3.31 V, E_dc (-0, +151) V/m, E_RF 1684 V/m, micromotion 38 nm, beta(493) 0.49
+B60 tilt  0 dz 0.50: ion z 50.61 (x -0.00) um, |V|max 3.25 V, E_dc (-0, +304) V/m, E_RF 3416 V/m, micromotion 77 nm, beta(493) 0.98
+B60 tilt  0 dz 0.75: ion z 50.89 (x -0.00) um, |V|max 3.18 V, E_dc (-0, +457) V/m, E_RF 5193 V/m, micromotion 117 nm, beta(493) 1.50
+B60 tilt  0 dz 1.00: ion z 51.18 (x -0.00) um, |V|max 3.11 V, E_dc (-0, +612) V/m, E_RF 7019 V/m, micromotion 159 nm, beta(493) 2.02
+B60 tilt  0 dz 1.25: ion z 51.48 (x -0.00) um, |V|max 3.04 V, E_dc (-0, +768) V/m, E_RF 8899 V/m, micromotion 201 nm, beta(493) 2.56
+B60 tilt  0 dz 1.50: ion z 51.80 (x -0.00) um, |V|max 2.97 V, E_dc (-0, +925) V/m, E_RF 10835 V/m, micromotion 245 nm, beta(493) 3.12
+B60 tilt  0 dz 1.75: ion z 52.13 (x -0.00) um, |V|max 2.90 V, E_dc (-0, +1084) V/m, E_RF 12833 V/m, micromotion 290 nm, beta(493) 3.70
+B60 tilt  0 dz 2.00: ion z 52.49 (x -0.00) um, |V|max 2.83 V, E_dc (-0, +1244) V/m, E_RF 14898 V/m, micromotion 337 nm, beta(493) 4.29
+B60 tilt  0 dz 2.25: ion z 52.86 (x -0.00) um, |V|max 2.75 V, E_dc (-0, +1405) V/m, E_RF 17036 V/m, micromotion 385 nm, beta(493) 4.91
+B60 tilt  0 dz 2.50: ion z 53.26 (x -0.00) um, |V|max 2.68 V, E_dc (-0, +1567) V/m, E_RF 19254 V/m, micromotion 435 nm, beta(493) 5.55
+B60 tilt  0 dz 2.75: ion z 53.68 (x -0.00) um, |V|max 2.61 V, E_dc (-0, +1731) V/m, E_RF 21559 V/m, micromotion 487 nm, beta(493) 6.21
+B60 tilt  0 dz 3.00: ion z 54.14 (x -0.00) um, |V|max 2.53 V, E_dc (-0, +1896) V/m, E_RF 23961 V/m, micromotion 542 nm, beta(493) 6.90
+B60 tilt 0: undoing the -2.50 um window drop needs |V|max 2.81 V (DAC 10 V), E_dc,z 1287 V/m; leaves E_RF 15474 V/m, micromotion 350 nm, beta(493, k along it) 4.46
+B60 tilt 10 dz 0.00: ion z 50.09 (x -0.00) um, |V|max 15.24 V, E_dc (+0, +0) V/m, E_RF 5 V/m, micromotion 0 nm, beta(493) 0.00
+B60 tilt 10 dz 0.25: ion z 50.34 (x -0.00) um, |V|max 15.28 V, E_dc (+11, +152) V/m, E_RF 1682 V/m, micromotion 38 nm, beta(493) 0.48
+B60 tilt 10 dz 0.50: ion z 50.61 (x -0.00) um, |V|max 15.31 V, E_dc (+22, +304) V/m, E_RF 3415 V/m, micromotion 77 nm, beta(493) 0.98
+B60 tilt 10 dz 0.75: ion z 50.89 (x -0.00) um, |V|max 15.34 V, E_dc (+32, +458) V/m, E_RF 5192 V/m, micromotion 117 nm, beta(493) 1.50
+B60 tilt 10 dz 1.00: ion z 51.18 (x -0.00) um, |V|max 15.37 V, E_dc (+43, +613) V/m, E_RF 7018 V/m, micromotion 159 nm, beta(493) 2.02
+B60 tilt 10 dz 1.25: ion z 51.48 (x -0.00) um, |V|max 15.41 V, E_dc (+54, +770) V/m, E_RF 8896 V/m, micromotion 201 nm, beta(493) 2.56
+B60 tilt 10 dz 1.50: ion z 51.80 (x -0.00) um, |V|max 15.44 V, E_dc (+65, +928) V/m, E_RF 10831 V/m, micromotion 245 nm, beta(493) 3.12
+B60 tilt 10 dz 1.75: ion z 52.13 (x -0.00) um, |V|max 15.47 V, E_dc (+75, +1086) V/m, E_RF 12827 V/m, micromotion 290 nm, beta(493) 3.70
+B60 tilt 10 dz 2.00: ion z 52.50 (x -0.07) um, |V|max 15.50 V, E_dc (+86, +1247) V/m, E_RF 14945 V/m, micromotion 338 nm, beta(493) 4.31
+B60 tilt 10 dz 2.25: ion z 52.87 (x -0.10) um, |V|max 15.54 V, E_dc (+97, +1408) V/m, E_RF 17106 V/m, micromotion 387 nm, beta(493) 4.93
+B60 tilt 10 dz 2.50: ion z 53.28 (x -0.14) um, |V|max 15.57 V, E_dc (+108, +1571) V/m, E_RF 19354 V/m, micromotion 438 nm, beta(493) 5.58
+B60 tilt 10 dz 2.75: ion z 53.71 (x -0.18) um, |V|max 15.60 V, E_dc (+118, +1735) V/m, E_RF 21701 V/m, micromotion 491 nm, beta(493) 6.25
+B60 tilt 10 dz 3.00: ion z 54.17 (x -0.23) um, |V|max 15.63 V, E_dc (+129, +1900) V/m, E_RF 24162 V/m, micromotion 546 nm, beta(493) 6.96
+B60 tilt 10: undoing the -2.50 um window drop needs |V|max 15.51 V (DAC 10 V), E_dc,z 1287 V/m; leaves E_RF 15482 V/m, micromotion 350 nm, beta(493, k along it) 4.46

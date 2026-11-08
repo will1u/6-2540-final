@@ -112,10 +112,11 @@ def sum_taylor(T, weights):
 
 # ---------------------------------------------------------------- DC solve (workflow.ipynb cell 29)
 def solve_dc(T, rf_names, active, f_axial=1.0e6, v_rf=V_RF, f_rf=F_RF, m=M_BA138,
-             dc_limit=10.0, extra_rows=None, tilt_xz=0.0):
+             dc_limit=10.0, extra_rows=None, tilt_xz=0.0, grad_target=(0.0, 0.0, 0.0)):
     """Minimum-norm DC voltages at one ion position.
 
-    Constraints: E_x = E_y = E_z = 0 (no stray force at the RF null), d2/dxdz = tilt_xz (radial
+    Constraints: grad(phi_DC) = grad_target (V/um; default 0 = no stray force at the RF null; a
+    non-zero z entry pushes the ion off the null, see 13_dc_height_tuning.py), d2/dxdz = tilt_xz (radial
     mode rotation; 0 = none, non-zero tilts the radial axes away from the surface normal), and
     axial curvature giving f_axial once the RF pseudopotential's axial curvature is included.
     Returns (V dict, info dict). Falls back to bounded least squares if |V| > dc_limit.
@@ -126,7 +127,7 @@ def solve_dc(T, rf_names, active, f_axial=1.0e6, v_rf=V_RF, f_rf=F_RF, m=M_BA138
     w_ax = 2 * np.pi * f_axial
     A = np.array([[T[n][1][0], T[n][1][1], T[n][1][2], T[n][2][0, 2],
                    E * T[n][2][1, 1] * 1e12] for n in active]).T
-    b = np.array([0, 0, 0, tilt_xz, m * w_ax ** 2 - Kpsi[1, 1]])
+    b = np.array([grad_target[0], grad_target[1], grad_target[2], tilt_xz, m * w_ax ** 2 - Kpsi[1, 1]])
     if extra_rows is not None:
         A = np.vstack([A, extra_rows[0]])
         b = np.concatenate([b, extra_rows[1]])

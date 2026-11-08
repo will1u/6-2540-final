@@ -1,6 +1,6 @@
 """Design-rule, connectivity and fab-consistency checks + preview images for a trap die (Claude-authored).
 
-Usage (from design/sim):  ./run.sh ../gds/check_chip.py trap_die_v2_A30
+Usage (from design/sim):  ./run.sh ../gds/check_chip.py trap_die_v3_A30
 Reads <stem>.gds, <stem>_sim.json (seeds, die size, mark sites) and <stem>_pads.csv.
 
 Checks
@@ -8,8 +8,11 @@ Checks
                pad near the die edge, no floating Au islands, min spacing >= 5 um, no Au < 4.9 um wide
   layers       single top cell; no text on fab layers; all metal >= 90 um from the dicing edge
   SNSPD        leads within 19 um of the axis inside the trap (under the centre DC, never under RF);
-               buried ITO within 18 um of the axis; M1 via > 20 um from the leads
-               (plain die without SNSPD: nothing on layers 20-31, solid centre DC at the readout zone)
+               readout window open in the Au (bare D2, v3 has no ITO)
+               (plain die without SNSPD: nothing on layers 20-22, solid centre DC at the readout zone)
+  no ITO       layers 24, 30, 31 empty on every die (v3, DESIGN_LOG step 17)
+  pads         no pad in the die corners |x|, |y| > 4 mm, where the 45-degree beams leave the die
+  ground vias  >= 4 L40 vias inside the Au ground fill, each enclosed >= 25 um by fill Au and by M1 (step 22)
   D2 / pads    electrode Au >= 20 um from D2 openings; every bond/probe D2 opening covered by L45;
                readout window covered by L45; signal pads not on ground; GND spots on ground
   marks        L1 marks not under Al
@@ -31,7 +34,7 @@ from shapely.geometry import Point, Polygon, box  # noqa: E402
 from shapely.ops import unary_union  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-STEM = sys.argv[1] if len(sys.argv) > 1 else "trap_die_v2_A30"
+STEM = sys.argv[1] if len(sys.argv) > 1 else "trap_die_v3_A30"
 lib = gdstk.read_gds(os.path.join(HERE, STEM + ".gds"))
 sim = json.load(open(os.path.join(HERE, STEM + "_sim.json")))
 DIE = sim["_die"]
@@ -101,24 +104,54 @@ for L in (10, 22, 30, 31, 40, 50):
     closer = U(L).difference(die.buffer(-90)).area
     report(closer < 1.0, f"layer {L} stays >= 90 um from the dicing edge ({closer:.1f} um^2 closer)")
 
-# ---------------------------------------------------------------- SNSPD routing, ITO, vias
+# ---------------------------------------------------------------- SNSPD routing, no ITO
+report(not any(L in by_layer for L in (24, 30, 31)), "no ITO or via shapes: layers 24, 30, 31 empty")
 has_det = 20 in by_layer                  # False for the plain trap die (make_chip.py --nodet)
 if has_det:
     leads = U(22)
     seg = leads.intersection(box(x_rf0, y_ax - 300, x_read - 60, y_ax + 300))
     ymax = max(abs(y - y_ax) for g in getattr(seg, "geoms", [seg]) for x, y in g.exterior.coords)
     report(ymax < 19.0, f"SNSPD leads stay under the centre DC inside the trap (|y - y_axis|max = {ymax:.1f} um)")
-    itob = U(31)
-    near_trap = [g for g in getattr(itob, "geoms", [itob]) if abs(g.centroid.y - y_ax) < 300 and g.centroid.x > x_rf0]
-    report(all(abs(y - y_ax) <= 18.01 for g in near_trap for x, y in g.exterior.coords),
-           "buried ITO stays within 18 um of the axis (never under RF)")
-    report(U(24).distance(leads) > 20.0, f"M1 via > 20 um from SNSPD leads ({U(24).distance(leads):.1f} um)")
+    win = sim["_window"]
+    report(not au.intersects(box(x_read - win["wx"] / 2 + 0.5, y_ax - win["wy"] / 2 + 0.5,
+                                 x_read + win["wx"] / 2 - 0.5, y_ax + win["wy"] / 2 - 0.5)),
+           f"readout window {win['wx']:g} x {win['wy']:g} um is open in the Au (bare D2 floor)")
+    # NbN meander, v3.1 (DESIGN_LOG step 24)
+    nbn = U(20).intersection(box(x_read - 200, y_ax - 40, x_read + 100, y_ax + 40))
+    b = nbn.bounds
+    report(max(abs(b[1] - y_ax), abs(b[3] - y_ax)) <= 17.0 + 1e-6,
+           f"NbN stays within 17 um of the axis, >= 3 um inside the centre-DC edge (max {max(abs(b[1]), abs(b[3])):.2f} um)")
+    winbox = box(x_read - win["wx"] / 2, y_ax - win["wy"] / 2, x_read + win["wx"] / 2, y_ax + win["wy"] / 2)
+    bare = nbn.difference(au.union(winbox)).area
+    report(bare < 1e-3, f"all NbN lies under the centre-DC Au or the window ({bare:.3g} um^2 outside)")
+    r = 0.029                                 # closing by 29 nm fills every NbN gap narrower than ~58 nm
+    closed = nbn.buffer(r, join_style="mitre").buffer(-r, join_style="mitre").difference(nbn).area
+    report(closed < 0.05, f"NbN gaps >= 60 nm (closing by {2 * r * 1000:.0f} nm adds {closed:.3g} um^2)")
+    # refracted light footprint: rays through the bottom of the 6 um Au window cross 10.08 um of SiO2
+    # (n 1.463) to the NbN; ion >= 47.5 um above the Au top (sim/15). No turn may sit inside it.
+    rho = np.hypot(win["wx"] / 2, win["wy"] / 2)
+    s = np.sin(np.arctan(rho / (47.5 + 6.0))) / 1.463
+    spread = 10.08 * s / np.sqrt(1 - s * s)
+    fp = winbox.buffer(spread, join_style="mitre")
+    comps = nbn.intersection(fp)
+    hmax = max(g.bounds[3] - g.bounds[1] for g in getattr(comps, "geoms", [comps]))
+    report(hmax < 0.2, f"no NbN turn or tab inside the light footprint (window + {spread:.2f} um; "
+                       f"tallest NbN piece there {hmax * 1000:.0f} nm)")
 else:
-    report(not any(L in by_layer for L in (20, 22, 24, 30, 31)), "plain die: nothing on SNSPD/ITO layers 20, 22, 24, 30, 31")
+    report(not any(L in by_layer for L in (20, 22)), "plain die: nothing on SNSPD layers 20, 22")
     report(au.contains(box(x_read - 15, y_ax - 15, x_read + 15, y_ax + 15)), "plain die: centre DC is solid Au at the readout zone")
 
 # ---------------------------------------------------------------- D2 openings, protect, pads, marks
-d2_big = unary_union([g for g in by_layer.get(40, []) if g.area > 2000])    # bond/probe openings
+gpiece = pieces[ghit[0]] if ghit else None
+m1 = U(10)
+d2_all = [g for g in by_layer.get(40, []) if g.area > 2000]
+vias = [g for g in d2_all if gpiece is not None and gpiece.contains(g)]       # fill-to-M1 vias (step 22)
+d2_big = unary_union([g for g in d2_all if g not in vias])                     # bond/probe openings
+report(len(vias) >= 4, f"Au ground fill is tied to M1 on chip by {len(vias)} vias (>= 4)")
+for v in vias:
+    c = v.centroid
+    report(gpiece.contains(v.buffer(25, join_style="mitre")) and m1.contains(v.buffer(25, join_style="mitre")),
+           f"via at ({c.x:.0f}, {c.y:.0f}) enclosed >= 25 um by ground Au and by M1 Al")
 for i, ns in owner.items():
     report(pieces[i].distance(d2_big) >= 20.0, f"electrode {sorted(ns)} Au >= 20 um from D2 openings")
 prot = U(45)
@@ -126,7 +159,8 @@ report(d2_big.difference(prot).area < 1.0, "every bond/probe D2 opening is cover
 if has_det:
     report(prot.contains(box(x_read - 15, y_ax - 15, x_read + 15, y_ax + 15)), "readout window covered by L45")
 rows = list(csv.DictReader(open(os.path.join(HERE, STEM + "_pads.csv"))))
-gpiece = pieces[ghit[0]] if ghit else None
+corner = [r["pad"] for r in rows if abs(float(r["x_um"])) > 4000 and abs(float(r["y_um"])) > 4000]
+report(not corner, f"no pads in the beam-exit corners |x|, |y| > 4 mm {corner if corner else ''}")
 for r in rows:
     pt = (float(r["x_um"]), float(r["y_um"]))
     if r["electrode"] == "ground fill":
@@ -136,18 +170,16 @@ for r in rows:
         report(d2_big.contains(Point(pt)), f"M1 pad {r['pad']} sits in a D2 opening")
     elif r["layer"] == "50":
         report(not gpiece.contains(Point(pt)), f"pad {r['pad']} ({r['electrode']}) is not on the ground fill")
-m1 = U(10)
 for xm, ym in DIE["mark_sites"]:
     report(not m1.intersects(box(xm - 60, ym - 60, xm + 60, ym + 60)), f"L1 mark at ({xm:.0f}, {ym:.0f}) is not under Al")
 print("ALL CHECKS PASS" if ok else "SOME CHECKS FAILED")
 
 # ---------------------------------------------------------------- previews
 COLORS = {10: ("#bbbbbb", 0.25), 50: ("#d4a017", 0.7), 45: ("#e74c3c", 0.12), 22: ("#c0392b", 0.9),
-          20: ("#8e44ad", 1.0), 30: ("#16a085", 0.5), 31: ("#2ecc71", 0.5), 24: ("#000000", 1.0),
-          40: ("#2c3e50", 0.6), 1: ("#e67e22", 1.0), 100: ("#555555", 0.8)}
+          20: ("#8e44ad", 1.0), 40: ("#2c3e50", 0.6), 1: ("#e67e22", 1.0), 100: ("#555555", 0.8)}
 
 
-def draw(tag, window, layers=(10, 50, 45, 31, 30, 22, 20, 24, 40, 1, 100)):
+def draw(tag, window, layers=(10, 50, 45, 22, 20, 40, 1, 100)):
     W = box(*window)
     asp = (window[3] - window[1]) / (window[2] - window[0])
     fig, ax = plt.subplots(figsize=(12, max(12 * asp, 2.5) + 0.6))
@@ -165,7 +197,7 @@ def draw(tag, window, layers=(10, 50, 45, 31, 30, 22, 20, 24, 40, 1, 100)):
     ax.set_xlim(window[0], window[2])
     ax.set_ylim(window[1], window[3])
     ax.set_aspect("equal")
-    ax.set_title(f"{STEM} {tag}: Au 50 gold, M1 grey, L45 protect pink, buried ITO 31 green, top ITO 30 teal, "
+    ax.set_title(f"{STEM} {tag}: Au 50 gold, M1 grey, L45 protect pink, "
                  "SNSPD leads 22 red, NbN 20 purple, D2 open 40 navy", fontsize=8)
     fig.tight_layout()
     try:
@@ -178,5 +210,5 @@ def draw(tag, window, layers=(10, 50, 45, 31, 30, 22, 20, 24, 40, 1, 100)):
 draw("full", (-CX - 100, -CY - 100, CX + 100, CY + 100))
 draw("trap", (x_rf0 - 300, y_ax - 600, x_read + 2000, y_ax + 600))
 draw("window", (x_read - 100, y_ax - 60, x_read + 100, y_ax + 60))
-draw("leftend", (-CX - 50, -CY - 50, -2200, CY + 50))
+draw("leftend", (-CX - 50, -700, -2200, 700))
 sys.exit(0 if ok else 1)

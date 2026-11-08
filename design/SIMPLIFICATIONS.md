@@ -1,6 +1,6 @@
 # Wafer layout, and possible simplifications with the tests that would check them
 
-> **Claude-authored**, 2026-11-02, at William's request.
+> **Claude-authored**, 2026-11-02, at the team's request.
 > - Part 1 explains the wafer layout and run-size options.
 > - Part 2 lists ways to simplify the design, each with the tests that would show the design still works.
 > - **None of these tests have been run.** Where a number already exists from an earlier DESIGN_LOG step, it is quoted with its step; anything else is a test to do, not a result.
@@ -8,14 +8,17 @@
 
 ---
 
+> [!warning] Historical planning assumptions
+> This catalog was drafted for v2: narrow dies, 184-die wafer, ITO and the earlier detector. References to `wafer_v3` were renamed without updating those assumptions. Use [current variants](fab/VARIANTS.md), [run plan](fab/RUN_PLAN.md) and [open decisions](fab/OPEN_DECISIONS.md) for fabrication. Candidate tests below remain proposals, not current run instructions.
+
 ## Part 1. What the wafer layout is
 
-`gds/wafer_v2.gds` (from `make_wafer.py`) is the *placement plan* for a 100 mm wafer.
+`gds/wafer_v3.gds` (from `make_wafer.py`) is the *placement plan* for a 100 mm wafer.
 
 **What the layout fixes:**
 - **Tiles:** 10 × 10.8 mm. Each tile holds four 10 × 2.5 mm dies stacked with 200 µm dicing streets: A30, B60, A30, test die.
 - **Count:** the tiles that fit inside a 45 mm radius give 184 dies (92 A30, 46 B60, 46 test).
-- **Die IDs:** `wafer_v2_map.csv` gives every die an ID and a centre coordinate.
+- **Die IDs:** `wafer_v3_map.csv` gives every die an ID and a centre coordinate.
 
 **How a wafer run works:**
 - **Patterning.** Every step in `fab/TRAVELER.md` is done to the whole wafer at once:
@@ -85,7 +88,7 @@ For each simplification, check that the numbers below hold. They are the baselin
 - **Removes:** most of the MLA and EBL write time; the scale of the dicing map.
 - **Risks:** fewer test dies, so less information on uniformity.
 - **Tests:**
-  - **Before tape-out:** crop `wafer_v2.gds` to the block. Check that each MLA job, the EBL job and the dicing map list the same die IDs (`mask_list.md` section 4 checklist).
+  - **Before tape-out:** crop `wafer_v3.gds` to the block. Check that each MLA job, the EBL job and the dicing map list the same die IDs (`mask_list.md` section 4 checklist).
   - **After fab:** the usual test-die measurements, at least one test die per tile (`test_plan.md` (a)).
 - **My take:** recommended for run 1.
 
@@ -94,7 +97,7 @@ For each simplification, check that the numbers below hold. They are the baselin
   - every SNSPD-specific step (traveler steps 4–8b and 10);
   - the EBL;
   - the NbN thermal-budget constraints.
-- **How:** use `trap_die_v2_NODET` (DESIGN_LOG step 14). In parallel, or next, run the detector stack alone on test dies (T3, T4, T4b, T5, T7) to qualify NbN, optics and ITO before they are combined with the 10 µm D2 and plating.
+- **How:** use `trap_die_v3_NODET` (DESIGN_LOG step 14). In parallel, or next, run the detector stack alone on test dies (T3, T4, T4b, T5, T7) to qualify NbN, optics and ITO before they are combined with the 10 µm D2 and plating.
 - **Risks:**
   - The combination is only tested in run 2.
   - The interaction effects stay untested until the combined run: thermal budget of D2 and plating on finished NbN, and whether ITO survives the D2 etch.

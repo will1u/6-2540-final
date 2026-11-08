@@ -8,8 +8,9 @@ model; the ITO-on-D2 window enters as a fill of the centre DC electrode, see mak
      f_ax, radial-mode tilt, |V| <= DC_LIMIT, using the N_ACTIVE electrodes nearest the ion
   3. Transport loading -> readout in 10 um steps (single-position solve per step, as in
      workflow.ipynb; no trajectory optimisation): voltage waveforms, axial frequency, height
-  4. The 3-D recess correction at the readout window (sim/04b: -1.2 um for 30 x 30) is added to
-     the reported readout height.
+  4. The 3-D recess correction at the readout window is added to the reported readout height. It is
+     looked up by the window size in the layout JSON ("_window") from sim/04b's results for that floor
+     (v3: bare oxide; 30 x 30 -> -1.38 um, 30 x 60 -> -2.50 um; no window -> 0).
 Writes gridfiles-free outputs: sim/out/12_final_chip/ (labels.png, null.png, waveforms.png,
 waveforms.csv, summary.json).
 Usage: ./run.sh 12_final_chip_check.py [path/to/chip_sim.json]
@@ -29,7 +30,7 @@ from gds2itvg.plot import label_map
 import trapcalc as tc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-JS = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "gds", "trap_chip_v1_sim.json")
+JS = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "gds", "trap_die_v3_A30_sim.json")
 GDS = JS.replace("_sim.json", ".gds")
 TAG = os.path.basename(JS).replace("_sim.json", "")
 OUT = os.path.join(HERE, "out", "12_final_chip", TAG)
@@ -39,9 +40,16 @@ V_RF, F_RF = 53.0, tc.F_RF
 F_AX = 0.8e6
 DC_LIMIT = 10.0
 N_ACTIVE = 14
-ZONES = json.load(open(JS))["_zones"]
+LAYOUT = json.load(open(JS))
+ZONES = LAYOUT["_zones"]
 X_LOAD, X_READ = ZONES["loading_itvg_y"], ZONES["readout_itvg_y"]      # ITVG y (= GDS x - x_read)
-DH_RECESS = -1.19          # sim/04b, ito6 30x30
+WIN = LAYOUT.get("_window", {"wx": 30.0, "wy": 30.0, "floor": "ito6"})   # v2 layouts: ITO-on-D2 30 x 30
+if WIN["wx"] > 0:
+    case = f"{WIN['wy']:g}x{WIN['wx']:g} {WIN['floor']}"                     # 04b names: radial x axial
+    DH_RECESS = json.load(open(os.path.join(HERE, "out", "04b_window_3d", f"summary_{WIN['floor']}.json")))[case]["dh"][0]
+else:
+    case, DH_RECESS = "no window", 0.0
+print(f"3-D recess correction ({case}): {DH_RECESS:+.2f} um")
 TILT_DEG = 10.0
 
 lay = Layout.from_json(JS)
@@ -95,6 +103,7 @@ for name, y in (("loading", X_LOAD), ("readout", X_READ)):
           f"q = {zr['q']:.3f}; DC freqs {np.round(i['freqs']/1e6,3)} MHz; |V|max {i['vmax']:.2f} V; "
           f"bounded {i['bounded']}; radial axes at {zr['tilt_angle']:.1f} deg")
 summary["readout"]["null_z_with_recess"] = summary["readout"]["null_z"] + DH_RECESS
+summary["readout"]["recess_case"], summary["readout"]["dh_recess"] = case, DH_RECESS
 
 # 3. transport: fixed electrode set (all DC electrodes), no radial tilt while moving; the 10 deg
 #    tilt is added only once the ion sits in a zone (the tilt set can be ramped in separately)

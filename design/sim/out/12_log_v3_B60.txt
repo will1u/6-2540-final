@@ -1,0 +1,4 @@
+3-D recess correction (30x60 oxide): -2.50 um
+loading  y=   -600: null z = 50.08 um (x 0.00); RF-only [2.98458437 2.98519079] MHz, q = 0.302; DC freqs [0.8   2.887 2.974] MHz; |V|max 9.06 V; bounded False; radial axes at -100.7 deg
+readout  y=      0: null z = 50.09 um (x -0.00); RF-only [2.98317783 2.98378785] MHz, q = 0.301; DC freqs [0.753 2.493 3.321] MHz; |V|max 10.00 V; bounded True; radial axes at 171.6 deg
+transport: 61 steps, max |V| 7.33 V, max change per 10 um step 4.468 V, axial 0.800-0.800 MHz, height 50.08-50.09 um, bounded steps: 0

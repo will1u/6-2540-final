@@ -1,6 +1,6 @@
 """Full 10 mm x 10 mm chip: five-wire 138Ba+ trap with a trap-integrated NbN SNSPD (Claude-authored).
 
-Plain square diced chip (William, 2026-11-02: no bowtie). To keep the 45-degree laser beams off
+Plain square diced chip (team decision, 2026-11-02: no bowtie). To keep the 45-degree laser beams off
 the surface, the trap runs parallel to the top edge, 800 um from it, and both zones sit near the
 top-right corner: the beams only cross that corner (DESIGN_LOG step 8, sim/11_beam_clearance.py).
 

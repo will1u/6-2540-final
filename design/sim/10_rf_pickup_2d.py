@@ -41,6 +41,8 @@ Cases:
   d   Al + buried ITO |x| <= 25 um left floating
   e   "ITO on D2": D2 not etched; ITO patch on top of D2 at the bottom of the Au window
       (z = -6, |x| <= 15), tied to the centre DC electrode; no buried ITO; Al below
+  f   v3 (DESIGN_LOG step 17): no ITO anywhere, D2 not etched (bare SiO2 window floor), Al below.
+      Run with the v2 stack (ITO layer = oxide) and with the v3 no-ITO stack from 09b (summary_noito.json)
   Cases a-d have the window etched through D2 (vacuum in |x| < 15 down to the ITO / cap).
 
 Limitations (read before trusting small numbers):
@@ -118,9 +120,10 @@ def layers(st):
                 z_nw=0.5 * (z_nw_top + z_nw_bot))
 
 
-def make_grid(st):
+def make_grid(st, x_fine=15.5, h_fine=0.025):
+    """x_fine / h_fine: extent and step of the fine x grid that resolves the wires (v3.1 scan: 17.5 / 0.01)."""
     L = layers(st)
-    xs = axis([(0.0, 0.025), (15.5, 0.025), (X_C, 0.1), (X_RF0, 0.1), (45.0, 1.0), (100.0, 1.0),
+    xs = axis([(0.0, h_fine), (x_fine, h_fine), (X_C, 0.1), (X_RF0, 0.1), (45.0, 1.0), (100.0, 1.0),
                (X_RF1, 0.2), (X_OUT, 0.2), (150.0, 2.0), (X_MAX, 25.0)])
     zs = axis([(Z_BACK, 40.0), (-30.0, 2.0), (L["z_gnd_a"], 0.05), (L["z_al"], 0.01),
                (L["z_nw_bot"], st["t_nbn"] / 2), (L["z_nw_top"], st["t_nbn"] / 2), (L["z_ito_bot"], 0.01),
@@ -130,9 +133,12 @@ def make_grid(st):
 
 
 # ------------------------------------------------------------------ geometry of one case
-def build_case(case, st, wires_on):
-    """Return grid, cell permittivity, fixed-node mask/values and named conductor masks."""
-    xs, zs, L = make_grid(st)
+def build_case(case, st, wires_on, wire_w=WIRE_W, x_nw=X_WIN, grid=None):
+    """Return grid, cell permittivity, fixed-node mask/values and named conductor masks.
+
+    wire_w: nanowire width; x_nw: half-extent of the wire region (v3: = X_WIN; v3.1 scan: 15-17 um,
+    wires beyond 15 um sit under the centre-DC Au rim); grid: kwargs for make_grid."""
+    xs, zs, L = make_grid(st, **(grid or {}))
     X, Z = np.meshgrid(xs, zs, indexing="ij")
     xc, zc = 0.5 * (xs[1:] + xs[:-1]), 0.5 * (zs[1:] + zs[:-1])
     XC, ZC = np.meshgrid(xc, zc, indexing="ij")
@@ -155,9 +161,10 @@ def build_case(case, st, wires_on):
 
     cond = {}
     cond["rf"] = box(X, Z, X_RF0, X_RF1, Z_AU, 0.0)
-    cond["dc"] = box(X, Z, X_WIN, X_C, Z_AU, 0.0) | box(X, Z, X_OUT, X_MAX, Z_AU, 0.0)
+    cond["dcc"] = box(X, Z, X_WIN, X_C, Z_AU, 0.0)                             # centre DC rim
+    cond["dc"] = box(X, Z, X_OUT, X_MAX, Z_AU, 0.0)                            # outer DC
     if case == "e":
-        cond["dc"] |= box(X, Z, 0.0, X_WIN, Z_AU, Z_AU + 0.06)                 # ITO on D2, tied to centre DC
+        cond["dcc"] |= box(X, Z, 0.0, X_WIN, Z_AU, Z_AU + 0.06)                # ITO on D2, tied to centre DC
     if has_al:
         cond["gnd"] = Z <= L["z_al"] + tol
     elif case == "a":
@@ -169,9 +176,9 @@ def build_case(case, st, wires_on):
         cond["ito"] = box(X, Z, 0.0, ito_x, L["z_ito_bot"], Z_D2)
     if wires_on:
         w = np.zeros_like(X, bool)
-        for k in range(int(X_WIN / WIRE_P)):
-            x0 = k * WIRE_P + (WIRE_P - WIRE_W) / 2
-            w |= box(X, Z, x0, x0 + WIRE_W, L["z_nw_bot"], L["z_nw_top"])
+        for k in range(int(round(x_nw / WIRE_P))):
+            x0 = k * WIRE_P + (WIRE_P - wire_w) / 2
+            w |= box(X, Z, x0, x0 + wire_w, L["z_nw_bot"], L["z_nw_top"])
         cond["wires"] = w
     return xs, zs, L, eps, cond
 
@@ -218,16 +225,19 @@ def charge(K, phi, mask):
     return EPS0 * float((K @ phi)[mask.ravel()].sum())
 
 
-def run_case(case, st=STACK):
-    """Field at the nanowire plane (no wires) and charge on the wires, both per volt on the RF."""
+def run_case(case, st=STACK, wire_w=WIRE_W, x_nw=X_WIN, grid=None, dc_rf=0.0):
+    """Field at the nanowire plane (no wires) and charge on the wires, both per volt on the RF.
+
+    dc_rf: RF potential on the centre DC electrode as a fraction of the rail amplitude (0 = ideal
+    filter capacitor; the v3.1 scan also runs 0.01, an open item in the geometry audit)."""
     res = dict(case=case)
     for wires_on in (False, True):
-        xs, zs, L, eps, cond = build_case(case, st, wires_on)
+        xs, zs, L, eps, cond = build_case(case, st, wires_on, wire_w, x_nw, grid)
         K = laplacian(xs, zs, eps)
         fixed = np.zeros((len(xs), len(zs)), bool)
         for m in cond.values():
             fixed |= m
-        v_rf = np.where(cond["rf"], 1.0, 0.0)
+        v_rf = np.where(cond["rf"], 1.0, 0.0) + np.where(cond["dcc"], dc_rf, 0.0)
         if case == "d":                        # floating ITO: superpose RF=1 and ITO=1 solutions
             phi_a, phi_b = solve(K, fixed, [v_rf, np.where(cond["ito"], 1.0, 0.0)])
             v_f = -charge(K, phi_a, cond["ito"]) / charge(K, phi_b, cond["ito"])
@@ -268,20 +278,24 @@ def run_case(case, st=STACK):
             # charge on each wire (fF/um per V) to show where pickup comes from
             node_q = EPS0 * (K @ phi).reshape(len(xs), len(zs)) * cond["wires"]
             colq = -node_q.sum(axis=1) * 1e15 * 1e-6
-            centres = np.arange(int(X_WIN / WIRE_P)) * WIRE_P + WIRE_P / 2
+            centres = np.arange(int(round(x_nw / WIRE_P))) * WIRE_P + WIRE_P / 2
             per_wire = [colq[(xs > c - WIRE_P / 2) & (xs < c + WIRE_P / 2)].sum() for c in centres]
             res["wire_profile"] = (centres, np.array(per_wire))
     return res
 
 
 # ------------------------------------------------------------------ run all cases
-CASES = ["a", "a2", "b", "c1", "c2", "d", "e"]
+CASES = ["a", "a2", "b", "c1", "c2", "d", "e", "f"]
 LABEL = {"a": "a: no Al, gnd 1 um below", "a2": "a2: no Al, Si substrate", "b": "b: Al only",
          "c1": "c1: Al + ITO |x|<=25 gnd", "c2": "c2: Al + ITO under RF gnd", "d": "d: Al + ITO floating",
-         "e": "e: Al + ITO on D2 (no etch)"}
+         "e": "e: Al + ITO on D2 (no etch)", "f": "f: Al only, D2 kept, no ITO"}
 res = {c: run_case(c) for c in CASES}
 st66 = dict(STACK, t_sp=0.066)
 res66 = {c: run_case(c, st66) for c in ("b", "c1", "e")}
+# v3 stack: no ITO. 09b (summary_noito.json) finds the NbN absorption ~0.40 for any SiO2 cap once the cap
+# touches the 10 um D2 SiO2 (same material), so the v2 thicknesses are kept: SiO2 spacer 238 nm, cap 80 nm
+STACK_V3 = dict(t_ito=0.0, t_cap=0.080, t_nbn=0.007, t_sp=0.238)
+res_v3 = run_case("f", STACK_V3)
 
 # ------------------------------------------------------------------ figures
 fig, axs = plt.subplots(1, 3, figsize=(16, 4.6))
@@ -328,7 +342,8 @@ def clean(r):
 
 summary = dict(inputs=dict(V_RF=V_RF, f_RF=F_RF, stack_um=STACK, L_det_um=L_DET, rail_len_um=RAIL_LEN,
                            Isw_estimate_uA=I_SW, todaro=TODARO),
-               cases={c: clean(res[c]) for c in CASES}, spacer_66nm={c: clean(r) for c, r in res66.items()})
+               cases={c: clean(res[c]) for c in CASES}, spacer_66nm={c: clean(r) for c, r in res66.items()},
+               v3_f_noito_stack=dict(stack_um=STACK_V3, **clean(res_v3)))
 # RF capacitance and ITO dissipation for the whole rail length (two rails)
 cb, ca2, cc2 = (res[c]["C_rf_per_rail_pF_per_mm"] for c in ("b", "a2", "c2"))
 summary["rf_capacitance"] = dict(
@@ -354,5 +369,27 @@ for c in CASES:
 print("spacer 66 nm instead of 234 nm:")
 for c, r in res66.items():
     print(f"  {LABEL[c]:28s} E_max {r['E_max']:.3g}  C_RN {r['C_RN_fF']:.3g} fF  I_pk {r['I_pk_uA']:.3g} uA")
+print(f"v3 case f with the no-ITO stack {STACK_V3}: E_max {res_v3['E_max']:.3g}  C_RN {res_v3['C_RN_fF']:.3g} fF  "
+      f"I_pk {res_v3['I_pk_uA']:.3g} uA")
 print("floating ITO potential (case d) per V of RF:", res["d"].get("V_ITO_float_per_V"))
 print("RF capacitance:", json.dumps(summary["rf_capacitance"], indent=1))
+
+# ------------------------------------------------------------------ v3.1 geometry scan (DESIGN_LOG step 24)
+# Case f, v3 no-ITO stack. Wire width 100 vs 130 nm (200 nm pitch) and the radial half-extent of the
+# meander 15 / 16 / 17 um (wires beyond 15 um lie under the centre-DC Au rim). A 5 nm fine grid out to
+# 17.5 um puts both wire widths on grid nodes; every number is compared with the 100 nm / 15 um row
+# on the same grid. Rule for the radial overhang: the largest one with C_RN <= 1.2 x that reference.
+# Last row: 130 nm / 15 um with 1 % of the RF amplitude on the centre DC electrode (no filter capacitor
+# designed yet; geometry audit, RF section).
+GRID_V31 = dict(x_fine=17.5, h_fine=0.005)
+scan = {}
+for ww, xn, dcf in ((0.10, 15.0, 0.0), (0.13, 15.0, 0.0), (0.13, 16.0, 0.0), (0.13, 17.0, 0.0),
+                    (0.10, 17.0, 0.0), (0.13, 15.0, 0.01)):
+    r = run_case("f", STACK_V3, wire_w=ww, x_nw=xn, grid=GRID_V31, dc_rf=dcf)
+    scan[f"W{ww * 1000:.0f}_x{xn:g}_dc{dcf:g}"] = clean(r)
+ref = scan["W100_x15_dc0"]["C_RN_fF"]
+print("v3.1 scan, case f (no ITO), 5 nm grid:")
+for k, r in scan.items():
+    print(f"  {k:18s} C_RN {r['C_RN_fF']:.4g} fF ({r['C_RN_fF'] / ref:.3f} x ref)  I_pk {r['I_pk_uA']:.3g} uA")
+with open(os.path.join(OUT, "summary_v31_scan.json"), "w") as fh:
+    json.dump(dict(grid=GRID_V31, stack_um=STACK_V3, ref_key="W100_x15_dc0", runs=scan), fh, indent=1)
