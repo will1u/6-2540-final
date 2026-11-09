@@ -1225,3 +1225,81 @@ The A30 numbers are unchanged from step 25. The B60 v4 die is not drawn (it need
 - Slot-lead pickup: 44.5 µA per lead over 2.24 mm (E2), 28.3 µA (E1). Unchanged physics; the RF grounding decision stays open.
 
 **Addendum (team, 2026-11-08): Al 450 nm adopted** (`notes/decisions.md`). The local mirror is 450 nm Al-1%Cu: detector-end swing 6.7–8.8 mV, extra wire current 0.16–0.21 µA on E2. GDS unchanged. To carry into the v4 traveler: L10 sputter time, strip acceptance ≈ 5 Ω, a mirror probe opening, and a hillock check after the spacer deposition.
+
+---
+
+## 2026-11-08: v4 SNSPD overhang audit (read-only calculations; no design decision)
+
+**Inputs and method.** Actual `trap_die_v4_A30.gds` / `trap_die_v4_B60.gds`; existing gds2itvg nulls and window-drop estimates in `sim/out/13_dc_height_tuning_v4/summary.json`; optical functions from `sim/15_snspd_geometry.py`, evaluated inline through `sim/run.sh` without executing that script's v3 study. Stack: 493 nm, 7 nm NbN, fill 0.65, 238 nm SiO₂ spacer, 450 nm Al mirror, 80 / 160 nm SiO₂ cap, E2 6 µm / E1 0.35 µm Au. E1 heights are bracketed between the planar null and the existing 1 µm-pocket drop; they are not a new simulation of a 0.35 µm pocket. All numbers below are [team calc], not measured detector performance.
+
+- **GDS:** both meanders are connected; 160 lines, 130 nm / 200 nm pitch, actual radial span 31.93 µm. Straight lengths 36 / 69 µm; windows 30 × 30 / 60 × 30 µm. Fill inside each window is 0.65. All local detector NbN outside the window lies under Au (alignment marks excluded).
+- **Collection and absorption:** centred isotropic collection through the window floor is A30 E2 2.221%, E1 2.601–2.636%; B60 E2 4.158%, E1 4.674–4.760%. The finite Au pocket is included in the source-to-floor distance. Using the existing angular effective-medium approximation, fractions of all emitted 493 nm photons absorbed in NbN are A30 E2 0.980 / 1.470%, E1 1.149–1.164 / 1.720–1.743%; B60 E2 1.838 / 2.709%, E1 2.067–2.105 / 3.029–3.082% (80 / 160 nm cap). These exclude internal detection efficiency and recovery losses; the fill factor is already included in absorption.
+- **Ray footprint:** maximum spreading in the cap is A30 20–22 / 41–44 nm and B60 31–33 / 62–66 nm (80 / 160 nm cap, across Au options and E1 height brackets). Current centred detector envelopes contain every aperture ray. With 160 nm cap, full-envelope radial alignment margin is about 0.93 µm; 1 / 2 µm radial misalignment misses about 0.20 / 3.3% of aperture rays. These are continuous-envelope estimates, not wire-resolved electromagnetic efficiencies. A 2 µm axial offset remains contained. A hypothetical exactly window-sized envelope, perfectly centred, loses only about 0.32–0.39% of window rays through cap spreading at 160 nm; it is not a connected, fabrication-qualified replacement design.
+- **Electrical cost:** covered straight wire is 21.875 / 18.478% of total straight length (5.76 / 11.04 mm). With the existing dirty-BCS assumptions (400 Ω/square, Tc 7.9 K), straight-section kinetic inductance is 3.10 / 5.94 µH and L/50 Ω is 62.0 / 118.8 ns, excluding turns, tapers and connections. An ideal 150-line window-sized straight-section count gives 48.4 / 96.8 ns; the extra straight length therefore adds 13.6 / 22.0 ns. These are current recovery constants, not measured detection dead times. Kerman2006 Fig. 3 relates efficiency recovery to both inductance and the efficiency-versus-bias curve.
+- **Bends:** the drawn inner slot radius is 35 nm (70 nm gap / 2), with 0.5 µm end blocks. Au coverage does not remove the series switching-current constraint. ClemBerggren2011 Sec. VII.4 / Figs. 8–9 explain geometry-dependent current crowding. The sharp-turn factor in sim/15 is not a quantitative prediction for these rounded GDS turns; no switching-current factor is assigned here.
+- **Cap discrepancy:** step 26 specifies the current design target of 160 ± 10 nm total SiO₂ over NbN, but `make_chip.py` and the generated simulation metadata still state 80 nm, as do older process notes. GDS does not encode this deposited thickness. Both cases were evaluated; no fabrication recipe, metadata, or layout was changed by this audit.
+
+**Verification and limits.** Exact rectangular solid angle agrees with the existing numerical integral to < 2e-7 absolute fraction. Optical spatial-grid refinement (120 → 240 per axis) changes absorption by < 5e-5 absolute fraction; ray angular-grid refinement (16384 → 32768) changes no-margin capture by < 1e-5 absolute fraction. These checks establish numerical consistency only. Diffraction, arbitrary-azimuth grating response, actual NbN optical constants, internal efficiency, bias dependence, RF response and measured recovery remain unqualified. No reduction in overhang was adopted. Sources read: [Kerman2006, Fig. 3](https://qnn-rle.mit.edu/documents/kerman-published-version-2006.pdf), [ClemBerggren2011, Sec. VII.4](https://arxiv.org/html/1109.4881), [Hampel2023, Figs. 3–4](https://tf.nist.gov/general/pdf/3223.pdf).
+
+---
+
+## 2026-11-08: Step 29, validate the generated 360 µm pad rows (`gds/check_package_fanout.py`; `sim/16_pad_pitch_check.py`, `12`, `13`)
+
+**Status.** The current generated layout passes the checks below. **Team adoption of the pitch is pending** review of future perpendicular beam access near the zones. `notes/decisions.md` is unchanged. Record for the proposed decision: 360 µm pitch; rejected alternatives listed with the proposal: 180, 240, 300, 400 µm; the team's only supplied reason is to keep wire angles below 45° for a PGA84L-like package. Carrier and spacer choices remain open in `fab/OPEN_DECISIONS.md`.
+
+**Layout.** `make_chip.py`: PAD_P 180 → 360 µm, X_ROW_IN 2000 → 600 µm. Actual pad centres from `trap_die_v4_A30_pads.csv`: TL/BL at x = −3500…−980, TR/BR at +3500…+620, y = ±4720 µm. Side pads: RF (4700, 0), C (−4650, 450), SNS/SNG (−4750, ±100), GND spots (±4700, ±1500). B60 shares these positions; NODET omits SNS/SNG. Staircase finger heights are unchanged; horizontal track lengths and riser positions changed. The supplied regenerated A30/B60/NODET/UNIFORM dies, wafer and run layouts were retained; this validation did not regenerate them. Test dies and archived v3 files were not changed.
+
+**Package measurement and mapping [team calc].** Source `PGA84L1993`: [local cavity drawing](<pkg-pga84l-char (1).pdf>), extract page 2 / printed p. 4-24, dated 1993-05-14. Author/publisher are not identified in the supplied drawing. Cavity J = K = 0.470 in = 11.938 mm. Its vector bounds are (127.44, 169.77)…(486.11, 535.24) PDF points, giving independent x/y scale factors 33.284077 / 32.664788 µm per PDF point. Each finger centre is the average of the midpoints of its two long vector edges. All 84 measured centres were visually checked on the drawing. Rotate 90° counterclockwise as labelled, then mirror x to convert the bottom view to the die-facing view; centre the die on the cavity. These are approximate drawing-derived positions, not a manufacturing-tolerance specification.
+
+| Die-facing edge | Fingers | Measured x range (mm) | Measured y range (mm) |
+|---|---:|---|---|
+| Top | 21 | −5.592…+5.536 | +6.690 |
+| Bottom | 21 | −5.596…+5.540 | −6.590…−6.579 |
+| Left | 21 | −6.648…−6.635 | −5.481…+5.656 |
+| Right | 21 | +6.588…+6.600 | −5.486…+5.651 |
+
+Full measured positions, including original PDF coordinates: [package_fingers.csv](sim/out/16_pad_pitch_check/package_fingers.csv). Local IDs T/B01…21 run left to right, L/R01…21 bottom to top; **these are not electrical package pin numbers**. `check_package_fanout.py` enumerates ordered, one-to-one mappings on each edge, minimizing the worst angle and then total projected wire length. Angles are atan(|tangential displacement| / |normal displacement|), measured from the die-edge normal. Wires join chip-pad centres to package-finger centres. The earlier 0.25 mm landing assumption and ±0.15 mm sweep were dropped at the user's request.
+
+| Edge | Wires | Worst pad → finger | Worst angle | Longest projected wire |
+|---|---:|---|---:|---:|
+| Top | 17 | TL1 → T03 | 18.93° | 2.082 mm |
+| Bottom | 17 | BL1 → B03 | 20.03° | 1.979 mm |
+| Left | 5 | SNG → L10 | 8.58° | 1.988 mm |
+| Right | 3 | GND-4 → R08 | 4.97° | 1.900 mm |
+
+All 42 connections have distinct package fingers and no crossings. Top/bottom angles are below 45°; side angles are below the expected approximately 20°. Full pad/finger endpoints, electrode names, lengths and angles: [fanout.csv](sim/out/16_pad_pitch_check/fanout.csv); [diagram](sim/out/16_pad_pitch_check/fanout.png), [SVG](sim/out/16_pad_pitch_check/fanout.svg), [source hash and geometry summary](sim/out/16_pad_pitch_check/fanout_summary.json). This nominal plan represents one connection per chip pad; additional RF wires and electrical pin assignments await the carrier-specific bond plan.
+
+**Layout checks.** `check_chip.py` rerun on current A30, B60 and NODET: **ALL CHECKS PASS** on each; minimum conductor spacing 5.00 µm, zero floating Au islands, and no pads in the beam-exit corners. [Checker inputs and logs](sim/out/16_pad_pitch_check/checks_manifest.json) are fingerprinted so these results can be tied to the checked files.
+
+**Sim 12 comparison [team calc].** Seven cases run sequentially through the `electrode` launcher, using the unchanged sim 12 and solver source: 53 V RF, 28 MHz, 0.8 MHz axial; regular static zones use 10° tilt and ±10 V limits, transport uses zero tilt and a fixed electrode set. The queue script archives old summaries, waveforms and plots in `sim/out/12_final_chip/pad180/` before overwriting outputs; the seven `_pad180.txt` logs remain intact. Current canonical logs now correspond to the 360 µm layout. Exported zone voltages have 1 mV precision; waveform exports have 10 µV precision.
+
+| Case | Loading max V, old → new | Readout max V, old → new | Largest readout electrode change | Transport max step, old → new (V per 10 µm) |
+|---|---:|---:|---:|---:|
+| A30 E2 | 7.45 → 7.45 | 6.28 → 6.29 | 0.018 V | 7.589287 → 7.590069 |
+| A30 E1 | 7.45 → 7.45 | 6.27 → 6.28 | 0.018 V | 7.590345 → 7.591113 |
+| A30 E2, centre DC = 0 | 10.00 → 10.00 † | 10.00 → 10.00 † | 0.117 V † | **1.710110 → 1.708356** |
+| B60 E2 | 7.46 → 7.45 | 2.24 → 2.25 | 0.006 V | 8.001455 → 8.002177 |
+| B60 E1 | 7.45 → 7.45 | 2.24 → 2.24 | 0.006 V | 8.001464 → 8.002183 |
+| B60 E2, centre DC = 0 | 10.00 → 10.00 † | 10.00 → 10.00 † | 0.117 V † | **1.710110 → 1.708356** |
+| NODET | 7.92 → 7.93 | 7.87 → 7.89 | 0.021 V | 1.661964 → 1.662091 |
+
+† The centre-zero **static** zone solves remain bounded at 10 V and achieve approximately 0.794–0.795 MHz. They are diagnostic, as in steps 25/28; regular zone sets supply the stationary 10° tilt. The centre-zero **transport** solves achieve 0.800 MHz without clipping.
+
+All five regular zone cases meet the ±10 V / 0.8 MHz requirement; both centre-zero transport runs are below the user-confirmed 1.75 V per 10 µm limit. Each transport sweep contains 49 positions (48 transitions) over 480 µm. Every saved 77-point RF-null scan is identical to its pad180 baseline. Transport planar height ranges are E2/NODET 49.970817…49.976975 µm and E1 49.957822…49.963980 µm. The user confirmed applying the 49.96–49.98 µm criterion at **two-decimal reporting precision**, with raw values retained. Recess-corrected readout heights are separate quantities and were not used for this planar-height criterion. Across all waveform electrodes and positions, the largest voltage change is 0.01284 V.
+
+Data: [comparison.json](sim/out/16_pad_pitch_check/comparison.json), [per-electrode zone comparison](sim/out/16_pad_pitch_check/zone_voltage_comparison.csv), [per-electrode waveform comparison](sim/out/16_pad_pitch_check/transport_voltage_comparison.csv). Operating readout sets change by at most 0.021 V; the 0.117 V diagnostic change triggered the optional sim 13 rerun.
+
+**Sim 13 rerun [team calc].** All four A30/B60, E2/E1 cases rerun. Old outputs are in `sim/out/13_dc_height_tuning_v4_pad180/` (also preserving the existing inputs to the separate overhang audit). At the achieved upward displacement needed to undo the existing window correction:
+
+| Case | Required max V, no tilt: old → new | Required max V, 10°: old → new | Micromotion at 10°, new |
+|---|---:|---:|---:|
+| A30 E2 | 1.3377 → 1.3355 | 6.0641 → 6.0681 | 173.36 nm |
+| A30 E1 | 1.5190 → 1.5164 | 6.1991 → 6.2027 | 54.88 nm |
+| B60 E2 | 0.6639 → 0.6639 | 1.9086 → 1.9117 | 290.83 nm |
+| B60 E1 | 0.6741 → 0.6740 | 2.1363 → 2.1390 | 81.46 nm |
+
+The largest required-voltage change is 0.00403 V; sim 13 null heights and window-drop inputs are unchanged. E1 still uses the existing 1 µm-pocket upper-bound window correction. Full [height-tuning comparison](sim/out/16_pad_pitch_check/13_comparison.json) and [run log](sim/out/16_pad_pitch_check/13_log_pad360.txt).
+
+**Reproducibility.** `sim/run_cached_geometry.py` reuses exact unions of identical immutable Shapely polygon pairs only inside the solver's gap-splitting routine (bounded cache, restored afterward); no coordinates, precision, solver source or physical model were changed. Repeated union results were checked byte-for-byte on overlapping polygon pairs. The compiler cache was placed in a writable ignored directory. Solver revision, package versions and input hashes are recorded in [environment.json](sim/out/16_pad_pitch_check/environment.json) and the comparison files. Re-run sim 12 with `cd design/sim` then `./run.sh 16_pad_pitch_check.py`; `--resume` rechecks completed cases only when simulation inputs match. The fan-out script requires Python with `pdfplumber` (the bundled document runtime was used here). Sim 13 used `./run.sh run_cached_geometry.py 13_dc_height_tuning.py` with a writable NUMBA_CACHE_DIR.
+
+**Still open.** Confirm future perpendicular beam clearance before adopting the inward rows; choose 84-pin vs 100-pin/lab carrier and its electrical pin map; qualify the proposed ≥ approximately 0.6 mm, die-sized-or-larger spacer (Si suggested). The planned 45° beam arrangement remains the stated use case; no future-beam clearance was approved in this step.

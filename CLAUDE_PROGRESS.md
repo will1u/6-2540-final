@@ -1,13 +1,15 @@
 # Claude progress: five-wire Ba⁺ trap with an integrated NbN SNSPD
 
-> **Claude-authored running status.** Last update: 2026-11-08 (v4: local-mirror architecture, slot leads, A30 + B60; DESIGN_LOG steps 25–27).
+> **Claude-authored running status.** Last update: 2026-11-08 (v4: local-mirror architecture, slot leads, A30 + B60; DESIGN_LOG through step 29; 360 µm pad layout validated, team adoption pending).
 > - Full detail with numbers and citations for every step: [design log](design/DESIGN_LOG.md) (numbered design steps and documentation updates).
 > - New team member? Set up the `electrode` repo first: `design/CLAUDE.md`, "Setting up the electrode repo".
 > - Folder index and how to run: `design/README.md`.
 
+**2026-11-08, v4 SNSPD overhang audit:** completed the requested GDS, ray-footprint, optical-stack and straight-wire inductance checks for A30/B60, E1/E2 and 80/160 nm SiO₂ caps; see the final audit entry in `design/DESIGN_LOG.md`. Centred overhang causes no ray-envelope collection loss; its main quantified cost is about 14/22 ns of extra straight-section current-recovery time constant. Radial alignment margin is about 0.93 µm at 160 nm cap. Step 26's 160 nm cap target is still inconsistent with 80 nm in generator metadata and older process notes. No layout or design choice changed; actual switching current, internal efficiency and recovery still require qualification.
+
 ## Fabrication review
 
-Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decision log](notes/decisions.md). **The architecture changed to v4 on 2026-11-08** (local mirror, no D2; leads in a slot along the centre DC; A30 only; R1_TRAP on the no-Al stack). The trap-die GDS is v4 and passes `check_chip.py`; the traveler, run sheet, mask list and test dies still describe v3 and carry a banner. Their rewrite waits on the electrode Au choice (E1 vs E2).
+Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decision log](notes/decisions.md). **The architecture changed to v4 on 2026-11-08** (local mirror, no D2; leads in a slot along the centre DC; A30 + B60 retained; R1_TRAP on the no-Al stack). The trap-die GDS is v4 and passes `check_chip.py`; the traveler, run sheet, mask list and test dies still describe v3 and carry a banner. Their rewrite waits on the electrode Au choice (E1 vs E2).
 
 ## Goal
 
@@ -101,6 +103,8 @@ Ground rules agreed with the team:
 
 25. **v4: local-mirror architecture** (DESIGN_LOG step 25, team decisions): `make_chip.py` v4 (local Al mirror + ground via, Au leads in a centre-DC slot as Hampel 2023, no D2/L45, NODET without Al); `check_chip.py` rewritten, all pass on A30 and NODET; runs and wafer regenerated; v3 archived. Sims 04b (grounded window floor), 12 and 13 rerun: readout tilt now fits (6.1 V); transport needs the centre DC held at 0 V. Fab pages for the v3 process carry a banner until the E1/E2 choice.
 
+26. **360 µm pad-layout validation** (DESIGN_LOG step 29): measured all 84 PGA84L finger centres and mapped all 42 A30 pads without crossings; worst top/bottom angle 20.03°, side angles ≤ 8.58°. A30/B60/NODET pass `check_chip.py` (5.00 µm spacing, no floating Au or corner pads). All seven sim 12 runs pass: regular zone maxima ≤ 7.93 V; centre-zero transport 1.708 V per 10 µm; planar null heights unchanged, 49.96–49.98 µm at the confirmed two-decimal precision. A 0.117 V diagnostic readout-set change triggered sim 13; needed height-tuning voltages changed by ≤ 0.0041 V. Old outputs are archived. Layer map and v4 packaging map updated. **Pitch adoption, future perpendicular beam access, carrier choice and spacer remain open; `notes/decisions.md` unchanged.**
+
 ## In progress ⏳
 
 - Fabrication notes reorganized into linked modules. Qualification and detector reconciliation remain open; see [checklist](design/fab/OPEN_DECISIONS.md).
@@ -111,6 +115,7 @@ Ground rules agreed with the team:
 - [ ] **v3.1 SNSPD geometry** (step 24) is Claude's design call, not a team decision (team, 2026-11-08), so it stays out of `notes/decisions.md` until the team adopts it. Open from it: centre-DC filter capacitor, Al RF potential under the leads, Isw at 5 K (maybe 8–9 µA), measured NbN thickness, RCWA check of absorption, Suleimen 2026 full text, isotropy derivation check.
 - [ ] **v4 follow-ups** (step 25): choose E1 vs E2; rewrite traveler / R1_TRAP sheet / mask list / stack for v4; rework the test dies (no D2, no die-wide Al); set the cap to 160 nm in the rewritten traveler (09c, step 26); RF bypass / symmetric termination for the slot leads (10b: ≈ 46 µA common-mode per lead); mirror ground path: via moved and Al 450 nm (team decision; +0.2 µA instead of +0.6), still to go into the traveler with a probe opening; order Si with ρ > 20 kΩ·cm; measure resonator Q with a die mounted.
 - [ ] Bond pads (step 21): run W7 bond-and-leak before R1; get MIT.nano bonder and tool part numbers; draw the bond diagram against the carrier; field-solve DC-to-RF coupling.
+- [ ] **Pad pitch / package (step 29):** adopt or revise the validated 360 µm layout after reviewing future perpendicular beam access near the zones; choose 84-pin vs 100-pin/lab carrier and complete its electrical pin map. Spacer proposal: ≥ approximately 0.6 mm thick, die-sized or larger, Si suggested; not adopted.
 - [ ] Not yet team decisions (Claude's layout calls or open): readout radial tilt (v4 A30 fits 10° at 6.1 V; team to confirm), 0.8 MHz axial with ±10 V DACs.
 - [ ] Reasons the team still owes `notes/decisions.md` (asked 2026-11-08): ion height 50 µm; A30/B60 detector variants; and "not recorded" on Ba⁺/project scope, NODET die, R1_TRAP first. (Si substrate, no ITO and the 10 × 10 mm die were answered 2026-11-08.)
 - [ ] Before tape-out, run the witness wafers in [qualification](design/fab/QUALIFICATION.md). Also confirm:
