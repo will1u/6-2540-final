@@ -1,0 +1,2594 @@
+[
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 4.057490920737757,
+  "pct_of_8uA": 50.71863650922196,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 4.05008999879214,
+  "pct_of_8uA": 50.62612498490176,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 4.0314325202499015,
+  "pct_of_8uA": 50.39290650312377,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 3.8481913568776434,
+  "pct_of_8uA": 48.10239196097054,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 2.580381866446708,
+  "pct_of_8uA": 32.25477333058385,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 2.5756752127150015,
+  "pct_of_8uA": 32.19594015893752,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 2.563809894900499,
+  "pct_of_8uA": 32.04762368625624,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 2.4472767505536472,
+  "pct_of_8uA": 30.59095938192059,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 2.125286326710827,
+  "pct_of_8uA": 26.566079083885334,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 2.1242206431782464,
+  "pct_of_8uA": 26.55275803972808,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 2.1215152114470164,
+  "pct_of_8uA": 26.518940143087704,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 2.0934403957273617,
+  "pct_of_8uA": 26.16800494659202,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 1.351586585301492,
+  "pct_of_8uA": 16.894832316268648,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 1.35090885847066,
+  "pct_of_8uA": 16.886360730883247,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 1.3491883254820354,
+  "pct_of_8uA": 16.864854068525442,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "1 50 ohm line / short",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 1.3313340044738053,
+  "pct_of_8uA": 16.641675055922565,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 3.2001361623462152,
+  "pct_of_8uA": 40.00170202932769,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 3.196246259683165,
+  "pct_of_8uA": 39.95307824603957,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 3.1850301610698497,
+  "pct_of_8uA": 39.81287701337312,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 3.0499938333470986,
+  "pct_of_8uA": 38.124922916838734,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 2.035142772907818,
+  "pct_of_8uA": 25.439284661347727,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 2.0326689696412044,
+  "pct_of_8uA": 25.408362120515054,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 2.025536035017455,
+  "pct_of_8uA": 25.319200437718187,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 1.9396589996342226,
+  "pct_of_8uA": 24.245737495427782,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 1.6357624403843054,
+  "pct_of_8uA": 20.447030504803816,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 1.6352422297061167,
+  "pct_of_8uA": 20.44052787132646,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 1.6337343833681877,
+  "pct_of_8uA": 20.421679792102346,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 1.6146224393824202,
+  "pct_of_8uA": 20.18278049228025,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 1.0402713946713675,
+  "pct_of_8uA": 13.003392433392094,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 1.0399405640602941,
+  "pct_of_8uA": 12.999257050753677,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 1.0389816415577466,
+  "pct_of_8uA": 12.987270519471833,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 0.1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 1.0268273041465732,
+  "pct_of_8uA": 12.835341301832164,
+  "pulse_note": "A-side low-pass corner 31.831 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.46500729175720396,
+  "pct_of_8uA": 5.812591146965049,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.4649175682502204,
+  "pct_of_8uA": 5.811469603127755,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.46426227203146136,
+  "pct_of_8uA": 5.803278400393267,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.4500214963570125,
+  "pct_of_8uA": 5.625268704462656,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.29572373835345783,
+  "pct_of_8uA": 3.696546729418223,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.2956666782355334,
+  "pct_of_8uA": 3.6958334779441673,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.29524993929191823,
+  "pct_of_8uA": 3.690624241148978,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.28619344599783036,
+  "pct_of_8uA": 3.5774180749728797,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.24163162596758622,
+  "pct_of_8uA": 3.0203953245948276,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.24161903439300286,
+  "pct_of_8uA": 3.0202379299125357,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.24152691019036207,
+  "pct_of_8uA": 3.019086377379526,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.23945264130321275,
+  "pct_of_8uA": 2.9931580162901597,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.15366685426702675,
+  "pct_of_8uA": 1.9208356783378344,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.15365884659150517,
+  "pct_of_8uA": 1.9207355823938146,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.15360025973903924,
+  "pct_of_8uA": 1.9200032467379904,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 1 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.15228111795238028,
+  "pct_of_8uA": 1.9035139744047536,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.046364615739088885,
+  "pct_of_8uA": 0.579557696738611,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0463568175609534,
+  "pct_of_8uA": 0.5794602195119175,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.046294633587890655,
+  "pct_of_8uA": 0.5786829198486332,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.044909140096798784,
+  "pct_of_8uA": 0.5613642512099848,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.029485811807105976,
+  "pct_of_8uA": 0.3685726475888247,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.029480852516291713,
+  "pct_of_8uA": 0.3685106564536464,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.02944130630420911,
+  "pct_of_8uA": 0.36801632880261387,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.028560194713245075,
+  "pct_of_8uA": 0.3570024339155634,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.02419989306861402,
+  "pct_of_8uA": 0.3024986633576753,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.024198784013264776,
+  "pct_of_8uA": 0.3024848001658097,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.02418992563390851,
+  "pct_of_8uA": 0.3023740704238564,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.023985642992564622,
+  "pct_of_8uA": 0.2998205374070578,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.015390044355994986,
+  "pct_of_8uA": 0.1923755544499373,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.01538933904663805,
+  "pct_of_8uA": 0.1923667380829756,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.015383705515496875,
+  "pct_of_8uA": 0.19229631894371094,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "2 shunt 10 nF on A",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.015253790936844472,
+  "pct_of_8uA": 0.1906723867105559,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.053424870556644355,
+  "pct_of_8uA": 0.6678108819580544,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.05341434195949328,
+  "pct_of_8uA": 0.667679274493666,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.05333745022813403,
+  "pct_of_8uA": 0.6667181278516754,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.05166814791250809,
+  "pct_of_8uA": 0.6458518489063511,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.03397581655624799,
+  "pct_of_8uA": 0.4246977069530999,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.03396912084165527,
+  "pct_of_8uA": 0.4246140105206909,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.03392022115631894,
+  "pct_of_8uA": 0.4240027644539867,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.03285861990840403,
+  "pct_of_8uA": 0.4107327488550504,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.027620132396632524,
+  "pct_of_8uA": 0.34525165495790655,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.027618677234396975,
+  "pct_of_8uA": 0.3452334654299622,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.027608030853389233,
+  "pct_of_8uA": 0.3451003856673654,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.027368352307285723,
+  "pct_of_8uA": 0.34210440384107155,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.01756516284999327,
+  "pct_of_8uA": 0.21956453562491587,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.01756423743221201,
+  "pct_of_8uA": 0.2195529679026501,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.01755746681238012,
+  "pct_of_8uA": 0.21946833515475148,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.017405042029127772,
+  "pct_of_8uA": 0.21756302536409716,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.05555657884193201,
+  "pct_of_8uA": 0.6944572355241502,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.05554564121392992,
+  "pct_of_8uA": 0.6943205151741241,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.055465762078213354,
+  "pct_of_8uA": 0.6933220259776669,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.05373151887342314,
+  "pct_of_8uA": 0.6716439859177892,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.035331487218576964,
+  "pct_of_8uA": 0.44164359023221206,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.03532453137874646,
+  "pct_of_8uA": 0.4415566422343307,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.035273731838504255,
+  "pct_of_8uA": 0.4409216479813032,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.03417083110377248,
+  "pct_of_8uA": 0.427135388797156,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.028729224328313607,
+  "pct_of_8uA": 0.35911530410392006,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.028727711525478525,
+  "pct_of_8uA": 0.35909639406848154,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0287166434256374,
+  "pct_of_8uA": 0.3589580428204675,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.028467469092912857,
+  "pct_of_8uA": 0.3558433636614107,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.018270495471714065,
+  "pct_of_8uA": 0.22838119339642582,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.018269533397102054,
+  "pct_of_8uA": 0.22836916746377567,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.01826249458304581,
+  "pct_of_8uA": 0.22828118228807262,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.01810403090627941,
+  "pct_of_8uA": 0.22630038632849261,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.06462207060448212,
+  "pct_of_8uA": 0.8077758825560265,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.06460935990988427,
+  "pct_of_8uA": 0.8076169988735534,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.06451653159413964,
+  "pct_of_8uA": 0.8064566449267455,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.06250106111533245,
+  "pct_of_8uA": 0.7812632639416556,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.04109673254172683,
+  "pct_of_8uA": 0.5137091567715854,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.04108864911122979,
+  "pct_of_8uA": 0.5136081138903723,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.04102961447447532,
+  "pct_of_8uA": 0.5128701809309415,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.03974786583289681,
+  "pct_of_8uA": 0.4968483229112101,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.03342455899587974,
+  "pct_of_8uA": 0.41780698744849676,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.033422799786248784,
+  "pct_of_8uA": 0.4177849973281098,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.03340992889953124,
+  "pct_of_8uA": 0.4176241112441405,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.033120166852902616,
+  "pct_of_8uA": 0.4140020856612827,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.02125651729400892,
+  "pct_of_8uA": 0.2657064661751115,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.021255398515749233,
+  "pct_of_8uA": 0.2656924814468654,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.02124721321026369,
+  "pct_of_8uA": 0.26559016512829614,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.021062937571621223,
+  "pct_of_8uA": 0.2632867196452653,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.08993448669603209,
+  "pct_of_8uA": 1.1241810837004012,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0899168256490415,
+  "pct_of_8uA": 1.1239603206130189,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.08978784357936095,
+  "pct_of_8uA": 1.122348044742012,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.08698719207451794,
+  "pct_of_8uA": 1.0873399009314741,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.05719429153927436,
+  "pct_of_8uA": 0.7149286442409295,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0571830599071432,
+  "pct_of_8uA": 0.71478824883929,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.057101033107773355,
+  "pct_of_8uA": 0.713762913847167,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.05531994462267095,
+  "pct_of_8uA": 0.6914993077833869,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.046534990832497326,
+  "pct_of_8uA": 0.5816873854062166,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.046532543628086724,
+  "pct_of_8uA": 0.581656795351084,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.046514639162703375,
+  "pct_of_8uA": 0.5814329895337922,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.046111551709807894,
+  "pct_of_8uA": 0.5763943963725987,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.029594162709206177,
+  "pct_of_8uA": 0.3699270338650772,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.02959260639718773,
+  "pct_of_8uA": 0.36990757996484663,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.029581219961898993,
+  "pct_of_8uA": 0.3697652495237374,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 1 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.029324874458147507,
+  "pct_of_8uA": 0.3665609307268438,
+  "pulse_note": "A-side low-pass corner 3.183 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.0005276324751081928,
+  "pct_of_8uA": 0.00659540593885241,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0005275435461323827,
+  "pct_of_8uA": 0.006594294326654784,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0005268344149965404,
+  "pct_of_8uA": 0.006585430187456755,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0005110361063744203,
+  "pct_of_8uA": 0.006387951329680254,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.00033555054034970465,
+  "pct_of_8uA": 0.004194381754371308,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.00033549398551789735,
+  "pct_of_8uA": 0.004193674818973717,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0003350430099865639,
+  "pct_of_8uA": 0.004188037624832049,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0003249959957392381,
+  "pct_of_8uA": 0.004062449946740476,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.0002752591722419796,
+  "pct_of_8uA": 0.003440739653024745,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.00027524654367552006,
+  "pct_of_8uA": 0.0034405817959440007,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.00027514567534890936,
+  "pct_of_8uA": 0.003439320941861367,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0002728195892851696,
+  "pct_of_8uA": 0.00341024486606462,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.00017505246234714663,
+  "pct_of_8uA": 0.002188155779339333,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0001750444311464544,
+  "pct_of_8uA": 0.00218805538933068,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.00017498028342413785,
+  "pct_of_8uA": 0.002187253542801723,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.00",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0001735009972307932,
+  "pct_of_8uA": 0.002168762465384915,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.00226643544858814,
+  "pct_of_8uA": 0.02833044310735175,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.002266053493766625,
+  "pct_of_8uA": 0.02832566867208281,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.00226300773601486,
+  "pct_of_8uA": 0.02828759670018575,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.002195152807154588,
+  "pct_of_8uA": 0.02743941008943235,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.0014413510830347087,
+  "pct_of_8uA": 0.01801688853793386,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0014411081769347318,
+  "pct_of_8uA": 0.018013852211684146,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0014391712118925956,
+  "pct_of_8uA": 0.017989640148657445,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0013960185267971874,
+  "pct_of_8uA": 0.017450231584964844,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.0011823987260633822,
+  "pct_of_8uA": 0.014779984075792278,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0011823444818141393,
+  "pct_of_8uA": 0.014779306022676741,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0011819112159448628,
+  "pct_of_8uA": 0.014773890199310784,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.001171919829918718,
+  "pct_of_8uA": 0.014648997873983974,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.0007519524482605317,
+  "pct_of_8uA": 0.009399405603256647,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.000751917951355958,
+  "pct_of_8uA": 0.009398974391949476,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0007516424137357226,
+  "pct_of_8uA": 0.009395530171696533,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.05",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0007452883412741507,
+  "pct_of_8uA": 0.009316104265926885,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.004246136065993528,
+  "pct_of_8uA": 0.053076700824919096,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.004245420543416306,
+  "pct_of_8uA": 0.05306775679270382,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.004239714871542278,
+  "pct_of_8uA": 0.05299643589427847,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.004112600500341326,
+  "pct_of_8uA": 0.05140750625426657,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.002700351700395883,
+  "pct_of_8uA": 0.033754396254948534,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0026998966601950915,
+  "pct_of_8uA": 0.03374870825243864,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0026962681093178975,
+  "pct_of_8uA": 0.03370335136647372,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0026154290822395384,
+  "pct_of_8uA": 0.03269286352799423,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.002215255811253309,
+  "pct_of_8uA": 0.027690697640666364,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0022151541879808973,
+  "pct_of_8uA": 0.027689427349761216,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.002214342490937327,
+  "pct_of_8uA": 0.02767928113671659,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.002195624230140098,
+  "pct_of_8uA": 0.027445302876751225,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.0014088031338981737,
+  "pct_of_8uA": 0.017610039173727172,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0014087385060642568,
+  "pct_of_8uA": 0.01760923132580321,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0014082223032253123,
+  "pct_of_8uA": 0.017602778790316402,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.10",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.001396318330628422,
+  "pct_of_8uA": 0.017453979132855273,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.00774663565631495,
+  "pct_of_8uA": 0.09683294570393688,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.007745330465656936,
+  "pct_of_8uA": 0.0968166308207117,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0077349226986172534,
+  "pct_of_8uA": 0.09668653373271567,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.007503050538437926,
+  "pct_of_8uA": 0.09378813173047408,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.004926512114016025,
+  "pct_of_8uA": 0.06158140142520031,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.0049256820714177795,
+  "pct_of_8uA": 0.061571025892722245,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.004919063199345353,
+  "pct_of_8uA": 0.061488289991816915,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.004771602926691986,
+  "pct_of_8uA": 0.05964503658364982,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.004041657609766395,
+  "pct_of_8uA": 0.05052072012207994,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.004041472216904229,
+  "pct_of_8uA": 0.05051840271130286,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0040399914257210545,
+  "pct_of_8uA": 0.05049989282151318,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.004005843382561585,
+  "pct_of_8uA": 0.050073042282019815,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.0025703125922784047,
+  "pct_of_8uA": 0.03212890740348006,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.00257019469075033,
+  "pct_of_8uA": 0.03212743363437912,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0025692529741102423,
+  "pct_of_8uA": 0.032115662176378026,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "3 matched 10 nF m=0.20",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.0025475363534043344,
+  "pct_of_8uA": 0.03184420441755418,
+  "pulse_note": "A-side low-pass corner 0.318 MHz"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.04034120353759045,
+  "pct_of_8uA": 0.5042650442198806,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.04033377196270359,
+  "pct_of_8uA": 0.5041721495337949,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0402784657119354,
+  "pct_of_8uA": 0.5034808213991925,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.03906891971440518,
+  "pct_of_8uA": 0.48836149643006477,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.025655192362108087,
+  "pct_of_8uA": 0.3206899045263511,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.025650466214483403,
+  "pct_of_8uA": 0.32063082768104256,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.02561529392466903,
+  "pct_of_8uA": 0.3201911740583629,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.02484607703185767,
+  "pct_of_8uA": 0.31057596289822087,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.021066475976294158,
+  "pct_of_8uA": 0.263330949703677,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.021065417460676972,
+  "pct_of_8uA": 0.2633177182584622,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.021057526537471675,
+  "pct_of_8uA": 0.2632190817183959,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.020878884199810304,
+  "pct_of_8uA": 0.2609860524976288,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.013397331913014038,
+  "pct_of_8uA": 0.1674666489126755,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.01339665874465524,
+  "pct_of_8uA": 0.1674582343081905,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.013391640472144912,
+  "pct_of_8uA": 0.1673955059018114,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap nominal",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.013278031974261384,
+  "pct_of_8uA": 0.1659753996782673,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.4, 138.9, 0.5, 187.1"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.23364555911764437,
+  "pct_of_8uA": 2.9205694889705547,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.23360083994082184,
+  "pct_of_8uA": 2.920010499260273,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.23327478902910412,
+  "pct_of_8uA": 2.9159348628638013,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.2261891596520728,
+  "pct_of_8uA": 2.8273644956509103,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.14858807467481652,
+  "pct_of_8uA": 1.8573509334352065,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.14855963528820806,
+  "pct_of_8uA": 1.8569954411026008,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.14835228156232916,
+  "pct_of_8uA": 1.8544035195291144,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.14384613973379015,
+  "pct_of_8uA": 1.7980767466723768,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.12171420263167182,
+  "pct_of_8uA": 1.5214275328958977,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.12170787944741782,
+  "pct_of_8uA": 1.5213484930927228,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.12166169656287804,
+  "pct_of_8uA": 1.5207712070359753,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.12062228197214815,
+  "pct_of_8uA": 1.5077785246518518,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.07740476257250141,
+  "pct_of_8uA": 0.9675595321562677,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.07740074131150392,
+  "pct_of_8uA": 0.967509266393799,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.0773713710725719,
+  "pct_of_8uA": 0.9671421384071488,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L -5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.07671035010813017,
+  "pct_of_8uA": 0.9588793763516271,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1590, 524.7, 139.9, 2.886, 176.9"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.23128105436564328,
+  "pct_of_8uA": 2.891013179570541,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.23123767892553643,
+  "pct_of_8uA": 2.8904709865692055,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.2309214101489017,
+  "pct_of_8uA": 2.8865176268612713,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.22404184408352049,
+  "pct_of_8uA": 2.800523051044006,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.14708435592242033,
+  "pct_of_8uA": 1.8385544490302541,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.1470567710919704,
+  "pct_of_8uA": 1.83820963864963,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.1468556383643577,
+  "pct_of_8uA": 1.835695479554471,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.14248054354075573,
+  "pct_of_8uA": 1.7810067942594467,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.12106941229670465,
+  "pct_of_8uA": 1.513367653708808,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.12106318906856108,
+  "pct_of_8uA": 1.5132898633570135,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.12101773592656907,
+  "pct_of_8uA": 1.5127216990821135,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.11999460108572799,
+  "pct_of_8uA": 1.4999325135715997,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.07699470489880317,
+  "pct_of_8uA": 0.9624338112350396,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.07699074720539953,
+  "pct_of_8uA": 0.9623843400674941,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.07696184104993045,
+  "pct_of_8uA": 0.9620230131241306,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "4 trap L +5 %",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.07631117327474385,
+  "pct_of_8uA": 0.9538896659342981,
+  "pulse_note": "abs(Z_trap) ohm at 1/3/10/28/100 MHz: 1589, 524.1, 137.8, 2.886, 197.2"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 7.976125968250964e-16,
+  "pct_of_8uA": 9.970157460313705e-15,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 1.590548525049341e-15,
+  "pct_of_8uA": 1.988185656311676e-14,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 3.7218245386306645e-17,
+  "pct_of_8uA": 4.652280673288331e-16,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 1.5418561935895034e-15,
+  "pct_of_8uA": 1.927320241986879e-14,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 8.009985537950447e-16,
+  "pct_of_8uA": 1.001248192243806e-14,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 1.5952020015905597e-15,
+  "pct_of_8uA": 1.9940025019881996e-14,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 2.1710643142012205e-17,
+  "pct_of_8uA": 2.7138303927515257e-16,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 1.5466394083448067e-15,
+  "pct_of_8uA": 1.9332992604310083e-14,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 4.152005060776977e-16,
+  "pct_of_8uA": 5.190006325971222e-15,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 1.2451435922201264e-15,
+  "pct_of_8uA": 1.556429490275158e-14,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 4.1483967940164694e-16,
+  "pct_of_8uA": 5.185495992520587e-15,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 1.2343879309230589e-15,
+  "pct_of_8uA": 1.5429849136538234e-14,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 2.0813123317826593e-16,
+  "pct_of_8uA": 2.601640414728324e-15,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 6.230084836138217e-16,
+  "pct_of_8uA": 7.787606045172772e-15,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 4.1712783619125356e-16,
+  "pct_of_8uA": 5.2140979523906694e-15,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 symmetric 50 / 50",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 6.171939654615294e-16,
+  "pct_of_8uA": 7.714924568269117e-15,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.20022657242656805,
+  "pct_of_8uA": 2.5028321553321007,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.19953296723979363,
+  "pct_of_8uA": 2.4941620904974204,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.19797874695185225,
+  "pct_of_8uA": 2.474734336898153,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.1861903942250469,
+  "pct_of_8uA": 2.3273799278130864,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.12733510111622204,
+  "pct_of_8uA": 1.5916887639527755,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.12689399939070095,
+  "pct_of_8uA": 1.5861749923837618,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.12590558514016603,
+  "pct_of_8uA": 1.5738198142520754,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.1184087226195243,
+  "pct_of_8uA": 1.4801090327440538,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.10587831385413642,
+  "pct_of_8uA": 1.3234789231767052,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.10577537111148232,
+  "pct_of_8uA": 1.322192138893529,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.10554187490778165,
+  "pct_of_8uA": 1.3192734363472707,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.10363563840448234,
+  "pct_of_8uA": 1.2954454800560293,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.06733384903532702,
+  "pct_of_8uA": 0.8416731129415878,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.06726838207763929,
+  "pct_of_8uA": 0.8408547759704911,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.06711988898629674,
+  "pct_of_8uA": 0.8389986123287093,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.05)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.06590760824374942,
+  "pct_of_8uA": 0.8238451030468676,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.40011711620625634,
+  "pct_of_8uA": 5.001463952578204,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.39870137371955194,
+  "pct_of_8uA": 4.983767171494399,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.3955388639486776,
+  "pct_of_8uA": 4.94423579935847,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.3717468074876594,
+  "pct_of_8uA": 4.646835093595743,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.2544565031154393,
+  "pct_of_8uA": 3.1807062889429916,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.2535561545227716,
+  "pct_of_8uA": 3.1694519315346446,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.251544940443765,
+  "pct_of_8uA": 3.1443117555470628,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "A30",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.23641426184046682,
+  "pct_of_8uA": 2.9551782730058354,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.21170689683241062,
+  "pct_of_8uA": 2.6463362104051327,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.2114963786974423,
+  "pct_of_8uA": 2.643704733718029,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.21102025442801758,
+  "pct_of_8uA": 2.6377531803502197,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E2",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.2071617557470748,
+  "pct_of_8uA": 2.5895219468384347,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 0.0,
+  "I_nw_uA": 0.13463607146870157,
+  "pct_of_8uA": 1.6829508933587696,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 10.0,
+  "I_nw_uA": 0.13450219139635067,
+  "pct_of_8uA": 1.6812773924543833,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 30.0,
+  "I_nw_uA": 0.13419939775983994,
+  "pct_of_8uA": 1.6774924719979993,
+  "pulse_note": "no added filter"
+ },
+ {
+  "case": "5 B 50 ohm x (1+0.10)",
+  "die": "B60",
+  "option": "E1",
+  "R_pair": 140.0,
+  "I_nw_uA": 0.1317455660144316,
+  "pct_of_8uA": 1.6468195751803951,
+  "pulse_note": "no added filter"
+ }
+]
