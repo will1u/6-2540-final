@@ -4,7 +4,10 @@
 
 [Fab overview](README.md) · [Variants](VARIANTS.md) · [Open decisions](OPEN_DECISIONS.md)
 
-The first run is **R1_TRAP**, a plain trap without a detector. R1_FULL adds A30 and B60 detector dies. The local-mirror process is a separate proposal with no GDS implementation.
+> [!warning] Architecture changed to v4 (2026-11-08)
+> The team chose the local-mirror architecture (no die-wide Al, no 10 µm D2), leads in a slot along the centre DC, A30 and B60 detector dies (B60 briefly dropped, then kept), and the same no-Al stack for R1_TRAP ([decisions](../../notes/decisions.md); DESIGN_LOG step 25). The GDS is now v4 (`gds/trap_die_v4_*`). **This page still describes the v3 baseline process.** It must be rewritten before any run; the rewrite waits on the electrode Au choice (E1 lift-off vs E2 plated). Do not fabricate from it.
+
+The first run is **R1_TRAP**, a plain trap without a detector. R1_FULL adds A30 and B60 detector dies. The local-mirror architecture is adopted and implemented in the v4 GDS; the process pages below still describe the v3 baseline (see the banner).
 
 > [!important] Current readiness
 > Generated v3 layouts have recorded passing checks through the ground-via revision. The process still needs witness-wafer qualification and facility confirmation. **The detector generators now specify v3.1 geometry, while several recipe estimates still describe the earlier v3 detector.** See [the reconciliation checklist](OPEN_DECISIONS.md#detector-documents-and-generated-layouts).

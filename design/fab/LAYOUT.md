@@ -4,6 +4,9 @@
 
 [Fab overview](README.md) · [Variants](VARIANTS.md) · [Open decisions](OPEN_DECISIONS.md)
 
+> [!warning] Architecture changed to v4 (2026-11-08)
+> The team chose the local-mirror architecture (no die-wide Al, no 10 µm D2), leads in a slot along the centre DC, A30 and B60 detector dies (B60 briefly dropped, then kept), and the same no-Al stack for R1_TRAP ([decisions](../../notes/decisions.md); DESIGN_LOG step 25). The GDS is now v4 (`gds/trap_die_v4_*`). **This page still describes the v3 baseline process.** It must be rewritten before any run; the rewrite waits on the electrode Au choice (E1 lift-off vs E2 plated). Do not fabricate from it.
+
 Earlier layouts are archived: v1 (square die, trap in a corner) in `gds/archive_v1_square/`, v2 (narrow 10 × 2.5 mm die, two-ITO window) in `gds/archive_v2_narrow/`. Use v3 files for the current runs.
 
 **Trap die floorplan** (`gds/make_chip.py`; `check_chip.py` passes on all three v3 dies, 2026-11-07). GDS µm, die centre at (0, 0):

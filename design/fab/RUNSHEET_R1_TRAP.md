@@ -7,6 +7,9 @@
 
 [Fab overview](README.md) · [Variants](VARIANTS.md) · [Open decisions](OPEN_DECISIONS.md)
 
+> [!warning] Architecture changed to v4 (2026-11-08)
+> The team chose the local-mirror architecture (no die-wide Al, no 10 µm D2), leads in a slot along the centre DC, A30 and B60 detector dies (B60 briefly dropped, then kept), and the same no-Al stack for R1_TRAP ([decisions](../../notes/decisions.md); DESIGN_LOG step 25). The GDS is now v4 (`gds/trap_die_v4_*`). **This page still describes the v3 baseline process.** It must be rewritten before any run; the rewrite waits on the electrode Au choice (E1 lift-off vs E2 plated). Do not fabricate from it.
+
 > [!important] Before the device wafer
 > Complete W3 stress/etch/via qualification, W5 plating and **W7 bond-and-leak**, and confirm facility access. See [Qualification](QUALIFICATION.md). The detector revision adds no EBL work to this trap-only run.
 
@@ -16,10 +19,10 @@ Wafer ID: ________ Start date: ________ Operator: ________ GDS generated (date /
 
 - **Wafer:** one 100 mm HR float-zone Si wafer. Only an 8-die block at the centre (20.2 × 33.1 mm; v3 10 × 10 mm trap dies and 10 × 2.5 mm test dies) is written. Dies ([run_R1_TRAP_map.csv](../gds/run_R1_TRAP_map.csv), die-centre coordinates in µm):
 
-  | Die | Type | Centre (x, y) |
-  |---|---|---|
-  | R1_TRAP-01, -03, -04, -05, -07, -08 | NODET trap die (`trap_die_v3_NODET`, 10 × 10 mm) | (±5100, −11550 / 1350 / 11550) |
-  | R1_TRAP-02, -06 | Trap-only test die (`test_die_v3_TRAP`, 10 × 2.5 mm): T1 Au comb, T2 Au/D2/M1 capacitor + M1 pad, T6 Au loop | (±5100, −5100) |
+| Die | Type | Centre (x, y) |
+|---|---|---|
+| R1_TRAP-01, -03, -04, -05, -07, -08 | NODET trap die (`trap_die_v3_NODET`, 10 × 10 mm) | (±5100, −11550 / 1350 / 11550) |
+| R1_TRAP-02, -06 | Trap-only test die (`test_die_v3_TRAP`, 10 × 2.5 mm): T1 Au comb, T2 Au/D2/M1 capacitor + M1 pad, T6 Au loop | (±5100, −5100) |
 
 - **Goal:** qualify the trap process (thick SiO₂, plating, gap etch, dicing, packaging) and trap ions on a die with no detector stack. The resulting NODET die becomes the reference for the SNSPD dies in run 1b ([staged-run rationale](../SIMPLIFICATIONS.md#s2-staged-runs-a-plain-trap-run-first-snspd-later)).
 - **Stack (bottom to top):**

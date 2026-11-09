@@ -4,6 +4,9 @@
 
 [Fab overview](README.md) · [Traveler](TRAVELER.md) · [Open decisions](OPEN_DECISIONS.md)
 
+> [!warning] Architecture changed to v4 (2026-11-08)
+> The team chose the local-mirror architecture (no die-wide Al, no 10 µm D2), leads in a slot along the centre DC, A30 and B60 detector dies (B60 briefly dropped, then kept), and the same no-Al stack for R1_TRAP ([decisions](../../notes/decisions.md); DESIGN_LOG step 25). The GDS is now v4 (`gds/trap_die_v4_*`). **This page still describes the v3 baseline process.** It must be rewritten before any run; the rewrite waits on the electrode Au choice (E1 lift-off vs E2 plated). Do not fabricate from it.
+
 **Current target:** 130 nm wires / 70 nm spaces, 200 nm pitch, rounded turns. T4/T4b/T8 use revised geometry; the current generator adds T9. Confirm the generated run before export: [detector reconciliation](OPEN_DECISIONS.md#detector-documents-and-generated-layouts).
 
 The MLA150 is maskless, so "polarity" here means **which area the tool exposes**:

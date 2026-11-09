@@ -8,14 +8,28 @@ The first section concerns design choices; the next sections prepare each run. A
 
 ## Design choices
 
-| Decision | Choices | What resolves it | Scope |
-|---|---|---|---|
-| Architecture | Die-wide Al + D2, or local mirror | Compare qualification effort with the [proposal's](variants/LOCAL_MIRROR.md) routing/simulation work | Baseline currently retained |
-| Local-mirror routing | Slot along centre DC, or thicker local SiO₂ over buried leads | Implement routing, check isolation, rerun trap fields | Local mirror only |
-| Local-mirror Au | E1: ~0.35 µm lift-off; E2: 6 µm plated | Gap-charge shielding, resonator tests and process trade-off | Local mirror only |
-| Readout radial tilt | Smaller tilt, zero tilt, or wider DAC range | Recorded 10° solutions need 13.2 V A30 / 15.2 V B60, beyond ±10 V; zero tilt needs 6.6 / 3.4 V [team calc, step 19] | Detector readout; NODET/load-zone solution fits |
-| Detector allocation | Keep A30/B60, or change next-run mix | Compare yield, collection and B60 transport | R1_FULL currently contains both |
-| RF grounding / filters | Centre-DC filtering, carrier grounds, symmetric detector termination or cancellation | Bond diagram, DC-to-RF coupling calculation, RF-on/off tests | Full-stack operation |
+![Map of open design decisions](figures/open_decisions_map.svg)
+
+The two architectures in cross-section: [architecture comparison](figures/architecture_crosssection.svg) (also in [Local mirror H.0](variants/LOCAL_MIRROR.md#h0-why-the-baseline-has-a-thick-d2-ground-plane-and-mirror-together)).
+
+| Decision | Choices | What resolves it | Status |
+| --- | --- | --- | --- |
+| Electrode Au (v4) | E1: 0.35 µm lift-off (no plating); E2: 6 µm plated (as Todaro) | SiO₂ exposed in every 5 µm gap (E1 depth/width 0.07, E2 1.2), plating effort, resonator tests. Sims 12/13 barely distinguish them (same voltages; window drop −1.19 µm E2 vs ≤ −0.37 µm E1) | **Open.** Blocks the v4 traveler rewrite |
+| Readout radial tilt | Keep 10°, smaller tilt, zero tilt, or wider DAC range | v3 needed 13.2 V (A30) / 15.2 V (B60). **v4 needs 6.3 V (A30) / 2.2 V (B60) for 10°** (loading 7.5 V; 480 µm zones) [team calc, steps 25, 27, 28] | Over-range problem gone on v4; team to confirm 10° |
+| RF grounding / filters | Centre-DC filtering, carrier grounds, symmetric detector termination or cancellation; for v4 also an RF bypass at both SNSPD lead pads | v4 slot leads each collect ≈ 46 µA (E2) / 29 µA (E1) of common-mode RF over 2.3 mm; only termination asymmetry sends it through the nanowire (step 26). Bond diagram, coupling calculation, RF-on/off tests | **Open; more important on v4** |
+
+**Resolved 2026-11-08** ([decisions](../../notes/decisions.md)): architecture → local mirror, no D2; lead routing → Au leads in a slot along the centre DC; detector allocation → keep A30 and B60 (B60 was dropped, then kept); R1_TRAP → the same no-Al stack.
+
+### Before any v4 run
+
+- [ ] Choose E1 vs E2, then rewrite the traveler, R1_TRAP run sheet, mask list, stack and qualification pages for v4 (they carry a banner). Basis: [Local mirror H.2](variants/LOCAL_MIRROR.md).
+- [ ] Rework the test dies for v4. T2 (Au/D2/M1 capacitor) and the D2 probe openings no longer exist; TEST_TRAP must carry no Al for R1_TRAP.
+- [x] Mirror ground path: via moved to just past the RF open end (step 28) and **Al 450 nm** (team decision 2026-11-08): swing 6.7–8.8 mV, +0.16–0.21 µA. Still to do: put 450 nm in the v4 traveler, set the strip-resistance acceptance (≈ 5 Ω), add a mirror probe opening, check hillocks on a witness wafer.
+- [x] 09c optics (step 26): **set the SiO₂ over the wires (HSQ + cap) to 160 ± 10 nm**: A 0.44 → 0.66 (v3.1: 0.54). The traveler and stack pages still say 80 nm.
+- [x] 10b RF pickup (step 26): nanowire 0.96 µA (E2) / 1.92 µA (E1) vs 1.67 µA (v3.1); slot-lead pickup feeds the RF grounding decision above.
+- [ ] Rerun 15 (collection at the v4 heights).
+- [ ] Transport: hold the centre DC at 0 V while moving and ramp the tilt in at each zone (`12_final_chip_check.py --centre-dc-zero`: 1.67 V per 10 µm step vs 7.96 V with the centre DC free; step 25).
+- [ ] Order Si with ρ > 20 kΩ·cm; measure the RF resonator Q with a die mounted.
 
 ### Detector documents and generated layouts
 
@@ -35,9 +49,9 @@ Sources: [trap generator](../gds/make_chip.py), [test generator](../gds/make_tes
 ## Before R1_TRAP
 
 - [ ] Confirm Au-compatible tools, gold bath/minimum area, holders and training order with MIT.nano.
-- [ ] W3: qualify D2 stress/backside compensation and chuck bow limit; calibrate L40 and gap etches.
-- [ ] W3: compare fill-to-Al contact with/without Ar pre-clean; confirm AJA substrate RF etch and seed continuity down via walls.
-- [ ] W5: calibrate plating current on the R1_TRAP pattern; check thickness, gaps and bondability.
+- [ ] ~~W3: qualify D2 stress/backside compensation and chuck bow limit; calibrate L40 and gap etches.~~ Not needed for v4 (no D2, no gap etch). The A30 L40 cap/spacer etch (~0.32 µm) still needs a short calibration before R1_FULL.
+- [ ] Before R1_FULL (v4 A30/B60): compare Au-to-Al contact at the mirror via with/without Ar pre-clean; confirm the AJA substrate RF etch. R1_TRAP has no Al.
+- [ ] W5 (only if E2): calibrate plating current on the R1_TRAP pattern; check thickness, gaps and bondability. If E1: lift-off of 0.35 µm Au over 5 µm gaps and wedge bonding on evaporated Au instead.
 - [ ] W7: bond-and-leak loop; confirm bonder/wedge dimensions and carrier bond diagram.
 - [ ] Verify mark coordinates, polarity and die IDs against [layout](LAYOUT.md) and [exposure checklist](mask_list.md#4-export-checklist-per-job).
 
@@ -61,4 +75,4 @@ See [Qualification](QUALIFICATION.md). No completed witness-wafer measurements a
 
 ## Choices already recorded as the team's
 
-R1_TRAP first (2026-11-02); no ITO and 10 × 10 mm edge-pad dies (2026-11-07); on-chip Au-fill-to-Al vias (2026-11-08). Current layout retains 600 µm zone spacing and 0.8 MHz axial confinement. The team should record adopted choices in `notes/decisions.md`; that team-owned file is unchanged.
+Project scope and fixed inputs, separate loading zone, high-resistivity Si, 50 µm height and the height policy, no bowtie, the narrow die (superseded), NODET die, R&D runs at MIT.nano, R1_TRAP first (all 2026-11-02, backfilled); no ITO and 10 × 10 mm edge-pad dies (2026-11-07); on-chip Au-fill-to-Al via (2026-11-08); local-mirror architecture, slot leads, A30 only, R1_TRAP on the v4 stack (2026-11-08). All are logged in [`notes/decisions.md`](../../notes/decisions.md), which Claude now writes for the team. Current layout retains 600 µm zone spacing and 0.8 MHz axial confinement.

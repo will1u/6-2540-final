@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Claude-authored figure, 2026-11-08. Schematic, not to scale. Numbers from STACK.md, variants/LOCAL_MIRROR.md and DESIGN_LOG steps 9, 9b, 17, 22, 24. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 775" width="1090" height="775">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f9d8a"/>
+    </marker>
+    <style>
+      text { font-family: "Segoe UI", Helvetica, Arial, sans-serif; fill: #222; }
+      .t  { font-size: 16px; font-weight: 600; }
+      .h  { font-size: 19px; font-weight: 600; }
+      .s  { font-size: 12px; fill: #555; }
+      .l  { font-size: 11px; }
+      .n  { font-size: 11.5px; }
+      .b  { font-size: 12px; font-weight: 600; }
+      .g  { font-size: 11px; fill: #777; }
+      .au { fill: #e3b341; stroke: #a67c00; stroke-width: 0.6; }
+      .au2 { fill: none; stroke: #a67c00; stroke-width: 1; stroke-dasharray: 4 3; }
+      .d2 { fill: #eaf2fb; stroke: #9db4cc; stroke-width: 0.5; }
+      .cap { fill: #cfe0f2; stroke: #9db4cc; stroke-width: 0.5; }
+      .sp { fill: #d9e8f6; stroke: #9db4cc; stroke-width: 0.5; }
+      .al { fill: #7f8fa3; }
+      .d1 { fill: #dde7f1; stroke: #9db4cc; stroke-width: 0.5; }
+      .si { fill: #c4c4c4; }
+      .nb { fill: #5b2a86; }
+      .ray { stroke: #0f9d8a; stroke-width: 1.6; fill: none; marker-end: url(#arr); }
+      .lead { stroke: #888; stroke-width: 0.8; fill: none; }
+      .mk circle { fill: #fff; stroke: #c0392b; stroke-width: 1.5; }
+      .mk text { font-size: 10px; font-weight: 700; fill: #c0392b; text-anchor: middle; }
+    </style>
+    <!-- NbN wires seen end-on (they run along the trap axis, into the page) -->
+    <g id="wires" class="nb">
+      <rect x="152" y="314" width="3.5" height="3"/><rect x="158" y="314" width="3.5" height="3"/>
+      <rect x="164" y="314" width="3.5" height="3"/><rect x="170" y="314" width="3.5" height="3"/>
+      <rect x="176" y="314" width="3.5" height="3"/><rect x="182" y="314" width="3.5" height="3"/>
+      <rect x="188" y="314" width="3.5" height="3"/><rect x="194" y="314" width="3.5" height="3"/>
+      <rect x="200" y="314" width="3.5" height="3"/><rect x="206" y="314" width="3.5" height="3"/>
+      <rect x="212" y="314" width="3.5" height="3"/><rect x="218" y="314" width="3.5" height="3"/>
+      <rect x="224" y="314" width="3.5" height="3"/><rect x="230" y="314" width="3.5" height="3"/>
+      <rect x="236" y="314" width="3.5" height="3"/><rect x="242" y="314" width="3.5" height="3"/>
+    </g>
+  </defs>
+
+  <rect x="0" y="0" width="1090" height="775" fill="#ffffff"/>
+  <text class="h" x="30" y="32">Two architectures for the readout zone</text>
+  <text class="g" x="1060" y="32" text-anchor="end">Claude-authored figure, 2026-11-08</text>
+
+  <!-- ===================== Panel A: baseline ===================== -->
+  <g transform="translate(30,60)">
+    <text class="t" x="0" y="10">A. v3 baseline: die-wide Al + 10 µm D2</text>
+    <text class="s" x="0" y="28">Superseded 2026-11-08; GDS archived in gds/archive_v3_baseline/</text>
+
+    <!-- ion -->
+    <circle cx="200" cy="75" r="5" fill="#c0392b"/>
+    <text class="l" x="211" y="72">ion, ≈ 48.7 µm above the Au (A30)</text>
+
+    <!-- layers, bottom to top -->
+    <rect class="si"  x="20" y="353" width="340" height="30"/>
+    <rect class="d1"  x="20" y="341" width="340" height="12"/>
+    <rect class="al"  x="20" y="333" width="340" height="8"/>
+    <rect class="sp"  x="20" y="317" width="340" height="16"/>
+    <rect class="cap" x="20" y="306" width="340" height="11"/>
+    <use href="#wires"/>
+    <rect class="d2"  x="20" y="186" width="340" height="120"/>
+
+    <!-- 6 um Au electrodes -->
+    <rect class="au" x="20"  y="150" width="105" height="36"/>
+    <rect class="au" x="140" y="150" width="15"  height="36"/>
+    <rect class="au" x="245" y="150" width="15"  height="36"/>
+    <rect class="au" x="275" y="150" width="85"  height="36"/>
+    <text class="l" x="72"  y="172" text-anchor="middle">RF</text>
+    <text class="l" x="317" y="172" text-anchor="middle">RF</text>
+    <text class="l" x="134" y="140" text-anchor="end">centre DC (40 µm)</text>
+    <path class="lead" d="M135,142 L146,151"/>
+    <text class="l" x="266" y="140">30 µm window</text>
+    <path class="lead" d="M265,142 L246,160"/>
+
+    <!-- photons -->
+    <path class="ray" d="M200,80 L160,186 L153,306"/>
+    <path class="ray" d="M200,80 L200,306"/>
+    <path class="ray" d="M200,80 L240,186 L247,306"/>
+
+    <!-- markers on the drawing -->
+    <g class="mk"><circle cx="218" cy="198" r="7"/><text x="218" y="201.5">1</text></g>
+    <g class="mk"><circle cx="136" cy="292" r="7"/><text x="136" y="295.5">2</text></g>
+    <path class="lead" d="M10,186 L10,333 M6,186 L14,186 M6,333 L14,333" style="stroke:#c0392b"/>
+    <g class="mk"><circle cx="10" cy="260" r="7"/><text x="10" y="263.5">4</text></g>
+
+    <!-- layer labels -->
+    <text class="l" x="372" y="172">6 µm Au</text>
+    <text class="l" x="372" y="250">D2: 10 µm PECVD SiO₂</text>
+    <path class="lead" d="M361,310 L370,300"/><text class="l" x="372" y="303">cap 80 nm (HSQ + SiO₂)</text>
+    <path class="lead" d="M249,315.5 L370,315"/><text class="l" x="372" y="318">NbN 7 nm (wires end-on)</text>
+    <g class="mk"><circle cx="379" cy="328" r="6.5"/><text x="379" y="331.5">3</text></g>
+    <path class="lead" d="M361,325 L371,327"/><text class="l" x="390" y="332">spacer 238 nm SiO₂</text>
+    <path class="lead" d="M361,337 L370,342"/><text class="l" x="372" y="346">Al 150 nm, die-wide</text>
+    <path class="lead" d="M361,347 L370,357"/><text class="l" x="372" y="360">D1: 1 µm thermal SiO₂</text>
+    <text class="l" x="372" y="376">HR Si</text>
+
+    <!-- notes -->
+    <g class="mk"><circle cx="7" cy="401" r="7"/><text x="7" y="404.5">1</text></g>
+    <text class="n" x="20" y="405">Top of the optical stack is the SiO₂/vacuum surface, 10 µm up.</text>
+    <text class="n" x="20" y="420">The cap merges into D2, so no layer can be tuned to match the NbN.</text>
+    <text class="n" x="20" y="435">That surface reflects ~3.5 %; its fringes average out over the cone.</text>
+    <g class="mk"><circle cx="7" cy="449" r="7"/><text x="7" y="452.5">2</text></g>
+    <text class="n" x="20" y="453">Light spreads 2.6–3.9 µm past the window edge on the way down, so</text>
+    <text class="n" x="20" y="468">the NbN overhangs the window; the 1 µm radial overhang still loses ~5 %.</text>
+    <g class="mk"><circle cx="7" cy="482" r="7"/><text x="7" y="485.5">3</text></g>
+    <text class="n" x="20" y="486">238 nm spacer = Al-to-NbN distance. This is what makes the mirror work.</text>
+    <g class="mk"><circle cx="7" cy="500" r="7"/><text x="7" y="503.5">4</text></g>
+    <text class="n" x="20" y="504">Al-to-Au ≈ 10.3 µm: RF-to-ground C ≈ 2.9 pF (≈ 27 mA at 53 V, 28 MHz).</text>
+
+    <text class="b" x="0" y="532">NbN absorption ≈ 0.40 (50 % fill) · 0.54 (v3.1, 65 % fill)</text>
+    <text class="n" x="0" y="550">Costs: 10 µm D2 + stress qualification (W3), deep gap etch, L45 protect,</text>
+    <text class="n" x="0" y="565">6 µm plating.</text>
+    <text class="n" x="0" y="583">Status: superseded by B (2026-11-08).</text>
+  </g>
+
+  <!-- ===================== Panel B: local mirror ===================== -->
+  <g transform="translate(570,60)">
+    <text class="t" x="0" y="10">B. v4 local mirror, no D2 (adopted)</text>
+    <text class="s" x="0" y="28">Team decision 2026-11-08, after Hampel 2023; in the v4 GDS</text>
+
+    <circle cx="200" cy="75" r="5" fill="#c0392b"/>
+    <text class="l" x="211" y="72">ion (height not rerun for this stack)</text>
+
+    <!-- layers: spacer sits on D1 except over the local Al -->
+    <rect class="si"  x="20" y="353" width="340" height="30"/>
+    <rect class="d1"  x="20" y="341" width="340" height="12"/>
+    <rect class="sp"  x="20" y="317" width="340" height="24"/>
+    <rect class="al"  x="140" y="333" width="120" height="8"/>
+    <rect class="cap" x="20" y="306" width="340" height="11"/>
+    <use href="#wires"/>
+
+    <text class="g" x="28" y="232">no 10 µm D2:</text>
+    <text class="g" x="28" y="247">vacuum on the cap</text>
+
+    <!-- E2: 6 um plated (dashed outline); E1: 0.35 um lift-off (solid) -->
+    <rect class="au2" x="20"  y="270" width="105" height="36"/>
+    <rect class="au2" x="140" y="270" width="15"  height="36"/>
+    <rect class="au2" x="245" y="270" width="15"  height="36"/>
+    <rect class="au2" x="275" y="270" width="85"  height="36"/>
+    <rect class="au" x="20"  y="302" width="105" height="4"/>
+    <rect class="au" x="140" y="302" width="15"  height="4"/>
+    <rect class="au" x="245" y="302" width="15"  height="4"/>
+    <rect class="au" x="275" y="302" width="85"  height="4"/>
+    <text class="l" x="72"  y="292" text-anchor="middle">RF</text>
+    <text class="l" x="317" y="292" text-anchor="middle">RF</text>
+    <text class="l" x="134" y="262" text-anchor="end">centre DC</text>
+    <path class="lead" d="M135,264 L146,272"/>
+
+    <path class="ray" d="M200,80 L160,306"/>
+    <path class="ray" d="M200,80 L200,306"/>
+    <path class="ray" d="M200,80 L240,306"/>
+
+    <g class="mk"><circle cx="220" cy="292" r="7"/><text x="220" y="295.5">1</text></g>
+    <g class="mk"><circle cx="132" cy="288" r="7"/><text x="132" y="291.5">4</text></g>
+    <g class="mk"><circle cx="253" cy="288" r="7"/><text x="253" y="291.5">5</text></g>
+
+    <path class="lead" d="M361,288 L370,277"/><text class="l" x="372" y="280">E2: 6 µm Au (dashed)</text>
+    <path class="lead" d="M361,304 L370,293"/><text class="l" x="372" y="296">E1: 0.35 µm Au</text>
+    <path class="lead" d="M361,310 L370,306"/><text class="l" x="372" y="309">cap 160 nm</text>
+    <path class="lead" d="M249,315.5 L370,319"/><text class="l" x="372" y="322">NbN 7 nm</text>
+    <g class="mk"><circle cx="379" cy="331" r="6.5"/><text x="379" y="334.5">3</text></g>
+    <path class="lead" d="M361,325 L371,330"/><text class="l" x="390" y="335">spacer 238 nm SiO₂</text>
+    <g class="mk"><circle cx="379" cy="345" r="6.5"/><text x="379" y="348.5">2</text></g>
+    <path class="lead" d="M261,337 L371,344"/><text class="l" x="390" y="349">Al 450 nm, local</text>
+    <path class="lead" d="M361,347 L370,359"/><text class="l" x="372" y="362">D1: 1 µm thermal SiO₂</text>
+    <text class="l" x="372" y="378">HR Si (ρ &gt; 20 kΩ·cm)</text>
+
+    <g class="mk"><circle cx="7" cy="401" r="7"/><text x="7" y="404.5">1</text></g>
+    <text class="n" x="20" y="405">The cap/vacuum surface sits right on the stack, so the cap thickness</text>
+    <text class="n" x="20" y="420">is a tuning knob (rerun 09b before fixing it). Less tolerant: ±10 nm</text>
+    <text class="n" x="20" y="435">errors give a mean of 0.49 and a worst corner of 0.40.</text>
+    <g class="mk"><circle cx="7" cy="449" r="7"/><text x="7" y="452.5">2</text></g>
+    <text class="n" x="20" y="453">Al only under the centre DC (|y| ≤ 20 µm), none under the RF rails:</text>
+    <text class="n" x="20" y="468">no ground plane. Needs Si with ρ &gt; 20 kΩ·cm (as Todaro, Hampel).</text>
+    <g class="mk"><circle cx="7" cy="482" r="7"/><text x="7" y="485.5">3</text></g>
+    <text class="n" x="20" y="486">Same 238 nm spacer, so the same mirror.</text>
+    <g class="mk"><circle cx="7" cy="500" r="7"/><text x="7" y="503.5">4</text></g>
+    <text class="n" x="20" y="504">E1 (0.35 µm Au): the ion sees SiO₂ in every 5 µm gap (depth/width</text>
+    <text class="n" x="20" y="519">0.07). E2 (6 µm plated, dashed): 1.2, but keeps plating.</text>
+    <g class="mk"><circle cx="7" cy="533" r="7"/><text x="7" y="536.5">5</text></g>
+    <text class="n" x="20" y="537">Leads (decided): Au, made with the electrodes, in a 25 µm slot along the</text>
+    <text class="n" x="20" y="552">centre DC, as Hampel. The slot ends 50 µm before this cut, so it is not drawn.</text>
+
+    <text class="b" x="0" y="580">NbN absorption ≈ 0.50 (50 % fill) · v3.1 not computed</text>
+    <text class="n" x="0" y="598">Saves: 10 µm D2 + W3, deep gap etch, L45. E1 also drops plating.</text>
+    <text class="n" x="0" y="613">Status: v4 GDS (A30, B60, NODET). Still open: Au thickness E1 vs E2.</text>
+  </g>
+
+  <line x1="30" y1="695" x2="1060" y2="695" stroke="#ddd"/>
+  <text class="g" x="30" y="715">Radial cut through the A30 readout window. Not to scale: vertical exaggerated; NbN, cap and spacer drawn far thicker than they are. Photon paths in teal.</text>
+  <text class="g" x="30" y="732">Third option, rejected: thin stack with die-wide Al puts the Al 238 nm under the RF rails, giving C ≈ 127 pF and ≈ 1.2 A of RF current.</text>
+  <text class="g" x="30" y="749">Absorption values are 1-D effective-medium estimates, not RCWA (DESIGN_LOG steps 9, 9b, 24). Sources: STACK.md, variants/LOCAL_MIRROR.md H.0–H.4.</text>
+</svg>

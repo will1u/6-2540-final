@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Claude-authored figure, 2026-11-08 (updated after the v4 decisions). Summarises OPEN_DECISIONS.md; update both together. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 640" width="1090" height="640">
+  <defs>
+    <style>
+      text { font-family: "Segoe UI", Helvetica, Arial, sans-serif; fill: #222; font-size: 12px; }
+      .h { font-size: 19px; font-weight: 600; }
+      .s { fill: #555; }
+      .b { font-weight: 600; font-size: 13px; }
+      .r { fill: #8a5a00; font-size: 11.5px; }
+      .g { fill: #777; font-size: 11px; font-style: italic; }
+      .open { fill: #fff4e5; stroke: #e08a00; stroke-width: 1.4; }
+      .done { fill: #e8f5e9; stroke: #43a047; stroke-width: 1; }
+      .chk  { fill: #ffffff; stroke: #bbb; stroke-width: 1; stroke-dasharray: 5 3; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1090" height="640" fill="#ffffff"/>
+  <text class="h" x="30" y="32">Open design decisions, 2026-11-08 (after the v4 decisions)</text>
+  <text class="s" x="30" y="52">Orange = open choice · green = decided by the team (notes/decisions.md) · dashed = work before a run. Source: OPEN_DECISIONS.md.</text>
+  <text class="g" x="1060" y="32" text-anchor="end">Claude-authored figure</text>
+
+  <!-- decided -->
+  <text class="b" x="30" y="84">Decided</text>
+  <rect class="done" x="30" y="94" width="330" height="28" rx="6"/>
+  <text x="45" y="113">R1_TRAP first (11-02)</text>
+  <rect class="done" x="370" y="94" width="330" height="28" rx="6"/>
+  <text x="385" y="113">No ITO; 10 × 10 mm edge-pad dies (11-07)</text>
+  <rect class="done" x="710" y="94" width="350" height="28" rx="6"/>
+  <text x="725" y="113">On-chip via from the Au fill to the Al (11-08)</text>
+  <rect class="done" x="30" y="130" width="330" height="44" rx="6"/>
+  <text class="b" x="45" y="149">Architecture: local mirror, no D2 (11-08)</text>
+  <text x="45" y="165">v4 GDS; Si with ρ &gt; 20 kΩ·cm; no ground plane</text>
+  <rect class="done" x="370" y="130" width="330" height="44" rx="6"/>
+  <text class="b" x="385" y="149">Leads: Au in a slot along the centre DC (11-08)</text>
+  <text x="385" y="165">Same step as the electrodes, as Hampel 2023</text>
+  <rect class="done" x="710" y="130" width="350" height="44" rx="6"/>
+  <text class="b" x="725" y="149">A30 + B60 kept · R1_TRAP on v4 (11-08)</text>
+  <text x="725" y="165">R1_TRAP NODET: Au on SiO₂ over HR Si, no Al</text>
+
+  <!-- open choices -->
+  <text class="b" x="30" y="210">Still open</text>
+
+  <rect class="open" x="30" y="220" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="242">Electrode Au</text>
+  <text x="45" y="262">E1: 0.35 µm lift-off (no plating)</text>
+  <text x="45" y="278">E2: 6 µm plated (as Todaro)</text>
+  <text x="45" y="296">Blocks the v4 traveler rewrite.</text>
+  <text class="r" x="45" y="314">Resolve: SiO₂ exposed in the gaps (E1: 0.07</text>
+  <text class="r" x="45" y="329">depth/width), plating effort, resonator tests</text>
+
+  <rect class="open" x="370" y="220" width="330" height="120" rx="6"/>
+  <text class="b" x="385" y="242">Readout radial tilt</text>
+  <text x="385" y="262">v3 needed 13.2 V for 10°, past ±10 V.</text>
+  <text x="385" y="278">v4: A30 6.3 V, B60 2.2 V (load 7.5 V): fits.</text>
+  <text x="385" y="296">Team to confirm 10°.</text>
+  <text class="r" x="385" y="314">Options: smaller or zero tilt,</text>
+  <text class="r" x="385" y="329">or a wider DAC range</text>
+
+  <rect class="open" x="710" y="220" width="350" height="120" rx="6"/>
+  <text class="b" x="725" y="242">RF grounding / filters</text>
+  <text x="725" y="262">Centre-DC filtering, carrier grounds, RF</text>
+  <text x="725" y="278">bypass at both SNSPD pads (v4 slot leads),</text>
+  <text x="725" y="294">symmetric termination or cancellation.</text>
+  <text class="r" x="725" y="314">Resolve: bond diagram, coupling calc,</text>
+  <text class="r" x="725" y="329">RF on/off tests</text>
+
+  <!-- work before runs -->
+  <text class="b" x="30" y="378">Before any v4 run (work, not choices)</text>
+  <rect class="chk" x="30" y="388" width="505" height="232" rx="6"/>
+  <text class="b" x="45" y="410">Documents and layouts</text>
+  <text x="45" y="432">· Rewrite traveler, R1_TRAP sheet, mask list, stack for v4</text>
+  <text x="58" y="448">(after the E1/E2 choice; v3 pages carry a banner)</text>
+  <text x="45" y="470">· Rework the test dies for v4 (T2 Au/D2/M1 capacitor and</text>
+  <text x="58" y="486">D2 probe openings no longer exist; no-Al TEST_TRAP)</text>
+  <text x="45" y="508">· Mirror path: via moved, Al 450 nm (decided, +0.2 µA);</text>
+  <text x="58" y="524">add a probe opening and the R acceptance</text>
+  <text x="45" y="546">· Order Si with ρ &gt; 20 kΩ·cm</text>
+  <text x="45" y="568">· MIT.nano: Au tools, plating (if E2), training</text>
+
+  <rect class="chk" x="555" y="388" width="505" height="232" rx="6"/>
+  <text class="b" x="570" y="410">Simulations and tests not yet rerun for v4</text>
+  <text x="570" y="432">· Done (09c): cap 160 nm → absorption 0.66 (80 nm: 0.44)</text>
+  <text x="570" y="454">· Done (10b): wire 0.96 µA (E2); slot leads 46 µA each, common mode</text>
+  <text x="570" y="476">· RF loss / resonator Q with no ground plane (bench test)</text>
+  <text x="570" y="498">· Gap model: the local Al under the slot gaps and the</text>
+  <text x="583" y="514">window is not in the gds2itvg stack (ground_depth null)</text>
+  <text x="570" y="536">· Before R1_FULL: detector-doc reconciliation (T9, areas,</text>
+  <text x="583" y="552">EBL time), NbN recipe + W1, W2 EBL, cold tests</text>
+</svg>

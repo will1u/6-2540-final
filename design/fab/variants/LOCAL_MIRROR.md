@@ -4,14 +4,16 @@
 
 [Variants](../VARIANTS.md) · [Open decisions](../OPEN_DECISIONS.md) · [Baseline](../TRAVELER.md)
 
-> [!warning] Proposed architecture
-> **No GDS implementation.** Dimensions below were proposed against the earlier detector. Recheck the mirror outline, tabs and clearance against v3.1. Routing, Au thickness, optics and RF remain open in [Open decisions](../OPEN_DECISIONS.md).
+> [!important] Adopted as v4 (team decision, 2026-11-08)
+> The team chose this architecture, with the leads routed in a slot along the centre DC (H.5 option a, as Hampel 2023), and R1_TRAP on the same no-Al stack ([decisions](../../../notes/decisions.md)). `gds/make_chip.py` v4 implements it (DESIGN_LOG step 25): mirror |y| ≤ 20 µm from x = −2240 to +268 µm (readout at x = 240 since step 28), ground via at (−2140, 130) under the Au fill, just past the RF open end, Au leads 5 µm wide in a 25 µm slot, Ti/Au contacts from the NbN tabs into the slot. The H.5 list below is done; H.2 is the basis for the v4 traveler, which is not yet written. Still open: electrode Au (E1 vs E2), optics rerun (09b), RF pickup rerun (10).
 
-Team request, 2026-11-08 (DESIGN_LOG step 23). This is an **alternative** to the [baseline traveler](../TRAVELER.md), kept here so the two can be compared. The baseline stays the die-wide M1 ground plane under 10 µm D2. Nothing in the GDS implements this variant yet (H.5).
+Team request, 2026-11-08 (DESIGN_LOG step 23). Written as an alternative to the [baseline traveler](../TRAVELER.md) and adopted the same day.
 
 **Idea.** Follow Hampel 2023: the Al sits only under the SNSPD and along its leads, never under the RF rails. The electrodes sit on the thin optical stack. Both options remove 10 µm D2 and its deep gap etch. **E1 removes plating; E2 retains 6 µm plating.** A die-wide Al plane under electrodes on that thin stack would give C_RF–ground ≈ 127 pF instead of 2.9 pF (DESIGN_LOG step 22) [team calc]. That is why the mirror has to be local.
 
 ## H.0 Why the baseline has a thick D2: ground plane and mirror together
+
+![Baseline and local-mirror cross-sections through the readout window](../figures/architecture_crosssection.svg)
 
 The Al does two jobs, and each one depends on a different distance:
 
@@ -47,7 +49,7 @@ Capacitance the mirror adds to the centre DC (electrode 2), which sits 318 nm ab
 | Step | Baseline | Variant |
 |---|---|---|
 | 0–2 | Prep, L1 marks, 1 µm thermal SiO₂ (D1) | Same |
-| **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Al-1%Cu 150 nm (opaque; Hampel used 50 nm e-beam Al). Either the step-3 etch with the job not inverted, or lift-off as Hampel did. No mark cut-outs needed |
+| **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Al-1%Cu **450 nm** (team decision 2026-11-08, to lower the strip resistance to ground, DESIGN_LOG step 28; Hampel used 50 nm e-beam Al). Either the step-3 etch with the job not inverted, or lift-off as Hampel did. No mark cut-outs needed |
 | 4–8 | Spacer 238 nm, NbN, L22 leads, L20 nanowire, HSQ + cap | Same order: leads before the nanowire, cap straight after. **The cap is now the top surface over the detector (vacuum above)**, so its thickness matters optically again: rerun 09b before fixing it (H.4) |
 | 9, 10 | 10 µm D2 | **Skipped** |
 | **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: HSQ/cap + spacer ≈ 0.32 µm down to the Al. SNSPD pads: ≈ 80 nm down to the L22 Au. Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. Add a small Al probe opening on the mirror so it can be checked electrically (H.5) |
@@ -59,7 +61,7 @@ Thermal budget: no D2, so the long 300 °C exposure goes away.
 
 ## H.3 Cross-section under the readout window (variant)
 
-HR Si / 1 µm thermal SiO₂ / 150 nm Al (local mirror) / 238 nm PECVD SiO₂ / 7 nm NbN / 80 nm HSQ + PECVD SiO₂ cap / **vacuum**. For E1/A30 the window is a 30 × 30 µm hole in 0.35 µm Au; E2 retains 6 µm Au. The ion sees the cap directly. Away from the detector the electrodes sit on spacer + cap over D1, with no Al under them.
+HR Si / 1 µm thermal SiO₂ / 450 nm Al (local mirror; step 28) / 238 nm PECVD SiO₂ / 7 nm NbN / 160 nm HSQ + PECVD SiO₂ cap (step 26; was 80) / **vacuum**. For E1/A30 the window is a 30 × 30 µm hole in 0.35 µm Au; E2 retains 6 µm Au. The ion sees the cap directly. Away from the detector the electrodes sit on spacer + cap over D1, with no Al under them.
 
 ## H.4 What the variant changes in the physics (each needs a rerun or a test)
 

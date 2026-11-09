@@ -4,6 +4,9 @@
 
 [Fab overview](README.md) · [Variants](VARIANTS.md) · [Open decisions](OPEN_DECISIONS.md)
 
+> [!warning] Architecture changed to v4 (2026-11-08)
+> The team chose the local-mirror architecture (no die-wide Al, no 10 µm D2), leads in a slot along the centre DC, A30 and B60 detector dies (B60 briefly dropped, then kept), and the same no-Al stack for R1_TRAP ([decisions](../../notes/decisions.md); DESIGN_LOG step 25). The GDS is now v4 (`gds/trap_die_v4_*`). **This page still describes the v3 baseline process.** It must be rewritten before any run; the rewrite waits on the electrode Au choice (E1 lift-off vs E2 plated). Do not fabricate from it.
+
 > [!note] Scope
 > Full-stack architecture with a die-wide Al plane and 10 µm D2. [R1_TRAP](RUNSHEET_R1_TRAP.md) omits spacer/NbN/cap. Optical values below are **earlier v3 estimates at 50 % fill**, pending reconciliation for v3.1.
 
@@ -11,17 +14,17 @@
 
 All values are DESIGN_LOG steps 2, 6, 9, 9b and 10.
 
-| Layer | Thickness | Role / note |
-|---|---|---|
-| HR FZ Si | ~525 µm [verify] | RF substrate loss largely irrelevant under the Al plane (Romaszko 2020 Sec. 3.2; Leibrandt 2009) |
-| Thermal SiO₂ (D1) | 1.0 µm | Isolation; also on the backside |
-| Al-1%Cu (M1) | 150 nm | Ground plane and optical mirror; ≥ 100 nm is opaque (TMM: 50 nm transmits 0.12 %) |
-| PECVD SiO₂ spacer | 238 ± 10 nm | Second-order cavity spacer. 64 nm (first order) is optically equal but sits closer to Al hillocks. **Avoid ≈ 148 nm** (absorption node) |
-| NbN meander | 7 nm; current width/pitch 130/200 nm | Current v3.1: 160 lines; line regions 36 × 32 µm (A30) / 69 × 32 µm (B60); [revision comparison](VARIANTS.md#detector-revision) |
-| HSQ (on wires only) + PECVD cap | 80 ± 10 nm total over the wires | Cap thickness = 80 − measured remaining HSQ |
-| PECVD SiO₂ (D2) | 10.0 µm | Stays over the detector. Its top surface is the window floor the ion sees (bare SiO₂) |
-| Au walls (centre DC, 5 µm rims) | 6.0 µm | Window 30 × 30 µm (A30) or 60 × 30 µm (B60); pocket depth 6 µm |
-| Vacuum; ion | h ≈ 50.1 µm above the Au top, minus the 3-D recess effect over the bare-SiO₂ window: −1.38 µm (A30), −2.50 µm (B60) (DESIGN_LOG step 17) | – |
+| Layer                           | Thickness                                                                                                                                | Role / note                                                                                                                             |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| HR FZ Si                        | ~525 µm [verify]                                                                                                                         | RF substrate loss largely irrelevant under the Al plane (Romaszko 2020 Sec. 3.2; Leibrandt 2009)                                        |
+| Thermal SiO₂ (D1)               | 1.0 µm                                                                                                                                   | Isolation; also on the backside                                                                                                         |
+| Al-1%Cu (M1)                    | 150 nm                                                                                                                                   | Ground plane and optical mirror; ≥ 100 nm is opaque (TMM: 50 nm transmits 0.12 %)                                                       |
+| PECVD SiO₂ spacer               | 238 ± 10 nm                                                                                                                              | Second-order cavity spacer. 64 nm (first order) is optically equal but sits closer to Al hillocks. **Avoid ≈ 148 nm** (absorption node) |
+| NbN meander                     | 7 nm; current width/pitch 130/200 nm                                                                                                     | Current v3.1: 160 lines; line regions 36 × 32 µm (A30) / 69 × 32 µm (B60); [revision comparison](VARIANTS.md#detector-revision)         |
+| HSQ (on wires only) + PECVD cap | 80 ± 10 nm total over the wires                                                                                                          | Cap thickness = 80 − measured remaining HSQ                                                                                             |
+| PECVD SiO₂ (D2)                 | 10.0 µm                                                                                                                                  | Stays over the detector. Its top surface is the window floor the ion sees (bare SiO₂)                                                   |
+| Au walls (centre DC, 5 µm rims) | 6.0 µm                                                                                                                                   | Window 30 × 30 µm (A30) or 60 × 30 µm (B60); pocket depth 6 µm                                                                          |
+| Vacuum; ion                     | h ≈ 50.1 µm above the Au top, minus the 3-D recess effect over the bare-SiO₂ window: −1.38 µm (A30), −2.50 µm (B60) (DESIGN_LOG step 17) | –                                                                                                                                       |
 
 Expected NbN absorption ≈ 0.40 (worst ±10 nm corner 0.39) with no ITO, vs 0.53 for the v2 two-ITO stack. The model reads ~10 % pessimistic against Hampel. These are TMM effective-medium numbers, not RCWA (DESIGN_LOG steps 9b and 17).
 
