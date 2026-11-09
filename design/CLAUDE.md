@@ -185,7 +185,7 @@ After editing a fab page: `./run.sh ../fab/check_links.py` must report 0 broken 
 
 - **v4: local-mirror architecture** (team decisions in `../notes/decisions.md`; DESIGN_LOG step 25). A30 and NODET pass `check_chip.py`; sims 04b, 12 and 13 rerun on v4.
 - **First run: R1_TRAP**, trap-only, now on the no-Al stack (Au on SiO₂ over HR Si).
-- **Loose-ends pass, 2026-11-09 (DESIGN_LOG steps 30–36).** The fab pages, test dies and figures are v4. New sims 15b and 17–20. Assessments (Claude's, not team decisions): 50 µm ion height is adequate (step 30); E1 and E2 trap the same but differ in gap screening, SNSPD lead resistance, light and RF heating (step 31).
+- **Loose-ends pass, 2026-11-09 (DESIGN_LOG steps 30–36).** The fab pages, test dies and figures are v4. New sims 15b and 17–20. Team decision 2026-11-09: keep the 50 µm ion height (step 30; `../notes/decisions.md`). Assessment (Claude's, not a team decision): E1 and E2 trap the same but differ in gap screening, SNSPD lead resistance, light and RF heating (step 31).
 - Still open before any run:
   - electrode Au, E1 vs E2 (the fab pages carry both branches; delete one when the team chooses);
   - SNSPD lead termination (step 33): a plain 50 Ω line with the return grounded puts about 4 µA of RF through the nanowire;

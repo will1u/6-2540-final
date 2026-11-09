@@ -48,7 +48,7 @@ Format: date · decision · options rejected · reason · consequences.
 - **Rejected:** the other heights in the step-1 table (40 and 70 µm).
 - **Reason:**
   - Height policy: the electrode cut-out over the SNSPD lowers the ion there (team notes 11/7). The notes list ways to live with it: a different beam height per zone, a beam wide enough for both heights, or different waveforms per zone.
-  - 50 µm: not recorded as the team's (asked 2026-11-08). DESIGN_LOG step 1 gives Claude's analysis behind it: heating scales roughly as h⁻⁴ while collection gains only about h⁻², so detector size is the cheaper lever.
+  - 50 µm: not recorded at the time (asked 2026-11-08). The team gave its reason on 2026-11-09; see the entry "Keep the 50 µm ion height" below. DESIGN_LOG step 1 has the first analysis: heating scales roughly as h⁻⁴ while collection gains only about h⁻², so detector size is the cheaper lever.
 - **Details:** DESIGN_LOG steps 0–1.
 
 ## 2026-11-02 · Plain diced square chip, no bowtie
@@ -238,3 +238,16 @@ Format: date · decision · options rejected · reason · consequences.
 - **Rejected:** keeping 150 nm.
 - **Reason:** lower the resistance of the mirror's path to ground. The RF rails drive current into the 2.5 mm strip, and at 150 nm (≈ 15 Ω) the detector end swings 20–27 mV and adds up to 0.65 µA of nanowire pickup. At 450 nm it is 7–9 mV and ≤ 0.21 µA (DESIGN_LOG step 28).
 - **Consequences:** a longer Al sputter in the v4 traveler; no layout change. Check hillocks on a witness wafer after the spacer deposition (≤ 300 °C after the Al step).
+
+## 2026-11-09 · Keep the 50 µm ion height
+
+- **Decision:** keep the target ion height at 50 µm. No redesign for a lower trap.
+- **Rejected:** redesigning for a lower ion to collect more light. The case worked through was 40 µm with the centre DC and the 30 µm window unchanged; 30 and 35 µm are in the same table.
+- **Reason:** the team asked whether 50 µm should stay, given that a higher ion is more stable but collects less light, and adopted the analysis of DESIGN_LOG step 30 (`design/sim/17_height_tradeoff.py`) as its reason:
+  - Going to 40 µm with the same window gives 1.44× the light. It costs 2.4× the heating (h⁻⁴ scaling; 1.8× at h⁻²·⁶) and 2.6× the laser power clipped on the 10 mm die, which is 1.7 % at 493 nm already.
+  - Shrinking the whole trap with the height loses light, because the 5 µm rims and gaps do not shrink: 2.13 % at 50 µm against 1.72 % at 40 µm.
+  - The same gain is available at 50 µm without those costs: the 160 nm SiO₂ cap (absorption 0.44 → 0.66), the B60 window (1.83×), E1 Au (1.22×) or a wider centre DC (1.3× at 50 µm).
+  - The level reached is enough to work with: the A30 detector on E2 absorbs 1.47 % of all emitted 493 nm photons.
+- **Limits the team accepted with it:** the analysis uses a gapless, infinitely long five-wire model; the heating exponent is not universal; the photon rate behind the count estimate comes from one paper.
+- **Consequences:** no layout change. The height policy of 2026-11-02 (the height may differ between zones) stands.
+- **Details:** DESIGN_LOG step 30.

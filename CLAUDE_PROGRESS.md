@@ -5,8 +5,8 @@
 > - New team member? Set up the `electrode` repo first: `design/CLAUDE.md`, "Setting up the electrode repo".
 > - Folder index and how to run: `design/README.md`.
 
-**2026-11-09, loose-ends pass (DESIGN_LOG steps 30–36).** Written by delegated agents from a specification; every number below was rerun before logging. Nothing here is a team decision.
-- **Ion height (step 30, `sim/17`):** 50 µm is adequate. Going to 40 µm with the same 30 µm window gives 1.44× the light for 2.4× the heating (h⁻⁴) and 2.6× the clipped beam power; shrinking the whole trap loses light. The same gain is available at 50 µm from the 160 nm cap, B60, E1 or a wider centre DC.
+**2026-11-09, loose-ends pass (DESIGN_LOG steps 30–36).** Written by delegated agents from a specification; every number below was rerun before logging. One team decision came out of it: keep the 50 µm ion height (logged in `notes/decisions.md`). The rest are assessments, not decisions.
+- **Ion height (step 30, `sim/17`; team decision 2026-11-09: keep 50 µm):** 50 µm is adequate. Going to 40 µm with the same 30 µm window gives 1.44× the light for 2.4× the heating (h⁻⁴) and 2.6× the clipped beam power; shrinking the whole trap loses light. The same gain is available at 50 µm from the 160 nm cap, B60, E1 or a wider centre DC.
 - **E1 vs E2 (step 31, `sim/18`):** identical as traps. E2 screens charge on the SiO₂ gap floor about 35× better and its SNSPD leads are 4 Ω instead of 69 Ω each (room temperature). E1 collects 1.18× more light and perturbs the RF null about three times less. The choice is still the team's.
 - **Collection on v4 (step 32, `sim/15b`):** A30 on E2 collects 2.22 % and absorbs 1.47 % of all emitted 493 nm photons with the 160 nm cap; B60 4.16 % and 2.71 %.
 - **SNSPD lead termination (step 33, `sim/19`):** a plain 50 Ω line with the return grounded puts about 4.1 µA of 28 MHz current through the A30 nanowire on E2 (switching current 8–20 µA). A 28 MHz L-C trap or a differential readout brings it below 0.3 µA; a 1 nF bypass also low-passes the pulse at 3.2 MHz.
@@ -126,7 +126,7 @@ Ground rules agreed with the team:
 - [ ] Bond pads (step 21): run W7 bond-and-leak before R1; get MIT.nano bonder and tool part numbers; draw the bond diagram against the carrier; field-solve DC-to-RF coupling.
 - [ ] **Pad pitch / package (step 29):** adopt or revise the validated 360 µm layout after reviewing future perpendicular beam access near the zones; choose 84-pin vs 100-pin/lab carrier and complete its electrical pin map. Spacer proposal: ≥ approximately 0.6 mm thick, die-sized or larger, Si suggested; not adopted.
 - [ ] Not yet team decisions (Claude's layout calls or open): readout radial tilt (v4 A30 fits 10° at 6.1 V; team to confirm), 0.8 MHz axial with ±10 V DACs.
-- [ ] Reasons the team still owes `notes/decisions.md` (asked 2026-11-08): ion height 50 µm; A30/B60 detector variants; and "not recorded" on Ba⁺/project scope, NODET die, R1_TRAP first. (Si substrate, no ITO and the 10 × 10 mm die were answered 2026-11-08.)
+- [ ] Reasons the team still owes `notes/decisions.md` (asked 2026-11-08): A30/B60 detector variants; and "not recorded" on Ba⁺/project scope, NODET die, R1_TRAP first. (Si substrate, no ITO and the 10 × 10 mm die were answered 2026-11-08; the 50 µm ion height on 2026-11-09.)
 - [ ] Before tape-out, run the witness wafers in [qualification](design/fab/QUALIFICATION.md). Also confirm:
   - the Plating-U04 bath;
   - the Dane NbN recipe (Berggren group);

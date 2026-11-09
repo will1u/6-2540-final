@@ -1330,7 +1330,9 @@ The largest required-voltage change is 0.00403 V; sim 13 null heights and window
 - The same or a larger gain is available at 50 µm without those costs: the 160 nm cap (absorption 0.44 → 0.66, step 26), the B60 window (1.83×, drawn), E1 Au (1.22×, the aperture sits 5.65 µm closer) or a wider centre DC (1.3× at c = 50 µm).
 - Absolute level: A30 on E2 absorbs 1.47 % of all emitted 493 nm photons (step 32). At about 10⁷ photons/s from a bright ion (Zhukas et al., arXiv:2006.12801, one source, read through a summarising tool) that is about 15 counts per 100 µs before the internal detection efficiency. [team calc]
 
-**Assessment (Claude, `design/` exception; not a team decision).** 50 µm is adequate; a lower trap is not worth a redesign. Height is the most expensive lever for collection in this design, and beam clipping on the 10 mm die (1.7 %) already argues against going lower.
+**Decision (team, 2026-11-09; `notes/decisions.md`): keep 50 µm.** The team adopted the assessment below as its reason.
+
+**Assessment (Claude, `design/` exception).** 50 µm is adequate; a lower trap is not worth a redesign. Height is the most expensive lever for collection in this design, and beam clipping on the 10 mm die (1.7 %) already argues against going lower.
 
 **Limits.** Gapless, infinitely long model; no window perturbation in the collection column. The heating exponent is not universal: Sedlacek 2018 measured 3.9(2) at 295 K and 4.0(2) at 5 K over 29–83 µm; An 2019 reports 2.6 for electric-field noise over 50–300 µm (abstract only). Pointers: `research/research_notes/Loose ends 2026-11/`.
 
