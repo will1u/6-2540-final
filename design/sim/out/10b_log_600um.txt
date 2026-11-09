@@ -1,0 +1,9 @@
+E2 window: C_rf_mirror_fF_per_um 0.151, C_rf_per_rail_pF_per_mm 0.2483, C_RN_fF 0.1031, I_pk_uA 0.9615, C_wires_mirror_fF 136.8
+E2 slot  : C_rf_mirror_fF_per_um 0.151, C_rf_per_rail_pF_per_mm 0.2486, C_rf_lead_fF_per_um 0.002132, I_lead_uA_per_mm 19.88, I_lead_in_trap_uA 45.72
+E2 mirror path Rs 0.2 Ohm/sq: V at the detector end 25.9 mV, extra wire current <= 0.624 uA
+E2 mirror path Rs 0.27 Ohm/sq: V at the detector end 35 mV, extra wire current <= 0.842 uA
+E1 window: C_rf_mirror_fF_per_um 0.1515, C_rf_per_rail_pF_per_mm 0.2279, C_RN_fF 0.2064, I_pk_uA 1.924, C_wires_mirror_fF 136.8
+E1 slot  : C_rf_mirror_fF_per_um 0.154, C_rf_per_rail_pF_per_mm 0.228, C_rf_lead_fF_per_um 0.001355, I_lead_uA_per_mm 12.63, I_lead_in_trap_uA 29.06
+E1 mirror path Rs 0.2 Ohm/sq: V at the detector end 26.4 mV, extra wire current <= 0.636 uA
+E1 mirror path Rs 0.27 Ohm/sq: V at the detector end 35.7 mV, extra wire current <= 0.859 uA
+reference v3.1 baseline: C_RN 0.1796 fF, I_pk 1.67 uA

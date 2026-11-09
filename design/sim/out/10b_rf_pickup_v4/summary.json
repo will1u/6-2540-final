@@ -1,0 +1,74 @@
+{
+ "reference_v31_baseline": {
+  "C_RN_fF": 0.17957883979340242,
+  "I_pk_uA": 1.6744374574626701
+ },
+ "E2_window": {
+  "cut": "window",
+  "t_au": 6.0,
+  "C_rf_mirror_fF_per_um": 0.15100671960786474,
+  "C_rf_per_rail_pF_per_mm": 0.24831158123015384,
+  "C_RN_fF": 0.10312122257826382,
+  "I_pk_uA": 0.9615277498342203,
+  "C_wires_mirror_fF": 136.81899373468733
+ },
+ "E2_slot": {
+  "cut": "slot",
+  "t_au": 6.0,
+  "C_rf_mirror_fF_per_um": 0.15103337317670368,
+  "C_rf_per_rail_pF_per_mm": 0.2485938411437458,
+  "C_rf_lead_fF_per_um": 0.0021317988697529353,
+  "I_lead_uA_per_mm": 19.877419207059837,
+  "I_lead_in_trap_uA": 44.52541902381404
+ },
+ "E2_mirror_path_150nm_Rs0.2": {
+  "V_mirror_mV": 19.873541182958192,
+  "I_extra_uA": 0.47836516985062966
+ },
+ "E2_mirror_path_150nm_Rs0.27": {
+  "V_mirror_mV": 26.829280596993556,
+  "I_extra_uA": 0.6457929792983501
+ },
+ "E2_mirror_path_450nm_Rs0.067": {
+  "V_mirror_mV": 6.6576362962909945,
+  "I_extra_uA": 0.16025233189996094
+ },
+ "E2_mirror_path_450nm_Rs0.089": {
+  "V_mirror_mV": 8.843725826416394,
+  "I_extra_uA": 0.21287250058353016
+ },
+ "E1_window": {
+  "cut": "window",
+  "t_au": 0.35,
+  "C_rf_mirror_fF_per_um": 0.1515193381706827,
+  "C_rf_per_rail_pF_per_mm": 0.22794572391401677,
+  "C_RN_fF": 0.20637737483365445,
+  "I_pk_uA": 1.9243136173050421,
+  "C_wires_mirror_fF": 136.84839140219378
+ },
+ "E1_slot": {
+  "cut": "slot",
+  "t_au": 0.35,
+  "C_rf_mirror_fF_per_um": 0.15401150187322907,
+  "C_rf_per_rail_pF_per_mm": 0.22796661166961618,
+  "C_rf_lead_fF_per_um": 0.0013548923496493346,
+  "I_lead_uA_per_mm": 12.63335092092406,
+  "I_lead_in_trap_uA": 28.298706062869897
+ },
+ "E1_mirror_path_150nm_Rs0.2": {
+  "V_mirror_mV": 20.265414595129826,
+  "I_extra_uA": 0.4879025518644534
+ },
+ "E1_mirror_path_150nm_Rs0.27": {
+  "V_mirror_mV": 27.358309703425263,
+  "I_extra_uA": 0.658668445017012
+ },
+ "E1_mirror_path_450nm_Rs0.067": {
+  "V_mirror_mV": 6.788913889368492,
+  "I_extra_uA": 0.1634473548745919
+ },
+ "E1_mirror_path_450nm_Rs0.089": {
+  "V_mirror_mV": 9.01810949483277,
+  "I_extra_uA": 0.2171166355796817
+ }
+}

@@ -1,0 +1,6 @@
+v3.1_baseline_238_80     A = 0.540 at spacer 238, cap 80 nm; +-10 nm box mean 0.534, worst corner 0.517
+v4_current_238_80        A = 0.440 at spacer 238, cap 80 nm; +-10 nm box mean 0.440, worst corner 0.419
+v4_best_cap_spacer238    A = 0.662 at spacer 238, cap 159 nm; +-10 nm box mean 0.645, worst corner 0.596
+v4_best_1st_order        A = 0.665 at spacer 64, cap 164 nm; +-10 nm box mean 0.648, worst corner 0.605
+v4_best_2nd_order        A = 0.665 at spacer 232, cap 166 nm; +-10 nm box mean 0.648, worst corner 0.609
+spacer 238: cap 146-172 nm keeps A within 0.02 of the best (repeats every 168 nm)
