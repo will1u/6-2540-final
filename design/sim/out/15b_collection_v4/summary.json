@@ -1,0 +1,380 @@
+{
+ "cases": {
+  "A30_E2_null+drop": {
+   "h_um": 48.789060725696494,
+   "D_um": 54.789060725696494,
+   "collection_pct": 2.221305509203943,
+   "caps": {
+    "80": {
+     "max_spread_um": 0.020326636725161384,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.4413971963670408,
+     "absorbed_of_emitted_pct": 0.9804780240372823
+    },
+    "160": {
+     "max_spread_um": 0.04065327345032277,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.6619088544076711,
+     "absorbed_of_emitted_pct": 1.4703017848866304
+    }
+   }
+  },
+  "A30_E1_null": {
+   "h_um": 49.96381543140433,
+   "D_um": 50.31381543140433,
+   "collection_pct": 2.6011299021279575,
+   "caps": {
+    "80": {
+     "max_spread_um": 0.021984769166306813,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.4415440980075244,
+     "absorbed_of_emitted_pct": 1.1485135564354894
+    },
+    "160": {
+     "max_spread_um": 0.04396953833261363,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.6610829414737348,
+     "absorbed_of_emitted_pct": 1.7195626068540382
+    }
+   }
+  },
+  "A30_E1_null+drop": {
+   "h_um": 49.59613696028195,
+   "D_um": 49.946136960281954,
+   "collection_pct": 2.636467644294917,
+   "caps": {
+    "80": {
+     "max_spread_um": 0.02213253128669372,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.44155742790374786,
+     "absorbed_of_emitted_pct": 1.1641518717663168
+    },
+    "160": {
+     "max_spread_um": 0.04426506257338744,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.6609944603337483,
+     "absorbed_of_emitted_pct": 1.7426905077281074
+    }
+   }
+  },
+  "B60_E2_null+drop": {
+   "h_um": 47.934180808364154,
+   "D_um": 53.934180808364154,
+   "collection_pct": 4.157744118454813,
+   "caps": {
+    "80": {
+     "max_spread_um": 0.03090101207275522,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.4421693931452389,
+     "absorbed_of_emitted_pct": 1.838427193710351
+    },
+    "160": {
+     "max_spread_um": 0.06180202414551044,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.6516157581409485,
+     "absorbed_of_emitted_pct": 2.7092515859030026
+    }
+   }
+  },
+  "B60_E1_null": {
+   "h_um": 49.96381543140433,
+   "D_um": 50.31381543140433,
+   "collection_pct": 4.67420557337101,
+   "caps": {
+    "80": {
+     "max_spread_um": 0.03271222062718542,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.4422657232377725,
+     "absorbed_of_emitted_pct": 2.067240908468957
+    },
+    "160": {
+     "max_spread_um": 0.06542444125437084,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.6479903912960756,
+     "absorbed_of_emitted_pct": 3.028840298486978
+    }
+   }
+  },
+  "B60_E1_null+drop": {
+   "h_um": 49.41596901978321,
+   "D_um": 49.76596901978321,
+   "collection_pct": 4.7602113002992805,
+   "caps": {
+    "80": {
+     "max_spread_um": 0.03300275100165963,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.44227898364439544,
+     "absorbed_of_emitted_pct": 2.105341415828932
+    },
+    "160": {
+     "max_spread_um": 0.06600550200331926,
+     "envelope_pct": 100.0,
+     "absorbed_cone": 0.6473518550305233,
+     "absorbed_of_emitted_pct": 3.0815316155859986
+    }
+   }
+  }
+ },
+ "normal_incidence": {
+  "80": {
+   "unpol": 0.4403929111363152,
+   "linear": {
+    "s_xz": 0.5862432011733363,
+    "s_yz": 0.29454262109929397,
+    "p_xz": 0.2945426210992939,
+    "p_yz": 0.5862432011733364
+   }
+  },
+  "160": {
+   "unpol": 0.6618304736883459,
+   "linear": {
+    "s_xz": 0.8297392810004969,
+    "s_yz": 0.49392166637619495,
+    "p_xz": 0.49392166637619483,
+    "p_yz": 0.8297392810004972
+   }
+  }
+ },
+ "acceptance": [
+  {
+   "item": "collection A30 E2",
+   "source": "overhang audit",
+   "expected": [
+    2.221,
+    2.221
+   ],
+   "tol": 0.01,
+   "yours": [
+    2.221305509203943
+   ],
+   "pass_": true
+  },
+  {
+   "item": "collection A30 E1",
+   "source": "overhang audit",
+   "expected": [
+    2.601,
+    2.636
+   ],
+   "tol": 0.01,
+   "yours": [
+    2.6011299021279575,
+    2.636467644294917
+   ],
+   "pass_": true
+  },
+  {
+   "item": "collection B60 E2",
+   "source": "overhang audit",
+   "expected": [
+    4.158,
+    4.158
+   ],
+   "tol": 0.01,
+   "yours": [
+    4.157744118454813
+   ],
+   "pass_": true
+  },
+  {
+   "item": "collection B60 E1",
+   "source": "overhang audit",
+   "expected": [
+    4.674,
+    4.76
+   ],
+   "tol": 0.01,
+   "yours": [
+    4.67420557337101,
+    4.7602113002992805
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed A30 E2, 80 nm",
+   "source": "overhang audit",
+   "expected": [
+    0.98,
+    0.98
+   ],
+   "tol": 0.02,
+   "yours": [
+    0.9804780240372823
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed A30 E2, 160 nm",
+   "source": "overhang audit",
+   "expected": [
+    1.47,
+    1.47
+   ],
+   "tol": 0.02,
+   "yours": [
+    1.4703017848866304
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed B60 E2, 80 nm",
+   "source": "overhang audit",
+   "expected": [
+    1.838,
+    1.838
+   ],
+   "tol": 0.02,
+   "yours": [
+    1.838427193710351
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed B60 E2, 160 nm",
+   "source": "overhang audit",
+   "expected": [
+    2.709,
+    2.709
+   ],
+   "tol": 0.02,
+   "yours": [
+    2.7092515859030026
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed A30 E1, 80 nm",
+   "source": "overhang audit",
+   "expected": [
+    1.149,
+    1.164
+   ],
+   "tol": 0.02,
+   "yours": [
+    1.1485135564354894,
+    1.1641518717663168
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed A30 E1, 160 nm",
+   "source": "overhang audit",
+   "expected": [
+    1.72,
+    1.743
+   ],
+   "tol": 0.02,
+   "yours": [
+    1.7195626068540382,
+    1.7426905077281074
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed B60 E1, 80 nm",
+   "source": "overhang audit",
+   "expected": [
+    2.067,
+    2.105
+   ],
+   "tol": 0.02,
+   "yours": [
+    2.067240908468957,
+    2.105341415828932
+   ],
+   "pass_": true
+  },
+  {
+   "item": "absorbed B60 E1, 160 nm",
+   "source": "overhang audit",
+   "expected": [
+    3.029,
+    3.082
+   ],
+   "tol": 0.02,
+   "yours": [
+    3.028840298486978,
+    3.0815316155859986
+   ],
+   "pass_": true
+  },
+  {
+   "item": "normal incidence, 160 nm",
+   "source": "spec",
+   "expected": [
+    0.66,
+    0.66
+   ],
+   "tol": 0.01,
+   "yours": [
+    0.6618304736883459
+   ],
+   "pass_": true
+  },
+  {
+   "item": "normal incidence, 80 nm",
+   "source": "spec",
+   "expected": [
+    0.44,
+    0.44
+   ],
+   "tol": 0.01,
+   "yours": [
+    0.4403929111363152
+   ],
+   "pass_": true
+  },
+  {
+   "item": "spread A30, 160 nm (um)",
+   "source": "spec",
+   "expected": [
+    0.041,
+    0.044
+   ],
+   "tol": 0.001,
+   "yours": [
+    0.04065327345032277
+   ],
+   "pass_": true
+  },
+  {
+   "item": "spread A30, 80 nm (um)",
+   "source": "overhang audit",
+   "expected": [
+    0.02,
+    0.022
+   ],
+   "tol": 0.001,
+   "yours": [
+    0.020326636725161384
+   ],
+   "pass_": true
+  },
+  {
+   "item": "spread B60, 160 nm (um)",
+   "source": "overhang audit",
+   "expected": [
+    0.062,
+    0.066
+   ],
+   "tol": 0.001,
+   "yours": [
+    0.06180202414551044
+   ],
+   "pass_": true
+  },
+  {
+   "item": "spread B60, 80 nm (um)",
+   "source": "overhang audit",
+   "expected": [
+    0.031,
+    0.033
+   ],
+   "tol": 0.001,
+   "yours": [
+    0.03090101207275522
+   ],
+   "pass_": true
+  }
+ ]
+}
