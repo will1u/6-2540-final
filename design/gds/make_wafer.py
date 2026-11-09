@@ -1,11 +1,11 @@
 """Wafer layout for MLA150 / EBL jobs (Claude-authored; traveler item A7; DESIGN_LOG steps 18, 25).
 
-v4 trap dies (local mirror) are 10 x 10 mm and the test die (still v3) is 10 x 2.5 mm. Each wafer column
+v4 trap dies (local mirror) are 10 x 10 mm and the test die (v4) is 10 x 2.5 mm. Each wafer column
 repeats the tile
     A30 trap die / B60 trap die / A30 trap die / test die      (bottom to top)
 with 200 um dicing streets, each die stacked at its own height (read from its cell outline). Dies are
 kept inside a 45 mm radius (5 mm edge exclusion). Die cells are imported from trap_die_v4_A30.gds,
-trap_die_v4_B60.gds and test_die_v3.gds, so re-running make_chip.py / make_test_die.py and then this
+trap_die_v4_B60.gds and test_die_v4.gds, so re-running make_chip.py / make_test_die.py and then this
 script updates the wafer.
 
 Writes wafer_v4.gds (top cell WAFER_V4), wafer_v4_map.csv (die id, type, centre), wafer_v4_map.png.
@@ -27,7 +27,7 @@ DIE_X, STREET = 10000.0, 200.0
 PX = DIE_X + STREET                      # column pitch
 TILE = ["A30", "B60", "A30", "TEST"]     # bottom to top within a tile
 SOURCES = {"A30": ("trap_die_v4_A30.gds", "TRAP_DIE_V4_A30"), "B60": ("trap_die_v4_B60.gds", "TRAP_DIE_V4_B60"),
-           "TEST": ("test_die_v3.gds", "TEST_DIE_V3")}
+           "TEST": ("test_die_v4.gds", "TEST_DIE_V4")}
 
 lib = gdstk.Library(unit=1e-6, precision=1e-9)
 cells, hgt = {}, {}

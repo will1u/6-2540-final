@@ -2,8 +2,8 @@
 
 Each run processes a full 100 mm wafer but writes only a small block of dies at the wafer centre, so
 spin coating, PECVD and plating behave as on a full wafer while MLA/EBL write time stays short.
-Trap dies are v4 (local mirror, 10 x 10 mm; DESIGN_LOG step 25); test dies are still v3 (10 x 2.5 mm,
-baseline die-wide Al + D2 test structures, not yet reworked for v4). Each column stacks its dies with
+Trap dies are v4 (local mirror, 10 x 10 mm; DESIGN_LOG step 25); test dies are v4 (10 x 2.5 mm, local Al
+mirror and cap openings, make_test_die.py). Each column stacks its dies with
 200 um streets, using each die's own height (from its cell outline), as in wafer_v4.gds.
 The die long axis runs along wafer x; align wafer x to the primary flat so the streets follow the
 Si <110> cleave directions [verify the orientation the MLA and the saw expect].
@@ -12,7 +12,7 @@ A run is a list of columns, each a list of die types from bottom to top:
     A30 / B60  trap die with the 30 x 30 / 60 x 30 um SNSPD     (make_chip.py, --det60)
     NODET      plain trap die, no SNSPD, no Al                    (make_chip.py --nodet)
     TEST       test-structure die, incl. the T8 EBL dose array    (make_test_die.py)
-    TEST_TRAP  test die for trap-only runs: T1, T2, T6 only       (make_test_die.py --trap-only)
+    TEST_TRAP  test die for trap-only runs: T1 and T6 only        (make_test_die.py --trap-only)
 
 Presets (edit RUNS to make another):
     R1_TRAP  staged run 1 (SIMPLIFICATIONS.md S2): trap process only (v4: Au on SiO2 over HR Si, no Al)
@@ -39,8 +39,8 @@ R_WAFER = 50000.0
 DIE_X, STREET = 10000.0, 200.0         # every die is 10 mm wide; heights differ (read from the cells)
 PX = DIE_X + STREET
 SOURCES = {"A30": ("trap_die_v4_A30.gds", "TRAP_DIE_V4_A30"), "B60": ("trap_die_v4_B60.gds", "TRAP_DIE_V4_B60"),
-           "NODET": ("trap_die_v4_NODET.gds", "TRAP_DIE_V4_NODET"), "TEST": ("test_die_v3.gds", "TEST_DIE_V3"),
-           "TEST_TRAP": ("test_die_v3_TRAP.gds", "TEST_DIE_V3_TRAP")}
+           "NODET": ("trap_die_v4_NODET.gds", "TRAP_DIE_V4_NODET"), "TEST": ("test_die_v4.gds", "TEST_DIE_V4"),
+           "TEST_TRAP": ("test_die_v4_TRAP.gds", "TEST_DIE_V4_TRAP")}
 RUNS = {
     "R1_TRAP": [["NODET", "TEST_TRAP", "NODET", "NODET"], ["NODET", "TEST_TRAP", "NODET", "NODET"]],
     "R1_FULL": [["A30", "TEST", "B60", "NODET"], ["NODET", "TEST", "A30", "B60"]],
