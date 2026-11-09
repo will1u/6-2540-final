@@ -37,7 +37,7 @@
   "arch": "local_mirror",
   "option": "E2",
   "t_au": 6.0,
-  "t_sio2_above_nbn": 0.08,
+  "t_sio2_above_nbn": 0.16,
   "slot_half": 0.0,
   "mirror_half": 0.0
  },

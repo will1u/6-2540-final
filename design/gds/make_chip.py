@@ -2,7 +2,7 @@
 
 v4 = local-mirror architecture (team decision, 2026-11-08; notes/decisions.md; DESIGN_LOG step 25). Follows
 Hampel 2023: no die-wide Al plane and no 10 um D2. The Au electrodes sit on the thin stack
-(Si / 1 um thermal SiO2 / 238 nm spacer / 80 nm cap). The Al (layer 10) is a local mirror strip under the
+(Si / 1 um thermal SiO2 / 238 nm spacer / 160 nm cap). The Al (layer 10) is a local mirror strip under the
 centre DC only (|y| <= 20 um, never under the RF rails), from just past the SNSPD to beyond the RF open end,
 grounded through one via under the Au ground fill. The v3 baseline is in archive_v3_baseline/.
 
@@ -46,7 +46,7 @@ Writes trap_die_v4_<V>.gds, <stem>_pads.csv and the gds2itvg layouts:
   <stem>_sim.json      option E2 electrodes (6 um plated Au)
   <stem>_E1_sim.json   option E1 electrodes (0.35 um lift-off Au); A30 and B60
   <stem>_simfloor.gds  A30 and B60, simulation only: layer 50 plus a grounded "floor" conductor 1 um inside the
-                       readout window. The window floor is the cap 0.32 um above the grounded mirror, so it
+                       readout window. The window floor is the cap 0.40 um above the grounded mirror, so it
                        sits at ~0 V; without this conductor gds2itvg would treat the 30 um hole as floating
                        dielectric. Never send this file to fab.
 Run from design/sim: ./run.sh ../gds/make_chip.py [--det60 | --nodet | --uniform]
@@ -264,7 +264,7 @@ for p in all_el + ground:
 GND_PADS = [(-4700.0, 1500.0), (-4700.0, -1500.0), (4700.0, 1500.0), (4700.0, -1500.0)]   # side edges
 
 # Mirror ground via (step 22 idea, LOCAL_MIRROR H.1/H.2 step 11v): an L40 opening through cap + spacer
-# (~0.32 um) onto the Al, under the Au ground fill, which lands on the Al there. The fill and the mirror
+# (~0.40 um) onto the Al, under the Au ground fill, which lands on the Al there. The fill and the mirror
 # must enclose it by >= MVIA_ENC.
 if HAS_DET:
     mv = rect(MVIA_C[0] - MVIA / 2, MVIA_C[1] - MVIA / 2, MVIA_C[0] + MVIA / 2, MVIA_C[1] + MVIA / 2, L_VIA)
@@ -314,7 +314,7 @@ for opt, t_au in STACKS.items():
         "_die": {"half_x": CX, "half_y": CY, "mark_sites": [list(m) for m in MARK_SITES], "x_rf0": XRF0},
         "_window": {"wx": WIN_WX if HAS_DET else 0.0, "wy": WIN_WY if HAS_DET else 0.0,
                     "floor": (f"mirror_t{6 if t_au > 1 else 1}" if HAS_DET else None)},
-        "_stack": {"arch": "local_mirror", "option": opt, "t_au": t_au, "t_sio2_above_nbn": 0.08,
+        "_stack": {"arch": "local_mirror", "option": opt, "t_au": t_au, "t_sio2_above_nbn": 0.16,
                    "slot_half": SLOT_HALF if HAS_DET else 0.0, "mirror_half": MIR_HALF if HAS_DET else 0.0},
         "_sim_only_ground": ["96"] if HAS_DET else [],
         "_snspd_leads": ["97", "98"] if HAS_DET else [],
