@@ -7,6 +7,12 @@
 > [!important] Adopted as v4 (team decision, 2026-11-08)
 > The team chose this architecture, with the leads routed in a slot along the centre DC (H.5 option a, as Hampel 2023), and R1_TRAP on the same no-Al stack ([decisions](../../../notes/decisions.md)). `gds/make_chip.py` v4 implements it (DESIGN_LOG step 25): mirror |y| ≤ 20 µm from x = −2240 to +268 µm (readout at x = 240 since step 28), ground via at (−2140, 130) under the Au fill, just past the RF open end, Au leads 5 µm wide in a 25 µm slot, Ti/Au contacts from the NbN tabs into the slot. The H.5 list below is done; H.2 is the basis for the v4 traveler, which is not yet written. Still open: electrode Au (E1 vs E2), optics rerun (09b), RF pickup rerun (10).
 
+> [!note] This page is the record of the argument; the process pages hold the current values (2026-11-09)
+> [Stack](../STACK.md) and the [process pages](../TRAVELER.md#f-steps) were rewritten for v4 on 2026-11-09 (DESIGN_LOG step 36). Where this page differs from them, they are right:
+> - the SiO₂ over the wires is 160 nm, so the mirror via is ≈ 0.40 µm deep and the contact openings ≈ 160 nm (H.2 step 11v below still says 0.32 µm and 80 nm);
+> - the trap dies have no mirror probe opening: the mirror ground path is measured on the test die (T10 strip, T11 via chain; step 35);
+> - the H.5 GDS changes were made in `gds/make_chip.py` v4, with the leads in the slot (option a).
+
 Team request, 2026-11-08 (DESIGN_LOG step 23). Written as an alternative to the [baseline traveler](../TRAVELER.md) and adopted the same day.
 
 **Idea.** Follow Hampel 2023: the Al sits only under the SNSPD and along its leads, never under the RF rails. The electrodes sit on the thin optical stack. Both options remove 10 µm D2 and its deep gap etch. **E1 removes plating; E2 retains 6 µm plating.** A die-wide Al plane under electrodes on that thin stack would give C_RF–ground ≈ 127 pF instead of 2.9 pF (DESIGN_LOG step 22) [team calc]. That is why the mirror has to be local.

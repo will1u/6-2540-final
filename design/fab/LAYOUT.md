@@ -1,57 +1,125 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
 
 # Die layout and alignment
 
 [Fab overview](README.md) · [Variants](VARIANTS.md) · [Open decisions](OPEN_DECISIONS.md)
 
-> [!warning] Architecture changed to v4 (2026-11-08)
-> The team chose the local-mirror architecture (no die-wide Al, no 10 µm D2), leads in a slot along the centre DC, A30 and B60 detector dies (B60 briefly dropped, then kept), and the same no-Al stack for R1_TRAP ([decisions](../../notes/decisions.md); DESIGN_LOG step 25). The GDS is now v4 (`gds/trap_die_v4_*`). **This page still describes the v3 baseline process.** It must be rewritten before any run; the rewrite waits on the electrode Au choice (E1 lift-off vs E2 plated). Do not fabricate from it.
+Current files are v4: trap dies `gds/trap_die_v4_A30.gds`, `gds/trap_die_v4_B60.gds` and `gds/trap_die_v4_NODET.gds`; test dies `gds/test_die_v4.gds` and `gds/test_die_v4_TRAP.gds`; runs `gds/run_R1_TRAP.gds` and `gds/run_R1_FULL.gds`; full-wafer reference `gds/wafer_v4.gds`. Earlier layouts are archived: v1 (square die) in `gds/archive_v1_square/`, v2 (narrow die) in `gds/archive_v2_narrow/`, v3 (die-wide Al plane, 10 µm D2) in `gds/archive_v3_baseline/`. Do not use the archives for fabrication.
 
-Earlier layouts are archived: v1 (square die, trap in a corner) in `gds/archive_v1_square/`, v2 (narrow 10 × 2.5 mm die, two-ITO window) in `gds/archive_v2_narrow/`. Use v3 files for the current runs.
+Numbers below are GDS µm with the die centre at (0, 0), unless noted. Areas and line counts are from [measured_v4.md](../gds/measured_v4.md).
 
-**Trap die floorplan** (`gds/make_chip.py`; `check_chip.py` passes on all three v3 dies, 2026-11-07). GDS µm, die centre at (0, 0):
+## Trap die floorplan (v4)
+
+Generator: `gds/make_chip.py` (`--det60` for B60, `--nodet` for NODET). `check_chip.py` passes on A30, B60 and NODET (`ALL CHECKS PASS`).
 
 | Feature | Location |
 |---|---|
 | Die (L101) | 10 × 10 mm: x = ±5000, y = ±5000 |
 | Trap axis | die centre line, y = 0 |
-| RF rails | x = −2000 … +2000, U closed at the right (+x) end; RF pad (4700, 0) on the right die edge |
-| Zones | loading x = −300, readout (SNSPD, window) x = +300 |
-| Segments | 15 + 15 at 100 µm pitch, centres x = −700 … +700; outer DC depth 200 µm |
-| Edge pads | 120 × 200 µm Au, four rows along the top and bottom die edges at y = ±4720 (moved in 60 µm in step 21 so a 50 µm fill strip runs outboard of the rows): TL1–TL8 at x = −3500 … −2240, TR1–TR9 at x = +3500 … +2060 (same x for BL / BR) |
-| Left die edge | centre-DC pad C (−4650, 0); SNSPD pads SNS (−4750, +260) and SNG (−4750, −260) |
-| Ground | Au ground-fill bond spots GND-1…4 at (±4700, ±1500); M1 bond openings M1-1…4 at (±4700, ±2000), on the left/right die edges; eight 150 × 150 µm fill-to-M1 ground vias (L40 under the Au fill) at (±4700, ±1000) and (±1000, ±2500) (DESIGN_LOG step 22) |
-| Alignment marks | L1 at (±4300, ±4830), in edge notches of the Au ground fill |
-| Full pad list | [trap_die_v3_A30_pads.csv](../gds/trap_die_v3_A30_pads.csv) (`_B60_pads.csv` is identical) |
+| RF rails | x = −2000 … +2000, U closed at the right (+x) end (U bar x = 2000 … 2060); RF pad (4700, 0), 200 × 200 µm, on the right die edge |
+| Zones | loading zone (−240, 0); readout zone (+240, 0) with the SNSPD and window; 480 µm apart (step 28) |
+| Centre DC | \|y\| ≤ 20 µm. Centre DC pad C (−4650, 450) on the left edge |
+| Segments | 15 + 15 at 120 µm pitch, centres −840 … +840 µm; electrode numbers in the section below |
+| Edge pads | Au, 120 (x) × 200 (y) µm, pitch 360 µm, two rows at y = ±4720 µm on the top and bottom die edges. Top and bottom rows at \|x\| = 620 … 3500 µm (right) and −3500 … −980 µm (left). Full list: `*_pads.csv`. The 360 µm pitch is generated and validated; team adoption is pending ([open decisions](OPEN_DECISIONS.md#design-choices)) |
+| Left die edge | SNSPD pads SNS (−4750, +100) and SNG (−4750, −100), 200 × 150 µm, Au |
+| Ground | Au ground-fill bond spots GND-1 … GND-4 at (±4700, ±1500). Au fill keeps ≥ 30 µm from every signal pad |
+| Mirror ground via (A30, B60) | 100 × 100 µm at (−2140, 130) µm, through the cap and spacer to the Al (layer 40). Replaces the v3 fill-to-M1 vias and bond openings |
+| Alignment marks | L1 crosses at (±4300, ±4830) µm, 100 × 4 µm arms, in edge notches of the Au ground fill. L40 crosses at (±4300, ±4758) µm, 60 × 24 µm |
+| EBL alignment crosses | layer 22, 20 µm crosses with 2 µm arms, at (−60, ±700) and (540, ±700) µm around the readout zone |
+| Full pad list | [trap_die_v4_A30_pads.csv](../gds/trap_die_v4_A30_pads.csv), [trap_die_v4_B60_pads.csv](../gds/trap_die_v4_B60_pads.csv), [trap_die_v4_NODET_pads.csv](../gds/trap_die_v4_NODET_pads.csv) |
 
-**Beam clearance** (`sim/11_beam_clearance.py`, full 10 mm chip) [team calc]: with the trap on the centre line of a 10 × 10 mm die, about **1.7 × 10⁻² of a 493 nm beam** (3.2 × 10⁻² at 650 nm, 9.6 × 10⁻³ at 405 nm) hits the surface, vs 1.1 × 10⁻⁵ on the v2 2.5 mm die. Team decision 2026-11-07 (DESIGN_LOG step 18). The 45° beams through the zones leave the die at the top/bottom edges near \|x\| ≈ 4.7 mm and the side edges near \|y\| ≈ 4.7 mm; no pad sits in the corners \|x\|, \|y\| > 4 mm (`check_chip.py`).
+Pad rows, electrode numbers (from the pads files):
 
-**Test structures** are not on the trap die. The list below describes the earlier v3 test die; the current generator adds **T9** and uses v3.1 meanders for T4/T4b/T8 (see [Variants](VARIANTS.md#detector-revision)). They are on `gds/test_die_v3.gds` (`make_test_die.py`, 10 × 2.5 mm, same layer stack): T1 Au comb (5 µm gap), T2 Au/D2/M1 capacitor 0.8 × 0.8 mm + M1 pad, T3 NbN 4-wire bar, T4 spare SNSPD 30 × 30 and T4b spare SNSPD 60 × 30 (under SiO₂ cap + D2 only), T6 Au continuity loop, T8 EBL dose array (T5 and T7 were ITO tests and are gone in v3) (seven 30 × 30 µm meanders on L20 datatypes 1–7, factors 0.80–1.20 × nominal; [EBL job](mask_list.md#2-ebl-job-for-layer-20-nbn)). Each run layout has two test dies.
+| Row | Pads | Electrodes |
+|---|---|---|
+| Top-left | TL1 … TL8 at x = −3500 … −980 | TL1 = 33 (top cap L); TL2 … TL8 = 3 … 9 |
+| Top-right | TR1 … TR9 at x = 620 … 3500 | TR1 = 34 (top cap R); TR2 … TR9 = 17 … 10 |
+| Bottom-left | BL1 … BL8 at x = −3500 … −980 | BL1 = 35 (bottom cap L); BL2 … BL8 = 18 … 24 |
+| Bottom-right | BR1 … BR9 at x = 620 … 3500 | BR1 = 36 (bottom cap R); BR2 … BR9 = 32 … 25 |
+| Other | RF (4700, 0) = 1; C (−4650, 450) = 2; SNS / SNG = SNSPD leads (A30, B60); GND-1 … 4 = ground fill | |
 
-**Plain trap die, no SNSPD** (`gds/trap_die_v3_NODET.gds`, `make_chip.py --nodet`, DESIGN_LOG step 14):
+Electrode numbers match `*_sim.json` and `*_pads.csv`: 1 = RF, 2 = centre DC, 3–17 top segments (left → right), 18–32 bottom segments, 33/34 top caps, 35/36 bottom caps.
 
-- Same electrodes, pads, marks and M1 bond openings as A30. It has no window (solid centre DC) and nothing on L20 or L22.
-- It is in both run layouts (`run_R1_TRAP`, `run_R1_FULL`) but not on `wafer_v3.gds`. On a mixed wafer it simply receives no features in those layers' steps.
-- **Trap-only wafer:** run steps 0–3, 9, 11–19 and skip steps 4–8. D2 (step 9) then goes directly on M1. Keep it 10 µm, which is the `ground_depth` the simulation assumes.
-- Step 11 opens the four M1 bond openings, eight fill-to-M1 ground vias and the L50 alignment crosses.
-- Step 17 drops the SNSPD tests.
+**Beam clearance** (`sim/11_beam_clearance.py`, full 10 mm chip) [team calc]: with the trap on the centre line of a 10 × 10 mm die, about **1.7 × 10⁻² of a 493 nm beam** (3.2 × 10⁻² at 650 nm, 9.6 × 10⁻³ at 405 nm) hits the surface. Team decision 2026-11-07 (DESIGN_LOG step 18). The 45° beams through the zones leave the die at the top/bottom edges near \|x\| ≈ 4.7 mm and the side edges near \|y\| ≈ 4.7 mm; no pad sits in the corners \|x\|, \|y\| > 4 mm (`check_chip.py`).
 
-**Wafer jobs** use the run GDS, `gds/run_<name>.gds`: one MLA job per layer and one EBL job for L20, writing only the run's block at the wafer centre ([run plan](RUN_PLAN.md)).
+## Readout zone: slot, leads, contacts, mirror, window (A30 and B60)
+
+| Feature | A30 | B60 | Source |
+|---|---|---|---|
+| Slot in the centre DC | \|y\| < 12.5 µm, from the left end to x = 175 µm; the centre DC is two 7.5 µm halves joined to the right of the slot | to x = 158.5 µm | layer map |
+| SNSPD leads (Au, L50) | 5 µm wide, centre y = ±5 µm, from the tip at x = 170 µm to x = −4400 µm, then to SNS / SNG | tip at x = 153.5 µm | layer map; `make_chip.py` |
+| L22 Ti/Au contact pads | 27 × 7 µm, x = 143 … 170 µm, y = ±(1.5 … 8.5) µm; each covers the −x half of an NbN tab | x = 126.5 … 153.5 µm | layer map |
+| L40 SNSPD contact openings | 18 × 3 µm, centred (157, ±5) µm, x = 148 … 166 µm, y = ±(3.5 … 6.5) µm | centred (140.5, ±5) µm, x = 131.5 … 149.5 µm | `measured_v4.md` §6 |
+| Local Al mirror (L10) | strip \|y\| ≤ 20 µm, x = −2240 … +268 µm; 40 µm wide at x = 0, 250 µm wide at the via | x to +284.5 µm | `measured_v4.md` §7 |
+| Mirror branch | to y = 230 µm at x = −2240 … −2040 µm, under the Au fill | same | layer map |
+| Mirror path, Al end to via | 2538.0 µm | 2554.5 µm | `measured_v4.md` §7 |
+| Readout window (open in Au) | 30 × 30 µm, axial × radial | 60 × 30 µm | layer map |
+| NbN meander (L20) | 160 lines, 130 nm wire, 200 nm pitch, lines 36 µm long, radial span 31.93 µm | lines 69 µm long | `measured_v4.md` §5 |
+
+Mirror and via checks: the mirror stays under the readout zone and the centre DC only, never under the RF rails (`check_chip.py`). The mirror ground via is enclosed ≥ 25 µm by the Au fill and the Al. Ion height, window recess and stack are in [STACK](STACK.md#readout-cross-section).
+
+## Plain trap die (NODET)
+
+`gds/trap_die_v4_NODET.gds` (`make_chip.py --nodet`, the R1_TRAP die): same electrodes, pads, ground fill and marks as A30. It has no window (solid centre DC), no Al, and nothing on layers 10, 20, 22 or 40. Layers 1 and 50 only, plus the notes and outline layers (100, 101).
+
+## Test structures
+
+Generator: `gds/make_test_die.py` (10 × 2.5 mm; `--trap-only` for TEST_TRAP). Checker: `gds/check_test_die.py` (`ALL CHECKS PASS`). Test-die L1 marks at (−1700, ±1080) and (4300, ±1080) µm. Test dies have no bond pads.
+
+| Structure | Where (x, y) µm | What it is for |
+|---|---|---|
+| T1 Au comb, 5 µm gap | (−4300, 350) | DC leakage and flashover across the trap gap (Dietl 2025, Sterling 2013). In TEST_TRAP |
+| T2v Au / SiO₂ / Al capacitor | (−2700, 400) | Au top plate 200 µm over an Al plate 240 µm, dielectric = 238 nm spacer + 160 nm cap. Expected ≈ 3.5 pF [team calc] |
+| T3 NbN 4-wire bar | (−1000, 250) | R_sq and Tc of the patterned NbN film. 200 × 10 µm with Ti/Au pads |
+| T4 spare SNSPD (A30 meander) | (600, 450) | A30 geometry on its own local Al mirror, with a mirror probe pad |
+| T4b spare SNSPD (B60 meander) | (2300, 450) | B60 geometry on its own local Al mirror |
+| T6 Au continuity loop, 6 µm line | (3500, 300) | Two-pad continuity loop (Dietl 2025). In TEST_TRAP |
+| T8 EBL dose array | (−1000, −650), 600 µm pitch | Seven A30 meanders on L20 datatypes 1–7; dose factors 0.80 … 1.20 × the nominal (`DOSE_FACTORS`). SEM linewidth, then 2-wire R at room temperature and cold |
+| T9 geometry array | seven slots at y = −650 (x = −4380 … −2000, and 3160 and 3760 for the straight pairs), plus one meander at (−100, 450) | Wire width and pitch variants, turn shape, length series, straight Ic references (DESIGN_LOG step 24). Compared as ratios between neighbours |
+| T10 Al mirror strip, four-point | y = −100, current pads at x = −4570 and −1920; taps at x = −4455 and −1945 | Mirror strip resistance over 2510 µm, the trap's mirror ground path. Full test die only (not in TEST_TRAP) |
+| T11 Au-to-Al via chain | y = −100, x = 1700 … 2950 | Four vias in series: Au pad, Al island, Au strap, Al island, Au pad |
+| T12 twin Au leads over Al | y = −100, x = −1600 … 1100 | Two 5 µm Au leads 5 µm apart over an Al strip, modelling the SNSPD leads in the trap's slot |
+
+Test-die notes:
+- T4 and T4b keep the meander's 32 µm radial span (`DET_WY`); the module docstring says 34 µm, which the code does not use.
+- Probe access, as drawn in `make_test_die.py`:
+  - each meander has two Ti/Au (L22) probe pads on its left, opened through the cap (L40);
+  - each meander's local mirror has its own Al contact on the right, opened through the cap and spacer (L40) and covered by a 100 µm Au pad (L50);
+  - T2v, T10 and the other Al probe pads use the same pattern: Al pad (L10), 70 µm opening (L40), Au probe pad (L50).
+
+## Protections checked by check_chip.py
+
+`check_chip.py` checks each trap die. The list is its module docstring: a pass means `ALL CHECKS PASS`.
+
+| Group | What is checked |
+|---|---|
+| Conductors | every electrode and SNSPD lead seed is on its own Au conductor (no shorts); each reaches a pad near the die edge; no floating Au; minimum spacing ≥ 5 µm; no Au narrower than 4.9 µm |
+| Layers | one top cell; no text on fab layers; all metal ≥ 90 µm from the dicing edge; layers 24, 30, 31 and 45 empty |
+| SNSPD | leads inside the centre-DC slot and inside the trap; no Ti/Au (L22) inside the trap except the contacts by the detector (no buried leads); each L40 contact ≥ 1 µm inside its Au lead and its Ti/Au pad; the readout window is open in the Au; NbN rules (|y| ≤ 17 µm, all NbN under Au or the window, gaps ≥ 60 nm, no turn or tab in the light footprint) |
+| Mirror | Al (L10) never under the RF rails; covers all NbN by ≥ 5 µm; at least one ground via inside the Au fill, enclosed ≥ 25 µm by fill Au and Al |
+| Plain die | nothing on layers 10, 20, 22, 40; solid centre DC at the readout zone |
+| Pads | no pad in the die corners (\|x\|, \|y\| > 4 mm); signal pads not on ground; GND spots on ground |
+| Marks | L1 marks not under Al |
+
+`make_test_die.py` has its own self-check (keep-out boxes do not overlap, all keep-outs inside the die, layers 24, 30, 31, 45 empty; in `--trap-only` also layers 10, 20, 22, 40 empty). `check_test_die.py` is written from the specification, not from the generator.
+
+## Resolved items (v2, carried into v3, changed in v4)
 
 ### A.1 Resolved in the GDS (v2, carried into v3)
 
-| # | Was | Now in the GDS |
+| # | Was | Now in the GDS (v4) |
 |---|---|---|
-| A1 | L1 marks under M1 Al | 300 × 300 µm M1 cut-outs at every mark site (trap die: edge notches at (±4300, ±4830); test die: (−1700, ±1080), (4300, ±1080)) |
-| A2 | No EBL marks on L22 | 20 µm L22 crosses (2 µm arms) at (0, ±700) and (600, ±700) around the readout zone, plus one at every mark site |
-| A3 | No protect layer for the gap etch | L45 PROTECT is drawn: every bond/probe D2 opening + 10 µm, readout window + 2.5 µm, SNSPD-lead branch region at the left end (x = −4835 … −4430, \|y\| ≤ 330). On the test die also the T3 and T4/T4b areas. Used in step 16a. **In v3 the window patch is essential**: with no ITO, nothing else stops the gap etch going down through the window SiO₂ toward the NbN |
-| A4 | Ground fill had no bond pad, and no link to M1 | GND-1…4 bond spots on the fill, listed in `*_pads.csv`. **Step 22 (v3, 2026-11-08):** eight L40 vias under the fill tie it to M1 on chip, as Hampel 2023 grounds its mirror. M1 no longer depends on a bond wire to stay grounded; the M1-1…4 openings remain as a backup |
-| A5 | No probe-able buried-ITO → Al test | Moot in v3 (no ITO); T7 removed |
-| A6 | Top-ITO radial edges flush with the centre-DC Au edge | Moot in v3 (no ITO) |
-| A7 | Single die only | Full-wafer reference `gds/make_wafer.py` → `wafer_v3.gds` (56 dies); R&D run layouts `gds/make_run.py` → `run_R1_TRAP.gds`, `run_R1_FULL.gds` (8 dies each, [run plan](RUN_PLAN.md)) |
+| A1 | L1 marks under the die-wide M1 Al | No layer-10 polygon at any mark site (the Al is only the local mirror under the detector), so no cut-outs. Test-die L1 marks at (−1700, ±1080) and (4300, ±1080) |
+| A2 | No EBL marks on L22 | Trap dies: L22 crosses at (−60, ±700) and (540, ±700) µm (moved from (0, ±700) and (600, ±700) in v3). Test dies: one L22 cross at each mark site, 90 µm −x of the L1 cross |
+| A3 | Protect layer for the gap etch | Retired in v4. Layer 45 is empty, there is no gap etch and no 10 µm SiO₂ (D2), so there is no window protect patch |
+| A4 | Ground fill had no link to M1 | Ground fill bond spots GND-1 … GND-4 at (±4700, ±1500). The v3 fill-to-M1 vias and M1 bond openings are gone; one mirror ground via at (−2140, 130) µm ties the local mirror to the fill (100 × 100 µm, enclosed ≥ 25 µm) |
+| A5, A6 | ITO test and flush radial ITO edges | Moot: no ITO since v3, none in v4 |
+| A7 | Single die only | R&D runs `run_R1_TRAP.gds` and `run_R1_FULL.gds` (8 dies each; [mask list, section 3](mask_list.md#3-rd-runs-make_runpy-and-the-full-wafer-reference)); full-wafer reference `wafer_v4.gds` (56 dies) |
 
 ## Alignment coordinates used by the recipes
 
-Trap L1 marks: **(±4300, ±4830) µm**. L40 cross centres: **(±4300, ±4758) µm**, 72 µm inward along y. Test L1 sites: (−1700, ±1080) and (4300, ±1080) µm; their L40 centres are offset +72 µm in y. Add the run-map die centre for wafer coordinates. These positions follow the working generators; (±2150, ±1080) were the old v2 trap marks.
+Trap L1 marks: **(±4300, ±4830) µm**. Trap L40 crosses: **(±4300, ±4758) µm**, 72 µm inward along y. Trap L22 EBL crosses: **(−60, ±700) and (540, ±700) µm**. Test L1 sites: **(−1700, ±1080) and (4300, ±1080) µm**; their L40 crosses are 72 µm further in +y. Add the run-map die centre for wafer coordinates (`run_<name>_map.csv`).
 
-See the [exposure checklist](mask_list.md#4-export-checklist-per-job) for polarity and overlay, and [detector reconciliation](OPEN_DECISIONS.md#detector-documents-and-generated-layouts) for the current T9/test-die changes.
+The positions follow the v4 generators. The v3 trap marks at (±2150, ±1080) and the v3 EBL crosses at (0, ±700) and (600, ±700) are gone.
+
+See the [exposure checklist](mask_list.md#4-export-checklist-per-job) for polarity and overlay, and [detector reconciliation](OPEN_DECISIONS.md#detector-documents-and-generated-layouts) for the open T9 and test-die items.

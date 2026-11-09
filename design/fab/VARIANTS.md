@@ -1,21 +1,21 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
 
 # Fabrication variants
 
 [Fab overview](README.md) · [Variants](VARIANTS.md) · [Open decisions](OPEN_DECISIONS.md)
 
-> [!warning] Architecture changed to v4 (2026-11-08)
-> The team chose the local-mirror architecture (no die-wide Al, no 10 µm D2), leads in a slot along the centre DC, A30 and B60 detector dies (B60 briefly dropped, then kept), and the same no-Al stack for R1_TRAP ([decisions](../../notes/decisions.md); DESIGN_LOG step 25). The GDS is now v4 (`gds/trap_die_v4_*`). **This page still describes the v3 baseline process.** It must be rewritten before any run; the rewrite waits on the electrode Au choice (E1 lift-off vs E2 plated). Do not fabricate from it.
+> [!note] The local mirror is the process; the v3 baseline is superseded
+> The v4 local-mirror architecture is the fabrication process. The die-wide Al ground plane under 10 µm of SiO₂ (D2) is the superseded v3 baseline. Its GDS is archived in [gds/archive_v3_baseline/](../gds/archive_v3_baseline/), and it is not for fabrication. The substrate alternatives remain separate variants ([SUBSTRATES](variants/SUBSTRATES.md)).
 
-There are four separate choices: **run**, **die type**, **detector revision**, and **process architecture**. A30 and B60 are detector-window sizes within the same architecture; R1_TRAP and R1_FULL are wafer runs.
+There are four separate choices: **run**, **die type**, **detector revision**, and **process architecture**. A30 and B60 are detector-window sizes within the v4 architecture. R1_TRAP and R1_FULL are wafer runs.
 
 ## Runs
 
 | Run | Die mix | Process | Status |
 |---|---|---|---|
-| R1_TRAP / 1a | 6 NODET + 2 TEST_TRAP | Steps 0–3, 9, 11–19, including 16a; five MLA jobs, no EBL | **Selected first**; [run sheet](RUNSHEET_R1_TRAP.md) |
-| R1_FULL / 1b | 2 A30 + 2 B60 + 2 NODET + 2 TEST | Full stack; adds detector deposition and L20/L22 jobs | Planned after trap-process qualification |
-| Full-wafer reference | 25 A30 + 14 B60 + 17 TEST | Same architecture, more dies | Reference; not the first run |
+| R1_TRAP / 1a | 6 NODET + 2 TEST_TRAP | Steps 0–2, 12–15 (branch E1 or E2), 17–19. No Al, no NbN, no EBL | **Selected first**; [run sheet](RUNSHEET_R1_TRAP.md) |
+| R1_FULL / 1b | 2 A30 + 2 B60 + 2 NODET + 2 TEST | Full v4 stack, steps 0–19; adds the Al mirror, NbN, EBL and layer 22 and 40 jobs | Planned after trap-process qualification |
+| Full-wafer reference | 25 A30 + 14 B60 + 17 TEST | Same v4 architecture, more dies (`wafer_v4`) | Reference; not the first run |
 
 Both R1 blocks are 20.2 × 33.1 mm at the centre of a 100 mm wafer. See [run plan and maps](RUN_PLAN.md).
 
@@ -23,32 +23,35 @@ Both R1 blocks are 20.2 × 33.1 mm at the centre of a 100 mm wafer. See [run pla
 
 | Type | Au window, axial × radial | Detector | Purpose |
 |---|---|---|---|
-| A30 | 30 × 30 µm | NbN below cap + 10 µm D2 SiO₂ | Primary detector size |
+| A30 | 30 × 30 µm | NbN under the SiO₂ cap, over a 450 nm local Al mirror; no D2 | Primary detector size |
 | B60 | 60 × 30 µm | Same stack, longer meander | Larger-aperture comparison |
-| NODET | None; solid centre DC | None | Trap-only run and full-stack reference |
-| TEST | Not a trap | T1–T4b, T6, T8; current generator adds T9 | Process, dose and geometry comparisons |
-| TEST_TRAP | Not a trap | No NbN; T1, T2, T6 only | Trap-process qualification |
+| NODET | None; solid centre DC | None; no Al | Trap-only run (R1_TRAP) and full-stack reference |
+| TEST | Not a trap | T1, T2v, T3, T4, T4b, T6, T8–T12 (v4, drawn and checked 2026-11-09) | Process, dose and geometry comparisons |
+| TEST_TRAP | Not a trap | No NbN, no Al; T1 and T6 on layers 1 and 50 | Trap-process qualification |
 | UNIFORM | None | Simulation reference only | Equal-depth DC segments, no leads; **never fabricate** |
 
-**NODET on R1_FULL receives blanket spacer/cap depositions.** NODET on R1_TRAP skips them, so D2 goes directly on Al. Die type alone does not determine the deposited stack.
+NODET on R1_TRAP has no Al and no spacer, NbN or cap, so its Au sits on thermal SiO₂. Whether NODET on R1_FULL receives steps 4–8 is not stated in the sources [verify]. Die type alone does not determine the deposited stack.
+
+The runs use the test dies `test_die_v4` and `test_die_v4_TRAP`; `make_run.py` writes the v4 TRAP die (checked 2026-11-09).
 
 ## A30 and B60 operating differences
 
-Recorded v3 trap-model results from design-log steps 17 and 19; these describe the unchanged Au windows, not a cold-detector measurement.
+Values from the v4 trap model (DESIGN_LOG steps 25–28) for the Au windows as drawn. The v3 values (recess −1.38 and −2.50 µm; 13.2 and 15.2 V at 10° tilt) are superseded.
 
 | Quantity | A30 | B60 |
 |---|---|---|
-| Bare-SiO₂ recess correction [team calc, upper bound] | −1.38 µm | −2.50 µm |
-| Readout ion height with that correction | ~48.7 µm | ~47.6 µm |
-| Maximum DC at 10° readout tilt | 13.2 V, beyond ±10 V | 15.2 V, beyond ±10 V |
-| Maximum DC with zero readout tilt | 6.6 V | 3.4 V |
-| Largest transport change per 10 µm step | ~1.6 V | Up to ~4.5 V near window |
+| Ion drop over the window (recess from the grounded floor), E2 (6 µm Au) | −1.19 µm | −2.04 µm |
+| Ion drop over the window, E1 (0.35 µm Au) | ≤ −0.37 µm | ≤ −0.55 µm |
+| Maximum DC at 10° readout tilt, 480 µm zones | 6.3 V | 2.2 V |
+| Largest transport change per 10 µm step, centre DC held at 0 V | 1.708 V | 1.708 V |
+
+The readout ion height is 49.98 µm before the window recess (planar model). The 10° readout tilt is still to be confirmed by the team ([open decisions](OPEN_DECISIONS.md)).
 
 ## Detector revision
 
-GDS filenames still contain `v3`; the current generators call their detector geometry **v3.1**. Record the generator revision with the filename.
+v4 trap GDS files are named `trap_die_v4_*`. The current generators call their detector geometry **v3.1**. Record the generator revision with each file.
 
-| Item | Earlier v3 recipe | Current v3.1 generator |
+| Item | Earlier recipe | Current v3.1 generator |
 |---|---|---|
 | NbN film | 7 nm | 7 nm recipe retained |
 | Width / pitch | 100 / 200 nm; 50 % fill | 130 / 200 nm; 65 % fill |
@@ -62,14 +65,13 @@ Turns and tabs extend beyond the line region. Sources: [trap generator](../gds/m
 
 ## Process architecture
 
-| Architecture | Al beneath RF | SiO₂ above detector | Au electrodes | Status |
-|---|---|---|---|---|
-| **Baseline** | Die-wide plane | Cap + 10 µm D2 | 6 µm plated | Implemented architecture; [traveler](TRAVELER.md) |
-| **Local mirror E1** | None; Al local to detector/leads | Cap only | ~0.35 µm lift-off | Proposed; no GDS |
-| **Local mirror E2** | None; Al local to detector/leads | Cap only | 6 µm plated | Proposed; no GDS |
+| Architecture | Al beneath RF | Al under the detector | SiO₂ above the detector | Au electrodes | Status |
+|---|---|---|---|---|---|
+| **v4 local mirror** | None | Local mirror, 450 nm, under the detector and its leads only | Spacer 238 nm; cap 160 ± 10 nm over the wires; no D2 | E1: 0.35 µm lift-off; E2: 6 µm plated (open) | **Adopted 2026-11-08**; implemented in the v4 GDS; [traveler](TRAVELER.md) |
+| Superseded: v3 baseline | Die-wide plane, 150 nm, inverted layer 10 | Same die-wide plane | Cap + 10 µm D2 | 6 µm plated | Superseded 2026-11-08; archived GDS only ([archive](../gds/archive_v3_baseline/)) |
 
-**E1 removes plating as well as D2. E2 retains plating.** Both remove the deep D2 gap etch, and need a lead-routing decision and new stack simulations. See [local-mirror proposal](variants/LOCAL_MIRROR.md).
+The electrode Au (E1 or E2) is still open ([open decisions](OPEN_DECISIONS.md)). Both branches remove D2 and its deep gap etch. E1 has no plating; E2 keeps 6 µm plating. See the [local mirror](variants/LOCAL_MIRROR.md) page.
 
 ## Other alternatives and history
 
-[Sapphire and fused silica](variants/SUBSTRATES.md) are substrate alternatives. [Simplifications](../SIMPLIFICATIONS.md) contains historical v2 candidate studies, labelled accordingly. The v1 corner layout and v2 narrow, two-ITO layout are archived.
+[Sapphire and fused silica](variants/SUBSTRATES.md) are substrate alternatives. [Simplifications](../SIMPLIFICATIONS.md) contains historical v2 candidate studies, labelled accordingly. The v1 corner layout, the v2 narrow two-ITO layout and the v3 baseline are archived.
