@@ -68,17 +68,19 @@ cd 6-2540-final/design/sim && ./run.sh -c "import gds2itvg; print('ok')"
 
 | Path | Contents |
 |---|---|
-| `DESIGN_LOG.md` | Steps 0–25: every design step with numbers and citations. **Read the latest steps first.** |
+| `DESIGN_LOG.md` | Steps 0–36: every design step with numbers and citations. **Read the latest steps first.** |
 | `README.md` | Folder index and script list |
 | `SIMPLIFICATIONS.md` | Wafer and run options; 14 possible simplifications, each with tests (a plan; nothing run) |
 | `research/reports/Trap integrated SNSPD design.md` | Literature report (28 design implications); raw notes in `research/research_notes/` |
 | `research/reports/SNSPD geometry audit.md` | Audit of the v3 meander against the SNSPD-geometry literature (Clem & Berggren, Suleimen 2026, Hampel); basis of step 24 |
 | `research/reports/Bond pad sizing for ion traps.md` | Bond pad size, spacing and bonding rules; basis of step 21 |
 | `references_design.bib` | Verified references |
-| `sim/` | `trapcalc.py` (shared physics), `trapgeom.py` (parametric geometry), numbered studies `01`–`15` (13 = DC height tuning, 14 = staircase vs uniform segments, 15 = SNSPD geometry budget) |
+| `sim/` | `trapcalc.py` (shared physics), `trapgeom.py` (parametric geometry), numbered studies `01`–`20` (13 = DC height tuning, 14 = staircase vs uniform segments, 15 = SNSPD geometry budget on v3, 15b = collection and absorption on v4, 16 = pad pitch, 17 = ion height trade-off, 18 = E1 vs E2, 19 = SNSPD lead termination, 20 = transport timing) |
 | `gds/make_chip.py` | v4 10 × 10 mm trap dies: `trap_die_v4_A30` (default), `_B60` (`--det60`), `_NODET` (`--nodet`: no SNSPD, no Al; the R1_TRAP die), `_UNIFORM` (`--uniform`, simulation reference only; never for fab). Writes `.gds`, `_pads.csv`, `_sim.json` (electrode option E2, 6 µm Au) and, for A30/B60, `_E1_sim.json` (0.35 µm Au) plus `_simfloor.gds` (simulation only: layer 50 + the grounded window floor; never for fab). |
 | `gds/archive_v3_baseline/` | v3 dies (die-wide Al + 10 µm D2, A30/B60/NODET/UNIFORM), runs and wafer. Superseded 2026-11-08; sim 14 still reads its NODET/UNIFORM files. |
-| `gds/make_test_die.py` | 10 × 2.5 mm `test_die_v3` (T1–T4b, T6, T8, T9; T8 = EBL dose array, T9 = SNSPD geometry array); `--trap-only` → `test_die_v3_TRAP` (T1, T2, T6). **Still v3 baseline** (die-wide Al, D2 openings); rework for v4 is open. |
+| `gds/make_test_die.py` | 10 × 2.5 mm `test_die_v4` for the v4 stack (step 35): T1 Au comb, T2v Au / 0.40 µm SiO₂ / Al capacitor, T3 NbN bar, T4/T4b spare SNSPDs, T6 Au loop, T8 EBL dose array, T9 SNSPD geometry array, T10 Al mirror strip four-point (taps 2510 µm apart), T11 Au-to-Al via chain, T12 twin Au leads over Al. Every meander sits on its own local Al mirror with a probe pad. `--trap-only` → `test_die_v4_TRAP` (T1 and T6; layers 1 and 50 only). The script ends with a self-check and writes a preview PNG. v3 test dies are in `gds/archive_v3_baseline/`. |
+| `gds/check_test_die.py` | Independent checker for the test dies, written from the specification (not from the generator): Au spacing, NbN on its own leads, every opening on Al or Ti/Au and covered by Au, a mirror under every meander, T1/T2v/T6/T10/T11/T12 connectivity. |
+| `gds/measure_dies.py` | Read-only measurement of the released GDS files → `gds/measured_v4.md` / `.json`: area per layer, Au area per run, meander line count, squares, inductance, file hashes. The fab pages cite it. Rerun it after any layout change. |
 | `gds/snspd_geom.py` | `meander()` and `straight()`: the NbN geometry shared by `make_chip.py` and `make_test_die.py` (step 24) |
 | `gds/make_run.py` | R&D run layouts: `run_R1_TRAP` (6 NODET + 2 TEST_TRAP), `run_R1_FULL` (2 A30 + 2 B60 + 2 NODET + 2 TEST), 8 dies at the wafer centre. Edit `RUNS` to add a run; every column must stack the same die heights so the saw cuts run straight (asserted). |
 | `gds/make_wafer.py` | Full-wafer reference, `wafer_v4` (56 dies: 25 A30 + 14 B60 + 17 TEST) |
@@ -86,7 +88,9 @@ cd 6-2540-final/design/sim && ./run.sh -c "import gds2itvg; print('ok')"
 | `gds/layer_map.md` | Layers, process order, key coordinates |
 | `gds/archive_v1_square/`, `gds/archive_v2_narrow/` | Superseded layouts (v1 square die with corner zones; v2 narrow 10 × 2.5 mm die with the two-ITO window). Do not use. |
 | `fab/README.md`, `fab/VARIANTS.md`, `fab/OPEN_DECISIONS.md` | Human-facing fab overview, variant comparison and unresolved decisions / qualification checklist |
-| `fab/TRAVELER.md` | Index of steps 0–19 in `fab/process/` (**v3 baseline process; v4 rewrite pending the E1/E2 choice**); `fab/QUALIFICATION.md` for witnesses; `fab/variants/LOCAL_MIRROR.md` for the adopted v4 architecture |
+| `fab/TRAVELER.md` | Index of steps 0–19 in `fab/process/`, **v4 since 2026-11-09** (step 36). Steps 9, 10, 16a and 16 are removed; steps 12–15 are written twice, as branch E1 and branch E2, until the team chooses. `fab/QUALIFICATION.md` for witnesses; `fab/variants/LOCAL_MIRROR.md` for the argument behind the architecture |
+| `fab/figures/` | `stack_v4.svg` (cross-sections of the final stack), `process_flow_v4.svg` (one composite cross-section per step; written by `make_process_flow.py`), `architecture_crosssection.svg` (v3 against v4) |
+| `fab/check_links.py` | Checks every relative link and heading anchor under `design/fab`. Run it after editing any fab page |
 | `fab/RUNSHEET_R1_TRAP.md` | Streamlined sheet for the first run (trap only, no EBL) |
 | `fab/mask_list.md`, `process_checks.md`, `test_plan.md` | Exposure jobs; go/no-go checks; electrical, cryogenic and trapping tests |
 
@@ -113,7 +117,9 @@ After any change to a die:
 - if layer 50 changed, re-run `12_final_chip_check.py`;
 - then log the step.
 
-The test die has no checker script. Check it with a short gdstk/shapely snippet: Au conductor count, ≥ 5 µm spacing, and every NbN structure touching its own leads.
+After any change to a test die: `make_test_die.py` must print `SELF-CHECK PASS`, and `./run.sh ../gds/check_test_die.py test_die_v4` (and `test_die_v4_TRAP`) must print `ALL CHECKS PASS`. Then rerun `make_wafer.py`, `make_run.py` and `measure_dies.py`.
+
+After editing a fab page: `./run.sh ../fab/check_links.py` must report 0 broken links.
 
 ## Conventions
 
@@ -159,7 +165,7 @@ The test die has no checker script. Check it with a short gdstk/shapely snippet:
 | RF drive | 53 V at 28 MHz → radial ~3.0 MHz, q 0.30, depth ≈ 52 meV |
 | Ion height | v4: 49.97 / 49.98 µm (loading / readout, planar model); over the window the grounded-floor recess lowers it by 1.19 µm (E2, ≈ 48.8 µm) or ≤ 0.37 µm (E1) (sim 04b `mirror_t6` / `mirror_t1`) |
 | DC | axial 0.8 MHz, ±10 V DACs, 10° radial tilt in the zones. v4 (480 µm zones, step 28): loading 7.5 V, readout 6.3 V (A30) / 2.2 V (B60) (v3 needed 13.2 / 15.2 V); NODET 7.9 V. **Transport on A30/B60: hold the centre DC at 0 V** (`12 --centre-dc-zero`: max 6.6 V, ≤ 1.71 V per 10 µm step); with it free, the slot end and window give 8 V steps (DESIGN_LOG step 25). Ramp the tilt in at the zone |
-| Detector | A30 and B60 (B60 dropped and kept again 2026-11-08). v3.1 (step 24): NbN meander 130 nm / 200 nm pitch (f 0.65), 160 lines over 32 µm, lines 36 µm (A30) / 69 µm (B60), rounded end blocks and tapered tabs under Au (`gds/snspd_geom.py`). Geometric collection (isotropic Ba⁺ 493 nm emission) 2.23 % at the v3 height; absorption (EMT) **0.66 on v4 with a 160 nm cap** (0.44 with the drawn 80 nm; v3.1: 0.54; sim 09c). RF pickup bound (sim 10b, 2-D): nanowire 0.96 µA (E2) / 1.92 µA (E1), plus up to 0.5–0.65 µA from the mirror path (0.16–0.21 µA with the 450 nm Al the team chose; step 28); each slot lead collects ≈ 46 µA (E2) of common-mode RF over 2.3 mm (needs RF bypass / symmetric termination at the pads). Collection at the v4 heights not rerun (15) |
+| Detector | A30 and B60 (B60 dropped and kept again 2026-11-08). v3.1 (step 24): NbN meander 130 nm / 200 nm pitch (f 0.65), 160 lines over 32 µm, lines 36 µm (A30) / 69 µm (B60), rounded end blocks and tapered tabs under Au (`gds/snspd_geom.py`). Geometric collection on v4 (isotropic Ba⁺ 493 nm emission, sim 15b, step 32): A30 2.22 % (E2) / 2.60–2.64 % (E1), B60 4.16 % / 4.67–4.76 %; absorbed in NbN of all emitted photons with the 160 nm cap: A30 E2 1.47 %, B60 E2 2.71 %; absorption (EMT) **0.66 on v4 with a 160 nm cap** (0.44 with the drawn 80 nm; v3.1: 0.54; sim 09c). RF pickup bound (sim 10b, 2-D): nanowire 0.96 µA (E2) / 1.92 µA (E1), plus up to 0.5–0.65 µA from the mirror path (0.16–0.21 µA with the 450 nm Al the team chose; step 28); each slot lead collects ≈ 46 µA (E2) of common-mode RF over 2.3 mm (needs an RF trap or a symmetric termination at the pads: sim 19, step 33; a plain 1 nF bypass low-passes the pulse at 3.2 MHz) |
 | Window stack | v4: local Al mirror / SiO₂ spacer 238 nm / NbN / SiO₂ (HSQ + cap) **160 ± 10 nm** (step 26; was 80) / vacuum; the ion sees the cap in the 30 µm Au opening |
 | Die / beams | 10 × 10 mm die, trap on the centre line: ~1.7e-2 of the 493 nm beam clips the surface (sim 11) |
 
@@ -170,20 +176,22 @@ The test die has no checker script. Check it with a short gdstk/shapely snippet:
 - **If ITO ever comes back:** every ITO must be grounded or tied to an electrode. A floating ITO raised RF pickup 9× (step 10).
 - **Keep the mirror ground via** (DESIGN_LOG steps 22, 25). It ties the local Al mirror to the Au ground fill on chip, as Hampel 2023 does. A floating mirror is the worst case for RF pickup (Hampel Fig. 3(a); step 10).
 - **Never put Al under the RF rails** (v4). On the thin stack, a die-wide plane would give C_RF–ground ≈ 127 pF (step 22). `check_chip.py` checks the mirror stays at |y| ≤ 20 µm inside the trap.
-- **No buried SNSPD leads under the centre DC** (v4). With only the 80 nm cap between them and the Au, a pinhole would short the SNSPD to electrode 2; the leads are Au in the slot (team decision). Layer 22 is contacts only.
-- **SNSPD turns stay outside the light footprint** (DESIGN_LOG step 24). The NbN lines run past the window (3 µm axially, 1 µm radially) with the end blocks and tabs beyond, under Au. In v3 light refracted 2.6–3.9 µm outward in the 10 µm SiO₂; in v4 only the 80 nm cap lies between the window floor and the NbN, so the footprint is essentially the window (+0.02 µm) and the overhang is margin. `check_chip.py` checks it, plus NbN gaps ≥ 60 nm and \|y\| ≤ 17 µm.
+- **No buried SNSPD leads under the centre DC** (v4). With only the 160 nm cap between them and the Au, a pinhole would short the SNSPD to electrode 2; the leads are Au in the slot (team decision). Layer 22 is contacts only.
+- **SNSPD turns stay outside the light footprint** (DESIGN_LOG step 24). The NbN lines run past the window (3 µm axially, 1 µm radially) with the end blocks and tabs beyond, under Au. In v3 light refracted 2.6–3.9 µm outward in the 10 µm SiO₂; in v4 only the 160 nm cap lies between the window floor and the NbN, so the footprint is essentially the window (+0.05 µm on A30, +0.07 µm on B60) and the overhang is margin. `check_chip.py` checks it, plus NbN gaps ≥ 60 nm and \|y\| ≤ 17 µm.
 - **Collection uses an isotropic emitter** for Ba⁺ 493 nm (`collection_fraction(..., "iso")`), not "sigma" (step 24).
 - **Transport solves:** use a fixed electrode set with zero tilt. Letting the active set change gives 3 V jumps per step (step 11).
 
-## Current state (2026-11-08)
+## Current state (2026-11-09)
 
 - **v4: local-mirror architecture** (team decisions in `../notes/decisions.md`; DESIGN_LOG step 25). A30 and NODET pass `check_chip.py`; sims 04b, 12 and 13 rerun on v4.
 - **First run: R1_TRAP**, trap-only, now on the no-Al stack (Au on SiO₂ over HR Si).
+- **Loose-ends pass, 2026-11-09 (DESIGN_LOG steps 30–36).** The fab pages, test dies and figures are v4. New sims 15b and 17–20. Assessments (Claude's, not team decisions): 50 µm ion height is adequate (step 30); E1 and E2 trap the same but differ in gap screening, SNSPD lead resistance, light and RF heating (step 31).
 - Still open before any run:
-  - electrode Au, E1 vs E2 (blocks the traveler rewrite);
-  - traveler, run sheet, mask list and test dies still describe v3 (banners in `fab/`);
-  - reruns of 09b, 10 and 15 for v4; mirror ground path ≈ 14–18 Ω vs the < 10 Ω test;
-  - facility questions for MIT.nano staff: which tools accept Au, the gold plating tank (if E2), training order.
+  - electrode Au, E1 vs E2 (the fab pages carry both branches; delete one when the team chooses);
+  - SNSPD lead termination (step 33): a plain 50 Ω line with the return grounded puts about 4 µA of RF through the nanowire;
+  - the 10 µm transport table is not a waveform: interpolate it before it is played on a DAC (step 34);
+  - pad pitch adoption, carrier, spacer, T10 acceptance limit, whether R1_TRAP gets the 398 nm PECVD SiO₂;
+  - facility questions for MIT.nano staff: which tools accept Au, the gold plating tank (if E2), an evaporator for Ti/Au (if E1), training order.
 - Full list of open items: `../CLAUDE_PROGRESS.md` and `fab/OPEN_DECISIONS.md`.
 
 ## Gotchas

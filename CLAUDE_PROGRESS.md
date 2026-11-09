@@ -1,15 +1,24 @@
 # Claude progress: five-wire Ba⁺ trap with an integrated NbN SNSPD
 
-> **Claude-authored running status.** Last update: 2026-11-08 (v4: local-mirror architecture, slot leads, A30 + B60; DESIGN_LOG through step 29; 360 µm pad layout validated, team adoption pending).
+> **Claude-authored running status.** Last update: 2026-11-09 (loose-ends pass: DESIGN_LOG steps 30–36; fab pages, test dies and figures are now v4; 50 µm height and E1 vs E2 assessed). Before that: 2026-11-08 (v4 local-mirror architecture, slot leads, A30 + B60; 360 µm pad layout validated, team adoption pending).
 > - Full detail with numbers and citations for every step: [design log](design/DESIGN_LOG.md) (numbered design steps and documentation updates).
 > - New team member? Set up the `electrode` repo first: `design/CLAUDE.md`, "Setting up the electrode repo".
 > - Folder index and how to run: `design/README.md`.
+
+**2026-11-09, loose-ends pass (DESIGN_LOG steps 30–36).** Written by delegated agents from a specification; every number below was rerun before logging. Nothing here is a team decision.
+- **Ion height (step 30, `sim/17`):** 50 µm is adequate. Going to 40 µm with the same 30 µm window gives 1.44× the light for 2.4× the heating (h⁻⁴) and 2.6× the clipped beam power; shrinking the whole trap loses light. The same gain is available at 50 µm from the 160 nm cap, B60, E1 or a wider centre DC.
+- **E1 vs E2 (step 31, `sim/18`):** identical as traps. E2 screens charge on the SiO₂ gap floor about 35× better and its SNSPD leads are 4 Ω instead of 69 Ω each (room temperature). E1 collects 1.18× more light and perturbs the RF null about three times less. The choice is still the team's.
+- **Collection on v4 (step 32, `sim/15b`):** A30 on E2 collects 2.22 % and absorbs 1.47 % of all emitted 493 nm photons with the 160 nm cap; B60 4.16 % and 2.71 %.
+- **SNSPD lead termination (step 33, `sim/19`):** a plain 50 Ω line with the return grounded puts about 4.1 µA of 28 MHz current through the A30 nanowire on E2 (switching current 8–20 µA). A 28 MHz L-C trap or a differential readout brings it below 0.3 µA; a 1 nF bypass also low-passes the pulse at 3.2 MHz.
+- **Transport timing (step 34, `sim/20`):** smooth ramps are easy (minimum-jerk: < 0.1 quanta above 44 µs). The 10 µm voltage table is not a waveform: it must be interpolated well below 1 µm per DAC update.
+- **Layouts (step 35):** v4 test dies `test_die_v4` / `test_die_v4_TRAP` with an independent checker; the cap is 160 nm in `make_chip.py` and the sim metadata; `gds/measured_v4.md` holds areas, squares and hashes measured from the released files.
+- **Fab pages (step 36):** every page in `design/fab/` is v4, with E1 and E2 written as equal branches; two new figures, `fab/figures/stack_v4.svg` and `process_flow_v4.svg`.
 
 **2026-11-08, v4 SNSPD overhang audit:** completed the requested GDS, ray-footprint, optical-stack and straight-wire inductance checks for A30/B60, E1/E2 and 80/160 nm SiO₂ caps; see the final audit entry in `design/DESIGN_LOG.md`. Centred overhang causes no ray-envelope collection loss; its main quantified cost is about 14/22 ns of extra straight-section current-recovery time constant. Radial alignment margin is about 0.93 µm at 160 nm cap. Step 26's 160 nm cap target is still inconsistent with 80 nm in generator metadata and older process notes. No layout or design choice changed; actual switching current, internal efficiency and recovery still require qualification.
 
 ## Fabrication review
 
-Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decision log](notes/decisions.md). **The architecture changed to v4 on 2026-11-08** (local mirror, no D2; leads in a slot along the centre DC; A30 + B60 retained; R1_TRAP on the no-Al stack). The trap-die GDS is v4 and passes `check_chip.py`; the traveler, run sheet, mask list and test dies still describe v3 and carry a banner. Their rewrite waits on the electrode Au choice (E1 vs E2).
+Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decision log](notes/decisions.md). **The architecture changed to v4 on 2026-11-08** (local mirror, no D2; leads in a slot along the centre DC; A30 + B60 retained; R1_TRAP on the no-Al stack). The trap-die GDS is v4 and passes `check_chip.py`. Since 2026-11-09 the traveler, run sheet, mask list, test plan and test dies are v4 as well, with the electrode step written as two branches (E1 and E2) until the team chooses. Figures: [stack](design/fab/figures/stack_v4.svg), [process flow](design/fab/figures/process_flow_v4.svg).
 
 ## Goal
 
@@ -32,21 +41,21 @@ Ground rules agreed with the team:
 - Claude-written docs live in `design/` and are labelled Claude-authored.
 - Claude does not touch `proposal/*.tex`. Claude logs the team's decisions in `notes/decisions.md` (team change, 2026-11-08).
 
-## Current deliverables (v3)
+## Current deliverables (v4)
 
 | What | File |
 |---|---|
 | Trap dies (10 × 10 mm) | `design/gds/trap_die_v4_A30.gds` (30 × 30 µm SNSPD, local mirror, slot leads), `trap_die_v4_B60.gds` (60 × 30 µm), `trap_die_v4_NODET.gds` (plain trap, no SNSPD, no Al). v3 (incl. B60) in `gds/archive_v3_baseline/` |
-| Test die (10 × 2.5 mm) | `design/gds/test_die_v3.gds`: T1 Au comb, T2 D2 capacitor, T3 NbN bar, T4/T4b spare SNSPDs, T6 Au loop, T8 EBL dose array, T9 geometry array. **Still v3; rework for v4 open** |
+| Test die (10 × 2.5 mm) | `design/gds/test_die_v4.gds`: T1 Au comb, T2v Au / SiO₂ / Al capacitor, T3 NbN bar, T4/T4b spare SNSPDs on local Al mirrors, T6 Au loop, T8 EBL dose array, T9 geometry array, T10 Al mirror strip (four-point), T11 Au-to-Al via chain, T12 twin Au leads over Al. `test_die_v4_TRAP.gds`: T1 and T6 only. Both pass `check_test_die.py`. v3 test dies in `gds/archive_v3_baseline/` |
 | R&D runs | `design/gds/run_R1_TRAP.gds` (6 NODET + 2 trap-only test dies; **run 1a, chosen first**; sheet `design/fab/RUNSHEET_R1_TRAP.md`) and `run_R1_FULL.gds` (2 A30 + 2 B60 + 2 NODET + 2 TEST): 8 dies, 20.2 × 33.1 mm block at the centre of a 100 mm wafer (`make_run.py`) |
 | Full wafer (reference) | `design/gds/wafer_v4.gds` + `wafer_v4_map.csv/png`: 56 dies, columns of [A30, B60, A30, TEST] |
 | Pad lists | `design/gds/*_pads.csv` |
 | Layer map | `design/gds/layer_map.md` |
 | Simulation layouts | `design/gds/*_sim.json` (read by gds2itvg) |
-| Generators / checks | `make_chip.py`, `make_test_die.py`, `make_run.py`, `make_wafer.py`; `check_chip.py` (DRC + connectivity + fab consistency + no ITO + no pads in the beam-exit corners; **all pass** on v4 A30 and NODET) |
-| Simulations | `design/sim/01…13_*.py` (outputs in `design/sim/out/`) |
-| Literature | `design/research/reports/Trap integrated SNSPD design.md`, `design/references_design.bib` |
-| Fab | `design/fab/TRAVELER.md`, `mask_list.md`, `process_checks.md`, `test_plan.md` |
+| Generators / checks | `make_chip.py`, `make_test_die.py`, `make_run.py`, `make_wafer.py`; `check_chip.py` (DRC + connectivity + fab consistency + no ITO + no pads in the beam-exit corners; **all pass** on v4 A30, B60 and NODET); `check_test_die.py` (written from the specification, independent of the generator); `measure_dies.py` → `measured_v4.md` (areas, meander squares, file hashes) |
+| Simulations | `design/sim/01…20_*.py` (outputs in `design/sim/out/`). New 2026-11-09: `15b` collection on v4, `17` height trade-off, `18` E1 vs E2, `19` lead termination, `20` transport timing |
+| Literature | `design/research/reports/Trap integrated SNSPD design.md`, `design/references_design.bib`; pointers from 2026-11-09 in `design/research/research_notes/Loose ends 2026-11/` |
+| Fab | `design/fab/TRAVELER.md` (v4 index), `process/01…04`, `RUNSHEET_R1_TRAP.md`, `mask_list.md`, `process_checks.md`, `test_plan.md`, `figures/stack_v4.svg`, `figures/process_flow_v4.svg`; `check_links.py` checks the links between them |
 
 ## Key design numbers
 

@@ -1300,6 +1300,187 @@ Data: [comparison.json](sim/out/16_pad_pitch_check/comparison.json), [per-electr
 
 The largest required-voltage change is 0.00403 V; sim 13 null heights and window-drop inputs are unchanged. E1 still uses the existing 1 µm-pocket upper-bound window correction. Full [height-tuning comparison](sim/out/16_pad_pitch_check/13_comparison.json) and [run log](sim/out/16_pad_pitch_check/13_log_pad360.txt).
 
+---
+
+> **Steps 30–36 (2026-11-09) close the v4 loose ends.** The scripts, layouts and pages were written by delegated agents from a written specification. Every acceptance number quoted below was rerun independently before it was logged. None of these steps is a team decision; `notes/decisions.md` is unchanged.
+
+## 2026-11-09: Step 30, is 50 µm the right ion height? (`sim/17_height_tradeoff.py`)
+
+**Question (team).** A higher ion is more stable but collects less light. Keep 50 µm, or redesign lower?
+
+**Model.** The gapless five-wire model of step 1 (`trapcalc.fivewire_rf_phi`), which matched gds2itvg to 0.1 µm at 50 µm (step 2). For each height the RF rail width is set so the null sits there. Collection is for an isotropic emitter through the E2 aperture (ion height + 6 µm). Beam clipping is the formula of sim 11 (10 mm die, 45°). [team calc]
+
+**A. Centre DC kept at 40 µm, so the 30 µm window stays.**
+
+| h (µm) | RF rail (µm) | Depth at 3 MHz radial, 28 MHz (meV) | Drive that keeps 52 meV at q 0.30 | Collection A30 / B60, E2 (%) | Heating, h⁻⁴ (h⁻²·⁶) | 493 nm clipped |
+|---|---|---|---|---|---|---|
+| 30 | 12.5 | 14.9 | 123 V, 52 MHz | 4.73 / 7.92 | 7.7× (3.8×) | 10 % |
+| 35 | 26.9 | 21.3 | 83 V, 44 MHz | 3.77 / 6.50 | 4.2× (2.5×) | 6.9 % |
+| 40 | 43.6 | 29.5 | 67 V, 37 MHz | 3.06 / 5.42 | 2.4× (1.8×) | 4.5 % |
+| **50** | **83.6** | **51.9** | **53 V, 28 MHz** | **2.13 / 3.90** | **1×** | **1.7 %** |
+| 60 | 132.5 | 83.2 | 48 V, 22 MHz | 1.56 / 2.92 | 0.48× (0.62×) | 0.54 % |
+| 70 | 190.3 | 124.2 | 46 V, 18 MHz | 1.19 / 2.26 | 0.26× (0.42×) | 0.15 % |
+
+**B. Whole trap scaled with h (c = 0.8 h, window = c − 10 µm).** Collection falls when the trap shrinks, because the 5 µm rims and gaps do not shrink: 2.13 % at 50 µm, 1.72 % at 40 µm, 1.16 % at 30 µm (E2). Lower h raises collection only if the window keeps its size.
+
+**C. Height kept at 50 µm, wider centre DC (window = c − 10 µm radially, 30 µm axially).** c = 50 µm: 2.77 %, 58 V, 46.6 meV. c = 60 µm: 3.36 %, 71 V, 43.3 meV. c = 70 µm: 3.90 %, 98 V, 41.3 meV.
+
+**Reading.**
+- Going from 50 to 40 µm with the same window gives 1.44× the light. It costs 2.4× the heating at h⁻⁴ (1.8× at h⁻²·⁶), 2.6× the clipped beam power, a 44 µm RF rail, and a window that is 0.75 h wide instead of 0.6 h (larger null drop and mode splitting: steps 6, 19).
+- The same or a larger gain is available at 50 µm without those costs: the 160 nm cap (absorption 0.44 → 0.66, step 26), the B60 window (1.83×, drawn), E1 Au (1.22×, the aperture sits 5.65 µm closer) or a wider centre DC (1.3× at c = 50 µm).
+- Absolute level: A30 on E2 absorbs 1.47 % of all emitted 493 nm photons (step 32). At about 10⁷ photons/s from a bright ion (Zhukas et al., arXiv:2006.12801, one source, read through a summarising tool) that is about 15 counts per 100 µs before the internal detection efficiency. [team calc]
+
+**Assessment (Claude, `design/` exception; not a team decision).** 50 µm is adequate; a lower trap is not worth a redesign. Height is the most expensive lever for collection in this design, and beam clipping on the 10 mm die (1.7 %) already argues against going lower.
+
+**Limits.** Gapless, infinitely long model; no window perturbation in the collection column. The heating exponent is not universal: Sedlacek 2018 measured 3.9(2) at 295 K and 4.0(2) at 5 K over 29–83 µm; An 2019 reports 2.6 for electric-field noise over 50–300 µm (abstract only). Pointers: `research/research_notes/Loose ends 2026-11/`.
+
+---
+
+## 2026-11-09: Step 31, do E1 and E2 differ functionally? (`sim/18_e1_vs_e2.py`)
+
+**Question (team).** E1 is 0.35 µm lift-off Au, E2 is 6 µm plated Au. Is there a functional difference beyond the process?
+
+**Already simulated.** Zone and transport voltages agree to 0.01 V and null heights to 0.02 µm (steps 25, 28). As traps, the two are the same.
+
+| Quantity | E1, 0.35 µm | E2, 6 µm | Source |
+|---|---|---|---|
+| Au sheet resistance at room temperature, bulk ρ 2.44 µΩ·cm | 0.070 Ω/sq | 0.0041 Ω/sq | [team calc]; thinner than the 14.9 µm skin depth at 28 MHz, so the DC value applies |
+| One SNSPD slot lead (5 µm wide, 995 squares as drawn) | 69 Ω | 4.0 Ω | [team calc], room temperature |
+| Lead pair in series with the 50 Ω line, cold | 14–69 Ω (RRR 10–2) | 0.8–4 Ω | RRR is an assumption [verify]; no measured value found for either film |
+| Pulse amplitude and reset-time factor 50 / (50 + R pair), RRR 5 | 0.64 | 0.97 | [team calc] |
+| Centre DC lead (7.5 µm wide, 394 squares) | 27 Ω | 1.6 Ω | [team calc], room temperature |
+| RF dissipation, C_RF 1–2 pF, RRR 5 | 31–126 µW | 1.8–7.4 µW | upper bound; C_RF not computed [verify] |
+| Screening of charge on the SiO₂ gap floor, exp(−π t / g), 5 µm gaps | 0.80 | 0.023 | [inference]: lowest slot mode, not a field solve |
+| Same for the 30 µm window | 0.96 | 0.53 | [inference] |
+| SiO₂ gap depth-to-width | 0.07 | 1.2 | LOCAL_MIRROR H.4 |
+| Window null drop, A30 / B60 | ≤ 0.37 / ≤ 0.55 µm | 1.19 / 2.04 µm | steps 25, 26 |
+| Micromotion after retuning the height, 10° tilt, A30 / B60 | 55 / 81 nm | 173 / 291 nm | step 29 |
+| Geometric collection, A30 | 2.60–2.64 % | 2.22 % | step 32 |
+| RF pickup: nanowire / each slot lead | 1.92 / 28.3 µA | 0.96 / 44.5 µA | steps 26, 28 |
+
+**Reading.** Four differences matter:
+1. **Charge on the SiO₂ in the gaps.** E2's 6 µm walls screen the gap floor about 35× better. With E1 the ion sees SiO₂ along the whole trap. Todaro trapped on 6 µm Au; Hampel (350 nm) reports no trapping.
+2. **SNSPD lead resistance.** With E1 the two slot leads add tens of ohms in series with the 50 Ω readout line, which lowers the pulse amplitude and shortens the reset. With E2 the leads are negligible.
+3. **Light and the window.** E1 collects 1.18× more and perturbs the RF null about three times less.
+4. **RF heating.** Tens to hundreds of µW on E1, 17× less on E2; small either way, but it scales with C_RF², which is not known.
+
+Process differences (plating bath, step coverage over the 0.40 µm via, wedge bonding on 350 nm Au) are in `fab/process/03_ELECTRODES.md`. **The choice stays the team's**; no option is recommended here.
+
+**Literature (L2 note).** No measured resistivity at 4 K was found for 0.35 µm evaporated or 6 µm plated Au; a witness measurement would settle the RRR bracket. No source quantifying stray field from a charged trench floor against metal thickness was found.
+
+---
+
+## 2026-11-09: Step 32, collection and absorption on the v4 stack (`sim/15b_collection_v4.py`)
+
+Closes "rerun 15 at the v4 heights". Parts A–C of sim 15 on the v4 stack: vacuum / SiO₂ cap 160 nm (and 80 nm) / NbN 7 nm, fill 0.65 / SiO₂ spacer 238 nm / Al 450 nm / SiO₂ 1 µm / Si. No D2 layer, so no fringe average. Heights from `sim/out/13_dc_height_tuning_v4/summary.json`; E1 is bracketed between the planar null and the 1 µm-pocket drop. [team calc]
+
+| Case | Ion height (µm) | Geometric collection (%) | Absorbed of all emitted, 80 / 160 nm cap (%) |
+|---|---|---|---|
+| A30 E2 | 48.79 | 2.221 | 0.981 / 1.470 |
+| A30 E1 | 49.60–49.96 | 2.601–2.636 | 1.149–1.164 / 1.720–1.743 |
+| B60 E2 | 47.93 | 4.158 | 1.838 / 2.709 |
+| B60 E1 | 49.42–49.96 | 4.674–4.760 | 2.067–2.105 / 3.029–3.082 |
+
+- Normal-incidence unpolarised absorption 0.662 (160 nm) and 0.440 (80 nm), as sim 09c.
+- Ray spread in the cap is at most 0.044 µm (A30) and 0.066 µm (B60) at 160 nm, so the meander envelope catches every window ray.
+- All rows reproduce the overhang audit to the digits it printed. Internal detection efficiency, polarisation dependence of the meander and RCWA are still not included.
+
+---
+
+## 2026-11-09: Step 33, RF current through the nanowire against the lead termination (`sim/19_lead_termination.py`)
+
+**Why.** Each slot lead collects 44.5 µA (E2) or 28.3 µA (E1) of common-mode 28 MHz current (step 28). Only an asymmetry between the two leads' paths to ground drives it through the nanowire.
+
+**Model [inference].** Two nodes (the pad ends of the leads), equal injected currents, each node to ground through a 2 nH bond wire [verify] and its termination, and the nanowire as jωL_k plus the lead-pair resistance between them. L_k 3.10 µH (A30) and 5.94 µH (B60). Lumping the distributed pickup at the pads makes it an upper bound.
+
+| Termination (signal lead / return lead) | Nanowire current, A30 E2 (µA) | A30 E1 (µA) | Effect on the detector pulse |
+|---|---|---|---|
+| 50 Ω line / short to ground | 4.06 | 2.58 | none |
+| 50 Ω ∥ 100 pF / short | 3.20 | 2.04 | low-pass at 31.8 MHz |
+| 50 Ω ∥ 1 nF / short | 0.47 | 0.30 | low-pass at 3.18 MHz |
+| 50 Ω ∥ 10 nF / short | 0.046 | 0.029 | low-pass at 0.32 MHz |
+| 50 Ω ∥ 1 nF / 1 nF, 0–20 % mismatch | 0.053–0.090 | 0.034–0.057 | low-pass at 3.18 MHz |
+| 50 Ω ∥ series L-C trap at 28 MHz (100 pF, 0.5 Ω) / short | 0.040 | 0.026 | trap is 524 Ω at 3 MHz, 139 Ω at 10 MHz |
+| same, L off by ±5 % | 0.23 | — | — |
+| 50 Ω / 50 Ω (differential), 0 / 5 / 10 % mismatch | 0 / 0.20 / 0.40 | 0 / 0.13 / 0.25 | none |
+
+- Reference: the switching current is estimated at 8–20 µA (step 26). A plain 50 Ω line with the return grounded puts half of the 8 µA lower bound through the A30 nanowire on E2.
+- The pulse decays in L_k / 50 Ω = 62 ns (A30) or 119 ns (B60), a spectral corner of 2.6 or 1.3 MHz. A 1 nF bypass, the value suggested in step 26, puts its corner at 3.2 MHz, right on the pulse.
+- A lead-pair resistance up to 140 Ω changes these currents by less than 6 %.
+- This feeds the open **RF grounding / filters** decision. No termination is chosen here.
+
+---
+
+## 2026-11-09: Step 34, how fast can the ion be moved? (`sim/20_transport_timing.py`)
+
+Closes "adiabatic transport timing" at the level of a first estimate. Input: `sim/out/12_final_chip/trap_die_v4_A30_V2zero/waveforms.csv` (centre DC at 0 V, 49 positions, 10 µm apart).
+
+**Model [inference].** A classical ion in a 0.8 MHz axial well whose centre s(t) moves 480 µm in a time T. Residual motion n̄ = (m / 2ħω)·|∫ s̈ e^{iωt} dt|². Zero-point size 6.77 nm. The well centre is assumed to follow the filtered voltages linearly.
+
+**Smooth ramps.** A minimum-jerk position ramp stays below 0.1 quanta for every T above 44 µs; a sin² ramp above 207 µs. A linear ramp never settles (envelope 2 × 10⁴ quanta at 100 µs).
+
+**The DAC staircase is the limit.** One sudden 10 µm step leaves 5.5 × 10⁵ quanta; 1 µm leaves 5.5 × 10³; 0.1 µm leaves 55.
+
+| Staircase, 10 kHz first-order filter | T = 100 µs | 300 µs | 1 ms | 3 ms |
+|---|---|---|---|---|
+| 48 steps of 10 µm | 76 | 1.4 × 10⁵ | 76 | 1.4 × 10⁵ |
+| 480 steps of 1 µm | 2.2 | 0.56 | 0.75 | 1.4 × 10⁵ |
+| 4800 steps of 0.1 µm | 2.0 | 0.23 | 0.022 | 0.0056 |
+
+(n̄ with T shifted by 0.3 axial periods off the commensurate values; at exactly commensurate T the sum is either zero or the coherent maximum.)
+
+- Whenever the step interval is a whole number of axial periods, the kicks add coherently (the 10⁵ entries). A finer staircase moves that resonance to longer T; it does not remove it.
+- With 48 steps the update rate is far below the axial frequency (48 kHz at T = 1 ms against 800 kHz), so every step is a separate kick and only the filter attenuates it.
+- **Consequence:** the 10 µm table from sim 12 is a set of static solutions, not a waveform. It has to be interpolated to steps well under 1 µm, with a DAC update rate above the axial frequency or a filter of higher order, before it is played.
+- DAC numbers for 48 steps: largest step 1.708 V (electrode 11, GDS x from 50 to 60 µm), largest voltage 6.64 V, slew 0.082 V/µs at T = 1 ms.
+
+**Limits.** One dimension, classical, harmonic, constant frequency along the path, no heating during the move, first-order filter only.
+
+---
+
+## 2026-11-09: Step 35, v4 test dies, cap metadata, measured layout numbers (`gds/make_test_die.py`, `check_test_die.py`, `measure_dies.py`, `make_chip.py`)
+
+**Cap metadata.** `make_chip.py` and every `_sim.json` now state the 160 nm cap of step 26 (`t_sio2_above_nbn` 0.08 → 0.16; "0.32 µm" → "0.40 µm" in two comments). A per-layer XOR against the previous dies is zero on A30, B60, NODET and UNIFORM, so layer 50 is unchanged and sim 12 was not rerun. `check_chip.py`: **ALL CHECKS PASS** on A30, B60, NODET; the light footprint moves from the window + 0.02 µm to + 0.05 µm (A30) / + 0.07 µm (B60).
+
+**Test dies for v4 (Claude's layout calls, `design/` exception).** `test_die_v4` and `test_die_v4_TRAP` replace the v3 files, which moved to `gds/archive_v3_baseline/`.
+- Removed: T2 (Au / D2 / Al capacitor), layer 45, the die-wide Al and its cut-outs.
+- Kept: T1, T3, T6, T8, T9, T4 / T4b. Every meander now has a local Al mirror (the drawn NbN + 4 µm, running 160 µm under its leads) with a mirror probe pad.
+- New: **T2v** Au / 0.40 µm SiO₂ / Al capacitor, 200 × 200 µm, about 3.5 pF. **T10** Al strip 40 µm wide with voltage taps 2510 µm apart (62.75 squares; 4.2–5.6 Ω at 450 nm for ρ 3–4 µΩ·cm), the stand-in for the trap's mirror ground path. **T11** chain of four 100 µm Au-to-Al vias. **T12** two 5 µm Au lines 5 µm apart, 2.7 mm long, across a 2.3 mm Al strip (the slot leads, including the step over the Al edge).
+- `--trap-only`: T1 and T6 on layers 1 and 50 only.
+- **No mirror probe opening is added to the trap dies.** T10 and T11 measure the same path on the test die, so layer 50 near the trap stays untouched.
+- On the test structures the 4 µm layer-22 leads cross the edge of the 450 nm Al under the spacer. The trap die has no such crossing. [inference: a possible weak point of the test structures only]
+
+**Checks.** `check_test_die.py` was written from the specification, not from the generator. It found one fault the generator's own self-check missed: the mirror under the sharp-turn T9 control had a 1 µm margin, because that meander is drawn 36 µm tall for a nominal 30 µm. Three further faults were found by review and fixed: T10 end pads not touching the strip (an error in the specification), T12 lines meeting their pads along a 2.5 µm edge, and two T1 comb fingers left as separate conductors by an edge-only contact (inherited from v3). Final state: **ALL CHECKS PASS** on both dies; 30 Au conductors, all ≥ 5 µm apart. `run_R1_TRAP`, `run_R1_FULL` and `wafer_v4` regenerated.
+
+**Measured from the released GDS (`gds/measured_v4.md`, with file hashes).**
+
+| | A30 | B60 | NODET | TEST | TEST_TRAP |
+|---|---|---|---|---|---|
+| Layer 10 Al (mm²) | 0.142 | 0.143 | 0 | 0.710 | 0 |
+| Layer 20 NbN (µm²) | 1928 | 2615 | 0 | 20 270 | 0 |
+| Layer 22 Ti/Au (mm²) | 0.0021 | 0.0021 | 0 | 1.012 | 0 |
+| Layer 40 openings (mm²) | 0.0114 | 0.0114 | 0 | 0.653 | 0 |
+| Layer 50 Au (cm²) | 0.9131 | 0.9131 | 0.9147 | 0.1267 | 0.2141 |
+
+- Meanders: 160 lines, 0.130 µm wide on a 0.200 µm pitch, 36 / 69 µm long; straight length 5.760 / 11.040 mm; 3.10 / 5.94 µH and 62.0 / 118.8 ns at 69.95 pH/sq (turns, tapers and tabs excluded).
+- Runs: Au 5.917 cm² (`run_R1_TRAP`) and 5.735 cm² (`run_R1_FULL`); EBL area of `run_R1_FULL` 0.0496 mm² merged (0.0502 mm² as a raw sum).
+- These replace the mixed v3 estimates in the mask list (plated area, EBL charge).
+
+---
+
+## 2026-11-09: Step 36, fabrication pages rewritten for v4; stack and process-flow figures (`fab/`)
+
+**Team instruction (2026-11-09):** rewrite the fab pages for v4 now, with E1 and E2 both written out, without waiting for the electrode choice.
+
+- **Rewritten:** `STACK.md`, `process/01_FOUNDATION.md` … `04_PACKAGING.md`, `RUNSHEET_R1_TRAP.md`, `QUALIFICATION.md`, `process_checks.md`, `test_plan.md`, `tests/01` … `04`, `TRAVELER.md`, `README.md`, `VARIANTS.md`, `RUN_PLAN.md`, `mask_list.md`, `LAYOUT.md`. The v3 banners are gone.
+- **Step numbers are kept:** 0–3 foundation (step 3 = local Al mirror, detector dies only), 4–8 detector, 9 and 10 removed, 11 layer-40 openings through the thin stack, 12–15 electrodes as branch E1 or branch E2, 16a and 16 removed, 17–19 test, dice, package. R1_TRAP uses 0–2, 12–15 and 17–19.
+- **Rule the writers worked under:** values are carried from the v3 pages, `LOCAL_MIRROR.md` and steps 25–29; nothing new is invented; anything no source gives is tagged `[verify]`. No page recommends E1 or E2.
+- **New test identifiers:** a15 (T2v), a16 (T10), a17 (T11), a18 (T12), a19 (SNSPD leads to the centre DC). a4 is retired. a13 (ground link) no longer uses the < 10 Ω limit, because the Al strip alone is about 5 Ω.
+- **Figures:** `fab/figures/stack_v4.svg` (five cross-section panels, E1 solid and E2 dashed) and `fab/figures/process_flow_v4.svg` (one composite cross-section per step, written by `make_process_flow.py`).
+- **Link checker:** `fab/check_links.py` checks every relative link and heading anchor under `design/fab`.
+- **Sources resolved:** "Dietl 2025" is M. Dietl et al., "Test and characterization of multilayer ion traps on fused silica", arXiv:2505.21284. Its Table 2 gives the 50 V DC / 300 V RF, 0–100 nA leakage limits and the 1 mA, 0–100 mV continuity test used in a1–a3. Those traps have Al electrodes on fused silica; no comb structure or flashover measurement was found in it, so the T1 limits remain `[verify]`. Suleimen 2026 is Phys. Rev. Applied 25, 044091; only the abstract is open.
+- **Opened by the rewrite, for the team:** whether R1_TRAP also deposits the 398 nm of PECVD SiO₂ so its electrodes sit on the same surface as the detector dies; whether NODET dies on R1_FULL get steps 4–8; the T10 acceptance limit; no v4 witness covers the 300 °C cap deposition on NbN now that W1-b is gone.
+
 **Reproducibility.** `sim/run_cached_geometry.py` reuses exact unions of identical immutable Shapely polygon pairs only inside the solver's gap-splitting routine (bounded cache, restored afterward); no coordinates, precision, solver source or physical model were changed. Repeated union results were checked byte-for-byte on overlapping polygon pairs. The compiler cache was placed in a writable ignored directory. Solver revision, package versions and input hashes are recorded in [environment.json](sim/out/16_pad_pitch_check/environment.json) and the comparison files. Re-run sim 12 with `cd design/sim` then `./run.sh 16_pad_pitch_check.py`; `--resume` rechecks completed cases only when simulation inputs match. The fan-out script requires Python with `pdfplumber` (the bundled document runtime was used here). Sim 13 used `./run.sh run_cached_geometry.py 13_dc_height_tuning.py` with a writable NUMBA_CACHE_DIR.
 
 **Still open.** Confirm future perpendicular beam clearance before adopting the inward rows; choose 84-pin vs 100-pin/lab carrier and its electrical pin map; qualify the proposed ≥ approximately 0.6 mm, die-sized-or-larger spacer (Si suggested). The planned 45° beam arrangement remains the stated use case; no future-beam clearance was approved in this step.

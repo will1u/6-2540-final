@@ -15,7 +15,9 @@ For fabrication review, start with [fab overview](fab/README.md), [variants](fab
 | `sim/` | Simulation scripts, numbered in the order they were run. Outputs go to `sim/out/<script>/`. |
 | `SIMPLIFICATIONS.md` | Wafer layout and run-size options; possible design simplifications and the tests that would check each one (a plan; nothing run). |
 | `gds/make_chip.py` | Generates the v4 10 × 10 mm trap dies (local mirror, no D2; DESIGN_LOG step 25): `trap_die_v4_A30.gds`; `--nodet` builds the plain trap die without an SNSPD or Al (`trap_die_v4_NODET.gds`, the R1_TRAP die); `--uniform` builds `trap_die_v4_UNIFORM.gds`, a simulation-only reference (never for fab). It also writes the simulation layouts (`*_sim.json` for E2 6 µm Au, `*_E1_sim.json` for E1 0.35 µm Au, and `*_simfloor.gds`, sim only) and the pad list (`*_pads.csv`). The v3 baseline dies (incl. B60) are in `gds/archive_v3_baseline/`. |
-| `gds/make_test_die.py` | 10 × 2.5 mm test-structure die (`test_die_v3.gds`): T1–T4b, T6, T8. T8 is the EBL dose array. `--trap-only` writes `test_die_v3_TRAP.gds` (T1, T2, T6) for trap-only runs. Still v3 baseline structures; rework for v4 is open. |
+| `gds/make_test_die.py` | 10 × 2.5 mm test-structure die for the v4 stack (`test_die_v4.gds`): T1, T2v, T3, T4/T4b, T6, T8 (EBL dose array), T9 (geometry array), T10 (Al mirror strip), T11 (Au-to-Al via chain), T12 (twin Au leads over Al). `--trap-only` writes `test_die_v4_TRAP.gds` (T1 and T6, no Al) for trap-only runs. The v3 test dies are in `gds/archive_v3_baseline/`. |
+| `gds/check_test_die.py` | Independent checks on the test dies (spacing, connectivity, openings, mirrors), written from the specification and not from the generator. |
+| `gds/measure_dies.py` | Read-only measurement of the released GDS files: area per layer, meander squares and inductance, file hashes. Writes `gds/measured_v4.md`, which the fab pages cite. |
 | `gds/make_run.py` | Small R&D run layouts for MIT.nano: `run_R1_TRAP.gds`, `run_R1_FULL.gds` (8 dies at the wafer centre, map CSV/PNG). |
 | `gds/make_wafer.py` | Full-wafer reference layout (`wafer_v4.gds`, 56 dies, map CSV/PNG). |
 | `gds/archive_v1_square/`, `gds/archive_v2_narrow/` | Superseded layouts: v1 square die (DESIGN_LOG step 8), v2 narrow die with the two-ITO window (steps 12–16). |
@@ -60,3 +62,11 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 | `12_final_chip_check.py` | Simulates the **fabrication GDS itself**: RF null along the axis, DC sets at both zones, transport waveforms. |
 | `13_dc_height_tuning.py` | Can DC voltages push the ion back up over the readout window? DC needed and excess micromotion vs upward shift, at 0° and 10° radial tilt. |
 | `14_staircase_check.py` | Staircase fingers + leads vs plain equal-depth segments (`trap_die_v3_UNIFORM`, read from `gds/archive_v3_baseline/`) and the electrode repo's five-wire example: unit potentials, symmetry, zone voltages, transport. |
+| `09c_localmirror_optics.py`, `10b_rf_pickup_v4.py` | v4 versions of 09 and 10: NbN absorption with vacuum above the cap (sets the 160 nm cap); RF pickup with the slot leads and the local mirror. |
+| `15_snspd_geometry.py` | SNSPD geometry budget on the v3 stack: collection, refraction footprint, absorption vs fill factor, turn crowding, kinetic inductance. |
+| `15b_collection_v4.py` | Collection and NbN absorption on the v4 stack, for A30/B60 and both electrode options. |
+| `16_pad_pitch_check.py` | Compares the 360 µm pad layout with the 180 µm one: wire fan-out to the PGA84L fingers, sim 12 and 13 differences. |
+| `17_height_tradeoff.py` | Is 50 µm the right ion height? Collection, trap depth, heating and beam clipping from 30 to 70 µm. |
+| `18_e1_vs_e2.py` | Do the two electrode options differ functionally? Au resistance, RF heating, SiO₂ gap screening, next to the already-simulated differences. |
+| `19_lead_termination.py` | RF current through the nanowire for several terminations of the SNSPD leads, and what each does to the detector pulse. |
+| `20_transport_timing.py` | How fast can the ion be moved? Residual motion for smooth ramps and for a DAC staircase through a filter. |
