@@ -17,6 +17,9 @@ The two architectures in cross-section: [architecture comparison](figures/archit
 | Electrode Au (v4) | E1: 0.35 µm lift-off (no plating); E2: 6 µm plated (as Todaro) | SiO₂ exposed in every 5 µm gap (E1 depth/width 0.07, E2 1.2), plating effort, resonator tests. Sims 12/13 barely distinguish them (same voltages; window drop −1.19 µm E2 vs ≤ −0.37 µm E1) | **Open.** Blocks the v4 traveler rewrite |
 | Readout radial tilt | Keep 10°, smaller tilt, zero tilt, or wider DAC range | v3 needed 13.2 V (A30) / 15.2 V (B60). **v4 needs 6.3 V (A30) / 2.2 V (B60) for 10°** (loading 7.5 V; 480 µm zones) [team calc, steps 25, 27, 28] | Over-range problem gone on v4; team to confirm 10° |
 | RF grounding / filters | Centre-DC filtering, carrier grounds, symmetric detector termination or cancellation; for v4 also an RF bypass at both SNSPD lead pads | v4 slot leads each collect ≈ 46 µA (E2) / 29 µA (E1) of common-mode RF over 2.3 mm; only termination asymmetry sends it through the nanowire (step 26). Bond diagram, coupling calculation, RF-on/off tests | **Open; more important on v4** |
+| Pad pitch / beam access | Current generated layout: 360 µm; alternatives recorded for the proposed choice: 180, 240, 300, 400 µm | Centre-to-centre PGA84L fan-out passes (worst 20.03°; step 29), as do all seven sim 12 cases. Closest top/bottom pads are at x = +0.62 / −0.98 mm; confirm clearance for a future perpendicular beam near the zones | **Team adoption pending.** Proposed reason: keep wire angles below 45° for a PGA84L-like package; no additional reason supplied |
+| Carrier | PGA84L-like 84-pin package, 100-pin CPGA, or the lab carrier | Cryostat fit and a carrier-specific electrical pin map; step 29 checks nominal PGA84L geometry only | **Open.** Local finger IDs in the fan-out table are not package pin numbers |
+| Package spacer | Proposed thickness ≥ approximately 0.6 mm; die-sized (10 × 10 mm) or larger; Si suggested | Verify the actual carrier, die and spacer stack and beam clearance | **Open proposal [verify]**, not an adopted material or thickness |
 
 **Resolved 2026-11-08** ([decisions](../../notes/decisions.md)): architecture → local mirror, no D2; lead routing → Au leads in a slot along the centre DC; detector allocation → keep A30 and B60 (B60 was dropped, then kept); R1_TRAP → the same no-Al stack.
 
@@ -28,7 +31,7 @@ The two architectures in cross-section: [architecture comparison](figures/archit
 - [x] 09c optics (step 26): **set the SiO₂ over the wires (HSQ + cap) to 160 ± 10 nm**: A 0.44 → 0.66 (v3.1: 0.54). The traveler and stack pages still say 80 nm.
 - [x] 10b RF pickup (step 26): nanowire 0.96 µA (E2) / 1.92 µA (E1) vs 1.67 µA (v3.1); slot-lead pickup feeds the RF grounding decision above.
 - [ ] Rerun 15 (collection at the v4 heights).
-- [ ] Transport: hold the centre DC at 0 V while moving and ramp the tilt in at each zone (`12_final_chip_check.py --centre-dc-zero`: 1.67 V per 10 µm step vs 7.96 V with the centre DC free; step 25).
+- [ ] Transport: hold the centre DC at 0 V while moving and ramp the tilt in at each zone (`12_final_chip_check.py --centre-dc-zero`: **1.708 V per 10 µm step** on A30/B60 with the 480 µm zone spacing and 360 µm pad pitch; free-centre transport 7.590 / 8.002 V, step 29). The constrained static 10° zone solves remain diagnostic; use the regular zone sets once stationary.
 - [ ] Order Si with ρ > 20 kΩ·cm; measure the RF resonator Q with a die mounted.
 
 ### Detector documents and generated layouts
@@ -75,4 +78,4 @@ See [Qualification](QUALIFICATION.md). No completed witness-wafer measurements a
 
 ## Choices already recorded as the team's
 
-Project scope and fixed inputs, separate loading zone, high-resistivity Si, 50 µm height and the height policy, no bowtie, the narrow die (superseded), NODET die, R&D runs at MIT.nano, R1_TRAP first (all 2026-11-02, backfilled); no ITO and 10 × 10 mm edge-pad dies (2026-11-07); on-chip Au-fill-to-Al via (2026-11-08); local-mirror architecture, slot leads, A30 only, R1_TRAP on the v4 stack (2026-11-08). All are logged in [`notes/decisions.md`](../../notes/decisions.md), which Claude now writes for the team. Current layout retains 600 µm zone spacing and 0.8 MHz axial confinement.
+Project scope and fixed inputs, separate loading zone, high-resistivity Si, 50 µm height and the height policy, no bowtie, the narrow die (superseded), NODET die, R&D runs at MIT.nano, R1_TRAP first (all 2026-11-02, backfilled); no ITO and 10 × 10 mm edge-pad dies (2026-11-07); on-chip Au-fill-to-Al via (2026-11-08); local-mirror architecture, slot leads, A30 only then A30 + B60 retained, R1_TRAP on the v4 stack (2026-11-08). All are logged in [`notes/decisions.md`](../../notes/decisions.md), which Claude now writes for the team. Current layout uses 480 µm zone spacing and 0.8 MHz axial confinement. The generated 360 µm pad pitch remains pending team adoption (step 29).
