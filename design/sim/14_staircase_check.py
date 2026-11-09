@@ -36,7 +36,7 @@ from gds2itvg.analysis import rf_null
 import trapcalc as tc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-GDSDIR = os.path.join(HERE, "..", "gds")
+GDSDIR = os.path.join(HERE, "..", "gds", "archive_v3_baseline")   # v3 study (step 20); v3 files archived at step 25
 FWDIR = os.path.join(HERE, "..", "..", "..", "electrode", "examples", "fivewire")
 OUT = os.path.join(HERE, "out", "14_staircase_check")
 os.makedirs(OUT, exist_ok=True)
