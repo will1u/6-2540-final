@@ -1076,3 +1076,152 @@ Wire width barely matters; lines under the centre-DC rim do. Rule set in the pla
 - Measured NbN thickness used in every model.
 - Whether 130 nm, 7 nm NbN keeps a saturated 493 nm plateau at 5 K (T9 b10).
 - Suleimen 2026 full text.
+
+---
+
+## 2026-11-08: Step 25, v4 local-mirror dies, slot leads, A30 only (`gds/make_chip.py` v4, `check_chip.py`, `make_run.py`, `make_wafer.py`; `sim/04b`, `12`, `13`)
+
+**Decisions (team, 2026-11-08; logged in `notes/decisions.md`).**
+- Architecture: local mirror, no 10 µm D2 (LOCAL_MIRROR.md, adopted).
+- Lead routing: SNSPD leads in the electrode Au, in a slot along the centre DC, as Hampel 2023. Checked against the paper: arXiv:2302.01462 v1 fabrication paragraph, leads "patterned, together with the SNSPD leads, in a lift-off process" in 350 nm Au, capped only over the SNSPD; SPIE Proc. 13025 (tf.nist.gov/general/pdf/3290.pdf) Fig. 1 shows the leads as thin Au lines between the RF electrodes, over the mirror. Hampel trapped no ions in that paper.
+- R1_TRAP on the same no-Al stack.
+- Detector allocation: A30 only, B60 dropped.
+- Still open: electrode Au, E1 (0.35 µm lift-off) vs E2 (6 µm plated).
+
+**Layout (v4).** v3 files moved to `gds/archive_v3_baseline/`.
+- Slot \|y\| < 12.5 from the left end of the centre DC to x = 235 (50 µm before the window): DC half / gap / lead / gap / lead / gap / DC half = 7.5 / 5 / 5 / 5 / 5 / 5 / 7.5 µm. Right of x = 235 the centre DC is solid, so electrode 2 is a U around the slot. Its lead runs along the top half and turns up to the C pad (−4650, 450) only at x = −3600, outboard of the left pad-row tracks (|y| ≥ 334 out to x = −3500). A first draft turned at x = −2300 and would have crossed them.
+- Au leads 5 µm at y = ±5, x = 230 → −4400, then to Au pads (−4750, ±100), 200 × 150 µm. No layer-22 leads in the trap.
+- Contacts: layer 22 covers the −x half of each NbN tab (under the solid centre DC), steps into the slot and ends in a 27 × 7 µm pad at x = 203 … 230; an 18 × 3 µm layer-40 cap opening sits ≥ 1 µm inside the Au lead and the pad.
+- Local mirror (layer 10): \|y\| ≤ 20, x = −2550 … +328, plus a branch to y = 230 at x = −2550 … −2350 under the Au fill; 100 µm ground via at (−2450, 130), enclosed ≥ 25 µm by fill and Al. 0.157 mm². No layer 45; no M1 pads or fill-to-M1 vias.
+- NODET: layers 1 and 50 only (solid centre DC, no Al). Pad map: C pad moved to (−4650, 450) on every variant.
+- Simulation files: `_sim.json` = E2 (6 µm), `_E1_sim.json` = 0.35 µm; `ground_depth: null`; grounds 97/98 = the leads (~0 V), 96 = the window floor. `_simfloor.gds` (A30, sim only) adds a ground conductor 1 µm inside the window, because the floor is the cap 0.32 µm above the grounded mirror; without it gds2itvg treats the 30 µm hole as floating dielectric.
+
+**Checks.** `check_chip.py` rewritten for v4 (leads inside the slot, no buried Ti/Au in the trap, contacts inside lead and pad, mirror never under the RF rails and ≥ 3 µm around all detector NbN, mirror via enclosure, layers 24/30/31/45 empty; NbN rules of step 24 with the v4 footprint = window + 0.02 µm, since only the 80 nm cap lies between the floor and the NbN). **ALL CHECKS PASS** on A30 and NODET. Layer areas per A30 die: L10 0.157, L20 0.0019, L22 0.0024, L40 0.0115 mm². Runs: `run_R1_TRAP` 6 NODET + 2 TEST_TRAP; `run_R1_FULL` 4 A30 + 2 NODET + 2 TEST (EBL area 0.049 mm²); `wafer_v4` 39 A30 + 17 TEST. **The test dies are still v3** (die-wide Al, D2 openings, L45).
+
+**3-D window recess (`04b … mirror_t6`, `mirror_t1`).** Grounded floor at the bottom of the Au pocket, ~1.3 µm SiO₂ then Si (ε 11.7) below, box bottom 40 µm under the Au:
+- E2 (6 µm pocket): Δh = **−1.19 µm** (v3 bare SiO₂ floor: −1.38; v2 `ito6` gave the same −1.19).
+- E1: the 0.35 µm pocket is below the 1 µm grid; a 1 µm pocket gives **−0.37 µm**, an upper bound.
+
+**Final-chip simulation (`12`, 53 V / 28 MHz, 0.8 MHz axial, 10° tilt in the zones).**
+
+| Die | Null height load / read (planar) | Read incl. recess | Loading \|V\|max | Readout \|V\|max | Transport max \|V\| / max step |
+|---|---|---|---|---|---|
+| v3 A30 (step 19) | 50.08 / 50.09 | 48.7 | 9.06 | 10.00, clipped (13.2 needed) | 7.33 / 1.61 V |
+| **v4 A30 E2** | 49.97 / 49.98 | **48.79** | 8.14 | **6.09** | 7.26 / **7.96 V** |
+| **v4 A30 E1** | 49.96 / 49.96 | ≥ 49.59 | 8.13 | 6.08 | 7.26 / 7.96 V |
+| v4 NODET | 49.97 / 49.98 | – | 9.10 | 9.10 | 7.34 / 1.59 V |
+| **v4 A30 E2, centre DC at 0 V** | 49.97 / 49.98 | 48.79 | 10.00, clipped (0.76 MHz) | 10.00, clipped (0.76 MHz) | 6.41 / **1.67 V** |
+
+- RF-only radial 3.00 MHz, q 0.30 on every v4 die. Without a ground plane the null sits ~0.1 µm lower than v3.
+- **The readout tilt problem of step 19 is gone on v4:** with the floor grounded through the mirror, the 10° tilt at the A30 readout needs 6.1 V (v3: 13.2 V). Readout DC radial modes 2.80 / 3.08 MHz.
+- **New: rough transport on A30.** The 7.96 V step sits between ITVG y = −200 and 0 (GDS x = 100 … 300), around the slot end (y = −65) and the window. Diagnosis (scratch script, gds2itvg unit potentials on the RF null): the constraint matrix is well conditioned (≈ 14–20, same as NODET), but electrode 2's axial curvature d²φ₂/dy² swings from +4.2 × 10⁻⁵ to −3.5 × 10⁻⁵ µm⁻² there (NODET: ~10⁻¹⁰), comparable to the whole 0.8 MHz axial curvature per volt (≈ 3.6 × 10⁻⁵ V/µm²). Any voltage on the centre DC makes axial bumps, and the minimum-norm single-position solve swings to cancel them. The slot also lowers φ₂ at the ion from 0.27 to 0.15.
+- **Fix in the solve, not the layout:** hold the centre DC at 0 V during transport (`12_final_chip_check.py --centre-dc-zero`): max step 1.67 V, max \|V\| 6.41 V. With electrode 2 at 0 V, the zones cannot reach 0.8 MHz with the 10° tilt inside ±10 V, so the tilt set (which uses the centre DC) is ramped in once the ion sits in a zone, as sim 12 already assumes. E1 and E2 give the same voltages to 0.01 V; the V2 = 0 transport was run on E2 only.
+
+**DC height tuning (`13`, out/13_dc_height_tuning_v4/).** Undoing the window drop by pushing the ion off the RF null: E2 (−1.19 µm) needs 1.4 V without tilt / 6.0 V with 10°, leaving 173 nm micromotion (β ≈ 2.2 at 493 nm with k along it); E1 (≤ −0.37 µm) needs 1.6 / 6.0 V and leaves ≤ 55 nm (β ≤ 0.7). v3 A30 needed 6.8 V for 200 nm.
+
+**Mirror ground path [team calc].** The strip is 2.75 mm from the detector to the via, 40 µm wide: ≈ 69 squares of 150 nm Al-1%Cu at 0.20–0.27 Ω/sq (ρ 3–4 µΩ·cm), so ≈ 14–18 Ω. The < 10 Ω acceptance carried over from H.2 / a13 cannot pass as drawn; whether ~15 Ω matters for RF pickup needs sim 10.
+
+**Not rerun / open:** 09b (vacuum above the cap; sets the cap thickness), 10 (RF pickup with the slot leads 17.5 µm from the RF rail edge and the local mirror), 15 (collection at the new heights). gds2itvg's single-stack gap model omits the local Al under the slot gaps and the window (`ground_depth: null` everywhere). Traveler, R1_TRAP sheet, mask list, stack and qualification docs still describe v3 and carry a banner; their rewrite waits on E1 vs E2. Test dies need a v4 rework.
+
+---
+
+## 2026-11-08: Step 26, v4 optics and RF pickup; B60 window on the v4 stack (`sim/09c_localmirror_optics.py`, `sim/10b_rf_pickup_v4.py`, `sim/04b`)
+
+**Optics (`09c`, new; 09b's transfer matrix, EMT, f 0.65, normal incidence, unpolarised).** Vacuum now sits on the cap, so the cap is a matching layer again.
+
+| Stack | Spacer / cap (nm) | A_NbN | ±10 nm box mean | worst corner |
+|---|---|---|---|---|
+| v3.1 baseline, 10 µm D2 above (fringe avg) | 238 / 80 | 0.540 | 0.534 | 0.517 |
+| **v4 as drawn** | 238 / 80 | **0.440** | 0.440 | 0.419 |
+| **v4, cap re-optimised** | 238 / **159** | **0.662** | 0.645 | 0.596 |
+| v4 best, 1st-order spacer | 64 / 164 | 0.665 | 0.648 | 0.605 |
+| v4 best, 2nd-order spacer | 232 / 166 | 0.665 | 0.648 | 0.609 |
+
+- **The 80 nm cap is now a bad thickness** (0.44, below the v3.1 0.54). With the 238 nm spacer kept, a ~160 nm cap gives 0.66, +22 % over v3.1 and +50 % over the v4 drawing. Re-optimising the spacer gains nothing (0.665). A cap of 146–172 nm stays within 0.02 of the best; the response repeats every λ/2n = 168 nm (243 nm gives 0.44 again, 327 nm 0.66).
+- **Decision (Claude, under the `design/` exception; reported to the team): total SiO₂ (HSQ + PECVD cap) over the wires 160 ± 10 nm** for v4, spacer unchanged. Side effects: twice the dielectric between the NbN/Ti-Au contacts and the centre-DC Au (better pinhole margin); the L40 contact etch becomes ~160 nm and the mirror via ~0.40 µm. The 2-D pickup and gds2itvg runs used 80 nm; at 160 nm the wires sit 80 nm further from the Au, a small change [inference].
+- Hampel check (09): the model reads ~10 % low against Hampel's measured SDE.
+
+**RF pickup (`10b`, new; 10's solver, 2-D, 53 V / 28 MHz, HR Si insulating at 4–6 K).**
+
+| | E2 (6 µm Au) | E1 (0.35 µm Au) | v3.1 baseline |
+|---|---|---|---|
+| Nanowire C_RN (30 µm) / I_pk | 0.103 fF / **0.96 µA** | 0.206 fF / **1.92 µA** | 0.180 fF / 1.67 µA |
+| Wires ↔ mirror | 137 fF | 137 fF | – |
+| RF rail → mirror strip | 0.151 fF/µm | 0.154 fF/µm | – |
+| Mirror detector end, ~15 Ω path (R_s 0.20–0.27) | 26–35 mV → +0.62–0.84 µA | 26–36 mV → +0.64–0.86 µA | – |
+| RF rail → each slot lead | 2.13 aF/µm → **20 µA/mm, 46 µA over 2.3 mm** | 1.36 aF/µm → 13 µA/mm, 29 µA | buried, not modelled |
+
+- **Nanowire:** E2 is better than v3.1 (the 6 µm walls and the grounded mirror 0.32 µm below); E1 is 1.15× v3.1.
+- **Mirror ground path matters:** the ~15 Ω strip lets the mirror's detector end swing ~30 mV, adding up to ~0.6–0.9 µA (comparable to the direct pickup on E2). Lowering it needs a lower-resistance strip (thicker Al: 300 nm halves it), a shorter path, or less rail coupling (narrower mirror away from the detector) [inference].
+- **Slot leads are a new, large pickup path.** Each lead collects ~46 µA (E2) of RF displacement current over its 2.3 mm between the rails, against an NbN switching current estimated at 8–20 µA. The two leads see the same coupling (common mode), so with identical terminations no current crosses the nanowire; any termination asymmetry sends a fraction through it [inference; Todaro Supp. Fig. S4 model]. This ties the routing to the open **RF grounding / filters** decision: a low-impedance-at-28 MHz capacitor to ground at both lead pads (e.g. 1 nF ≈ 6 Ω), a symmetric termination, or a differential readout [inference]. In v3 the leads were buried under the centre DC over the Al plane and were not modelled (3-D lead pickup was open).
+- Limits: 2-D (no window ends, slot end or lead tips); ideal conductors; ω V C is an upper bound.
+
+**B60 on the v4 stack (`04b mirror_t6` / `mirror_t1`, 30 × 60 case added).**
+
+| Window | v3 bare-SiO₂ floor | v4 E2 (6 µm) | v4 E1 (≤, 1 µm pocket) |
+|---|---|---|---|
+| A30 (30 × 30) | −1.38 µm | −1.19 µm | −0.37 µm |
+| B60 (30 × 60) | −2.50 µm | −2.04 µm | −0.55 µm |
+
+The A30 numbers are unchanged from step 25. The B60 v4 die is not drawn (it needs the slot end moved left of its longer tabs).
+
+---
+
+## 2026-11-08: Step 27, B60 kept on v4 (`gds/make_chip.py --det60`, `make_run.py`, `make_wafer.py`; `sim/12`, `13`)
+
+**Decision (team, 2026-11-08; `notes/decisions.md`):** keep B60, reversing the A30-only call after the step-26 numbers.
+
+**Layout.** `make_chip.py --det60` writes `trap_die_v4_B60`: 60 × 30 µm window, 69 µm lines (OVH_X 4.5). The slot end now follows the tabs: X_TAB = X_READ − DET_WX/2 − 27 (asserted against `snspd_geom`), slot end = X_TAB − 20 (A30 235, B60 218.5), contacts 186.5 … 213.5 on B60; mirror to X_READ + DET_WX/2 + 10 (A30 328, B60 344.5). A30 is unchanged (layer areas identical). **ALL CHECKS PASS** on A30, B60, NODET. Runs back to `run_R1_FULL` 2 A30 + 2 B60 + 2 NODET + 2 TEST (EBL 0.050 mm²); `wafer_v4` tile A30/B60/A30/TEST (25 A30, 14 B60, 17 TEST).
+
+**Simulation (`12`, `13`; window drop from step 26).**
+
+| Die | Read incl. recess | Loading \|V\|max | Readout \|V\|max (10°) | Transport max step: centre DC free / at 0 V |
+|---|---|---|---|---|
+| v4 A30 E2 | 48.79 µm | 8.14 V | 6.09 V | 7.96 / 1.67 V |
+| **v4 B60 E2** | **47.94 µm** | 8.14 V | **2.25 V** | 8.01 / **1.67 V** |
+| v4 B60 E1 | ≥ 49.41 µm | 8.13 V | 2.24 V | 8.01 V / – |
+| v3 B60 (step 19) | 47.6 µm | 9.06 V | 10.00 V clipped (15.2 needed) | up to 4.5 V |
+
+- B60 readout radial modes 2.90 / 2.99 MHz. The 10° tilt now fits easily on both detector dies.
+- Same transport behaviour as A30: hold the centre DC at 0 V while moving.
+- DC height tuning (`13`, `out/13_dc_height_tuning_v4/`): undoing the B60 drop needs 0.7 V (no tilt) / 1.9 V (10°) on E2 and leaves 291 nm micromotion (β ≈ 3.7 at 493 nm, k along it); on E1, ≤ 0.55 µm needs 0.7 / 2.1 V and leaves ≤ 81 nm (β ≤ 1.0).
+
+---
+
+## 2026-11-08: Step 28, zones 480 µm apart, 120 µm segment pitch, mirror via moved (`gds/make_chip.py`; `sim/12`, `13`, `10b`)
+
+**Decision (team, 2026-11-08; `notes/decisions.md`):** loading and readout zones 480 µm apart, to match the team's laser setup. Zones at x = −240 / +240 (were ±300).
+
+**Layout calls (Claude, `design/` exception).**
+- Outer DC segments at **120 µm pitch** (115 µm + 5 µm gap), still 15 per side, centres −840 … +840, so both zones sit on segment centres (four pitches apart). Step 3 found 75–150 µm pitches equivalent (1 MHz axial 9–12 V, tilt ≤ 2.8 V). A 96 µm pitch would need 16 segments and renumbered electrodes; 100 µm would put a zone over a gap. Electrode numbers and pad rows are unchanged.
+- Detector, slot, contacts and mirror move with X_READ (A30 slot end 175, B60 158.5; mirror right end 268 / 284.5).
+- **Mirror via moved from (−2450, 130) to (−2140, 130)**, just past the RF open end; the strip now starts at x = −2240 (2.51 mm on A30, was 2.88).
+- `check_chip.py`: **ALL CHECKS PASS** on A30, B60, NODET. Runs and wafer regenerated (same die mix). The 600 µm logs are kept as `sim/out/*_600um.txt`.
+
+**Simulation (`12`, 53 V / 28 MHz, 0.8 MHz axial, 10° tilt in the zones).**
+
+| Die | Loading \|V\|max | Readout \|V\|max | Transport max \|V\| / max step: centre DC free | … centre DC at 0 V |
+|---|---|---|---|---|
+| A30 E2 (600 µm, step 25) | 8.14 | 6.09 | 7.26 / 7.96 V | 6.41 / 1.67 V |
+| **A30 E2** | **7.45** | **6.28** | 7.27 / 7.59 V | **6.64 / 1.71 V** |
+| A30 E1 | 7.45 | 6.27 | 7.27 / 7.59 V | – |
+| **B60 E2** | 7.46 | **2.24** | 7.13 / 8.00 V | **6.64 / 1.71 V** |
+| B60 E1 | 7.45 | 2.24 | 7.13 / 8.00 V | – |
+| NODET | 7.92 | 7.87 | 7.20 / 1.66 V | – |
+
+- Null heights 49.96–49.98 µm; RF-only radial 3.00 MHz, q 0.30; 49 transport steps of 10 µm.
+- With the centre DC held at 0 V the zone solves still clip at ±10 V (0.795 MHz axial), so the tilt is ramped in at the zone as before.
+- `13` (window drops from step 26 unchanged): undoing the drop needs A30 1.3 / 6.1 V and B60 0.7 / 1.9 V (no tilt / 10°) on E2, with the same micromotion as step 27 (A30 173 nm, B60 291 nm on E2; ≤ 55 / 81 nm on E1).
+
+**Mirror ground path (`10b`, L = 2240 µm between the rails, 140 µm to the via).**
+
+| Al | Detector-end swing | Extra wire current (E2) |
+|---|---|---|
+| 150 nm, via at −2450 (step 26) | 26–35 mV | 0.62–0.84 µA |
+| 150 nm, via at −2140 | 20–27 mV | 0.48–0.65 µA |
+| **450 nm, via at −2140** (proposed) | **6.7–8.8 mV** | **0.16–0.21 µA** |
+
+- The Al thickness is a traveler parameter, not GDS; 450 nm is a proposal for the v4 traveler rewrite (step-L10 sputter time; watch hillocks after the spacer deposition, ≤ 300 °C).
+- Slot-lead pickup: 44.5 µA per lead over 2.24 mm (E2), 28.3 µA (E1). Unchanged physics; the RF grounding decision stays open.
+
+**Addendum (team, 2026-11-08): Al 450 nm adopted** (`notes/decisions.md`). The local mirror is 450 nm Al-1%Cu: detector-end swing 6.7–8.8 mV, extra wire current 0.16–0.21 µA on E2. GDS unchanged. To carry into the v4 traveler: L10 sputter time, strip acceptance ≈ 5 Ω, a mirror probe opening, and a hillock check after the spacer deposition.

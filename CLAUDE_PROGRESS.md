@@ -1,13 +1,13 @@
 # Claude progress: five-wire Ba⁺ trap with an integrated NbN SNSPD
 
-> **Claude-authored running status.** Last documentation update: 2026-11-08 (linked fab notes and reconciliation checklist).
+> **Claude-authored running status.** Last update: 2026-11-08 (v4: local-mirror architecture, slot leads, A30 + B60; DESIGN_LOG steps 25–27).
 > - Full detail with numbers and citations for every step: [design log](design/DESIGN_LOG.md) (numbered design steps and documentation updates).
 > - New team member? Set up the `electrode` repo first: `design/CLAUDE.md`, "Setting up the electrode repo".
 > - Folder index and how to run: `design/README.md`.
 
 ## Fabrication review
 
-Start with [fab overview](design/fab/README.md), [variants](design/fab/VARIANTS.md) and [open decisions](design/fab/OPEN_DECISIONS.md). R1_TRAP remains the selected first run. Current generators specify v3.1 (130/200 nm, rounded turns, enlarged footprint, T9); older fab estimates need reconciliation before R1_FULL. No new layout checks, simulations or witness measurements were run during this cleanup.
+Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decision log](notes/decisions.md). **The architecture changed to v4 on 2026-11-08** (local mirror, no D2; leads in a slot along the centre DC; A30 only; R1_TRAP on the no-Al stack). The trap-die GDS is v4 and passes `check_chip.py`; the traveler, run sheet, mask list and test dies still describe v3 and carry a banner. Their rewrite waits on the electrode Au choice (E1 vs E2).
 
 ## Goal
 
@@ -18,7 +18,7 @@ Synthesise design files and fab procedures for a basic **five-wire surface trap*
 | Ion | ¹³⁸Ba⁺, detected at 493 nm |
 | Ion height | 50 µm |
 | Substrate | High-resistivity Si (sapphire and fused-silica deltas covered) |
-| Metals | Al ground plane, plated Au electrodes |
+| Metals | Local Al mirror under the SNSPD and its leads (v4); Au electrodes, E1 0.35 µm lift-off or E2 6 µm plated (open) |
 | Detector | NbN SNSPD under the readout zone, under SiO₂ only (no ITO since v3) |
 | Electrodes | Segmented outer DC electrodes |
 | Zones | Loading zone, plus a readout zone directly above the SNSPD |
@@ -28,20 +28,20 @@ Every design choice is referenced to the literature.
 
 Ground rules agreed with the team:
 - Claude-written docs live in `design/` and are labelled Claude-authored.
-- Claude does not touch `proposal/*.tex` or `notes/decisions.md`.
+- Claude does not touch `proposal/*.tex`. Claude logs the team's decisions in `notes/decisions.md` (team change, 2026-11-08).
 
 ## Current deliverables (v3)
 
 | What | File |
 |---|---|
-| Trap dies (10 × 10 mm) | `design/gds/trap_die_v3_A30.gds` (30 × 30 µm SNSPD), `trap_die_v3_B60.gds` (60 × 30 µm), `trap_die_v3_NODET.gds` (plain trap, no SNSPD) |
-| Test die (10 × 2.5 mm) | `design/gds/test_die_v3.gds`: T1 Au comb, T2 D2 capacitor, T3 NbN bar, T4/T4b spare SNSPDs, T6 Au loop, T8 EBL dose array (T5/T7 ITO tests removed) |
+| Trap dies (10 × 10 mm) | `design/gds/trap_die_v4_A30.gds` (30 × 30 µm SNSPD, local mirror, slot leads), `trap_die_v4_B60.gds` (60 × 30 µm), `trap_die_v4_NODET.gds` (plain trap, no SNSPD, no Al). v3 (incl. B60) in `gds/archive_v3_baseline/` |
+| Test die (10 × 2.5 mm) | `design/gds/test_die_v3.gds`: T1 Au comb, T2 D2 capacitor, T3 NbN bar, T4/T4b spare SNSPDs, T6 Au loop, T8 EBL dose array, T9 geometry array. **Still v3; rework for v4 open** |
 | R&D runs | `design/gds/run_R1_TRAP.gds` (6 NODET + 2 trap-only test dies; **run 1a, chosen first**; sheet `design/fab/RUNSHEET_R1_TRAP.md`) and `run_R1_FULL.gds` (2 A30 + 2 B60 + 2 NODET + 2 TEST): 8 dies, 20.2 × 33.1 mm block at the centre of a 100 mm wafer (`make_run.py`) |
-| Full wafer (reference) | `design/gds/wafer_v3.gds` + `wafer_v3_map.csv/png`: 56 dies, columns of [A30, B60, A30, TEST] |
+| Full wafer (reference) | `design/gds/wafer_v4.gds` + `wafer_v4_map.csv/png`: 56 dies, columns of [A30, B60, A30, TEST] |
 | Pad lists | `design/gds/*_pads.csv` |
 | Layer map | `design/gds/layer_map.md` |
 | Simulation layouts | `design/gds/*_sim.json` (read by gds2itvg) |
-| Generators / checks | `make_chip.py`, `make_test_die.py`, `make_run.py`, `make_wafer.py`; `check_chip.py` (DRC + connectivity + fab consistency + no ITO + no pads in the beam-exit corners; **all pass** on A30, B60, NODET) |
+| Generators / checks | `make_chip.py`, `make_test_die.py`, `make_run.py`, `make_wafer.py`; `check_chip.py` (DRC + connectivity + fab consistency + no ITO + no pads in the beam-exit corners; **all pass** on v4 A30 and NODET) |
 | Simulations | `design/sim/01…13_*.py` (outputs in `design/sim/out/`) |
 | Literature | `design/research/reports/Trap integrated SNSPD design.md`, `design/references_design.bib` |
 | Fab | `design/fab/TRAVELER.md`, `mask_list.md`, `process_checks.md`, `test_plan.md` |
@@ -50,17 +50,18 @@ Ground rules agreed with the team:
 
 | Item | Value |
 |---|---|
-| Geometry | Centre DC 40 µm, RF rails 84 µm, gaps 5 µm, 6 µm Au on 10 µm SiO₂ over Al |
+| Geometry | Centre DC 40 µm (A30: 25 µm lead slot), RF rails 84 µm, gaps 5 µm; Au (E1 0.35 / E2 6 µm, open) on ~1.3 µm SiO₂ over HR Si; local Al mirror, no ground plane (v4) |
 | RF drive | 53 V at 28 MHz → radial 3.0 MHz, q 0.30, depth ≈ 52 meV |
-| Outer segments | 15 + 15 at 100 µm pitch |
-| Zone spacing | Loading ↔ readout 600 µm (12 h) |
-| Readout window | 30 µm opening inside the centre DC over bare SiO₂ (no ITO, v3); the L45 protect patch keeps the gap etch out of it |
-| Window effect on height | −1.38 µm (A30) / −2.50 µm (B60) over bare SiO₂ (3-D FD, upper bound). The ion now sees bare SiO₂ in the window. |
-| NbN absorption | ≈ 0.54 at 493 nm for the v3.1 meander (f 0.65; EMT, step 24); 0.40 at f 0.5 (v3) |
-| Geometric collection | 2.23 % (A30), 4.20 % (B60) with isotropic Ba⁺ emission (step 24; the old 3.25 % / 5.9 % assumed a σ pattern). × 95 % landing × 0.54 ≈ 1.15 % / 2.2 %. Todaro: 2.0 % geometric. |
+| Outer segments | 15 + 15 at 120 µm pitch (100 µm before step 28) |
+| Zone spacing | Loading ↔ readout 480 µm (team decision 2026-11-08, laser setup; was 600 µm) |
+| Readout window | 30 µm opening inside the centre DC; floor = 80 nm SiO₂ cap over the grounded local mirror (v4) |
+| Window effect on height | v4: −1.19 µm (E2) / ≤ −0.37 µm (E1), grounded floor (3-D FD). v3: −1.38 µm over bare SiO₂. |
+| NbN absorption | v4: 0.66 with a 160 nm cap, 0.44 with the drawn 80 nm (sim 09c, step 26); v3.1: 0.54 (f 0.65, EMT) |
+| Geometric collection | 2.23 % (A30) with isotropic Ba⁺ emission at the v3 height (step 24); not yet recomputed for v4. Todaro: 2.0 % geometric. |
 | Beam clipping (10 × 10 mm die) | ≈ 1.7e-2 at 493 nm, 3.2e-2 at 650 nm (was 1.1e-5 / 1.1e-4 on the 2.5 mm die) |
 | RF pickup bound (2-D) | 1.42 µA with no ITO (was ≈ 0 with the grounded buried ITO); ~7–9 % of the estimated NbN switching current |
 | Simulated on the v3 fab GDS | Null height 50.08 µm (loading), 50.09 µm (readout); with the window recess ≈ 48.7 µm (A30) or ≈ 47.6 µm (B60). Loading zone and NODET: axial 0.8 MHz, radial 2.89 / 2.97 MHz, 10° tilt, max \|V\| 9.05 V. **A30/B60 readout: the open window splits the radial modes, so the 10° tilt needs 13.2 / 15.2 V (over ±10 V); no tilt needs 6.6 / 3.4 V.** Transport max 7.33 V; ≤ 1.6 V per 10 µm step (A30), up to 4.5 V near the B60 window. |
+| Simulated on the v4 fab GDS | Null 49.97 / 49.98 µm; readout incl. recess ≈ 48.8 µm (E2). 10° tilt: loading 8.1 V, **readout 6.1 V** (fits ±10 V; v3 needed 13.2 V). NODET 9.1 V. Transport with the centre DC held at 0 V: max 6.4 V, ≤ 1.67 V per 10 µm step (8 V steps if the centre DC is used, because of the slot end and window). |
 
 ## Done ✅ (chronological)
 
@@ -96,6 +97,10 @@ Ground rules agreed with the team:
 
 23. **SNSPD geometry v3.1** (DESIGN_LOG step 24, report `design/research/reports/SNSPD geometry audit.md`): 130/200 nm meander, lines past the window (3 / 4.5 µm axially, 1 µm radially per the sim 10 RF scan), rounded end blocks and tapered tabs outside the light footprint; shared `gds/snspd_geom.py`; new NbN checks; T9 geometry array on the test die; sims 06, 10, 15 updated. All dies pass `check_chip.py`.
 
+24. **Decision log handed to Claude** (team change, 2026-11-08): rule updated in root and `design/` CLAUDE/AGENTS files; `notes/decisions.md` created, with the earlier team decisions backfilled.
+
+25. **v4: local-mirror architecture** (DESIGN_LOG step 25, team decisions): `make_chip.py` v4 (local Al mirror + ground via, Au leads in a centre-DC slot as Hampel 2023, no D2/L45, NODET without Al); `check_chip.py` rewritten, all pass on A30 and NODET; runs and wafer regenerated; v3 archived. Sims 04b (grounded window floor), 12 and 13 rerun: readout tilt now fits (6.1 V); transport needs the centre DC held at 0 V. Fab pages for the v3 process carry a banner until the E1/E2 choice.
+
 ## In progress ⏳
 
 - Fabrication notes reorganized into linked modules. Qualification and detector reconciliation remain open; see [checklist](design/fab/OPEN_DECISIONS.md).
@@ -103,22 +108,15 @@ Ground rules agreed with the team:
 ## Open items / decisions for the team
 
 - [ ] Ground vias (step 22): add the via contact check to W3 (with / without Ar pre-clean, sidewall cross-section); confirm the AJA substrate RF etch.
-- [ ] Log in `notes/decisions.md` (team's call): **on-chip fill-to-M1 ground vias** (2026-11-08).
-- [ ] Log in `notes/decisions.md` (team's call): **v3.1 SNSPD geometry** (step 24). Open from it: centre-DC filter capacitor, Al RF potential under the leads, Isw at 5 K (maybe 8–9 µA), measured NbN thickness, RCWA check of absorption, Suleimen 2026 full text, isotropy derivation check.
-- [ ] Local-mirror variant (step 23, [local-mirror proposal](design/fab/variants/LOCAL_MIRROR.md)): written up only, no GDS. To pursue it: choose the lead routing (slot in the centre DC vs a thicker local SiO₂), add `make_chip.py --localmirror`, rerun 09b / 04b / 12 / 10 with no D2; specify Si with ρ > 20 kΩ·cm (NIST practice, no ground plane needed); prefer option E2 (6 µm plated, as Todaro did). Log the choice in `notes/decisions.md` if the team picks it.
+- [ ] **v3.1 SNSPD geometry** (step 24) is Claude's design call, not a team decision (team, 2026-11-08), so it stays out of `notes/decisions.md` until the team adopts it. Open from it: centre-DC filter capacitor, Al RF potential under the leads, Isw at 5 K (maybe 8–9 µA), measured NbN thickness, RCWA check of absorption, Suleimen 2026 full text, isotropy derivation check.
+- [ ] **v4 follow-ups** (step 25): choose E1 vs E2; rewrite traveler / R1_TRAP sheet / mask list / stack for v4; rework the test dies (no D2, no die-wide Al); set the cap to 160 nm in the rewritten traveler (09c, step 26); RF bypass / symmetric termination for the slot leads (10b: ≈ 46 µA common-mode per lead); mirror ground path: via moved and Al 450 nm (team decision; +0.2 µA instead of +0.6), still to go into the traveler with a probe opening; order Si with ρ > 20 kΩ·cm; measure resonator Q with a die mounted.
 - [ ] Bond pads (step 21): run W7 bond-and-leak before R1; get MIT.nano bonder and tool part numbers; draw the bond diagram against the carrier; field-solve DC-to-RF coupling.
-- [ ] Log in `notes/decisions.md` (team's call):
-  - **no ITO** (2026-11-07): absorption 0.53 → 0.40, RF pickup bound ≈ 0 → 1.4 µA, bare SiO₂ under the ion (unscreened charging and click kicks);
-  - **10 × 10 mm die with edge pads** (2026-11-07): ~1.7e-2 of the 493 nm beam clips the surface (vs 1e-5 on the 2.5 mm die);
-  - readout radial tilt: 10° no longer fits ±10 V on A30/B60 (13.2 / 15.2 V); pick a smaller tilt, wider DACs, or no tilt;
-  - A30/B60 split;
-  - 600 µm zone spacing;
-  - 0.8 MHz axial frequency with ±10 V DACs.
+- [ ] Not yet team decisions (Claude's layout calls or open): readout radial tilt (v4 A30 fits 10° at 6.1 V; team to confirm), 0.8 MHz axial with ±10 V DACs.
+- [ ] Reasons the team still owes `notes/decisions.md` (asked 2026-11-08): ion height 50 µm; A30/B60 detector variants; and "not recorded" on Ba⁺/project scope, NODET die, R1_TRAP first. (Si substrate, no ITO and the 10 × 10 mm die were answered 2026-11-08.)
 - [ ] Before tape-out, run the witness wafers in [qualification](design/fab/QUALIFICATION.md). Also confirm:
   - the Plating-U04 bath;
   - the Dane NbN recipe (Berggren group);
-- [ ] Log in `notes/decisions.md`: first run is trap-only R1_TRAP (team decision, 2026-11-02).
-- [ ] Before R1_TRAP: D2 stress loop, gap-etch rate loop, W5 plating (RUNSHEET_R1_TRAP section 2).
+- [ ] Before R1_TRAP (v4): no D2 stress or gap-etch loops any more; W5 plating only if E2; W7 bond-and-leak on the v4 stack.
 - [ ] Ask MIT.nano staff the facility questions in [facility questions](design/fab/QUALIFICATION.md#facility-confirmations): which tools accept Au, NbN sputter access, gold plating tank.
 - [ ] Check whether T4/T4b on the test die can be wire-bonded for the cold SNSPD test (marked [verify] in `test_plan.md` (b)).
 - [ ] Not modelled yet:
@@ -135,3 +133,5 @@ Ground rules agreed with the team:
 | D2 etched down to a buried ITO | ITO on D2 + buried grounded ITO | The ion sees no dielectric, and absorption is recovered |
 | ITO on D2 + buried grounded ITO | No ITO, bare SiO₂ window floor | Team decision 2026-11-07 |
 | Narrow 10 × 2.5 mm die | 10 × 10 mm die, trap centred, pads at the edges | Team decision 2026-11-07 |
+| Die-wide Al ground plane under 10 µm D2 (v3) | Local Al mirror, no D2, leads in a centre-DC slot (v4) | Team decision 2026-11-08: better optics with vacuum above the cap; NIST traps without a plane on HR Si |
+| A30 + B60 | A30 only, then A30 + B60 again | Team decisions 2026-11-08 (B60 kept after the v4 numbers) |
