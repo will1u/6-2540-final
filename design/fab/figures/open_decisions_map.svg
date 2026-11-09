@@ -16,7 +16,7 @@
   </defs>
 
   <rect x="0" y="0" width="1090" height="640" fill="#ffffff"/>
-  <text class="h" x="30" y="32">Open design decisions, 2026-11-08 (after the v4 decisions)</text>
+  <text class="h" x="30" y="32">Open design decisions, 2026-11-09 (after the loose-ends pass)</text>
   <text class="s" x="30" y="52">Orange = open choice · green = decided by the team (notes/decisions.md) · dashed = work before a run. Source: OPEN_DECISIONS.md.</text>
   <text class="g" x="1060" y="32" text-anchor="end">Claude-authored figure</text>
 
@@ -45,7 +45,7 @@
   <text class="b" x="45" y="242">Electrode Au</text>
   <text x="45" y="262">E1: 0.35 µm lift-off (no plating)</text>
   <text x="45" y="278">E2: 6 µm plated (as Todaro)</text>
-  <text x="45" y="296">Blocks the v4 traveler rewrite.</text>
+  <text x="45" y="296">Fab pages carry both branches (11-09).</text>
   <text class="r" x="45" y="314">Resolve: SiO₂ exposed in the gaps (E1: 0.07</text>
   <text class="r" x="45" y="329">depth/width), plating effort, resonator tests</text>
 
@@ -69,12 +69,12 @@
   <text class="b" x="30" y="378">Before any v4 run (work, not choices)</text>
   <rect class="chk" x="30" y="388" width="505" height="232" rx="6"/>
   <text class="b" x="45" y="410">Documents and layouts</text>
-  <text x="45" y="432">· Rewrite traveler, R1_TRAP sheet, mask list, stack for v4</text>
-  <text x="58" y="448">(after the E1/E2 choice; v3 pages carry a banner)</text>
-  <text x="45" y="470">· Rework the test dies for v4 (T2 Au/D2/M1 capacitor and</text>
-  <text x="58" y="486">D2 probe openings no longer exist; no-Al TEST_TRAP)</text>
+  <text x="45" y="432">· Done 11-09: traveler, R1_TRAP sheet, mask list, stack</text>
+  <text x="58" y="448">rewritten for v4 with E1 and E2 as equal branches</text>
+  <text x="45" y="470">· Done 11-09: v4 test dies (T2v, T10, T11, T12;</text>
+  <text x="58" y="486">no-Al TEST_TRAP) with an independent checker</text>
   <text x="45" y="508">· Mirror path: via moved, Al 450 nm (decided, +0.2 µA);</text>
-  <text x="58" y="524">add a probe opening and the R acceptance</text>
+  <text x="58" y="524">measured on T10 / T11; set the R acceptance</text>
   <text x="45" y="546">· Order Si with ρ &gt; 20 kΩ·cm</text>
   <text x="45" y="568">· MIT.nano: Au tools, plating (if E2), training</text>
 
@@ -85,6 +85,6 @@
   <text x="570" y="476">· RF loss / resonator Q with no ground plane (bench test)</text>
   <text x="570" y="498">· Gap model: the local Al under the slot gaps and the</text>
   <text x="583" y="514">window is not in the gds2itvg stack (ground_depth null)</text>
-  <text x="570" y="536">· Before R1_FULL: detector-doc reconciliation (T9, areas,</text>
-  <text x="583" y="552">EBL time), NbN recipe + W1, W2 EBL, cold tests</text>
+  <text x="570" y="536">· Done 11-09: areas and squares measured from the GDS.</text>
+  <text x="583" y="552">Before R1_FULL: NbN recipe + W1, W2 EBL, cold tests</text>
 </svg>
