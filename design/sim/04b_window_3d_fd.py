@@ -38,6 +38,16 @@ os.makedirs(OUT, exist_ok=True)
 D = 1.0                                   # grid step (um)
 XM, YM, ZB, ZT = 160.0, 160.0, -16.0, 130.0
 C, A, G, T_AU, EPS = 40.0, 84.0, 5.0, 6.0, 3.9
+# v4 local mirror (DESIGN_LOG step 25): "./run.sh 04b_window_3d_fd.py mirror_t6" (or mirror_t1).
+# Au T_AU um thick on ~1.3 um SiO2 over HR Si (eps 11.7 at 28 MHz, above its ~8 MHz relaxation frequency),
+# no ground plane under the rails. The window floor is the cap 0.32 um above the grounded Al mirror, so
+# it is a grounded floor at z = -T_AU (as 'ito6', which was tied to RF ground). The box bottom (grounded)
+# moves to 40 um below the Au. E1 (0.35 um Au) is below the 1 um grid: mirror_t1 is its upper bound.
+MIRROR = len(sys.argv) > 1 and sys.argv[1].startswith("mirror_t")
+if MIRROR:
+    T_AU = float(sys.argv[1][len("mirror_t"):])
+    ZB = -T_AU - 40.0
+EPS_SI, T_SIO2 = 11.7, 1.3
 
 xs = np.arange(0, XM + D / 2, D)
 ys = np.arange(0, YM + D / 2, D)
@@ -48,13 +58,15 @@ X, Y, Z = np.meshgrid(xs, ys, zs, indexing="ij")
 
 def solve(wy, wx, floor):
     eps = np.where(Z < -T_AU, EPS, 1.0)
+    if floor == "mirror":
+        eps = np.where(Z < -T_AU - T_SIO2, EPS_SI, eps)
     metal = (Z >= -T_AU) & (Z <= 0)
     win = (X <= wy / 2) & (Y <= wx / 2) if wx > 0 else np.zeros_like(metal)
     rf = metal & (X >= C / 2 + G) & (X <= C / 2 + G + A)
     gnd = metal & ((X <= C / 2) & ~win | (X >= C / 2 + 2 * G + A))
     if floor == "etched":
         eps = np.where(win & (Z < -T_AU), 1.0, eps)
-    if floor == "ito6":
+    if floor in ("ito6", "mirror"):
         # ITO sheet on top of the SiO2 at the bottom of the Au window, tied to the centre DC
         # electrode (RF ground): a 6 um deep pocket with a conducting floor
         gnd = gnd | (win & (np.abs(Z + T_AU) < D / 2))
@@ -119,7 +131,11 @@ CASES = [("none", 0, 0, "etched"),
          ("30x30 ito6", 30, 30, "ito6"), ("30x60 ito6", 30, 60, "ito6"),
          ("30x60 oxide", 30, 60, "oxide")]   # v3: no ITO, bare D2 floor (DESIGN_LOG step 17)
 TAG = ""
-if len(sys.argv) > 1:          # e.g. "ito6": run only cases whose name contains it (+ reference)
+if MIRROR:                     # v4: reference and the A30 window on the local-mirror stack
+    TAG = "_" + sys.argv[1]
+    CASES = [("none", 0, 0, "mirror"), (f"30x30 {sys.argv[1]}", 30, 30, "mirror"),
+             (f"30x60 {sys.argv[1]}", 30, 60, "mirror")]          # B60 window (step 26: B60 reconsidered)
+elif len(sys.argv) > 1:        # e.g. "ito6": run only cases whose name contains it (+ reference)
     TAG = "_" + sys.argv[1]
     CASES = [CASES[0]] + [c for c in CASES[1:] if sys.argv[1] in c[0]]
 

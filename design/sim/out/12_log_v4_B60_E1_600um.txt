@@ -1,0 +1,4 @@
+3-D recess correction (30x60 mirror_t1): -0.55 um
+loading  y=   -600: null z = 49.96 um (x 0.00); RF-only [2.99805952 2.9984708 ] MHz, q = 0.303; DC freqs [0.8   2.923 2.966] MHz; |V|max 8.13 V; bounded False; radial axes at 169.5 deg
+readout  y=      0: null z = 49.96 um (x -0.00); RF-only [2.99665877 2.99707376] MHz, q = 0.303; DC freqs [0.8   2.896 2.99 ] MHz; |V|max 2.24 V; bounded False; radial axes at 170.2 deg
+transport: 61 steps, max |V| 7.26 V, max change per 10 um step 8.006 V, axial 0.800-0.800 MHz, height 49.96-49.96 um, bounded steps: 0

@@ -8,7 +8,11 @@ ion away from the null, like a spring: displacement = force / stiffness. The ion
 RF field is not zero, so it is driven at the RF frequency (excess micromotion). This script measures
 how much DC that takes and what the micromotion is.
 
-Method (planar gds2itvg model of the v3 die, readout zone, ITVG frame: x radial, y axial, z height):
+v4 (DESIGN_LOG steps 25-27): the local-mirror A30 and B60 dies, electrode options E2 (6 um plated Au) and E1
+(0.35 um lift-off Au), with the grounded window floor of <stem>_simfloor.gds. The v3 A30/B60 run is in
+out/13_dc_height_tuning/ and DESIGN_LOG step 19; v4 writes out/13_dc_height_tuning_v4/.
+
+Method (planar gds2itvg model of the die, readout zone, ITVG frame: x radial, y axial, z height):
   1. Same DC set as sim 12 (0.8 MHz axial, the 14 electrodes nearest the ion), for two radial tilts: 0 and
      10 deg. Solved WITHOUT the +-10 V clip so the reported max |V| is the true cost (sim 12 clips at 10 V;
      with the open bare-SiO2 window the 10 deg tilt alone already needs 13-15 V, DESIGN_LOG step 19).
@@ -20,12 +24,12 @@ Method (planar gds2itvg model of the v3 die, readout zone, ITVG frame: x radial,
   4. At that position: RF field amplitude E_RF = V_RF |grad phi_RF|, micromotion amplitude
      a = e E_RF / (m Omega^2), and modulation index beta = k a for a 493 nm beam with k along the
      micromotion (worst case; in-plane beams have k_z = 0 and barely see vertical micromotion).
-Swept dz = 0 ... 3 um. The window drop to undo comes from sim 04b (bare-oxide floor): -1.38 um
-(A30, 30 x 30) and -2.50 um (B60, 30 x 60). The planar model does not contain the drop itself, so the
+Swept dz = 0 ... 3 um. The window drop to undo comes from sim 04b for the die's window floor
+(v4: summary_mirror_t6.json for E2, summary_mirror_t1.json for E1, an upper bound). The planar model does not contain the drop itself, so the
 spring constant and RF gradient are those of the unperturbed trap (fine for a few-um shift).
 
-Outputs: sim/out/13_dc_height_tuning/summary.json, dc_height.png
-Usage:   ./run.sh 13_dc_height_tuning.py            (A30 and B60)
+Outputs: sim/out/13_dc_height_tuning_v4/summary.json, dc_height.png
+Usage:   ./run.sh 13_dc_height_tuning.py            (v4 A30 and B60, options E2 and E1)
 """
 
 import json
@@ -40,7 +44,7 @@ from scipy.optimize import minimize
 import trapcalc as tc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "out", "13_dc_height_tuning")
+OUT = os.path.join(HERE, "out", "13_dc_height_tuning_v4")
 os.makedirs(OUT, exist_ok=True)
 
 V_RF, F_RF = 53.0, tc.F_RF
@@ -49,9 +53,14 @@ F_AX, DAC, N_ACTIVE, TILTS = 0.8e6, 10.0, 14, (0.0, 10.0)
 DC_LIMIT = 1e9                             # no clipping; compare max |V| with the DAC range afterwards
 LAM = 493e-9
 DZ = np.arange(0.0, 3.01, 0.25)           # wanted upward shift (um)
+GDSDIR = os.path.join(HERE, "..", "gds")
+DIES = {f"{v}_{e}": os.path.join(GDSDIR, f"trap_die_v4_{v}" + ("_sim.json" if e == "E2" else "_E1_sim.json"))
+        for v in ("A30", "B60") for e in ("E2", "E1")}
 DH_WINDOW = {}
-for k, case in (("A30", "30x30 oxide"), ("B60", "30x60 oxide")):
-    DH_WINDOW[k] = json.load(open(os.path.join(HERE, "out", "04b_window_3d", "summary_oxide.json")))[case]["dh"][0]
+for k, js in DIES.items():
+    w = json.load(open(js))["_window"]
+    DH_WINDOW[k] = json.load(open(os.path.join(HERE, "out", "04b_window_3d", f"summary_{w['floor']}.json")))[
+        f"{w['wy']:g}x{w['wx']:g} {w['floor']}"]["dh"][0]
 
 
 def rf_grad(els, p, h=0.25):
@@ -70,10 +79,9 @@ def energy_eV(els, V, p):
 
 summary = {}
 fig, axs = plt.subplots(1, 3, figsize=(16, 4.2))
-for die in ("A30", "B60"):
-    js = os.path.join(HERE, "..", "gds", f"trap_die_v3_{die}_sim.json")
+for die, js in DIES.items():
     lay = Layout.from_json(js)
-    els = build_electrodes(js.replace("_sim.json", ".gds"), lay, ion_box=(-20, 20, -200, 200), ion_z=(25, 90))
+    els = build_electrodes(os.path.join(GDSDIR, json.load(open(js))["_gds"]), lay, ion_box=(-20, 20, -200, 200), ion_z=(25, 90))
     dc_names = [n for n in els if n != "1"]
     r = rf_null(els, ["1"], y=0.0, z_range=(15, 150))
     p0 = np.array([r["x"], 0.0, r["z"]])
@@ -123,7 +131,7 @@ for die in ("A30", "B60"):
         axs[1].plot(zs, [q["dz_achieved"] for q in rows], "o" + ls, ms=3, label=lab)
         axs[2].plot(zs, [q["a_mm_nm"] for q in rows], "o" + ls, ms=3, label=lab)
     for a_ in axs:
-        a_.axvline(-DH_WINDOW[die], ls=":", lw=0.8, color="C0" if die == "A30" else "C2")
+        a_.axvline(-DH_WINDOW[die], ls=":", lw=0.8, color="0.5")
 axs[0].axhline(DAC, color="r", lw=0.8)
 axs[0].set(xlabel="wanted upward shift (um)", ylabel="max |V| (V)", title="DC voltage needed (red: 10 V DAC)")
 axs[1].plot(DZ, DZ, "k:", lw=0.8)

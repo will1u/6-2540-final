@@ -10,10 +10,11 @@ model; the ITO-on-D2 window enters as a fill of the centre DC electrode, see mak
      workflow.ipynb; no trajectory optimisation): voltage waveforms, axial frequency, height
   4. The 3-D recess correction at the readout window is added to the reported readout height. It is
      looked up by the window size in the layout JSON ("_window") from sim/04b's results for that floor
-     (v3: bare oxide; 30 x 30 -> -1.38 um, 30 x 60 -> -2.50 um; no window -> 0).
+     (v3: bare oxide; 30 x 30 -> -1.38 um, 30 x 60 -> -2.50 um; v4: mirror_t6 / mirror_t1, the grounded
+     floor over the local mirror for E2 / E1; no window -> 0).
 Writes gridfiles-free outputs: sim/out/12_final_chip/ (labels.png, null.png, waveforms.png,
 waveforms.csv, summary.json).
-Usage: ./run.sh 12_final_chip_check.py [path/to/chip_sim.json]
+Usage: ./run.sh 12_final_chip_check.py [path/to/chip_sim.json] [--centre-dc-zero]
 """
 
 import csv
@@ -30,9 +31,16 @@ from gds2itvg.plot import label_map
 import trapcalc as tc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-JS = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "gds", "trap_die_v3_A30_sim.json")
-GDS = JS.replace("_sim.json", ".gds")
-TAG = os.path.basename(JS).replace("_sim.json", "")
+ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+JS = ARGS[0] if ARGS else os.path.join(HERE, "..", "gds", "trap_die_v4_A30_sim.json")
+LAYOUT = json.load(open(JS))
+# v4 layouts name the GDS to simulate ("_gds": the A30 _simfloor.gds adds the grounded window floor)
+GDS = os.path.join(os.path.dirname(JS), LAYOUT["_gds"]) if "_gds" in LAYOUT else JS.replace("_sim.json", ".gds")
+# --centre-dc-zero: hold the centre DC (electrode 2) at 0 V in every solve (DESIGN_LOG step 25). On the v4 A30
+# die the lead slot and the grounded window floor give electrode 2 a strong axial ripple, so any voltage on it
+# makes the transport waveforms rough; at 0 V the slot, leads and window floor are all at the same potential.
+FIX2 = "--centre-dc-zero" in sys.argv
+TAG = os.path.basename(JS).replace("_sim.json", "") + ("_V2zero" if FIX2 else "")
 OUT = os.path.join(HERE, "out", "12_final_chip", TAG)
 os.makedirs(OUT, exist_ok=True)
 
@@ -40,7 +48,6 @@ V_RF, F_RF = 53.0, tc.F_RF
 F_AX = 0.8e6
 DC_LIMIT = 10.0
 N_ACTIVE = 14
-LAYOUT = json.load(open(JS))
 ZONES = LAYOUT["_zones"]
 X_LOAD, X_READ = ZONES["loading_itvg_y"], ZONES["readout_itvg_y"]      # ITVG y (= GDS x - x_read)
 WIN = LAYOUT.get("_window", {"wx": 30.0, "wy": 30.0, "floor": "ito6"})   # v2 layouts: ITO-on-D2 30 x 30
@@ -56,7 +63,7 @@ lay = Layout.from_json(JS)
 els, gnd = build_electrodes(GDS, lay, ion_box=(-20, 20, -900, 350), ion_z=(25, 90), return_ground=True)
 label_map(els, os.path.join(OUT, "labels.png"), ground=gnd, ion_box=(-20, 20, -900, 350),
           title=f"{TAG}: electrode numbers (layer 50)")
-dc_names = [n for n in els if n != "1"]
+dc_names = [n for n in els if n != "1" and not (FIX2 and n == "2")]
 
 # 1. RF null along the axis
 ys = np.arange(-2200, 1601, 50.0)          # RF rails span ITVG y = -2300 ... +1700 (U bar)
