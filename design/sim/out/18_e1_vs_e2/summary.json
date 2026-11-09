@@ -1,0 +1,750 @@
+{
+ "rows": [
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, room temperature, bulk rho = 2.44e-08 ohm m",
+   "E1": "0.0697",
+   "E2": "0.0041",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / t; rho [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, 4 K, bulk rho, RRR = 2",
+   "E1": "0.0349",
+   "E2": "0.0020",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / (RRR t); RRR [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, 4 K, bulk rho, RRR = 5",
+   "E1": "0.0139",
+   "E2": "0.0008",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / (RRR t); RRR [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, 4 K, bulk rho, RRR = 10",
+   "E1": "0.0070",
+   "E2": "0.0004",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / (RRR t); RRR [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, room temperature, film rho = 4.00e-08 ohm m",
+   "E1": "0.1143",
+   "E2": "0.0067",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / t; rho [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, 4 K, film rho, RRR = 2",
+   "E1": "0.0571",
+   "E2": "0.0033",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / (RRR t); RRR [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, 4 K, film rho, RRR = 5",
+   "E1": "0.0229",
+   "E2": "0.0013",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / (RRR t); RRR [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs, 4 K, film rho, RRR = 10",
+   "E1": "0.0114",
+   "E2": "0.0007",
+   "unit": "ohm/sq",
+   "source": "[team calc] rho / (RRR t); RRR [verify]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Rs(E1) / Rs(E2) (any rho)",
+   "E1": "17.14",
+   "E2": "-",
+   "unit": "ratio",
+   "source": "[team calc] = t(E2) / t(E1) = 6 / 0.35"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Skin depth at 28 MHz, bulk rho",
+   "E1": "14.86",
+   "E2": "14.86",
+   "unit": "um",
+   "source": "[team calc] sqrt(rho / (pi f mu0))"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "t < skin depth (bulk rho): DC sheet resistance applies",
+   "E1": "yes",
+   "E2": "yes",
+   "unit": "-",
+   "source": "[team calc]"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "Skin depth at 28 MHz, film rho",
+   "E1": "19.02",
+   "E2": "19.02",
+   "unit": "um",
+   "source": "[team calc] sqrt(rho / (pi f mu0))"
+  },
+  {
+   "part": "1 Au resistance",
+   "quantity": "t < skin depth (film rho): DC sheet resistance applies",
+   "E1": "yes",
+   "E2": "yes",
+   "unit": "-",
+   "source": "[team calc]"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "RF rail, one rail (two rails)",
+   "E1": "47.62",
+   "E2": "47.62",
+   "unit": "sq",
+   "source": "[team calc] (XRF1 - XRF0) / A"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "RF feed lead, 2060 to 4700 at 60 um",
+   "E1": "44.00",
+   "E2": "44.00",
+   "unit": "sq",
+   "source": "[team calc] 2640 / 60"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "SNSPD slot lead, brief tail (300 um)",
+   "E1": "974.0",
+   "E2": "974.0",
+   "unit": "sq",
+   "source": "[team calc] brief geometry: about 300 um tail"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "SNSPD slot lead, drawn tail (402 um)",
+   "E1": "994.5",
+   "E2": "994.5",
+   "unit": "sq",
+   "source": "[team calc] make_chip.py path X_LEAD_END -> X_BEND -> X_SNPAD"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "Centre DC lead, x-span -2040 to -4650 at 7.5 um",
+   "E1": "348.0",
+   "E2": "348.0",
+   "unit": "sq",
+   "source": "[team calc] span only (brief)"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "Centre DC lead, drawn polyline at 7.5 um",
+   "E1": "394.0",
+   "E2": "394.0",
+   "unit": "sq",
+   "source": "[team calc] make_chip.py path (-2040 -> -3600 -> -3700,450 -> -4650,450)"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, bulk rho: RF rail (one)",
+   "E1": "3.3197",
+   "E2": "0.1937",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, bulk rho: RF feed lead",
+   "E1": "3.0674",
+   "E2": "0.1789",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, bulk rho: SNSPD slot lead (drawn)",
+   "E1": "69.3289",
+   "E2": "4.0442",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, bulk rho: centre DC lead (drawn)",
+   "E1": "27.4686",
+   "E2": "1.6023",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, film rho: RF rail (one)",
+   "E1": "5.4422",
+   "E2": "0.3175",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, film rho: RF feed lead",
+   "E1": "5.0286",
+   "E2": "0.2933",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, film rho: SNSPD slot lead (drawn)",
+   "E1": "113.6540",
+   "E2": "6.6298",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "2 squares",
+   "quantity": "R at room temperature, film rho: centre DC lead (drawn)",
+   "E1": "45.0305",
+   "E2": "2.6268",
+   "unit": "ohm",
+   "source": "[team calc] squares x Rs"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "RF current amplitude, C_rf = 1 pF",
+   "E1": "9.324",
+   "E2": "9.324",
+   "unit": "mA",
+   "source": "[team calc] 2 pi f C_rf V; C_rf [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 1 pF, bulk rho, RRR = 2",
+   "E1": "78.70",
+   "E2": "4.59",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 1 pF, bulk rho, RRR = 5",
+   "E1": "31.48",
+   "E2": "1.84",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 1 pF, bulk rho, RRR = 10",
+   "E1": "15.74",
+   "E2": "0.92",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 1 pF, film rho, RRR = 2",
+   "E1": "129.01",
+   "E2": "7.53",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 1 pF, film rho, RRR = 5",
+   "E1": "51.61",
+   "E2": "3.01",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 1 pF, film rho, RRR = 10",
+   "E1": "25.80",
+   "E2": "1.51",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "RF current amplitude, C_rf = 2 pF",
+   "E1": "18.648",
+   "E2": "18.648",
+   "unit": "mA",
+   "source": "[team calc] 2 pi f C_rf V; C_rf [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 2 pF, bulk rho, RRR = 2",
+   "E1": "314.79",
+   "E2": "18.36",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 2 pF, bulk rho, RRR = 5",
+   "E1": "125.92",
+   "E2": "7.35",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 2 pF, bulk rho, RRR = 10",
+   "E1": "62.96",
+   "E2": "3.67",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 2 pF, film rho, RRR = 2",
+   "E1": "516.05",
+   "E2": "30.10",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 2 pF, film rho, RRR = 5",
+   "E1": "206.42",
+   "E2": "12.04",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 2 pF, film rho, RRR = 10",
+   "E1": "103.21",
+   "E2": "6.02",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "RF current amplitude, C_rf = 5 pF",
+   "E1": "46.621",
+   "E2": "46.621",
+   "unit": "mA",
+   "source": "[team calc] 2 pi f C_rf V; C_rf [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 5 pF, bulk rho, RRR = 2",
+   "E1": "1967.44",
+   "E2": "114.77",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 5 pF, bulk rho, RRR = 5",
+   "E1": "786.98",
+   "E2": "45.91",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 5 pF, bulk rho, RRR = 10",
+   "E1": "393.49",
+   "E2": "22.95",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 5 pF, film rho, RRR = 2",
+   "E1": "3225.32",
+   "E2": "188.14",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 5 pF, film rho, RRR = 5",
+   "E1": "1290.13",
+   "E2": "75.26",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "3 RF heating",
+   "quantity": "P upper bound, C_rf = 5 pF, film rho, RRR = 10",
+   "E1": "645.06",
+   "E2": "37.63",
+   "unit": "uW",
+   "source": "[team calc] rho_4K = rho_RT / RRR; C_rf, RRR [verify]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, room temperature, bulk rho",
+   "E1": "69.33",
+   "E2": "4.04",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), room temperature, bulk rho",
+   "E1": "138.66",
+   "E2": "8.09",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, room temperature, bulk rho",
+   "E1": "0.2650",
+   "E2": "0.8608",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, room temperature, film rho",
+   "E1": "113.65",
+   "E2": "6.63",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), room temperature, film rho",
+   "E1": "227.31",
+   "E2": "13.26",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, room temperature, film rho",
+   "E1": "0.1803",
+   "E2": "0.7904",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, 4 K, bulk rho, RRR = 2",
+   "E1": "34.66",
+   "E2": "2.02",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), 4 K, bulk rho, RRR = 2",
+   "E1": "69.33",
+   "E2": "4.04",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, 4 K, bulk rho, RRR = 2",
+   "E1": "0.4190",
+   "E2": "0.9252",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, 4 K, bulk rho, RRR = 5",
+   "E1": "13.87",
+   "E2": "0.81",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), 4 K, bulk rho, RRR = 5",
+   "E1": "27.73",
+   "E2": "1.62",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, 4 K, bulk rho, RRR = 5",
+   "E1": "0.6432",
+   "E2": "0.9687",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, 4 K, bulk rho, RRR = 10",
+   "E1": "6.93",
+   "E2": "0.40",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), 4 K, bulk rho, RRR = 10",
+   "E1": "13.87",
+   "E2": "0.81",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, 4 K, bulk rho, RRR = 10",
+   "E1": "0.7829",
+   "E2": "0.9841",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, 4 K, film rho, RRR = 2",
+   "E1": "56.83",
+   "E2": "3.31",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), 4 K, film rho, RRR = 2",
+   "E1": "113.65",
+   "E2": "6.63",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, 4 K, film rho, RRR = 2",
+   "E1": "0.3055",
+   "E2": "0.8829",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, 4 K, film rho, RRR = 5",
+   "E1": "22.73",
+   "E2": "1.33",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), 4 K, film rho, RRR = 5",
+   "E1": "45.46",
+   "E2": "2.65",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, 4 K, film rho, RRR = 5",
+   "E1": "0.5238",
+   "E2": "0.9496",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "one lead R, 4 K, film rho, RRR = 10",
+   "E1": "11.37",
+   "E2": "0.66",
+   "unit": "ohm",
+   "source": "[team calc] drawn lead squares x Rs"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "pair R (two in series), 4 K, film rho, RRR = 10",
+   "E1": "22.73",
+   "E2": "1.33",
+   "unit": "ohm",
+   "source": "[team calc]"
+  },
+  {
+   "part": "4 SNSPD slot lead",
+   "quantity": "50 ohm line: pulse amplitude factor = reset-time factor, 4 K, film rho, RRR = 10",
+   "E1": "0.6875",
+   "E2": "0.9742",
+   "unit": "-",
+   "source": "[team calc] 50/(50+R_pair); reset time = L_k/(50+R_pair)"
+  },
+  {
+   "part": "5 SiO2 screening",
+   "quantity": "exp(-pi t/g), g = 5 um",
+   "E1": "0.8026",
+   "E2": "0.02305",
+   "unit": "-",
+   "source": "[inference]: lowest-mode estimate, not a field solve"
+  },
+  {
+   "part": "5 SiO2 screening",
+   "quantity": "E1/E2 ratio, g = 5 um",
+   "E1": "34.8",
+   "E2": "-",
+   "unit": "-",
+   "source": "[inference]: lowest-mode estimate, not a field solve"
+  },
+  {
+   "part": "5 SiO2 screening",
+   "quantity": "exp(-pi t/g), g = 10 um",
+   "E1": "0.8959",
+   "E2": "0.15184",
+   "unit": "-",
+   "source": "[inference]: lowest-mode estimate, not a field solve"
+  },
+  {
+   "part": "5 SiO2 screening",
+   "quantity": "E1/E2 ratio, g = 10 um",
+   "E1": "5.9",
+   "E2": "-",
+   "unit": "-",
+   "source": "[inference]: lowest-mode estimate, not a field solve"
+  },
+  {
+   "part": "5 SiO2 screening",
+   "quantity": "exp(-pi t/g), g = 30 um",
+   "E1": "0.9640",
+   "E2": "0.53349",
+   "unit": "-",
+   "source": "[inference]: lowest-mode estimate, not a field solve"
+  },
+  {
+   "part": "5 SiO2 screening",
+   "quantity": "E1/E2 ratio, g = 30 um",
+   "E1": "1.8",
+   "E2": "-",
+   "unit": "-",
+   "source": "[inference]: lowest-mode estimate, not a field solve"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "Window null drop, A30",
+   "E1": "<= 0.37",
+   "E2": "1.19",
+   "unit": "um",
+   "source": "quoted: DESIGN_LOG.md step 25 (E1 is an upper bound from a 1 um pocket)"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "Window null drop, B60",
+   "E1": "<= 0.55",
+   "E2": "2.04",
+   "unit": "um",
+   "source": "quoted: DESIGN_LOG.md step 26"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "Micromotion after undoing the drop, 10 deg tilt, A30",
+   "E1": "54.88",
+   "E2": "173.36",
+   "unit": "nm",
+   "source": "quoted: DESIGN_LOG.md step 29"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "Micromotion after undoing the drop, 10 deg tilt, B60",
+   "E1": "81.46",
+   "E2": "290.83",
+   "unit": "nm",
+   "source": "quoted: DESIGN_LOG.md step 29"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "A30 geometric collection",
+   "E1": "2.601-2.636",
+   "E2": "2.221",
+   "unit": "%",
+   "source": "quoted: DESIGN_LOG.md, v4 SNSPD overhang audit"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "Nanowire RF pickup",
+   "E1": "1.92",
+   "E2": "0.96",
+   "unit": "uA",
+   "source": "quoted: DESIGN_LOG.md step 26 (10b)"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "RF pickup per slot lead",
+   "E1": "28.3",
+   "E2": "44.5",
+   "unit": "uA",
+   "source": "quoted: DESIGN_LOG.md step 28"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "SiO2 gap depth-to-width ratio",
+   "E1": "0.07",
+   "E2": "1.2",
+   "unit": "-",
+   "source": "quoted: fab/variants/LOCAL_MIRROR.md H.4"
+  },
+  {
+   "part": "6 quoted simulated numbers",
+   "quantity": "DC voltages for zones and transport",
+   "E1": "same to 0.01 V",
+   "E2": "reference",
+   "unit": "V",
+   "source": "quoted: DESIGN_LOG.md step 25"
+  }
+ ],
+ "checks": [
+  {
+   "check": "Rs(E1)/Rs(E2) = 17.14",
+   "pass": true,
+   "value": "17.143"
+  },
+  {
+   "check": "exp(-pi t/g), g = 5, E1 = 0.803",
+   "pass": true,
+   "value": "0.8026"
+  },
+  {
+   "check": "exp(-pi t/g), g = 5, E2 = 0.0230",
+   "pass": true,
+   "value": "0.02305"
+  },
+  {
+   "check": "exp ratio about 35",
+   "pass": true,
+   "value": "34.8"
+  },
+  {
+   "check": "Rs(E1) bulk RT = 0.0697 ohm/sq",
+   "pass": true,
+   "value": "0.06971"
+  },
+  {
+   "check": "one slot lead E1 bulk RT roughly 65-70 ohm",
+   "pass": true,
+   "value": "69.33"
+  },
+  {
+   "check": "one slot lead E2 bulk RT about 4 ohm",
+   "pass": true,
+   "value": "4.044"
+  },
+  {
+   "check": "skin depth at 28 MHz, bulk rho = 14.9 um",
+   "pass": true,
+   "value": "14.86"
+  }
+ ],
+ "verify_inputs": [
+  "rho_RT bulk 2.44e-8 ohm m (bulk Au at 20 C)",
+  "rho_RT thin evaporated film 4.0e-8 ohm m",
+  "RRR = 2, 5, 10 (4 K residual resistance ratio)",
+  "C_rf = 1, 2, 5 pF (chip RF capacitance not computed)",
+  "Slot-lead tail: brief said about 300 um; drawn path is 402 um (both shown)",
+  "Centre DC lead: brief span to -4650 (348 sq) vs drawn polyline (394 sq) (both shown)"
+ ]
+}
