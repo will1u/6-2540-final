@@ -14,7 +14,7 @@
 | GDS layer | Name | Material / process | Write tool | Drawn = | Aligns to | Notes |
 |---|---|---|---|---|---|---|
 | 1 | MARK | ~1 µm Si etch | MLA150 | etched | first layer | Crosses at 4 edge notches per die. |
-| 10 | M1 | Al-1%Cu **450 nm** (team decision 2026-11-08; was 150), **local mirror** (A30, B60) | MLA150 | Al kept | 1 | \|y\| ≤ 20 µm under the centre DC, x = −2240 … +268 (B60: +284.5, 10 µm past the NbN); branch to y = 230 at x = −2240 … −2040 under the Au fill for the ground via. Never under the RF rails (checked). 0.157 mm² per die. |
+| 10 | M1 | Al-1%Cu **450 nm** (team decision 2026-11-08; was 150), **local mirror** (A30, B60) | MLA150 | Al kept | 1 | \|y\| ≤ 20 µm under the centre DC, x = −2240 … +268 (B60: +284.5, 10 µm past the NbN); branch to y = 230 at x = −2240 … −2040 under the Au fill for the ground via. Never under the RF rails (checked). 0.142 mm² per A30 die, 0.143 mm² per B60 die (`measured_v4.md`). |
 | 20 | NBN | NbN meander + contact tabs (+ test bars) | EBL (HSQ) | NbN kept | 22 crosses | v3.1 (DESIGN_LOG step 24): 130 nm wires, 200 nm pitch, 160 lines, 36 × 32 µm; tabs at x = 175 … 215 (B60: lines 69 µm, tabs 158.5 … 198.5), \|y\| ≈ 13 … 16, under the solid centre DC. Datatypes 1–7 = T8 dose array (test die). |
 | 22 | LEAD | Ti/Au contacts + EBL crosses (lift-off) | MLA150 | metal | 1 | Before the nanowire etch, as in v3. **v4: no buried leads.** Each contact covers the −x half of an NbN tab and steps into the slot to a 27 × 7 µm pad at x = 143 … 170 (B60: 126.5 … 153.5), y = ±(1.5 … 8.5). |
 | 24, 30, 31 | *retired in v3* | – | – | – | – | ITO / via layers of v2. Must stay empty (checked). |

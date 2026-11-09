@@ -10,8 +10,8 @@ spacer (0.40 um) onto Al. Layer 45 is retired and stays empty. Layers 24, 30, 31
   T1   Au comb, 5 um gaps (DC leakage / flashover across the trap gap; Dietl 2025, Sterling 2013)
   T2v  Au / SiO2 / Al capacitor through the cap + spacer, placed where T2 was (~3.5 pF)
   T3   NbN 4-wire bar 10 x 200 um with Ti/Au pads (R_sq, Tc of the patterned film)
-  T4   spare SNSPD = trap meander (v3.1 A30: 130 / 200 nm, 36 x 34 um, rounded turns), local Al mirror
-  T4b  spare SNSPD, v3.1 B60 meander (69 x 34 um), local Al mirror
+  T4   spare SNSPD = trap meander (v3.1 A30: 130 / 200 nm, 36 x 32 um, rounded turns), local Al mirror
+  T4b  spare SNSPD, v3.1 B60 meander (69 x 32 um), local Al mirror
   T6   Au continuity loop, 6 um line (Dietl 2025 two-pad loop)
   T8   EBL dose array: seven copies of the A30 trap meander, each on its own layer-20 datatype 1..7 so the
        EBL job can give each a different dose (DOSE_FACTORS below, x the nominal dose of datatype 0).
