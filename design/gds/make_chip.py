@@ -98,9 +98,10 @@ GAP_FAR = 10.0
 PAD_GAP = 30.0                         # Au ground fill keep-out around bond pads (step 21)
 pad_polys = []                         # bond pads, collected for the PAD_GAP keep-out
 PAD_X, PAD_Y = 120.0, 200.0            # long-edge pads (x size, y size)
-PAD_P = 180.0                          # pad pitch along the edge
+PAD_P = 360.0                          # pad pitch along the edge (step 29: was 180; measured PGA84L finger-centre
+                                       # fan-out has a ~20 deg worst wire; team adoption pending beam-access review)
 Y_PADROW = CY - 100.0 - 80.0 - PAD_Y / 2
-X_ROW_OUT, X_ROW_IN = 3500.0, 2000.0   # pad rows occupy |x| in [X_ROW_IN, X_ROW_OUT], clear of the beam exits
+X_ROW_OUT, X_ROW_IN = 3500.0, 600.0    # pad rows occupy |x| in [X_ROW_IN, X_ROW_OUT]; X_ROW_OUT keeps the beam exits clear
 EDGE_AU = 100.0
 
 # slot and SNSPD leads (local-mirror routing, step 25)

@@ -44,7 +44,7 @@ GDS µm, die centre (0, 0), die 10 × 10 mm.
 | SNSPD leads (A30, B60) | Au 5 µm, centre y = ±5, from x = 170 (B60: 153.5) to x = −4400, then to their pads |
 | Centre DC pad | (−4650, 450) |
 | SNSPD pads (Au) | (−4750, ±100), 200 × 150 µm |
-| Pad rows | top and bottom die edges, y = ±4720, \|x\| = 2060…3500, 180 µm pitch. `TL1…TL8`, `TR1…TR9`, `BL1…BL8`, `BR1…BR9` in `*_pads.csv` |
+| Pad rows | top and bottom die edges, y = ±4720, \|x\| = 620…3500, 360 µm pitch (step 29; generated layout validated, team adoption pending beam-access review). `TL1…TL8`, `TR1…TR9`, `BL1…BL8`, `BR1…BR9` in `*_pads.csv` |
 | GND bond spots | (±4700, ±1500), side edges |
 | Mirror ground via (A30, B60) | (−2140, 130), 100 × 100 µm, just past the RF open end (step 28) |
 | L1 / L40 marks | (±4300, ±4830) |
