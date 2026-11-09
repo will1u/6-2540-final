@@ -1,0 +1,41 @@
+pad,electrode,role,x_um,y_um,layer
+RF,1,RF,4700,0,50
+TL1,33,top cap left,-3500,4720,50
+TL2,3,"top segment, centre -1080 um from readout",-3320,4720,50
+TL3,4,"top segment, centre -960 um from readout",-3140,4720,50
+TL4,5,"top segment, centre -840 um from readout",-2960,4720,50
+TL5,6,"top segment, centre -720 um from readout",-2780,4720,50
+TL6,7,"top segment, centre -600 um from readout",-2600,4720,50
+TL7,8,"top segment, centre -480 um from readout",-2420,4720,50
+TL8,9,"top segment, centre -360 um from readout",-2240,4720,50
+TR1,34,top cap right,3500,4720,50
+TR2,17,"top segment, centre +600 um from readout",3320,4720,50
+TR3,16,"top segment, centre +480 um from readout",3140,4720,50
+TR4,15,"top segment, centre +360 um from readout",2960,4720,50
+TR5,14,"top segment, centre +240 um from readout",2780,4720,50
+TR6,13,"top segment, centre +120 um from readout",2600,4720,50
+TR7,12,"top segment, centre +0 um from readout",2420,4720,50
+TR8,11,"top segment, centre -120 um from readout",2240,4720,50
+TR9,10,"top segment, centre -240 um from readout",2060,4720,50
+BL1,35,bottom cap left,-3500,-4720,50
+BL2,18,"bottom segment, centre -1080 um from readout",-3320,-4720,50
+BL3,19,"bottom segment, centre -960 um from readout",-3140,-4720,50
+BL4,20,"bottom segment, centre -840 um from readout",-2960,-4720,50
+BL5,21,"bottom segment, centre -720 um from readout",-2780,-4720,50
+BL6,22,"bottom segment, centre -600 um from readout",-2600,-4720,50
+BL7,23,"bottom segment, centre -480 um from readout",-2420,-4720,50
+BL8,24,"bottom segment, centre -360 um from readout",-2240,-4720,50
+BR1,36,bottom cap right,3500,-4720,50
+BR2,32,"bottom segment, centre +600 um from readout",3320,-4720,50
+BR3,31,"bottom segment, centre +480 um from readout",3140,-4720,50
+BR4,30,"bottom segment, centre +360 um from readout",2960,-4720,50
+BR5,29,"bottom segment, centre +240 um from readout",2780,-4720,50
+BR6,28,"bottom segment, centre +120 um from readout",2600,-4720,50
+BR7,27,"bottom segment, centre +0 um from readout",2420,-4720,50
+BR8,26,"bottom segment, centre -120 um from readout",2240,-4720,50
+BR9,25,"bottom segment, centre -240 um from readout",2060,-4720,50
+C,2,centre DC,-4650,450,50
+GND-1,ground fill,Au ground fill: bond to carrier ground,-4700,1500,50
+GND-2,ground fill,Au ground fill: bond to carrier ground,-4700,-1500,50
+GND-3,ground fill,Au ground fill: bond to carrier ground,4700,1500,50
+GND-4,ground fill,Au ground fill: bond to carrier ground,4700,-1500,50

@@ -2,23 +2,24 @@
 
 Each run processes a full 100 mm wafer but writes only a small block of dies at the wafer centre, so
 spin coating, PECVD and plating behave as on a full wafer while MLA/EBL write time stays short.
-v3 dies have two sizes: trap dies 10 x 10 mm, test dies 10 x 2.5 mm. Each column stacks its dies with
-200 um streets, using each die's own height (from its cell outline), as in wafer_v3.gds.
+Trap dies are v4 (local mirror, 10 x 10 mm; DESIGN_LOG step 25); test dies are still v3 (10 x 2.5 mm,
+baseline die-wide Al + D2 test structures, not yet reworked for v4). Each column stacks its dies with
+200 um streets, using each die's own height (from its cell outline), as in wafer_v4.gds.
 The die long axis runs along wafer x; align wafer x to the primary flat so the streets follow the
 Si <110> cleave directions [verify the orientation the MLA and the saw expect].
 
 A run is a list of columns, each a list of die types from bottom to top:
     A30 / B60  trap die with the 30 x 30 / 60 x 30 um SNSPD     (make_chip.py, --det60)
-    NODET      plain trap die, no SNSPD                           (make_chip.py --nodet)
+    NODET      plain trap die, no SNSPD, no Al                    (make_chip.py --nodet)
     TEST       test-structure die, incl. the T8 EBL dose array    (make_test_die.py)
     TEST_TRAP  test die for trap-only runs: T1, T2, T6 only       (make_test_die.py --trap-only)
 
 Presets (edit RUNS to make another):
-    R1_TRAP  staged run 1 (SIMPLIFICATIONS.md S2): trap process only, traveler steps 4-8b and 10 skipped
-    R1_FULL  full stack, one of each trap variant per column plus a test die
+    R1_TRAP  staged run 1 (SIMPLIFICATIONS.md S2): trap process only (v4: Au on SiO2 over HR Si, no Al)
+    R1_FULL  full stack: 2 A30 + 2 B60 + 2 NODET + 2 test dies
 
 Writes run_<name>.gds (top cell RUN_<NAME>), run_<name>_map.csv and run_<name>_map.png, and prints
-the die count and layer-20 (EBL) area. Re-run make_chip.py (all three variants) and make_test_die.py
+the die count and layer-20 (EBL) area. Re-run make_chip.py (A30, --det60, --nodet) and make_test_die.py
 first so the die cells are current.
 Run from design/sim:  ./run.sh ../gds/make_run.py [R1_TRAP | R1_FULL]   (no argument: all presets)
 """
@@ -37,8 +38,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 R_WAFER = 50000.0
 DIE_X, STREET = 10000.0, 200.0         # every die is 10 mm wide; heights differ (read from the cells)
 PX = DIE_X + STREET
-SOURCES = {"A30": ("trap_die_v3_A30.gds", "TRAP_DIE_V3_A30"), "B60": ("trap_die_v3_B60.gds", "TRAP_DIE_V3_B60"),
-           "NODET": ("trap_die_v3_NODET.gds", "TRAP_DIE_V3_NODET"), "TEST": ("test_die_v3.gds", "TEST_DIE_V3"),
+SOURCES = {"A30": ("trap_die_v4_A30.gds", "TRAP_DIE_V4_A30"), "B60": ("trap_die_v4_B60.gds", "TRAP_DIE_V4_B60"),
+           "NODET": ("trap_die_v4_NODET.gds", "TRAP_DIE_V4_NODET"), "TEST": ("test_die_v3.gds", "TEST_DIE_V3"),
            "TEST_TRAP": ("test_die_v3_TRAP.gds", "TEST_DIE_V3_TRAP")}
 RUNS = {
     "R1_TRAP": [["NODET", "TEST_TRAP", "NODET", "NODET"], ["NODET", "TEST_TRAP", "NODET", "NODET"]],

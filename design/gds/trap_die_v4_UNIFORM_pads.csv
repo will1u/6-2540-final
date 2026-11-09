@@ -1,0 +1,7 @@
+pad,electrode,role,x_um,y_um,layer
+RF,1,RF,4700,0,50
+C,2,centre DC,-4650,450,50
+GND-1,ground fill,Au ground fill: bond to carrier ground,-4700,1500,50
+GND-2,ground fill,Au ground fill: bond to carrier ground,-4700,-1500,50
+GND-3,ground fill,Au ground fill: bond to carrier ground,4700,1500,50
+GND-4,ground fill,Au ground fill: bond to carrier ground,4700,-1500,50

@@ -1,20 +1,21 @@
 """Design-rule, connectivity and fab-consistency checks + preview images for a trap die (Claude-authored).
 
-Usage (from design/sim):  ./run.sh ../gds/check_chip.py trap_die_v3_A30
-Reads <stem>.gds, <stem>_sim.json (seeds, die size, mark sites) and <stem>_pads.csv.
+v4 local-mirror dies (DESIGN_LOG step 25). Usage (from design/sim):  ./run.sh ../gds/check_chip.py trap_die_v4_A30
+Reads <stem>.gds (the fab file, not _simfloor.gds), <stem>_sim.json (seeds, die size, marks) and <stem>_pads.csv.
 
 Checks
-  conductors   every gds2itvg seed on its own Au conductor (no shorts), every electrode reaches a
-               pad near the die edge, no floating Au islands, min spacing >= 5 um, no Au < 4.9 um wide
-  layers       single top cell; no text on fab layers; all metal >= 90 um from the dicing edge
-  SNSPD        leads within 19 um of the axis inside the trap (under the centre DC, never under RF);
-               readout window open in the Au (bare D2, v3 has no ITO)
-               (plain die without SNSPD: nothing on layers 20-22, solid centre DC at the readout zone)
-  no ITO       layers 24, 30, 31 empty on every die (v3, DESIGN_LOG step 17)
-  pads         no pad in the die corners |x|, |y| > 4 mm, where the 45-degree beams leave the die
-  ground vias  >= 4 L40 vias inside the Au ground fill, each enclosed >= 25 um by fill Au and by M1 (step 22)
-  D2 / pads    electrode Au >= 20 um from D2 openings; every bond/probe D2 opening covered by L45;
-               readout window covered by L45; signal pads not on ground; GND spots on ground
+  conductors   every gds2itvg seed (electrodes and the two SNSPD leads) on its own Au conductor (no shorts),
+               each reaches a pad near the die edge, no floating Au islands, min spacing >= 5 um, no Au < 4.9 um
+  layers       single top cell; no text on fab layers; all metal >= 90 um from the dicing edge;
+               retired layers 24, 30, 31 (ITO, v3) and 45 (protect, no gap etch in v4) empty
+  SNSPD        Au leads stay inside the centre-DC slot inside the trap; no Ti/Au (layer 22) inside the trap
+               except the contacts near the detector (no buried leads); each L40 contact lies >= 1 um inside
+               its Au lead and its Ti/Au pad; readout window open in the Au; NbN rules of step 24 (|y| <= 17 um,
+               all NbN under Au or the window, gaps >= 60 nm, no turn or tab in the light footprint)
+  mirror       Al (layer 10) never under the RF rails; covers all NbN by >= 5 um; >= 1 ground via inside
+               the Au fill, enclosed >= 25 um by fill Au and by the Al
+  plain die    nothing on layers 10, 20, 22, 40; solid centre DC at the readout zone
+  pads         no pad in the die corners |x|, |y| > 4 mm; signal pads not on ground; GND spots on ground
   marks        L1 marks not under Al
 Writes <stem>_preview_{full,trap,window,leftend}.png
 """
@@ -34,13 +35,14 @@ from shapely.geometry import Point, Polygon, box  # noqa: E402
 from shapely.ops import unary_union  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-STEM = sys.argv[1] if len(sys.argv) > 1 else "trap_die_v3_A30"
+STEM = sys.argv[1] if len(sys.argv) > 1 else "trap_die_v4_A30"
 lib = gdstk.read_gds(os.path.join(HERE, STEM + ".gds"))
 sim = json.load(open(os.path.join(HERE, STEM + "_sim.json")))
 DIE = sim["_die"]
 CX, CY = DIE["half_x"], DIE["half_y"]
 x_read, y_ax = sim["frame"]["origin"]
 x_rf0 = DIE["x_rf0"]
+C_HALF, G_RF = 20.0, 5.0                   # centre DC half width, DC-RF gap (make_chip.py C, G)
 ok = True
 
 
@@ -66,7 +68,8 @@ def U(L):
 au = U(50)
 pieces = list(au.geoms) if hasattr(au, "geoms") else [au]
 owner = {}
-for n, pts in sim["electrodes"].items():
+leads = sim.get("_snspd_leads", [])
+for n, pts in list(sim["electrodes"].items()) + [(k, sim["ground"][k]) for k in leads]:
     for pt in pts:
         hit = [i for i, g in enumerate(pieces) if g.contains(Point(pt))]
         report(len(hit) == 1, f"seed of electrode {n} at {pt} lies on metal")
@@ -97,25 +100,41 @@ thin = au.buffer(-2.45, join_style="mitre").buffer(2.45, join_style="mitre")
 report(au.difference(thin).area < 50.0, f"features narrower than 4.9 um: {au.difference(thin).area:.1f} um^2 of Au")
 
 # ---------------------------------------------------------------- layers, edge, text
-for L in (1, 10, 20, 22, 24, 30, 31, 40, 45, 50):
+for L in (1, 10, 20, 22, 40, 50):
     report(not [lb for lb in cell.labels if lb.layer == L], f"no text labels on fab layer {L}")
 die = box(-CX, -CY, CX, CY)
-for L in (10, 22, 30, 31, 40, 50):
+for L in (10, 22, 40, 50):
     closer = U(L).difference(die.buffer(-90)).area
     report(closer < 1.0, f"layer {L} stays >= 90 um from the dicing edge ({closer:.1f} um^2 closer)")
 
-# ---------------------------------------------------------------- SNSPD routing, no ITO
-report(not any(L in by_layer for L in (24, 30, 31)), "no ITO or via shapes: layers 24, 30, 31 empty")
+# ---------------------------------------------------------------- SNSPD, local mirror (v4)
+report(not any(L in by_layer for L in (24, 30, 31, 45)), "retired layers empty: 24, 30, 31 (ITO) and 45 (protect)")
 has_det = 20 in by_layer                  # False for the plain trap die (make_chip.py --nodet)
+st = sim["_stack"]
+m1 = U(10)
+gpiece = pieces[ghit[0]] if ghit else None
 if has_det:
-    leads = U(22)
-    seg = leads.intersection(box(x_rf0, y_ax - 300, x_read - 60, y_ax + 300))
-    ymax = max(abs(y - y_ax) for g in getattr(seg, "geoms", [seg]) for x, y in g.exterior.coords)
-    report(ymax < 19.0, f"SNSPD leads stay under the centre DC inside the trap (|y - y_axis|max = {ymax:.1f} um)")
+    trap = box(x_rf0, y_ax - 300, x_read - 60, y_ax + 300)          # inside the RF rails, left of the detector
+    lead_pieces = [pieces[i] for i, ns in owner.items() if set(ns) & set(leads)]
+    for k in leads:
+        i = [j for j, ns in owner.items() if k in ns][0]
+        b = pieces[i].intersection(trap).bounds
+        ym = max(abs(b[1] - y_ax), abs(b[3] - y_ax))
+        report(ym <= st["slot_half"] - 5.0 + 1e-6, f"SNSPD lead {k} stays inside the centre-DC slot in the trap (|y|max {ym:.1f} um)")
+    ti = U(22).intersection(box(x_rf0 - 50, y_ax - 120, -x_rf0, y_ax + 120))
+    report(ti.bounds[0] >= x_read - 120, f"no buried Ti/Au leads in the trap: layer 22 starts at x = {ti.bounds[0]:.0f} um "
+                                         "(contacts only, within 120 um of the readout zone)")
+    contacts = [g for g in by_layer.get(40, []) if abs(g.centroid.y - y_ax) < 20 and abs(g.centroid.x - x_read) < 150]
+    report(len(contacts) == 2, f"two SNSPD contacts on layer 40 near the detector ({len(contacts)})")
+    for v in contacts:
+        inner = v.buffer(1.0 - 1e-6, join_style="mitre")
+        ok_lead = any(p.contains(inner) for p in lead_pieces)
+        report(ok_lead and U(22).contains(inner),
+               f"contact at ({v.centroid.x:.0f}, {v.centroid.y:.0f}) inside its Au lead and Ti/Au pad by >= 1 um")
     win = sim["_window"]
     report(not au.intersects(box(x_read - win["wx"] / 2 + 0.5, y_ax - win["wy"] / 2 + 0.5,
                                  x_read + win["wx"] / 2 - 0.5, y_ax + win["wy"] / 2 - 0.5)),
-           f"readout window {win['wx']:g} x {win['wy']:g} um is open in the Au (bare D2 floor)")
+           f"readout window {win['wx']:g} x {win['wy']:g} um is open in the Au")
     # NbN meander, v3.1 (DESIGN_LOG step 24)
     nbn = U(20).intersection(box(x_read - 200, y_ax - 40, x_read + 100, y_ax + 40))
     b = nbn.bounds
@@ -127,37 +146,35 @@ if has_det:
     r = 0.029                                 # closing by 29 nm fills every NbN gap narrower than ~58 nm
     closed = nbn.buffer(r, join_style="mitre").buffer(-r, join_style="mitre").difference(nbn).area
     report(closed < 0.05, f"NbN gaps >= 60 nm (closing by {2 * r * 1000:.0f} nm adds {closed:.3g} um^2)")
-    # refracted light footprint: rays through the bottom of the 6 um Au window cross 10.08 um of SiO2
-    # (n 1.463) to the NbN; ion >= 47.5 um above the Au top (sim/15). No turn may sit inside it.
+    # light footprint: v4 has only the cap (t_sio2_above_nbn, n 1.463) between the window floor and the NbN.
+    # Rays that pass the Au top edge heading outward hit the window wall, so the footprint is the window
+    # plus the spread inside the cap (ion >= 47.5 um above the Au, sim/15).
     rho = np.hypot(win["wx"] / 2, win["wy"] / 2)
-    s = np.sin(np.arctan(rho / (47.5 + 6.0))) / 1.463
-    spread = 10.08 * s / np.sqrt(1 - s * s)
+    sn = np.sin(np.arctan(rho / 47.5)) / 1.463
+    spread = st["t_sio2_above_nbn"] * sn / np.sqrt(1 - sn * sn)
     fp = winbox.buffer(spread, join_style="mitre")
     comps = nbn.intersection(fp)
     hmax = max(g.bounds[3] - g.bounds[1] for g in getattr(comps, "geoms", [comps]))
     report(hmax < 0.2, f"no NbN turn or tab inside the light footprint (window + {spread:.2f} um; "
                        f"tallest NbN piece there {hmax * 1000:.0f} nm)")
+    # local mirror
+    mb = m1.intersection(box(x_rf0, y_ax - 120, -x_rf0 + 100, y_ax + 120)).bounds
+    ym = max(abs(mb[1] - y_ax), abs(mb[3] - y_ax))
+    report(ym <= st["mirror_half"] + 1e-6 and ym <= C_HALF + G_RF - 5.0 + 1e-6,
+           f"Al mirror never under the RF rails (|y|max {ym:.1f} um inside the trap; rails start at {C_HALF + G_RF:g})")
+    # meander |y| <= 16 under a |y| <= 20 mirror: 4 um margin on the long sides (H.1 asked 5 um for the v3 15 um meander)
+    report(m1.contains(nbn.buffer(3.0, join_style="mitre")), "Al mirror covers the detector NbN (meander + tabs) by >= 3 um")
+    mvias = [g for g in by_layer.get(40, []) if gpiece is not None and gpiece.contains(g)]
+    report(len(mvias) >= 1, f"mirror tied to the Au ground fill on chip by {len(mvias)} via(s)")
+    for v in mvias:
+        c = v.centroid
+        report(gpiece.contains(v.buffer(25, join_style="mitre")) and m1.contains(v.buffer(25, join_style="mitre")),
+               f"mirror via at ({c.x:.0f}, {c.y:.0f}) enclosed >= 25 um by ground Au and by the Al")
 else:
-    report(not any(L in by_layer for L in (20, 22)), "plain die: nothing on SNSPD layers 20, 22")
+    report(not any(L in by_layer for L in (10, 20, 22, 40)), "plain die: nothing on layers 10, 20, 22, 40")
     report(au.contains(box(x_read - 15, y_ax - 15, x_read + 15, y_ax + 15)), "plain die: centre DC is solid Au at the readout zone")
 
-# ---------------------------------------------------------------- D2 openings, protect, pads, marks
-gpiece = pieces[ghit[0]] if ghit else None
-m1 = U(10)
-d2_all = [g for g in by_layer.get(40, []) if g.area > 2000]
-vias = [g for g in d2_all if gpiece is not None and gpiece.contains(g)]       # fill-to-M1 vias (step 22)
-d2_big = unary_union([g for g in d2_all if g not in vias])                     # bond/probe openings
-report(len(vias) >= 4, f"Au ground fill is tied to M1 on chip by {len(vias)} vias (>= 4)")
-for v in vias:
-    c = v.centroid
-    report(gpiece.contains(v.buffer(25, join_style="mitre")) and m1.contains(v.buffer(25, join_style="mitre")),
-           f"via at ({c.x:.0f}, {c.y:.0f}) enclosed >= 25 um by ground Au and by M1 Al")
-for i, ns in owner.items():
-    report(pieces[i].distance(d2_big) >= 20.0, f"electrode {sorted(ns)} Au >= 20 um from D2 openings")
-prot = U(45)
-report(d2_big.difference(prot).area < 1.0, "every bond/probe D2 opening is covered by L45 protect")
-if has_det:
-    report(prot.contains(box(x_read - 15, y_ax - 15, x_read + 15, y_ax + 15)), "readout window covered by L45")
+# ---------------------------------------------------------------- pads, marks
 rows = list(csv.DictReader(open(os.path.join(HERE, STEM + "_pads.csv"))))
 corner = [r["pad"] for r in rows if abs(float(r["x_um"])) > 4000 and abs(float(r["y_um"])) > 4000]
 report(not corner, f"no pads in the beam-exit corners |x|, |y| > 4 mm {corner if corner else ''}")
@@ -166,8 +183,6 @@ for r in rows:
     if r["electrode"] == "ground fill":
         report(gpiece.contains(box(pt[0] - 100, pt[1] - 100, pt[0] + 100, pt[1] + 100)),
                f"GND spot {r['pad']} has 200 x 200 um of ground fill")
-    elif r["electrode"] == "ground plane":
-        report(d2_big.contains(Point(pt)), f"M1 pad {r['pad']} sits in a D2 opening")
     elif r["layer"] == "50":
         report(not gpiece.contains(Point(pt)), f"pad {r['pad']} ({r['electrode']}) is not on the ground fill")
 for xm, ym in DIE["mark_sites"]:
@@ -197,8 +212,8 @@ def draw(tag, window, layers=(10, 50, 45, 22, 20, 40, 1, 100)):
     ax.set_xlim(window[0], window[2])
     ax.set_ylim(window[1], window[3])
     ax.set_aspect("equal")
-    ax.set_title(f"{STEM} {tag}: Au 50 gold, M1 grey, L45 protect pink, "
-                 "SNSPD leads 22 red, NbN 20 purple, D2 open 40 navy", fontsize=8)
+    ax.set_title(f"{STEM} {tag}: Au 50 gold, Al mirror 10 grey, "
+                 "Ti/Au 22 red, NbN 20 purple, L40 openings navy", fontsize=8)
     fig.tight_layout()
     try:
         fig.savefig(os.path.join(HERE, f"{STEM}_preview_{tag}.png"), dpi=140)
