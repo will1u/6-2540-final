@@ -18,7 +18,8 @@ It holds GDS generators, simulations, a literature report, and fab documents for
 
 - **Agreed exception to the root rules:** in `design/`, Claude makes design calls and flags problems honestly. The team asked for this package.
 - **Authorship:** every Claude-written doc lives in `design/` (or `../CLAUDE_PROGRESS.md`) and starts with a **"Claude-authored"** line.
-- **Off limits:** never touch `proposal/*.tex` or `notes/decisions.md`. When a team member makes a decision, remind them to log it there themselves.
+- **Off limits:** never touch `proposal/*.tex`.
+- **Decisions:** when a team member makes a decision, log it in `../notes/decisions.md` in the same session (root `CLAUDE.md`, Decision log; team change, 2026-11-08).
 - **Logging:**
   - After every design step, append an entry to `DESIGN_LOG.md`: date, script, inputs, key numbers, decision, citation.
   - Keep `../CLAUDE_PROGRESS.md` current: goal, deliverables, done list, open items. Team members read it to pick up the work.

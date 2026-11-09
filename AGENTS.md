@@ -31,8 +31,9 @@ Act as a **project advisor and coding assistant**, not a co-author. You help us 
 - Read a source before relying on it. Never guess at authors, titles, or DOIs; flag anything you could not open or only saw as a search excerpt.
 
 ## Decision log
-- We keep `notes/decisions.md`, where **we** record each design choice and why (electrode geometry, layer stack, materials, etc.). Don't write entries yourself.
-- When we make a significant design decision in a session, remind us to log it.
+- `notes/decisions.md` records each design choice and why (electrode geometry, layer stack, materials, etc.).
+- **Claude writes the entries** (team change, 2026-11-08). When we make a design decision in a session, log it there in the same session: date, the choice, the options we rejected, and **our** reason. Record our reasoning, not reasoning we didn't give; if the reason isn't clear, ask. This is the one exception to "never write prose that describes our work".
+- Log only what we decided. Proposals, Claude's own design calls under the `design/` exception, and options still open go in `design/fab/OPEN_DECISIONS.md` or `design/DESIGN_LOG.md`, not here.
 
 ## Tooling
 - Simulation: [`gds2itvg`](https://github.com/felixknollmann/electrode/tree/main) (repo name `electrode`; not NIST's `electrode` package). It reads a GDSII layout and writes unit-potential grid files for ITVG's `VoltageGenerator`, and can find the RF null. See its README for the workflow. Use it by default rather than other solvers.
