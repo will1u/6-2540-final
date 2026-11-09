@@ -1,0 +1,99 @@
+{
+  "completed": true,
+  "trigger": "0.117 V electrode change in centre-zero diagnostic readout sets",
+  "inputs_sha256": {
+    "gds\\trap_die_v4_A30_E1_sim.json": "613f82b293f43fd74b01df3a26f6f261d9d40faaca376634970c2405c3cb1f0d",
+    "gds\\trap_die_v4_A30_sim.json": "9eb66cc5b80072805099e4ba79b59f361d39c677225bcbb602c44296fa92a8c6",
+    "gds\\trap_die_v4_A30_simfloor.gds": "5c6b76a395e59ece997dc984764ac5ac2552fc82b0f5c6f29f0669b55af25296",
+    "gds\\trap_die_v4_B60_E1_sim.json": "9a959b9e74d314e442699b536768d62d5148bb7b810c349dffa088746391afad",
+    "gds\\trap_die_v4_B60_sim.json": "012cb8653817d0f9cb08601f0568d6128de461de7d38b8fbd69416f52899d39d",
+    "gds\\trap_die_v4_B60_simfloor.gds": "14b0a4531ed18317f2e78afff0026dcc02dd07a3cb195bc0e194e7ea777f0273",
+    "gds\\trap_die_v4_NODET.gds": "f273ab58d08bb6183c90225b6f8154bb756747bd2dae5bfbb9cc955514e8136b",
+    "gds\\trap_die_v4_NODET_sim.json": "a24622028a3f6eaa98903e71d733467ffe21c57cc0858f45a73f1f1920776779",
+    "sim\\12_final_chip_check.py": "da68b80749c449bb91643adcc5f057ca2eb1f19541040bf4f4a8ef550913ef9b",
+    "sim\\out\\04b_window_3d\\summary_mirror_t1.json": "a2dd7b931f66656d03a3183f99f3aa8343ddcfb350788ef93cd4160b9a78ba30",
+    "sim\\out\\04b_window_3d\\summary_mirror_t6.json": "ec75166de326a51f318ba1221c76f7de10133a5e6e34ef86dd0d767b43c7b93e",
+    "sim\\run.sh": "622302d5fc1d579cccca5b7c459439d888386ed12e8a8e98f139070994cae847",
+    "sim\\run_cached_geometry.py": "39a25541f2998d5af8a69da431f989bdfc552ea44fb10b387dacc2e2ef4ed554",
+    "sim\\trapcalc.py": "0851a00a2cdbc1aa85adb1dbbc359d9451804903d41fed36cc35a9fce2124edc"
+  },
+  "study_sha256": "8d5b1044c53886ef8dbedb4faf3b09cdde40b15232c82782fe5f49e6f9891be2",
+  "baseline_summary_sha256": "70098057a6fe368138af3b8627eeb9dd20d49d127793346c165805a9147017ed",
+  "new_summary_sha256": "d94bce162fc019f39df0bf7e379da201ab947ae57402c6a3f21abe37ae856641",
+  "rows": [
+    {
+      "die": "A30_E2",
+      "tilt": "tilt_0deg",
+      "old_vmax": 1.3377409421302815,
+      "new_vmax": 1.335485101801103,
+      "delta_vmax": -0.0022558403291785822,
+      "old_micromotion_nm": 173.35668730214988,
+      "new_micromotion_nm": 173.35671676324958
+    },
+    {
+      "die": "A30_E2",
+      "tilt": "tilt_10deg",
+      "old_vmax": 6.06407112582073,
+      "new_vmax": 6.068098890386704,
+      "delta_vmax": 0.004027764565973868,
+      "old_micromotion_nm": 173.35667372869867,
+      "new_micromotion_nm": 173.3566307460529
+    },
+    {
+      "die": "A30_E1",
+      "tilt": "tilt_0deg",
+      "old_vmax": 1.5190115192740323,
+      "new_vmax": 1.516403896672056,
+      "delta_vmax": -0.0026076226019762228,
+      "old_micromotion_nm": 54.876135462661,
+      "new_micromotion_nm": 54.876135462661
+    },
+    {
+      "die": "A30_E1",
+      "tilt": "tilt_10deg",
+      "old_vmax": 6.199054175435761,
+      "new_vmax": 6.202729146116174,
+      "delta_vmax": 0.0036749706804126703,
+      "old_micromotion_nm": 54.87613546277253,
+      "new_micromotion_nm": 54.87613546305098
+    },
+    {
+      "die": "B60_E2",
+      "tilt": "tilt_0deg",
+      "old_vmax": 0.6638758700100607,
+      "new_vmax": 0.6638549981699164,
+      "delta_vmax": -2.087184014420984e-05,
+      "old_micromotion_nm": 290.8301577823479,
+      "new_micromotion_nm": 290.8301577823479
+    },
+    {
+      "die": "B60_E2",
+      "tilt": "tilt_10deg",
+      "old_vmax": 1.9085466209649715,
+      "new_vmax": 1.9117156748854847,
+      "delta_vmax": 0.003169053920513143,
+      "old_micromotion_nm": 290.8305133718652,
+      "new_micromotion_nm": 290.830419650237
+    },
+    {
+      "die": "B60_E1",
+      "tilt": "tilt_0deg",
+      "old_vmax": 0.6740910886280104,
+      "new_vmax": 0.6740400803836135,
+      "delta_vmax": -5.100824439685514e-05,
+      "old_micromotion_nm": 81.46147687011158,
+      "new_micromotion_nm": 81.46147687011158
+    },
+    {
+      "die": "B60_E1",
+      "tilt": "tilt_10deg",
+      "old_vmax": 2.1362948563997195,
+      "new_vmax": 2.1390258301798024,
+      "delta_vmax": 0.0027309737800829126,
+      "old_micromotion_nm": 81.46147687011158,
+      "new_micromotion_nm": 81.461484681164
+    }
+  ],
+  "max_abs_needed_vmax_change_V": 0.004027764565973868,
+  "max_null_height_change_um": 0.0
+}

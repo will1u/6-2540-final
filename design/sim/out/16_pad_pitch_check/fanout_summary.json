@@ -1,0 +1,43 @@
+{
+  "pdf_page": 2,
+  "pdf_sha256": "c04e553fb6dba6396241dfb2401f60d0859297db624f52522280efcbf0c5af6f",
+  "pad_csv_sha256": "e86c2a956c483505996898691cf50ed88c99400a5cac4e57780fcb64a957616f",
+  "cavity_um": 11938,
+  "pdf_cavity_bounds_pt": [
+    127.44,
+    169.76999999999998,
+    486.11,
+    535.24
+  ],
+  "scale_um_per_pdf_point": [
+    33.28407728552708,
+    32.66478780748078
+  ],
+  "landing": "finger centre; no placement sweep",
+  "orientation": "rotate bottom-view drawing 90 deg CCW, then mirror x for die-facing view",
+  "finger_ids": "local edge-order IDs, not package pin numbers",
+  "crossings": 0,
+  "edges": {
+    "T": {
+      "wires": 17,
+      "worst_angle_deg": 18.92962198280991,
+      "longest_projected_wire_um": 2082.3868235823747
+    },
+    "B": {
+      "wires": 17,
+      "worst_angle_deg": 20.025178551564952,
+      "longest_projected_wire_um": 1978.7265305681167
+    },
+    "L": {
+      "wires": 5,
+      "worst_angle_deg": 8.575415456958995,
+      "longest_projected_wire_um": 1988.4114996106648
+    },
+    "R": {
+      "wires": 3,
+      "worst_angle_deg": 4.970115779358756,
+      "longest_projected_wire_um": 1899.5939639117184
+    }
+  },
+  "top_bottom_under_45": true
+}

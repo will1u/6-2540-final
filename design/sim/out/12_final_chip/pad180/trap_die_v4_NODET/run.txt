@@ -1,0 +1,4 @@
+3-D recess correction (no window): +0.00 um
+loading  y=   -480: null z = 49.97 um (x -0.00); RF-only [2.99766062 2.99808633] MHz, q = 0.303; DC freqs [0.8   2.903 2.985] MHz; |V|max 7.92 V; bounded False; radial axes at -100.4 deg
+readout  y=      0: null z = 49.98 um (x -0.00); RF-only [2.99655915 2.99698794] MHz, q = 0.303; DC freqs [0.8   2.901 2.984] MHz; |V|max 7.87 V; bounded False; radial axes at -99.7 deg
+transport: 49 steps, max |V| 7.20 V, max change per 10 um step 1.662 V, axial 0.800-0.800 MHz, height 49.97-49.98 um, bounded steps: 0

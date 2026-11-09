@@ -1,0 +1,412 @@
+{
+  "started_utc": "2026-11-09T03:45:59.791421+00:00",
+  "inputs_sha256": {
+    "gds\\trap_die_v4_A30_E1_sim.json": "613f82b293f43fd74b01df3a26f6f261d9d40faaca376634970c2405c3cb1f0d",
+    "gds\\trap_die_v4_A30_sim.json": "9eb66cc5b80072805099e4ba79b59f361d39c677225bcbb602c44296fa92a8c6",
+    "gds\\trap_die_v4_A30_simfloor.gds": "5c6b76a395e59ece997dc984764ac5ac2552fc82b0f5c6f29f0669b55af25296",
+    "gds\\trap_die_v4_B60_E1_sim.json": "9a959b9e74d314e442699b536768d62d5148bb7b810c349dffa088746391afad",
+    "gds\\trap_die_v4_B60_sim.json": "012cb8653817d0f9cb08601f0568d6128de461de7d38b8fbd69416f52899d39d",
+    "gds\\trap_die_v4_B60_simfloor.gds": "14b0a4531ed18317f2e78afff0026dcc02dd07a3cb195bc0e194e7ea777f0273",
+    "gds\\trap_die_v4_NODET.gds": "f273ab58d08bb6183c90225b6f8154bb756747bd2dae5bfbb9cc955514e8136b",
+    "gds\\trap_die_v4_NODET_sim.json": "a24622028a3f6eaa98903e71d733467ffe21c57cc0858f45a73f1f1920776779",
+    "sim\\12_final_chip_check.py": "da68b80749c449bb91643adcc5f057ca2eb1f19541040bf4f4a8ef550913ef9b",
+    "sim\\out\\04b_window_3d\\summary_mirror_t1.json": "a2dd7b931f66656d03a3183f99f3aa8343ddcfb350788ef93cd4160b9a78ba30",
+    "sim\\out\\04b_window_3d\\summary_mirror_t6.json": "ec75166de326a51f318ba1221c76f7de10133a5e6e34ef86dd0d767b43c7b93e",
+    "sim\\run.sh": "622302d5fc1d579cccca5b7c459439d888386ed12e8a8e98f139070994cae847",
+    "sim\\run_cached_geometry.py": "39a25541f2998d5af8a69da431f989bdfc552ea44fb10b387dacc2e2ef4ed554",
+    "sim\\trapcalc.py": "0851a00a2cdbc1aa85adb1dbbc359d9451804903d41fed36cc35a9fce2124edc"
+  },
+  "transport_limit_V": 1.75,
+  "planar_height_limits_um": [
+    49.96,
+    49.98
+  ],
+  "height_precision_decimals": 2,
+  "cases": [
+    {
+      "case": "A30_E2",
+      "zones": {
+        "loading": {
+          "old_vmax": 7.45,
+          "new_vmax": 7.45,
+          "max_electrode_delta_V": 0.009000000000000008,
+          "old_null_um": 49.97081718067277,
+          "new_null_um": 49.97081718067277,
+          "delta_null_um": 0.0
+        },
+        "readout": {
+          "old_vmax": 6.28,
+          "new_vmax": 6.29,
+          "max_electrode_delta_V": 0.018000000000000016,
+          "old_null_um": 49.976950839969675,
+          "new_null_um": 49.976950839969675,
+          "delta_null_um": 0.0
+        }
+      },
+      "transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.264063565841511,
+        "max_step_change_V": 7.590068938009579,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999992,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "old_transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.267434575827857,
+        "max_step_change_V": 7.589287196879174,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999989,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "errors": [],
+      "max_null_scan_delta_um": 0.0,
+      "max_waveform_electrode_delta_V": 0.012840000000000074
+    },
+    {
+      "case": "A30_E1",
+      "zones": {
+        "loading": {
+          "old_vmax": 7.45,
+          "new_vmax": 7.45,
+          "max_electrode_delta_V": 0.010000000000000009,
+          "old_null_um": 49.957822183649505,
+          "new_null_um": 49.957822183649505,
+          "delta_null_um": 0.0
+        },
+        "readout": {
+          "old_vmax": 6.27,
+          "new_vmax": 6.28,
+          "max_electrode_delta_V": 0.018000000000000016,
+          "old_null_um": 49.963956638521964,
+          "new_null_um": 49.963956638521964,
+          "delta_null_um": 0.0
+        }
+      },
+      "transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.265085029323187,
+        "max_step_change_V": 7.591113412514355,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999995,
+          0.8000000000000007
+        ],
+        "height_range_um": [
+          49.957822183649505,
+          49.963979734478244
+        ]
+      },
+      "old_transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.268456966530651,
+        "max_step_change_V": 7.590344782947426,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999989,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.957822183649505,
+          49.963979734478244
+        ]
+      },
+      "errors": [],
+      "max_null_scan_delta_um": 0.0,
+      "max_waveform_electrode_delta_V": 0.012839999999999963
+    },
+    {
+      "case": "A30_E2_V2zero",
+      "zones": {
+        "loading": {
+          "old_vmax": 10.0,
+          "new_vmax": 10.0,
+          "max_electrode_delta_V": 0.08399999999999963,
+          "old_null_um": 49.97081718067277,
+          "new_null_um": 49.97081718067277,
+          "delta_null_um": 0.0
+        },
+        "readout": {
+          "old_vmax": 10.0,
+          "new_vmax": 10.0,
+          "max_electrode_delta_V": 0.11699999999999999,
+          "old_null_um": 49.976950839969675,
+          "new_null_um": 49.976950839969675,
+          "delta_null_um": 0.0
+        }
+      },
+      "transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 6.639087299366319,
+        "max_step_change_V": 1.7083558487352621,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999996,
+          0.8000000000000006
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "old_transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 6.642160334150021,
+        "max_step_change_V": 1.7101096746218802,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999995,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "errors": [],
+      "max_null_scan_delta_um": 0.0,
+      "max_waveform_electrode_delta_V": 0.011309999999999931
+    },
+    {
+      "case": "B60_E2",
+      "zones": {
+        "loading": {
+          "old_vmax": 7.46,
+          "new_vmax": 7.45,
+          "max_electrode_delta_V": 0.009000000000000008,
+          "old_null_um": 49.97081718067277,
+          "new_null_um": 49.97081718067277,
+          "delta_null_um": 0.0
+        },
+        "readout": {
+          "old_vmax": 2.24,
+          "new_vmax": 2.25,
+          "max_electrode_delta_V": 0.006000000000000005,
+          "old_null_um": 49.976950839969675,
+          "new_null_um": 49.976950839969675,
+          "delta_null_um": 0.0
+        }
+      },
+      "transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.131721105715376,
+        "max_step_change_V": 8.00217737577288,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999996,
+          0.8000000000000007
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "old_transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.130285411913456,
+        "max_step_change_V": 8.001454803269645,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999995,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "errors": [],
+      "max_null_scan_delta_um": 0.0,
+      "max_waveform_electrode_delta_V": 0.010940000000000616
+    },
+    {
+      "case": "B60_E1",
+      "zones": {
+        "loading": {
+          "old_vmax": 7.45,
+          "new_vmax": 7.45,
+          "max_electrode_delta_V": 0.009000000000000008,
+          "old_null_um": 49.957822183649505,
+          "new_null_um": 49.957822183649505,
+          "delta_null_um": 0.0
+        },
+        "readout": {
+          "old_vmax": 2.24,
+          "new_vmax": 2.24,
+          "max_electrode_delta_V": 0.006000000000000005,
+          "old_null_um": 49.963956638521964,
+          "new_null_um": 49.963956638521964,
+          "delta_null_um": 0.0
+        }
+      },
+      "transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.131800689324312,
+        "max_step_change_V": 8.002183196494945,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999992,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.957822183649505,
+          49.963979734478244
+        ]
+      },
+      "old_transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.130365483462175,
+        "max_step_change_V": 8.001463981640564,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999995,
+          0.8000000000000007
+        ],
+        "height_range_um": [
+          49.957822183649505,
+          49.963979734478244
+        ]
+      },
+      "errors": [],
+      "max_null_scan_delta_um": 0.0,
+      "max_waveform_electrode_delta_V": 0.010940000000000616
+    },
+    {
+      "case": "B60_E2_V2zero",
+      "zones": {
+        "loading": {
+          "old_vmax": 10.0,
+          "new_vmax": 10.0,
+          "max_electrode_delta_V": 0.08399999999999963,
+          "old_null_um": 49.97081718067277,
+          "new_null_um": 49.97081718067277,
+          "delta_null_um": 0.0
+        },
+        "readout": {
+          "old_vmax": 10.0,
+          "new_vmax": 10.0,
+          "max_electrode_delta_V": 0.11699999999999999,
+          "old_null_um": 49.976950839969675,
+          "new_null_um": 49.976950839969675,
+          "delta_null_um": 0.0
+        }
+      },
+      "transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 6.639087299366319,
+        "max_step_change_V": 1.7083558487352621,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999996,
+          0.8000000000000006
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "old_transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 6.642160334150021,
+        "max_step_change_V": 1.7101096746218802,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999995,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "errors": [],
+      "max_null_scan_delta_um": 0.0,
+      "max_waveform_electrode_delta_V": 0.011309999999999931
+    },
+    {
+      "case": "NODET",
+      "zones": {
+        "loading": {
+          "old_vmax": 7.92,
+          "new_vmax": 7.93,
+          "max_electrode_delta_V": 0.012,
+          "old_null_um": 49.97081718067277,
+          "new_null_um": 49.97081718067277,
+          "delta_null_um": 0.0
+        },
+        "readout": {
+          "old_vmax": 7.87,
+          "new_vmax": 7.89,
+          "max_electrode_delta_V": 0.021000000000000005,
+          "old_null_um": 49.976950839969675,
+          "new_null_um": 49.976950839969675,
+          "delta_null_um": 0.0
+        }
+      },
+      "transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.200533802059024,
+        "max_step_change_V": 1.6620911423250329,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999995,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "old_transport": {
+        "step_um": 10.0,
+        "n_steps": 49,
+        "max_abs_V": 7.198023476754339,
+        "max_step_change_V": 1.661963538577358,
+        "any_bounded": false,
+        "f_axial_range_MHz": [
+          0.7999999999999993,
+          0.8000000000000004
+        ],
+        "height_range_um": [
+          49.97081718067277,
+          49.97697491378935
+        ]
+      },
+      "errors": [],
+      "max_null_scan_delta_um": 0.0,
+      "max_waveform_electrode_delta_V": 0.011470000000000091
+    }
+  ],
+  "resumed_utc": "2026-11-09T04:08:11.702794+00:00",
+  "sim13_needed": true,
+  "validation_script_sha256": "b0ea5136582ddc6099c01f8c0220fa53cdf5ccd33b49283227547a6358dbd714",
+  "completed_utc": "2026-11-09T04:08:11.753872+00:00",
+  "all_passed": true,
+  "sim13_completed": true,
+  "sim13_comparison": "13_comparison.json"
+}

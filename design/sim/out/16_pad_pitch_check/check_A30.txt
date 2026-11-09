@@ -1,0 +1,157 @@
+PASS single top cell (['TRAP_DIE_V4_A30'])
+PASS seed of electrode 1 at [-240.0, 67.0] lies on metal
+PASS seed of electrode 2 at [-240.0, 16.25] lies on metal
+PASS seed of electrode 3 at [-840.0, 214.0] lies on metal
+PASS seed of electrode 4 at [-720.0, 214.0] lies on metal
+PASS seed of electrode 5 at [-600.0, 214.0] lies on metal
+PASS seed of electrode 6 at [-480.0, 214.0] lies on metal
+PASS seed of electrode 7 at [-360.0, 214.0] lies on metal
+PASS seed of electrode 8 at [-240.0, 214.0] lies on metal
+PASS seed of electrode 9 at [-120.0, 214.0] lies on metal
+PASS seed of electrode 10 at [0.0, 214.0] lies on metal
+PASS seed of electrode 11 at [120.0, 214.0] lies on metal
+PASS seed of electrode 12 at [240.0, 214.0] lies on metal
+PASS seed of electrode 13 at [360.0, 214.0] lies on metal
+PASS seed of electrode 14 at [480.0, 214.0] lies on metal
+PASS seed of electrode 15 at [600.0, 214.0] lies on metal
+PASS seed of electrode 16 at [720.0, 214.0] lies on metal
+PASS seed of electrode 17 at [840.0, 214.0] lies on metal
+PASS seed of electrode 18 at [-840.0, -214.0] lies on metal
+PASS seed of electrode 19 at [-720.0, -214.0] lies on metal
+PASS seed of electrode 20 at [-600.0, -214.0] lies on metal
+PASS seed of electrode 21 at [-480.0, -214.0] lies on metal
+PASS seed of electrode 22 at [-360.0, -214.0] lies on metal
+PASS seed of electrode 23 at [-240.0, -214.0] lies on metal
+PASS seed of electrode 24 at [-120.0, -214.0] lies on metal
+PASS seed of electrode 25 at [0.0, -214.0] lies on metal
+PASS seed of electrode 26 at [120.0, -214.0] lies on metal
+PASS seed of electrode 27 at [240.0, -214.0] lies on metal
+PASS seed of electrode 28 at [360.0, -214.0] lies on metal
+PASS seed of electrode 29 at [480.0, -214.0] lies on metal
+PASS seed of electrode 30 at [600.0, -214.0] lies on metal
+PASS seed of electrode 31 at [720.0, -214.0] lies on metal
+PASS seed of electrode 32 at [840.0, -214.0] lies on metal
+PASS seed of electrode 33 at [-1451.25, 214.0] lies on metal
+PASS seed of electrode 34 at [1481.25, 214.0] lies on metal
+PASS seed of electrode 35 at [-1451.25, -214.0] lies on metal
+PASS seed of electrode 36 at [1481.25, -214.0] lies on metal
+PASS seed of electrode 97 at [-240.0, 5.0] lies on metal
+PASS seed of electrode 98 at [-240.0, -5.0] lies on metal
+PASS ground seed lies on metal
+PASS no two electrodes share a conductor 
+PASS no electrode is shorted to ground
+PASS electrode ['1'] reaches a pad near the die edge (200 um from it)
+PASS electrode ['2'] reaches a pad near the die edge (250 um from it)
+PASS electrode ['3'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['4'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['5'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['6'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['7'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['8'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['9'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['10'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['11'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['12'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['13'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['14'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['15'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['16'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['17'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['18'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['19'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['20'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['21'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['22'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['23'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['24'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['25'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['26'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['27'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['28'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['29'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['30'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['31'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['32'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['33'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['34'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['35'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['36'] reaches a pad near the die edge (180 um from it)
+PASS electrode ['97'] reaches a pad near the die edge (150 um from it)
+PASS electrode ['98'] reaches a pad near the die edge (150 um from it)
+PASS no floating Au islands (0 found)
+PASS minimum spacing between conductors 5.00 um (({'2'}, {'97'}))
+PASS features narrower than 4.9 um: 0.0 um^2 of Au
+PASS no text labels on fab layer 1
+PASS no text labels on fab layer 10
+PASS no text labels on fab layer 20
+PASS no text labels on fab layer 22
+PASS no text labels on fab layer 40
+PASS no text labels on fab layer 50
+PASS layer 10 stays >= 90 um from the dicing edge (0.0 um^2 closer)
+PASS layer 22 stays >= 90 um from the dicing edge (0.0 um^2 closer)
+PASS layer 40 stays >= 90 um from the dicing edge (0.0 um^2 closer)
+PASS layer 50 stays >= 90 um from the dicing edge (0.0 um^2 closer)
+PASS retired layers empty: 24, 30, 31 (ITO) and 45 (protect)
+PASS SNSPD lead 97 stays inside the centre-DC slot in the trap (|y|max 7.5 um)
+PASS SNSPD lead 98 stays inside the centre-DC slot in the trap (|y|max 7.5 um)
+PASS no buried Ti/Au leads in the trap: layer 22 starts at x = 143 um (contacts only, within 120 um of the readout zone)
+PASS two SNSPD contacts on layer 40 near the detector (2)
+PASS contact at (157, 5) inside its Au lead and Ti/Au pad by >= 1 um
+PASS contact at (157, -5) inside its Au lead and Ti/Au pad by >= 1 um
+PASS readout window 30 x 30 um is open in the Au
+PASS NbN stays within 17 um of the axis, >= 3 um inside the centre-DC edge (max 15.96 um)
+PASS all NbN lies under the centre-DC Au or the window (0 um^2 outside)
+PASS NbN gaps >= 60 nm (closing by 58 nm adds 1.31e-13 um^2)
+PASS no NbN turn or tab inside the light footprint (window + 0.02 um; tallest NbN piece there 130 nm)
+PASS Al mirror never under the RF rails (|y|max 20.0 um inside the trap; rails start at 25)
+PASS Al mirror covers the detector NbN (meander + tabs) by >= 3 um
+PASS mirror tied to the Au ground fill on chip by 1 via(s)
+PASS mirror via at (-2140, 130) enclosed >= 25 um by ground Au and by the Al
+PASS no pads in the beam-exit corners |x|, |y| > 4 mm 
+PASS pad RF (1) is not on the ground fill
+PASS pad TL1 (33) is not on the ground fill
+PASS pad TL2 (3) is not on the ground fill
+PASS pad TL3 (4) is not on the ground fill
+PASS pad TL4 (5) is not on the ground fill
+PASS pad TL5 (6) is not on the ground fill
+PASS pad TL6 (7) is not on the ground fill
+PASS pad TL7 (8) is not on the ground fill
+PASS pad TL8 (9) is not on the ground fill
+PASS pad TR1 (34) is not on the ground fill
+PASS pad TR2 (17) is not on the ground fill
+PASS pad TR3 (16) is not on the ground fill
+PASS pad TR4 (15) is not on the ground fill
+PASS pad TR5 (14) is not on the ground fill
+PASS pad TR6 (13) is not on the ground fill
+PASS pad TR7 (12) is not on the ground fill
+PASS pad TR8 (11) is not on the ground fill
+PASS pad TR9 (10) is not on the ground fill
+PASS pad BL1 (35) is not on the ground fill
+PASS pad BL2 (18) is not on the ground fill
+PASS pad BL3 (19) is not on the ground fill
+PASS pad BL4 (20) is not on the ground fill
+PASS pad BL5 (21) is not on the ground fill
+PASS pad BL6 (22) is not on the ground fill
+PASS pad BL7 (23) is not on the ground fill
+PASS pad BL8 (24) is not on the ground fill
+PASS pad BR1 (36) is not on the ground fill
+PASS pad BR2 (32) is not on the ground fill
+PASS pad BR3 (31) is not on the ground fill
+PASS pad BR4 (30) is not on the ground fill
+PASS pad BR5 (29) is not on the ground fill
+PASS pad BR6 (28) is not on the ground fill
+PASS pad BR7 (27) is not on the ground fill
+PASS pad BR8 (26) is not on the ground fill
+PASS pad BR9 (25) is not on the ground fill
+PASS pad C (2) is not on the ground fill
+PASS pad SNS (SNSPD_S) is not on the ground fill
+PASS pad SNG (SNSPD_G) is not on the ground fill
+PASS GND spot GND-1 has 200 x 200 um of ground fill
+PASS GND spot GND-2 has 200 x 200 um of ground fill
+PASS GND spot GND-3 has 200 x 200 um of ground fill
+PASS GND spot GND-4 has 200 x 200 um of ground fill
+PASS L1 mark at (-4300, 4830) is not under Al
+PASS L1 mark at (4300, 4830) is not under Al
+PASS L1 mark at (-4300, -4830) is not under Al
+PASS L1 mark at (4300, -4830) is not under Al
+ALL CHECKS PASS

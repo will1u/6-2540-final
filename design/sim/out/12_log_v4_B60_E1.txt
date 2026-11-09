@@ -1,4 +1,5 @@
 3-D recess correction (30x60 mirror_t1): -0.55 um
+Exact gap-union cache: CacheInfo(hits=27521, misses=50, maxsize=256, currsize=50)
 loading  y=   -480: null z = 49.96 um (x -0.00); RF-only [2.99775273 2.99817657] MHz, q = 0.303; DC freqs [0.8   2.915 2.973] MHz; |V|max 7.45 V; bounded False; radial axes at 169.7 deg
 readout  y=      0: null z = 49.96 um (x -0.00); RF-only [2.99665112 2.99707805] MHz, q = 0.303; DC freqs [0.8   2.895 2.99 ] MHz; |V|max 2.24 V; bounded False; radial axes at 170.1 deg
-transport: 49 steps, max |V| 7.13 V, max change per 10 um step 8.001 V, axial 0.800-0.800 MHz, height 49.96-49.96 um, bounded steps: 0
+transport: 49 steps, max |V| 7.13 V, max change per 10 um step 8.002 V, axial 0.800-0.800 MHz, height 49.96-49.96 um, bounded steps: 0
