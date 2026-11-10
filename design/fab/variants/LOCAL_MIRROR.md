@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes; mirror 100 nm inlaid 2026-11-09.
 
 # Local mirror without D2
 
@@ -12,6 +12,7 @@
 > - the SiO₂ over the wires is 160 nm, so the mirror via is ≈ 0.40 µm deep and the contact openings ≈ 160 nm (H.2 step 11v below still says 0.32 µm and 80 nm);
 > - the trap dies have no mirror probe opening: the mirror ground path is measured on the test die (T10 strip, T11 via chain; step 35);
 > - the H.5 GDS changes were made in `gds/make_chip.py` v4, with the leads in the slot (option a).
+> - The mirror thickness and step 3 were changed on 2026-11-09 (100 nm, inlaid). [process/01_FOUNDATION.md](../process/01_FOUNDATION.md) is current.
 
 Team request, 2026-11-08 (DESIGN_LOG step 23). Written as an alternative to the [baseline traveler](../TRAVELER.md) and adopted the same day.
 
@@ -55,7 +56,7 @@ Capacitance the mirror adds to the centre DC (electrode 2), which sits 318 nm ab
 | Step | Baseline | Variant |
 |---|---|---|
 | 0–2 | Prep, L1 marks, 1 µm thermal SiO₂ (D1) | Same |
-| **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Al-1%Cu **450 nm** (team decision 2026-11-08, to lower the strip resistance to ground, DESIGN_LOG step 28; Hampel used 50 nm e-beam Al). Either the step-3 etch with the job not inverted, or lift-off as Hampel did. No mark cut-outs needed |
+| **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Evaporated Al **100 nm, inlaid**: SiO₂ recess, Al evaporation and lift-off with one resist (team decision 2026-11-09; `sim/10c`, DESIGN_LOG step 37; supersedes the 450 nm of 2026-11-08). Hampel used 50 nm e-beam Al by lift-off, not inlaid. No mark cut-outs needed |
 | 4–8 | Spacer 238 nm, NbN, L22 leads, L20 nanowire, HSQ + cap | Same order: leads before the nanowire, cap straight after. **The cap is now the top surface over the detector (vacuum above)**, so its thickness matters optically again: rerun 09b before fixing it (H.4) |
 | 9, 10 | 10 µm D2 | **Skipped** |
 | **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: HSQ/cap + spacer ≈ 0.32 µm down to the Al. SNSPD pads: ≈ 80 nm down to the L22 Au. Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. Add a small Al probe opening on the mirror so it can be checked electrically (H.5) |
@@ -67,7 +68,7 @@ Thermal budget: no D2, so the long 300 °C exposure goes away.
 
 ## H.3 Cross-section under the readout window (variant)
 
-HR Si / 1 µm thermal SiO₂ / 450 nm Al (local mirror; step 28) / 238 nm PECVD SiO₂ / 7 nm NbN / 160 nm HSQ + PECVD SiO₂ cap (step 26; was 80) / **vacuum**. For E1/A30 the window is a 30 × 30 µm hole in 0.35 µm Au; E2 retains 6 µm Au. The ion sees the cap directly. Away from the detector the electrodes sit on spacer + cap over D1, with no Al under them.
+HR Si / 1 µm thermal SiO₂ / 100 nm Al, inlaid (local mirror; step 37) / 238 nm PECVD SiO₂ / 7 nm NbN / 160 nm HSQ + PECVD SiO₂ cap (step 26; was 80) / **vacuum**. For E1/A30 the window is a 30 × 30 µm hole in 0.35 µm Au; E2 retains 6 µm Au. The ion sees the cap directly. Away from the detector the electrodes sit on spacer + cap over D1, with no Al under them.
 
 ## H.4 What the variant changes in the physics (each needs a rerun or a test)
 

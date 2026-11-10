@@ -1,4 +1,4 @@
-> **Claude-authored.** In-line measurements and acceptance windows for the v4 steps ([process pages](process/01_FOUNDATION.md), [R1_TRAP sheet](RUNSHEET_R1_TRAP.md)). Targets come from DESIGN_LOG steps 2, 9, 9b, 9c, 10, 17, 22 and 25–29 and the research report. Windows marked **[verify]** are first guesses to tighten after the witness wafers ([qualification](QUALIFICATION.md)). Rewritten for v4 2026-11-09.
+> **Claude-authored.** In-line measurements and acceptance windows for the v4 steps ([process pages](process/01_FOUNDATION.md), [R1_TRAP sheet](RUNSHEET_R1_TRAP.md)). Targets come from DESIGN_LOG steps 2, 9, 9b, 9c, 10, 17, 22 and 25–29 and the research report. Windows marked **[verify]** are first guesses to tighten after the witness wafers ([qualification](QUALIFICATION.md)). Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Process checks
 
@@ -28,11 +28,15 @@ Thermal limit for this step and every later step: **≤ 300 °C**.
 
 | Step | Quantity | Method / where | Target | Accept | If out of window |
 |---|---|---|---|---|---|
-| 3 | Al-1%Cu thickness | Dektak step on the etched edge (route A) or the lift-off edge (route B) | 450 nm | [verify]: no window for 450 nm in the sources | < 100 nm: not opaque, so re-deposit |
-| 3 | Al-1%Cu sheet resistance | 4-pt on a co-deposited Si witness | record | Expected value not settled across the sources [verify]; record it | Reconcile before accepting |
+| 3 | Recess depth into the thermal SiO₂ (3b) | Profilometer or AFM | 100 nm | 90–110 nm [design call; verify] | Hold before 3c; see the fallback in [process/01_FOUNDATION.md](process/01_FOUNDATION.md) |
+| 3 | Al thickness (3c) | Crystal monitor; witness by profilometer | Equal to the recess depth (100 nm nominal) | Equal to the measured recess depth [verify] | Opaque down to 50 nm (TMM: 50 nm transmits 0.12 %). A mismatch with the recess depth shows as the residual step (row below) |
+| 3 | Residual step, Al to SiO₂, after lift-off | Profilometer or AFM across the T10 strip and one trap mirror | Level | ≤ 20 nm [design call; verify] | See the fallback in [process/01_FOUNDATION.md](process/01_FOUNDATION.md) |
+| 3 | Lip or groove at the mirror edge | Profilometer or AFM across the T10 strip and one trap mirror | None | ≤ 20 nm [design call; verify] | See the fallback in [process/01_FOUNDATION.md](process/01_FOUNDATION.md) |
+| 3 | Lift-off complete | Optical | No Al flags or residue | No Al flags or residue [verify] | Re-do the lift-off [verify]; see the fallback if W8 fails |
+| 3 | Al sheet resistance | 4-pt on a witness | 0.30–0.40 Ω/sq expected [team calc] | [verify] | Reconcile before accepting |
 | 3 | Hillocks and whiskers on Al | Darkfield microscope | none | no features > 100 nm [verify] | Lower the deposition T, or a Ti cap on the Al in a later run (SINTEF; team decision) |
 | 3 | Mirror shape | Drawing vs as-built | \|y\| ≤ 20 µm, x = −2240 … +268 µm (A30); branch to the ground via at (−2140, 130) µm | Matches the drawing | Re-expose |
-| 3 | Mirror strip resistance | T10 four-point, test die | about 5 Ω at 450 nm (2.51 mm × 40 µm) | [verify]: acceptance not set | – |
+| 3 | Mirror strip resistance | T10 four-point, test die | 18.8–25.1 Ω at 100 nm (2.51 mm × 40 µm, 62.75 squares) (`sim/10c`, [DESIGN_LOG step 37](../DESIGN_LOG.md)) | [verify]: acceptance not set | – |
 
 ## 3. Detector stack (steps 4–8; A30 and B60 only)
 
@@ -85,7 +89,8 @@ Both branches draw the same layer 50. Run one branch.
 | 13 | E1 | Ti and Au thickness | Witness | Ti 10 nm / Au 350 nm | [verify] | – |
 | 14 | E1 | Lift-off in NMP | Optical | no Au across the 5 µm gaps; no flags | – | Re-do [verify] |
 | 15 | E1 | Electrode isolation | Probe pad rows, 10 V | > 100 MΩ between neighbours | [verify; carried from v3 step 15] | – |
-| 15 | E1 | Au over the 0.40 µm via step and the mirror edge | SEM cross-section ([E1 lift-off loop](QUALIFICATION.md#e1-lift-off-loop-e1-only)) | continuous | [verify] | – |
+| 15 | E1 | Au over the 0.40 µm via step | SEM cross-section ([E1 lift-off loop](QUALIFICATION.md#e1-lift-off-loop-e1-only)) | continuous | [verify] | – |
+| 15 | E1 | No lip or groove at the mirror edge under the Au | Optical or SEM | None (planar) | ≤ 20 nm [design call; verify] | – |
 | 15 | E1 | Gap depth-to-width (5 µm gaps, 0.35 µm Au) | Calculated | 0.07 [team calc]. Record; not a verdict | – | – |
 | 15 | E1 | Wire bond on evaporated Au | Pull test ([W7](QUALIFICATION.md#w7-bond-and-leak-step-19)) | [verify] | [verify] | – |
 
@@ -115,7 +120,7 @@ Both branches draw the same layer 50. Run one branch.
 | 15 | Both | SNSPD leads continuous in the slot | Optical or SEM | 5 µm lines, 5 µm gaps | continuous | – |
 | 15 | Both | Mirror via covered by the Au ground fill | Optical or SEM | ≥ 25 µm enclosure | covered | – |
 | 15 | Both | Electrode isolation | Probe pad rows, 10 V | > 100 MΩ between neighbours | [verify] | – |
-| 15 | Both | Fill-to-mirror resistance | Probe fill; mirror strip on test die T10 (no mirror probe pad on the trap die) | about 5 Ω strip plus contacts [team calc] | [verify]: the old < 10 Ω test is not carried over as drawn | – |
+| 15 | Both | Fill-to-mirror resistance | Probe fill; mirror strip on test die T10 (no mirror probe pad on the trap die) | 18.8–25.1 Ω strip at 100 nm plus contacts [team calc] | [verify]: the old < 10 Ω test is not carried over as drawn | – |
 | 15 | Both | Window floor (SiO₂ cap) | Optical; ellipsometry | no Au film or residue; cap thickness recorded | no visible film [verify]; thickness [verify] | Extra F-plasma [verify]; record |
 
 ## 6. Test, dice and package (steps 17–19)
@@ -131,9 +136,9 @@ Limits and protocol: [test plan](test_plan.md). The Dietl 2025 source for the li
 | a5 | T1 Au comb leakage | 50 V | ≤ 100 nA; ideally < 1 nA [verify]. Detects Au redeposition bridges (Sussex) | Both (300 V on sacrificial dies only) |
 | a3 | T6 Au continuity loop | 1 mA, 0–100 mV | [verify] | TEST_TRAP |
 | T2v | Au / SiO₂ / Al capacitor | ≈ 3.5 pF [team calc; geometry to confirm] | leakage ≤ 100 nA at 50 V [verify] | A30 and B60 |
-| T10 | Al mirror strip, four-point | about 5 Ω | [verify] | A30 and B60 |
+| T10 | Al mirror strip, four-point | 18.8–25.1 Ω at 100 nm | [verify] | A30 and B60 |
 | T11 | Au-to-Al via chain | [verify] | [verify] | A30 and B60 |
-| T12 | Twin Au leads over Al | continuity over the Al edge step | no open; no lead-to-lead leakage [verify] | A30 and B60 |
+| T12 | Twin Au leads over Al | continuity across the planar mirror edge, and lead-to-lead leakage | no open; no lead-to-lead leakage [verify] | A30 and B60 |
 | Ground link | Fill to mirror, through the on-chip via | [verify]: the old < 10 Ω was for the v3 M1 vias | [verify]; measured on T11 (via) and T10 (strip), with the T4/T4b mirror probe pads (no probe opening on the trap die) | A30 and B60 |
 | a10 | RF capacitance | – | [verify] | After packaging |
 
@@ -169,7 +174,7 @@ Limits and protocol: [test plan](test_plan.md). The Dietl 2025 source for the li
 | 19 | Both | Pad-to-pad isolation through the carrier pins | Carrier | after packaging | [verify] | – |
 | 19 | R1_FULL, A30 and B60 | Meander R₅ | Carrier pins | – | R / R_expected [verify] | – |
 
-Open, not a check: the SNSPD RF termination (common-mode RF of ≈ 44.5 µA per lead on E2, 28.3 µA on E1; [open decisions](OPEN_DECISIONS.md#design-choices)).
+Open, not a check: the SNSPD RF termination (common-mode RF of ≈ 44.5 µA per lead on E2, 28.6 µA on E1 (`sim/10c`, DESIGN_LOG step 37); [open decisions](OPEN_DECISIONS.md#design-choices)).
 
 ## 7. Records per die
 

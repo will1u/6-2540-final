@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Room temperature electrical tests
 
@@ -118,7 +118,7 @@
 
 **Stimulus:** 10 mA, 2-wire (4-wire if two probes fit per pad) [carried from v3; verify for T10]
 
-**Pass:** **[verify]**. The old **< 10 Ω** limit cannot be applied as written: the Al strip alone is about **5 Ω** at 450 nm Al [team calc], before the via and probe contacts. Set the acceptance separately for the T10 strip and the T11 chain.
+**Pass:** **[verify]**. The old **< 10 Ω** limit cannot be applied as written: the Al strip alone is **18.8–25.1 Ω** at 100 nm Al (`sim/10c`, DESIGN_LOG step 37) [team calc], before the via and probe contacts. Set the acceptance separately for the T10 strip and the T11 chain.
 
 If T11 reads open, or much higher than the expected chain, the candidates are AlF₃ or native Al₂O₃ left at the via floor, or a broken seed on the via sidewall [inference]. The Ar pre-clean in [process step 12 (E2)](../process/03_ELECTRODES.md) is the step that addresses the via floor.
 
@@ -166,7 +166,7 @@ The v4 trap dies have no M1 pads. The Au ground fill is grounded to the Al mirro
 
 **Stimulus:** [verify] (four-point current not set in the notes)
 
-**Pass:** **[verify].** Expected ≈ 5 Ω at 450 nm Al [team calc]. [STACK](../STACK.md) gives about 5 Ω as the expected value; no acceptance is set.
+**Pass:** **[verify].** Expected **18.8–25.1 Ω** at 100 nm Al (62.75 squares at 0.30–0.40 Ω/sq) [team calc] (`sim/10c`, DESIGN_LOG step 37). No acceptance is set. A higher value than expected points to a thin or discontinuous Al film or an over-etched via.
 
 **Source:** DESIGN_LOG step 25 (mirror path); [STACK](../STACK.md) (v4 changes)
 
@@ -182,7 +182,7 @@ The v4 trap dies have no M1 pads. The Au ground fill is grounded to the Al mirro
 
 ## a18 Lead continuity over the Al edge and lead-to-lead (T12)
 
-**Pads:** T12 is two 5 µm Au lines, 5 µm apart, laid over an Al strip (test die). The lines are 2.7 mm long and run over a 2.3 mm Al strip, extending about 200 µm beyond each end of the strip. Probe each line at both ends (continuity across the Al edge), line to line (lead-to-lead), and line to the Al strip (lead-to-Al).
+**Pads:** T12 is two 5 µm Au lines, 5 µm apart, laid over an Al strip (test die). The lines are 2.7 mm long and run over a 2.3 mm Al strip, extending about 200 µm beyond each end of the strip. The Al is inlaid, so it is level with the SiO₂ beside it: the lines cross the planar edge of the strip, and there is no step to climb. Probe each line at both ends (continuity across the planar Al edge), line to line (lead-to-lead), and line to the Al strip (lead-to-Al).
 
 **Stimulus:** [verify]. The a2 DC values (50 V, ≤ 100 nA) are a starting point only [verify].
 

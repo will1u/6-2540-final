@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Steps 4 to 8 detector stack
 
@@ -7,8 +7,9 @@
 Full stack only (A30 and B60 dies). R1_TRAP and NODET dies skip this stage. Current generators use the v4 local-mirror stack with the v3.1 meander: [reconcile estimates](../OPEN_DECISIONS.md#detector-documents-and-generated-layouts) before R1_FULL. Step numbers 8a/8b are retired.
 
 **Changed from v3 on this page**
-- Step 4: spacer unchanged (238 nm). The Al under it is the 450 nm local mirror, not a die-wide plane.
-- Step 5: NbN unchanged. The Al under it is the local mirror, which is not grounded until the layer-40 mirror via (step 11v).
+- Mirror: the Al under the spacer is the 100 nm inlaid local mirror, evaporated into a 100 nm recess in the thermal SiO₂ (step 3). History: 150 nm (v3), 450 nm (2026-11-08), then 100 nm inlaid (team decision 2026-11-09, [`notes/decisions.md`](../../../notes/decisions.md)). The 450 nm mirror left a 0.45 µm step under the centre DC and the slot leads. `sim/10c` showed the mirror's pickup goes to ground, and the thickness changes the nanowire current by under 2 µA (`sim/10c`, DESIGN_LOG step 37).
+- Step 4: spacer unchanged (238 nm). It is deposited on a flat surface: after step 3 the Al top is level with the SiO₂ beside it.
+- Step 5: NbN unchanged. The Al under it is the 100 nm evaporated local mirror, which is not grounded until the layer-40 mirror via (step 11v).
 - Step 6: Ti/Au is contacts only: a strip from each NbN tab into the slot, ending in a 27 × 7 µm pad, plus the EBL marks. No long buried Ti/Au leads. The long SNSPD leads are electrode Au (layer 50), made later.
 - Step 7: meander geometry unchanged (v3.1). Cap target moves with step 8.
 - Step 8: total SiO₂ over the wires (HSQ + cap) is **160 ± 10 nm** (was 80 nm). It is the top surface over the detector, with vacuum above.
@@ -24,13 +25,13 @@ Wafer ID: ________ Run: ________ Operator: ________ Generator revision: ________
 - **Tool:** PECVD-Samco-PD220 or PECVD-Oxford-TEOS, ≤ 300 °C [verify the tool's settable T].
 - **Target:** **238 ± 10 nm**. ±10 nm costs ≤ ~0.05 absorption [team calc, DESIGN_LOG step 9]. Never 140–160 nm (node).
 - **Measure:**
-  - Ellipsometry on the device wafer, with an Al substrate model [verify which device-wafer area carries the 450 nm local mirror under the spacer].
+  - Ellipsometry on the device wafer, with an Al substrate model [verify which device-wafer area carries the 100 nm local mirror under the spacer].
   - A co-loaded bare-Si piece to cross-check the rate and index.
   - AFM roughness on a dummy die area, to compare with W1-a.
 - **Go / no-go:** 228–248 nm; no visible hillocks.
 - **Hazards:**
   - First heating of the Al.
-  - The mirror is 450 nm Al-1%Cu (v4; was 150 nm). Check for hillocks after the spacer deposition (DESIGN_LOG step 28 addendum; ≤ 300 °C).
+  - The mirror is 100 nm evaporated Al, inlaid (was 150 nm in v3). It is evaporated Al with no Cu, not Al-1%Cu, so check for hillocks after the spacer deposition (DESIGN_LOG step 28 addendum; ≤ 300 °C). Witness W8 repeats the hillock check after a 300 °C cycle.
 - [ ] Done — date: ____ operator: ____ t_sp (5 pts): ____ n: ____ notes: ____
 
 ## 5. NbN 7 nm, room-temperature RF-bias reactive sputter
@@ -43,7 +44,7 @@ Wafer ID: ________ Run: ________ Operator: ________ Generator revision: ________
   - Rate ~0.04 nm/s (Medeiros: 200 s → 8 nm), so ~175 s for 7 nm [verify].
 - **Witnesses in the same run:**
   - (a) a thermal-SiO₂/Si chip, for ellipsometry with the Medeiros model and for Rsq;
-  - (b) a spacer-over-Al chip from step 4 (Tc on the real stack). [verify] its Al is the 450 nm local-mirror film; the W1-a stack in QUALIFICATION is drawn at 150 nm.
+  - (b) a spacer-over-Al chip from step 4 (Tc on the real stack). Its Al is the 100 nm evaporated, inlaid local-mirror film, as in the W1 stack of [QUALIFICATION](../QUALIFICATION.md) (pieces from W8).
 - **Target:** 7.0 ± 0.5 nm; Rsq ≈ 400 Ω/sq (5 nm: ≈ 600 Ω/sq) [team calc from Medeiros' fit ρ = 245 µΩ·cm with a 0.88 nm intercept; Toomey 2018 gives 600 Ω/sq at ~5 nm]; Tc ≈ 7.8–8 K (Dane 2017; Toomey 2018).
 - **Go / no-go:** Tc ≥ 7.5 K, which leaves Todaro's ≥ 25 % margin above a ≤ 6 K surface (Todaro PRL p. 2) [verify].
 - **Hazards:**

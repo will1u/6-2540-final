@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Cryogenic detector tests
 
@@ -19,8 +19,8 @@
 | L_k | ≈ 3.3 µH for the v3.1 A30 meander at 70 pH/sq (7 nm NbN, dirty BCS; sim/15), so τ = L/50 Ω ≈ 66 ns (B60 ≈ 6.3 µH, 126 ns) |
 | I_sw at ~5 K | **≈ 8–9 µA** for a 100 nm wire (Sedykh 2025's ≈ 15 µA at 2.2 K, Tc 7.5 K, scaled to 5 K; geometry audit), ≈ 1.1× that for the 130 nm wire with turn crowding [team calc, rough]. The older 15–25 µA came from heated NbN (Tc ≈ 10.9 K) and is optimistic |
 | Pulse height | ≈ 50 Ω × I_b ≈ 0.75–1.25 mV |
-| RF pickup, nanowire | v4 simulations (sim 10b, DESIGN_LOG step 26): **0.96 µA (E2) / 1.92 µA (E1)** in the nanowire, 2-D. The mirror path adds 0.16–0.21 µA with the 450 nm Al (step 28) |
-| RF pickup, lead model | Sim 19, lumped: a plain 50 Ω line on the signal lead with the return grounded gives **≈ 4.1 µA (E2) / 2.6 µA (E1)** through the A30 nanowire (upper bound). Each slot lead collects ≈ 44.5 µA (E2) / 28.3 µA (E1) of common-mode 28 MHz current over its 2.24 mm length (sim 18 / step 28) |
+| RF pickup, nanowire | v4 simulations (sim 10b, DESIGN_LOG step 26): **0.96 µA (E2) / 1.92 µA (E1)** in the nanowire, 2-D. The mirror path adds at most 0.73–0.97 µA on E2 and 0.74–0.99 µA on E1 with the 100 nm inlaid Al (`sim/10c`, DESIGN_LOG step 37). About 3.2 mA of RF current flows along the mirror strip to ground and dissipates 34–47 µW in it at room-temperature resistivity; no thermal model, so watch the switching current against RF amplitude as the sign of heating |
+| RF pickup, lead model | Sim 19, lumped: a plain 50 Ω line on the signal lead with the return grounded gives **≈ 4.1 µA (E2) / 2.6 µA (E1)** through the A30 nanowire (upper bound). Each slot lead collects ≈ 44.5 µA (E2) / 28.6 µA (E1) of common-mode 28 MHz current over its 2.24 mm length (`sim/10c`, DESIGN_LOG step 37; sim 18 / step 28 gave 28.3 µA for E1) |
 | Reference for the RF comparison | sim 19 expresses its results as a percentage of an 8 µA switching current; its notes give 8–20 µA as the range [team calc, upper bound]. The I_sw row above is 8–9 µA, so the two ranges do not agree [verify] |
 
 The termination at SNS and SNG is an **open decision** ([OPEN_DECISIONS](../OPEN_DECISIONS.md), RF grounding / filters). The lumped figures above assume the plain 50 Ω case; they are not a choice of termination. Record the termination used for each b6 run.

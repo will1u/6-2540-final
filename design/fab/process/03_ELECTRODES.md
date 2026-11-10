@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09. The v3 page was reorganized 2026-11-08 from the project fabrication notes.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09. The v3 page was reorganized 2026-11-08 from the project fabrication notes.
 
 # Steps 9 to 16 SiO₂ and Au electrodes
 
@@ -41,6 +41,8 @@ This was the top ITO on D2 (removed in v3). v4 has no ITO and no D2, so this ste
   - CHF₃ 25 / CF₄ 5 / Ar 50 sccm, 130 mTorr, 600 W (JoVE flows, carried from v3 step 11) [verify on our tool].
   - Etch about 1 min [verify] (LOCAL_MIRROR H.2). At the v3 rate of ~360 nm/min, 0.40 µm needs about 1.1 min [team calc]; the over-etch is set on W3 [verify].
   - Stops on Al (mirror via) and on Au (SNSPD contacts).
+  - **Note, Al thickness:** the Al under the mirror via is 100 nm thick (inlaid; team decision 2026-11-09, [`notes/decisions.md`](../../../notes/decisions.md)). Keep the over-etch into the Al small [verify selectivity].
+  - **Note, same chemistry as step 3b:** the mirror recess in step 3b of [`01_FOUNDATION.md`](01_FOUNDATION.md) uses the same CHF₃ / CF₄ / Ar chemistry [verify on our tool].
 - **Cap thickness:** 160 ± 10 nm total SiO₂ over the NbN is the step-26 target. The GDS generator and the simulation metadata now state 160 nm (corrected 2026-11-09; geometry unchanged). [verify: confirm the deposited cap thickness before the etch time is set]
 - **Layer / align:** L40 → L1 (±5 µm, carried from v3). [verify: the contact opening lands on a 27 × 7 µm Au pad and has only the ≥ 1 µm margin drawn; check the overlay budget against it]
 - **Inspect:**
@@ -74,7 +76,7 @@ Layer 50 is the electrode Au, the ground fill, the pads, and in v4 the SNSPD lea
 
 - **Ar pre-clean first:** in-situ, before the Ti, to remove the AlF₃ on the mirror-via floor (DESIGN_LOG step 22) [verify time and power]. On dies without a mirror via (NODET, R1_TRAP) whether the pre-clean is needed is [verify].
 - **Ti 10 nm, then Au 350 nm,** evaporated [verify thicknesses; Hampel used 350 nm Au].
-- Notes: the Au must cover the 0.40 µm via step and the mirror edge (checked in step 15).
+- Notes: the Au must cover the 0.40 µm via step (checked in step 15).
 - [ ] Done — date: ____ operator: ____ Ar pre-clean: ____ Ti t: ____ Au t: ____ notes: ____
 
 ### 14 (E1). Lift-off in NMP
@@ -88,13 +90,14 @@ Layer 50 is the electrode Au, the ground fill, the pads, and in v4 the SNSPD lea
   - all 5 µm gaps open everywhere;
   - SNSPD leads continuous in the slot (5 µm lines, 5 µm gaps);
   - mirror via covered by the ground fill (≥ 25 µm enclosure);
-  - Au continuous over the 0.40 µm via step and over the mirror edge [verify];
+  - Au continuous over the 0.40 µm via step [verify];
+  - no lip or groove at the mirror edge under the Au (surface planar after step 3);
   - electrodes isolated (neighbours > 100 MΩ at 10 V) [verify, carried from v3 step 15];
-  - **fill-to-mirror resistance** at the test die: the old < 10 Ω limit does not apply as drawn (the Al strip is about 5 Ω at 450 nm [team calc]; DESIGN_LOG step 28 addendum), plus the contacts. [verify: replacement limit]
+  - **fill-to-mirror resistance** at the test die: the old < 10 Ω limit does not apply as drawn. The Al strip alone is 18.8–25.1 Ω at 100 nm (`sim/10c`, DESIGN_LOG step 37) [team calc], plus the contacts. [verify: replacement limit]
   - wire bond on 350 nm evaporated Au [verify].
 - **Checks for this option (not a verdict):**
   - gap depth-to-width 0.07 (0.35 µm Au over 5 µm gaps), so SiO₂ is exposed in every gap, as the ion sees it;
-  - Au coverage of the 0.40 µm via step and the mirror edge with 0.35 µm Au;
+  - Au coverage of the 0.40 µm via step with 0.35 µm Au, and no lip or groove at the mirror edge;
   - wedge-bondability of 350 nm evaporated Au [verify].
 - [ ] Done — date: ____ operator: ____ gap check: ____ fill–mirror R: ____ bond test: ____ notes: ____
 
@@ -157,7 +160,8 @@ Steps 12 to 15 are the v3 plating steps, carried onto the thin stack. Changes fr
   - all electrodes isolated (neighbours > 100 MΩ at 10 V) [verify];
   - 5 µm gaps open; SNSPD leads continuous in the slot;
   - mirror via covered by the ground fill;
-  - fill-to-mirror resistance [verify: replacement limit];
+  - fill-to-mirror resistance: the Al strip alone is 18.8–25.1 Ω at 100 nm (`sim/10c`, DESIGN_LOG step 37) [team calc], plus the contacts [verify: replacement limit];
+  - no lip or groove at the mirror edge under the Au (surface planar after step 3);
   - meander R₂ (test die T4/T4b; the v4 test die is drawn and checked, 2026-11-09);
   - window floor optically clean (no Au film);
   - AFM: Au roughness ~8 nm rms (PTB 8.3(5) nm).
@@ -178,7 +182,7 @@ Steps 12 to 15 are the v3 plating steps, carried onto the thin stack. Changes fr
 | Au thickness | 0.35 µm (Ti 10 nm under) [verify] | 6.0 µm plated, on a Ti 15 nm / Au 50 nm seed (seed removed in step 15) |
 | Layer 50 resist | LOR + positive resist [verify thickness] | AZ nLOF 2070, ≥ 8 µm |
 | Gap depth-to-width ratio (5 µm gaps) | 0.07 | 1.2 |
-| Must be verified | Au coverage of the 0.40 µm via step; wedge bond on 350 nm Au; in-situ Ar clean on the evaporator; LOR thickness and undercut; lift-off time; fill-to-mirror R | Plating tank minimum against the measured 5.7–5.9 cm² per run; seed continuity on the 0.40 µm via; cap thickness after step 15; Ar pre-clean on the AJA |
+| Must be verified | Au coverage of the 0.40 µm via step; no lip or groove at the mirror edge; wedge bond on 350 nm Au; in-situ Ar clean on the evaporator; LOR thickness and undercut; lift-off time; fill-to-mirror R | Plating tank minimum against the measured 5.7–5.9 cm² per run; seed continuity on the 0.40 µm via; no lip or groove at the mirror edge; cap thickness after step 15; Ar pre-clean on the AJA |
 | Shared with the other option | Steps 9 to 11 (step 9 and 10 removed); inspection list in step 15 | Same |
 
 ## 16a. Removed in v4

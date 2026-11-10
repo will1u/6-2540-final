@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Finished device test plan
 

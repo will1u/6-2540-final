@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Run sequence and die maps
 
@@ -29,6 +29,7 @@ The work is organised as a series of short, cheap runs with the layout updated b
 | **1b: R1_FULL** | Detector reconciliation: generated files, the 130 / 200 nm recipe, T9, and L20 / L22 / L40 / L50 areas and EBL time | [Checklist](OPEN_DECISIONS.md#detector-documents-and-generated-layouts) |
 | | NbN recipe and sputter access; W1-a and W1-b | [Open decisions](OPEN_DECISIONS.md#before-r1_full) |
 | | W2: HSQ dose, develop and etch on the actual EBL tool; L22-to-L50 overlay | [Open decisions](OPEN_DECISIONS.md#before-r1_full) |
+| | W8 inlaid-mirror loop (steps 3a–3d) passed, or the fallback in [process 01](process/01_FOUNDATION.md); needed for R1_FULL only | [Qualification](QUALIFICATION.md) |
 | | Cap and spacer etch (about 0.40 µm) calibration; Au-to-Al contact at the mirror via with and without Ar pre-clean; AJA substrate RF etch | [Open decisions](OPEN_DECISIONS.md#before-r1_full) |
 | | v4 test dies: T2v, T10, T11 and T12 drawn and checked 2026-11-09. No mirror probe opening on the trap dies (none planned) | [Open decisions](OPEN_DECISIONS.md#before-any-v4-run) |
 | | Switching current at operating temperature with RF off and on; charging drift against NODET | [Open decisions](OPEN_DECISIONS.md#before-r1_full) |

@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Fabrication overview
 
@@ -37,7 +37,7 @@ The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no A
 | Trap layout (v4) | `trap_die_v4_A30`, `_B60` and `_NODET`; 36 signal pads at 360 µm pitch (team adoption pending); mirror ground via at (−2140, 130) µm; A30 and NODET pass `check_chip.py` | Record the B60 check result [verify]; team adoption of the pad pitch |
 | Trap simulations (v4) | 04b, 12 and 13 rerun on v4; 09c optics and 10b RF pickup done for v4; pad-pitch check (16) done | Collection at the v4 heights: `sim/15b_collection_v4.py` exists; rerun 15 still to be checked |
 | Detector | v3.1 meander (130 / 200 nm) under the v4 stack; absorption 0.66 with a 160 nm cap (effective-medium model, 09c) | Reconcile generated files, masks and detector predictions |
-| Fabrication | Process pages rewritten for v4; electrode Au (E1 or E2) open | Choose E1 or E2; facility confirmations; W5 and W7 qualification |
+| Fabrication | Process pages rewritten for v4; electrode Au (E1 or E2) open | Choose E1 or E2; facility confirmations; W5, W7 and W8 (inlaid mirror) [qualification](QUALIFICATION.md) |
 | First run | R1_TRAP selected on 2026-11-02; on the no-Al stack since 2026-11-08 | Choose E1 or E2; finish its qualification checklist |
 | Local mirror | Adopted 2026-11-08 as the v4 architecture; implemented in the v4 GDS | Electrode Au choice; no mirror probe opening on the trap dies (none planned; the mirror is measured on the test dies) |
 

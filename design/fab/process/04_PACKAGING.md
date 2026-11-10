@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Steps 17 to 19 test dice and package
 
@@ -29,9 +29,9 @@ This page follows the v4 local-mirror architecture ([Local mirror H.2, steps 17�
   | T1 | Au comb, 5 µm gaps |
   | T6 | Au continuity loop |
   | T2v | Au / SiO₂ / Al capacitor |
-  | T10 | Al mirror strip, four-point; about 5 Ω at 450 nm Al. Acceptance not yet set **[verify]** |
+  | T10 | Al mirror strip, four-point; expected 18.8–25.1 Ω at 100 nm Al (`sim/10c`, DESIGN_LOG step 37) [team calc]. Acceptance not yet set **[verify]** |
   | T11 | Au-to-Al via chain |
-  | T12 | Twin Au leads over Al |
+  | T12 | Twin Au leads over the inlaid Al strip, across its planar edge |
   | T3 | NbN bar |
   | T4, T4b | Spare SNSPDs |
   | T8 | EBL dose array |
@@ -76,7 +76,7 @@ This page follows the v4 local-mirror architecture ([Local mirror H.2, steps 17�
   - **Bond the Au ground fill to carrier ground at GND-1…4, at least 2 of them.** The Al mirror reaches this fill through its on-chip via. The v4 dies have no separate M1 bond pads, and NODET has no Al. The ground-link check is in step 17. The electrical protocol still names M1 pads in its a13 wording, so that check needs a v4 rewrite **[verify]**.
   - Bond off the top and bottom edges for the four pad rows, off the right edge for RF (4700, 0), and off the left edge for C and the SNSPD pads. Pads stay at |x| ≤ 3.5 mm on the top and bottom edges and near y = 0 on the side edges, away from the beam exits near the corners (|x| or |y| ≈ 4.7 mm). Keep the loops low anyway.
   - Bond the SNSPD pads last, wearing a strap. Short the carrier SNSPD pins until installation [inference].
-- **SNSPD RF termination: open.** The SNSPD leads are Au in the centre-DC slot. Each collects about 46 µA (E2) or 29 µA (E1) of common-mode RF (DESIGN_LOG step 26; step 28 gives 44.5 / 28.3 µA on the 2.24 mm lead). Whether the nanowire sees this depends on the termination at SNS and SNG. This belongs to the open **RF grounding / filters** decision in [open decisions](../OPEN_DECISIONS.md). Its options there are centre-DC filtering, carrier grounds, symmetric detector termination or cancellation, and for v4 an RF bypass at both SNSPD lead pads.
+- **SNSPD RF termination: open.** The SNSPD leads are Au in the centre-DC slot. Each collects about 46 µA (E2) or 29 µA (E1) of common-mode RF (DESIGN_LOG step 26; `sim/10c`, DESIGN_LOG step 37, gives 44.5 / 28.6 µA on the 2.24 mm lead). Whether the nanowire sees this depends on the termination at SNS and SNG. This belongs to the open **RF grounding / filters** decision in [open decisions](../OPEN_DECISIONS.md). Its options there are centre-DC filtering, carrier grounds, symmetric detector termination or cancellation, and for v4 an RF bypass at both SNSPD lead pads.
 - **Bond map.** Pad positions and electrode numbers come from [trap_die_v4_A30_pads.csv](../../gds/trap_die_v4_A30_pads.csv). B60 has the same positions; the [NODET CSV](../../gds/trap_die_v4_NODET_pads.csv) omits SNS and SNG. Top and bottom rows run at y = ±4720 µm at 360 µm pitch.
 
   | Pad(s) | Electrode(s) | Role | Wire |
@@ -103,7 +103,7 @@ Mirrors the open decisions in [open decisions](../OPEN_DECISIONS.md). Items mark
 - [ ] **Package spacer:** thickness, size and material (proposal ≥ approximately 0.6 mm, die-sized or larger, Si suggested) **[verify]**.
 - [ ] **RF grounding / filters:** filtering, carrier grounds, symmetric or cancelled termination, and an RF bypass at the SNS and SNG pads.
 - [x] **Test dies for v4:** the T2v, T10, T11 and T12 structures are drawn and checked (`gds/test_die_v4.gds`, `gds/check_test_die.py`); done 2026-11-09. TEST_TRAP has no Al (T1 and T6 only, on layers 1 and 50).
-- [ ] **Mirror strip:** acceptance for the T10 strip resistance (about 5 Ω at 450 nm Al) is not set. There is no mirror probe opening on the trap dies and none is planned; the mirror is measured on T10, T11 and the T4/T4b probe pads.
+- [ ] **Mirror strip:** acceptance for the T10 strip resistance (18.8–25.1 Ω at 100 nm Al, `sim/10c`, DESIGN_LOG step 37) is not set [verify]. There is no mirror probe opening on the trap dies and none is planned; the mirror is measured on T10, T11 and the T4/T4b probe pads.
 - [ ] **Bonding:** W7 bond-and-leak on the final stack, and wedge bonding on E1 evaporated Au **[verify]**.
 - [ ] **Ground-link check:** rewrite the a13 wording for v4 pads (no M1 bond pads) **[verify]**.
 - [ ] **Dicing outlines:** layer 101 is not written in v4; confirm the street outlines with staff **[verify]**.

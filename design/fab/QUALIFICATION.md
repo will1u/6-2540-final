@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Witness wafers and facility confirmations
 
@@ -14,17 +14,31 @@ These loops qualify the v4 recipes ([local mirror H.2](variants/LOCAL_MIRROR.md)
 | Run | Focus | Electrode option |
 |---|---|---|
 | R1_TRAP | W5 plating; E1 lift-off loop; W7 bond-and-leak | W5 for E2 only; E1 lift-off loop for E1 only; W7 for both |
-| R1_FULL | W1 NbN on the real stack; W2 HSQ dose and etch; W3 layer-40 openings and contacts; W7 bond-and-leak; W5 and E1 lift-off loop as for R1_TRAP | As for R1_TRAP |
+| R1_FULL | W8 inlaid mirror; W1 NbN on the real stack; W2 HSQ dose and etch; W3 layer-40 openings and contacts; W7 bond-and-leak; W5 and E1 lift-off loop as for R1_TRAP | As for R1_TRAP |
 
 Complete the loops that apply to the chosen run and electrode option before its device wafer. W3 has no NbN and rehearses steps 3, 4, 8, 11 and 12–15 of the v4 traveler.
 
 ## Witness loops
 
+### W8 Inlaid Al mirror (step 3)
+
+**Purpose:** the 100 nm inlaid Al local mirror: layer-10 recess, Al lift-off, and a planar surface before the spacer goes on. Hampel 2023 (arXiv:2302.01462) made a 50 nm e-beam evaporated Al mirror by lift-off, raised on SiO₂. The recess is not in Hampel. It is this design's addition and is unproven until this loop passes.
+
+**Stack / steps:** dummy thermal-SiO₂ wafer (Si / 1 µm SiO₂). 3a: LOR + positive resist [verify thicknesses]; MLA150; layer 10 exposed drawn. 3b: RIE a 100 nm recess (CHF₃ 25 / CF₄ 5 / Ar 50 sccm, 130 mTorr, 600 W, as in step 11) [verify on our tool; verify etch rate]; RIE-F-Samco-230iP or RIE-PlasmaTherm-210RL; target depth 100 ± 10 nm [design call; verify]. 3c: e-beam evaporate Al through the same resist, 100 nm nominal (equal to the measured recess depth), on EBeam-Temescal-FC2800 [verify that it has an Al source]. 3d: lift-off in NMP or Remover PG [verify]. Then the 238 nm SiO₂ spacer (step 4) on the same pieces.
+
+**Measure:** RIE rate and recess depth (profilometer or AFM); Al thickness (crystal monitor and witness); residual step and edge profile after lift-off, and again after the 238 nm spacer (profilometer or AFM); lift-off quality after the fluorine etch (the plasma can harden the resist); hillocks after a 300 °C cycle (darkfield) [verify]; sheet resistance of the Al on a witness (4-pt).
+
+**Go / no-go:** residual step between the Al and the SiO₂ ≤ 20 nm, and any lip or groove at the mirror edge ≤ 20 nm, by profilometer or AFM [design call; verify]; lift-off complete, with no residue.
+
+**Fail:** go to the fallback in [process/01_FOUNDATION.md](process/01_FOUNDATION.md).
+
+**Run and electrode:** R1_FULL only. R1_TRAP has no Al and skips step 3. No electrode step in this loop; both options.
+
 ### W1 NbN on spacer over Al
 
-**Purpose:** NbN on the real v4 stack, with the 238 nm spacer over the 450 nm Al-1%Cu local mirror (v3 witnesses carried 150 nm Al).
+**Purpose:** NbN on the real v4 stack, with the 238 nm spacer over the 100 nm inlaid Al local mirror (team decision 2026-11-09, [`notes/decisions.md`](../../notes/decisions.md); `sim/10c`, DESIGN_LOG step 37). v3 witnesses carried 150 nm Al.
 
-**Stack / steps:** Si / 1 µm SiO₂ / 450 nm Al-1%Cu / 238 nm SiO₂ spacer → NbN 7 nm, co-loaded with a thermal-SiO₂/Si chip (Medeiros ellipsometry model).
+**Stack / steps:** Si / 1 µm thermal SiO₂ with the 100 nm recess (0.9 µm SiO₂ under the Al) / 100 nm evaporated Al, inlaid (from W8 pieces) / 238 nm SiO₂ spacer → NbN 7 nm, co-loaded with a thermal-SiO₂/Si chip (Medeiros ellipsometry model).
 
 **Measure:** AFM on the spacer before NbN (hillocks, roughness); NbN thickness by ellipsometry; Rsq (4-pt); Tc (dipstick / PPMS [verify access]).
 
@@ -50,22 +64,22 @@ Complete the loops that apply to the chosen run and electrode option before its 
 
 **Purpose:** rehearse the layer-40 etches for the 0.40 µm mirror via and the 160 nm SNSPD contacts; Au-to-Al contact at the mirror via with and without the Ar pre-clean; sidewall coverage on the via; then the electrode step.
 
-**Stack / steps:** Si / 1 µm SiO₂ / 450 nm Al-1%Cu / 238 nm SiO₂ spacer / SiO₂ cap to 160 nm total [verify: with or without HSQ] → layer-40 openings (0.40 µm to the Al at the mirror via; 160 nm onto a Ti/Au pad drawn as layer 22 [verify]) → electrode Au for the option in use (E1 lift-off, or E2 seed and plating), with and without the Ar pre-clean on the mirror via.
+**Stack / steps:** Si / 1 µm SiO₂ with a 100 nm recess under the mirror (0.9 µm SiO₂ under the Al) / 100 nm evaporated Al, inlaid (from W8 pieces) / 238 nm SiO₂ spacer / SiO₂ cap to 160 nm total [verify: with or without HSQ] → layer-40 openings (0.40 µm to the Al at the mirror via; 160 nm onto a Ti/Au pad drawn as layer 22 [verify]) → electrode Au for the option in use (E1 lift-off, or E2 seed and plating), with and without the Ar pre-clean on the mirror via.
 
 **Test structures** (v4 test die, drawn and checked 2026-11-09):
 - T11 Au-to-Al via chain;
-- T12 twin Au leads over Al (continuity over the Al edge step, and lead-to-lead leakage);
-- T10 mirror strip, four-point (about 5 Ω at 450 nm; acceptance not set [verify]);
+- T12 twin Au leads over Al (continuity across the planar mirror edge, and lead-to-lead leakage);
+- T10 mirror strip, four-point (18.8–25.1 Ω expected at 100 nm, `sim/10c`, DESIGN_LOG step 37; acceptance not set [verify]);
 - T2v Au / 0.40 µm SiO₂ / Al capacitor (about 3.5 pF [team calc]; geometry to confirm [verify]).
 
-**Measure:** layer-40 depth and profile at the via and at the contacts (Dektak; SEM cross-section); over-etch time; clean Al and Au at each floor; T11 resistance with and without the Ar pre-clean; sidewall coverage of the seed or Au on the via wall (cross-section); T12 continuity and leakage; T10 strip resistance; T2v leakage at 50 V.
+**Measure:** layer-40 depth and profile at the via and at the contacts (Dektak; SEM cross-section); over-etch time; over-etch into the 100 nm Al at the mirror via [verify]; clean Al and Au at each floor; T11 resistance with and without the Ar pre-clean; sidewall coverage of the seed or Au on the via wall (cross-section); T12 continuity and leakage; T10 strip resistance; T2v leakage at 50 V.
 
 **Go / no-go:**
 - Etch: about 1 min for 0.40 µm at the v3 rate of ~360 nm/min [team calc]; over-etch set here [verify].
 - T11 resistance acceptance [verify]. The old < 10 Ω link limit was for the v3 M1 vias, not for this path.
 - Seed or Au continuous over the via wall [verify].
-- T12 continuity over the Al edge step and no lead-to-lead leakage [verify].
-- T10 about 5 Ω at 450 nm; acceptance [verify].
+- T12 continuity across the planar mirror edge and no lead-to-lead leakage [verify].
+- T10 18.8–25.1 Ω expected at 100 nm (`sim/10c`, DESIGN_LOG step 37); acceptance [verify].
 - T2v leakage ≤ 100 nA at 50 V [verify].
 
 **Run and electrode:** R1_FULL; the electrode option in use (both, if both stay open).
@@ -110,7 +124,7 @@ All items below are **[verify]**. Gold and tool compatibility, the evaporator, t
 
 - **Gold.** Which tools accept wafers carrying Au. On A30 and B60 dies the Ti/Au contacts (step 6) go on before the EBL, the RIE and the PECVD cap (steps 7 and 8), so those tools must accept it. Later Au steps: the layer-40 etch (step 11), the electrode step (12–15), the probe station and the dicing saw.
 - **Evaporator (E1 only).** Which evaporator accepts Ti and Au for the E1 electrodes, and whether it has the in-situ Ar pre-clean. EBeam-Temescal-FC2800 is the tool named in the v4 pages for step 6 and for E1 [verify that it accepts Ti and Au for E1].
-- **Sputter.** Al-1%Cu target availability (step 3) [verify]; the substrate RF etch in the Sputter-AJA-* tool, used for the E2 seed and the W3 Ar pre-clean [verify].
+- **Step 3 and sputter.** Al source on the EBeam-Temescal-FC2800 for step 3 [verify]; SiO₂ RIE rate for a 100 nm recess with the lift-off resist on the wafer [verify]; the substrate RF etch in the Sputter-AJA-* tool, used for the E2 seed and the W3 Ar pre-clean [verify].
 - **NbN.** Which sputter tool and recipe (Dane 2017 is a Berggren-group process), and whether access goes through that group.
 - **Plating (E2 only).** Whether a gold plating tank exists (Plating-U04 is named; chemistry unverified), its chemistry, and its minimum plated area. Not needed for E1.
 - **Holders.** Piece holders for the short loops.

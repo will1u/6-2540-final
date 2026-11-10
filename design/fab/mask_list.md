@@ -1,4 +1,4 @@
-> **Claude-authored.** Exposure list for the v4 dies: 10 × 10 mm trap dies `gds/trap_die_v4_A30.gds` (A30), `gds/trap_die_v4_B60.gds` (B60) and `gds/trap_die_v4_NODET.gds` (NODET, plain trap), and the 10 × 2.5 mm test dies `gds/test_die_v4.gds` (TEST) and `gds/test_die_v4_TRAP.gds` (TEST_TRAP). Each run writes a block of dies from `gds/run_<name>.gds` (`make_run.py`, section 3). Layers 24, 30, 31 and 45 are retired and must be empty. Areas come from [measured_v4.md](../gds/measured_v4.md), which carries the file hashes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Exposure list for the v4 dies: 10 × 10 mm trap dies `gds/trap_die_v4_A30.gds` (A30), `gds/trap_die_v4_B60.gds` (B60) and `gds/trap_die_v4_NODET.gds` (NODET, plain trap), and the 10 × 2.5 mm test dies `gds/test_die_v4.gds` (TEST) and `gds/test_die_v4_TRAP.gds` (TEST_TRAP). Each run writes a block of dies from `gds/run_<name>.gds` (`make_run.py`, section 3). Layers 24, 30, 31 and 45 are retired and must be empty. Areas come from [measured_v4.md](../gds/measured_v4.md), which carries the file hashes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Mask / exposure list
 
@@ -25,7 +25,7 @@ Listed in process order. "Runs" gives the runs that use each job.
 | Order | Layer | Name | Step | Tool | Resist | Expose | Runs |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 1 | MARK | 1 | DirectWrite-MLA150 | positive, ~1.3 µm (S1813-class) [verify stocked resist] | drawn | R1_TRAP, R1_FULL |
-| 2 | 10 | M1 (Al local mirror) | 3 | MLA150 | positive, 1.3–2 µm [verify]; then Al etch (route A) or lift-off (route B) | drawn | R1_FULL (A30, B60 only) |
+| 2 | 10 | M1 (Al local mirror) | 3 | MLA150 | LOR + positive [verify thicknesses]; SiO₂ recess etch 100 nm, Al evaporation 100 nm, lift-off, all with this one resist | drawn | R1_FULL (A30, B60 only) |
 | 3 | 22 | Ti/Au contacts and EBL marks | 6 | MLA150 (or EBL with PMMA bilayer, no TMAH) | LOR + positive (bilayer lift-off), ~0.5 + 1.3 µm | drawn | R1_FULL |
 | 4 | 20 | NBN | 7 | EBL-Elionix-HS50 | **HSQ, negative**, 50–70 nm | drawn (datatype 0); datatypes 1–7 = dose array | R1_FULL |
 | 5 | 40 | openings through the SiO₂ cap and spacer | 11 | MLA150 + RIE | thin positive, ~1.3 µm [verify] | drawn | R1_FULL |
@@ -43,7 +43,7 @@ Retired layers, no job: 24 (M1 via), 30 (top ITO), 31 (buried ITO), 45 (protect)
 | Layer | Align to | Critical dimension | Overlay |
 | --- | --- | --- | --- |
 | 1 | wafer flat | crosses 100 µm long, 4 µm arms (trap dies at (±4300, ±4830)) | – |
-| 10 | L1 | Al strip 40 µm wide at x = 0, 250 µm at the mirror via; |y| ≤ 20 µm under the centre DC; no Al under the RF rails | ±5 µm [verify] |
+| 10 | L1 | Al strip 40 µm wide at x = 0, 200 µm at the mirror-via branch; |y| ≤ 20 µm under the centre DC; no Al under the RF rails | ±5 µm [verify] |
 | 22 | L1 | contact pads 27 × 7 µm at x = 143 … 170 µm (A30); B60 at x = 126.5 … 153.5 µm | **±1 µm** (sets the overlay of the layer-40 openings on these pads) |
 | 20 | L22 EBL crosses at (−60, ±700) and (540, ±700) µm, fallback L1 | **130 nm lines / 70 nm spaces** (v3.1, unchanged in v4); tolerance from W2 [verify]; T9 also has 100/100, 140/60 and 300/300 nm | ±2 µm |
 | 40 | L1 | mirror via 100 × 100 µm; SNSPD contacts 18 × 3 µm (A30 x = 148 … 166 µm, B60 131.5 … 149.5 µm); L40 crosses 60 × 24 µm | ±5 µm (carried from v3) [verify: the contacts have ≥ 1 µm drawn margin inside the Ti/Au pad and the Au lead; check the overlay budget against it] |
@@ -83,7 +83,7 @@ Percentages and totals in the earlier v3 estimates are superseded by the table a
   - Overlay chain: L22 → L1 → L40 → L50. The SNSPD leads run in the centre-DC slot at \|y\| = 5 µm and end at the layer-22 contact pads. Their position is checked by `check_chip.py` (SNSPD leads inside the slot, L40 contacts inside the leads).
   - Budget: MLA overlay ~±0.5–1 µm per layer [verify tool spec].
 - **L1 visibility.** The Al local mirror is drawn only under the detector and its leads (|y| ≤ 20 µm, x = −2240 … +268 µm for A30). No layer-10 polygon sits at a mark site on a trap die, so the L1 crosses are not covered by Al.
-- **L10 etch vs lift-off.** TRAVELER step 3 names route A (etch: BCl₃/Cl₂ on sputtered Al-1%Cu, [verify tool recipe]) and route B (lift-off). The layer is drawn in v4, so the Al stays only where the mirror is. No dicing-street clearing is needed.
+- **L10 used once.** Layer 10 is exposed once, as the resist for both the SiO₂ recess and the lift-off, so the mirror is self-aligned to its recess. There is no second exposure. No dicing-street clearing is needed.
 - **L22 developer.** The positive-resist developers are TMAH-based, and the NbN is bare at this step. Use the shortest develop and a ≥ 3 min running DI rinse (Toomey 2018), or PMMA bilayer by EBL with MIBK:IPA (no TMAH) [team inference].
 - **L22 marks.** 20 µm crosses with 2 µm arms: on trap dies at (−60, ±700) and (540, ±700) µm around the readout zone; on each test die one cross at each mark site (90 µm −x of the L1 cross), plus the 15 µm overlay squares at the mark sites (make_chip.py, SNSPD layers).
 - **L50 plating area and cathode.** Plated area (E2): see the table above. Keep the wafer-edge cathode contacts free of resist: with an inverted job the edge would otherwise be exposed and the negative nLOF would stay there, so leave those spots out of the job or clear them by hand [verify].

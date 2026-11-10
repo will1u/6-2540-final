@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Fabrication variants
 
@@ -23,7 +23,7 @@ Both R1 blocks are 20.2 × 33.1 mm at the centre of a 100 mm wafer. See [run pla
 
 | Type | Au window, axial × radial | Detector | Purpose |
 |---|---|---|---|
-| A30 | 30 × 30 µm | NbN under the SiO₂ cap, over a 450 nm local Al mirror; no D2 | Primary detector size |
+| A30 | 30 × 30 µm | NbN under the SiO₂ cap, over a 100 nm inlaid local Al mirror; no D2 | Primary detector size |
 | B60 | 60 × 30 µm | Same stack, longer meander | Larger-aperture comparison |
 | NODET | None; solid centre DC | None; no Al | Trap-only run (R1_TRAP) and full-stack reference |
 | TEST | Not a trap | T1, T2v, T3, T4, T4b, T6, T8–T12 (v4, drawn and checked 2026-11-09) | Process, dose and geometry comparisons |
@@ -67,7 +67,7 @@ Turns and tabs extend beyond the line region. Sources: [trap generator](../gds/m
 
 | Architecture | Al beneath RF | Al under the detector | SiO₂ above the detector | Au electrodes | Status |
 |---|---|---|---|---|---|
-| **v4 local mirror** | None | Local mirror, 450 nm, under the detector and its leads only | Spacer 238 nm; cap 160 ± 10 nm over the wires; no D2 | E1: 0.35 µm lift-off; E2: 6 µm plated (open) | **Adopted 2026-11-08**; implemented in the v4 GDS; [traveler](TRAVELER.md) |
+| **v4 local mirror** | None | Local mirror, 100 nm evaporated Al, inlaid, under the detector and its leads only | Spacer 238 nm; cap 160 ± 10 nm over the wires; no D2 | E1: 0.35 µm lift-off; E2: 6 µm plated (open) | **Adopted 2026-11-08**; mirror 100 nm inlaid from 2026-11-09; implemented in the v4 GDS; [traveler](TRAVELER.md) |
 | Superseded: v3 baseline | Die-wide plane, 150 nm, inverted layer 10 | Same die-wide plane | Cap + 10 µm D2 | 6 µm plated | Superseded 2026-11-08; archived GDS only ([archive](../gds/archive_v3_baseline/)) |
 
 The electrode Au (E1 or E2) is still open ([open decisions](OPEN_DECISIONS.md)). Both branches remove D2 and its deep gap etch. E1 has no plating; E2 keeps 6 µm plating. See the [local mirror](variants/LOCAL_MIRROR.md) page.

@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Layer stack and thermal budget
 
@@ -14,19 +14,32 @@
 
 ![v4 trap stack: readout window, slot, NODET die, mirror ground via and SNSPD contact](figures/stack_v4.svg)
 
+The figure and the [process-flow figure](figures/process_flow_v4.svg) show a flat surface because that is what is built. The Al mirror is inlaid 100 nm into the thermal SiO₂ (step 3; team decision 2026-11-09, [decisions](../../notes/decisions.md)). So the SiO₂ spacer, NbN, SiO₂ cap and all the Au sit at one level across the mirror edge, as both figures draw them. Acceptance: the residual step between the Al and the SiO₂ is ≤ 20 nm, and any lip or groove at the mirror edge is ≤ 20 nm, by profilometer or AFM across the T10 strip and across one trap mirror [design call; verify]. Step 15 checks that the Au has no lip or groove at the mirror edge. Witness loop W8 tests the inlaid mirror before any run (see [QUALIFICATION.md](QUALIFICATION.md)).
+
 Stack under the readout window, listed bottom to top. Values are v4 (DESIGN_LOG steps 25, 26, 28; LOCAL_MIRROR H.3).
 
 | Layer | Thickness | Role / note |
 |---|---|---|
 | HR FZ Si | ~525 µm [verify]; ρ > 20 kΩ·cm (was > 10⁴ Ω·cm) | RF substrate with no ground plane. This Si is what the local-mirror design needs (NIST practice; LOCAL_MIRROR H.4) |
-| Thermal SiO₂ (D1) | 1.0 µm | Isolation under the mirror and electrodes; also on the backside |
-| Al-1%Cu local mirror (L10) | 450 nm (was 150 nm) | Strip |y| ≤ 20 µm, x = −2240 … +268 µm (A30); it lies under the window. Opaque (≥ 100 nm). Not under the RF rails |
+| Thermal SiO₂ (D1) | 1.0 µm grown; 0.9 µm remains under the mirror | Isolation under the mirror and electrodes; also on the backside |
+| Al local mirror (L10), inlaid | 100 nm (150 nm in v3, then 450 nm on 2026-11-08, then 100 nm, inlaid) | Evaporated Al by lift-off into a 100 nm recess in the thermal SiO₂ (step 3). Strip \|y\| ≤ 20 µm, x = −2240 … +268 µm (A30); it lies under the window. Opaque (≥ 100 nm). Not under the RF rails. The 450 nm mirror left a 0.45 µm step under the centre DC and the slot leads; `sim/10c` showed its pickup goes to ground and that the thickness changes the nanowire current by under 2 µA. Decision: team decision 2026-11-09 ([decisions](../../notes/decisions.md)). Numbers: [`sim/10c`](../sim/10c_mirror_thickness.py), DESIGN_LOG step 37 |
 | PECVD SiO₂ spacer | 238 ± 10 nm | Second-order cavity spacer for 493 nm. 64 nm (first order) is optically equal (DESIGN_LOG step 26) but sits closer to Al hillocks. **Avoid ≈ 148 nm** (absorption node) |
 | NbN meander (L20) | 7 nm; 130 / 200 nm line / pitch; 160 lines | Lines 36 µm (A30) / 69 µm (B60) long, with end blocks and tabs under Au (`gds/snspd_geom.py`, step 24) |
 | Ti/Au contacts (L22) | 10 / 350 nm [verify for contacts] | NbN tabs to the slot contact pads; EBL marks. Contacts only: no buried leads |
 | HSQ (on wires only) + PECVD SiO₂ cap | **160 ± 10 nm** total over the wires (was 80 ± 10) | Window floor and optical matching layer, since vacuum now sits on it. Cap thickness = 160 − measured remaining HSQ. The floor is 0.40 µm above the mirror (238 + 160 nm) |
 | Au window walls (L50) | E1: 0.35 µm; E2: 6 µm | Window is a 30 × 30 µm hole (A30) or 60 × 30 µm (B60) in the electrode Au. Both options shown; choice open |
 | Vacuum; ion | Ion planar height 49.98 µm at readout. Over the window: A30 −1.19 µm (E2), ≤ −0.37 µm (E1); B60 −2.04 µm (E2), ≤ −0.55 µm (E1) | Recess from the grounded floor (steps 25, 26) |
+
+### What the 100 nm mirror costs
+
+All values are from `sim/10c_mirror_thickness.py`, case `al100_inlaid` (DESIGN_LOG step 37; table in `sim/out/10c_mirror_thickness/table.md`): 53 V, 28 MHz, 2-D model, upper bounds, room-temperature Al resistivity (3–4 µΩ·cm), no thermal model.
+
+- Strip current to ground: about 3.2 mA. This current goes to ground, not into the SNSPD.
+- Swing of the mirror at the detector end: 30–40 mV.
+- Extra nanowire current from that swing, upper bound: 0.73–0.97 µA (E2), 0.74–0.99 µA (E1). The direct rail-to-wire pickup for comparison is 0.96 µA (E2) / 1.92 µA (E1), and the switching current is 8–20 µA.
+- Dissipation in the Al strip: 34–45 µW (E2), 35–47 µW (E1). The 450 nm mirror dissipated 7–10 µW. This heat is the main cost of the thin mirror.
+- Common-mode current the mirror swing adds to each slot lead: 4.1–5.5 µA, next to 44.5 µA (E2) / 28.6 µA (E1) of direct lead pickup.
+- Micromotion from the mirror swing, seen through the window (small-patch estimate): ≤ 2.1 nm (A30), ≤ 4.2 nm (B60), against 55–173 nm from the window itself (A30).
 
 **Optics (v4, DESIGN_LOG step 26, `09c`).** Absorption in NbN at 493 nm ≈ 0.66 with a 159–160 nm cap (±10 nm box mean 0.645; worst corner 0.596). The earlier 80 nm cap gives 0.44. `make_chip.py` and the simulation metadata state 160 nm (corrected 2026-11-09; geometry unchanged); 160 nm is the deposition target (DESIGN_LOG overhang audit). The model reads ~10 % pessimistic against Hampel. These are TMM effective-medium numbers, not RCWA. `09b` (vacuum above the cap) is superseded by `09c` for v4.
 
@@ -36,8 +49,8 @@ Stack under the readout window, listed bottom to top. Values are v4 (DESIGN_LOG 
 2. HSQ + PECVD SiO₂ cap, 160 ± 10 nm. Its top surface is the window floor, 0.40 µm above the mirror.
 3. NbN meander, 7 nm.
 4. PECVD SiO₂ spacer, 238 nm.
-5. Al-1%Cu mirror, 450 nm, under the window, grounded through the mirror via and the Au ground fill.
-6. Thermal SiO₂ (D1), 1.0 µm.
+5. Al mirror, 100 nm, inlaid in the thermal SiO₂, under the window, grounded through the mirror via and the Au ground fill.
+6. Thermal SiO₂ (D1), 1.0 µm; 0.9 µm under the mirror.
 7. HR Si, ρ > 20 kΩ·cm.
 
 Beside the window the Au walls (L50) sit on the cap: 0.35 µm (E1) or 6 µm (E2) deep.
@@ -50,8 +63,8 @@ The slot is |y| < 12.5 µm, x < 175 µm (A30). Two 5 µm leads sit at |y| = 5 µ
 2. Au SNSPD lead (part of L50): E1 Ti 10 nm / Au 350 nm lift-off, or E2 6 µm plated Au on the L50 seed.
 3. HSQ + PECVD SiO₂ cap, 160 ± 10 nm. The cap is opened (L40) only at the contact pad: the lead reaches the L22 Ti/Au pad (27 × 7 µm, x = 143 … 170 µm), which is the contact to the NbN tab.
 4. PECVD SiO₂ spacer, 238 nm.
-5. Al-1%Cu mirror, 450 nm, grounded through the mirror via at (−2140, 130) µm.
-6. Thermal SiO₂ (D1), 1.0 µm.
+5. Al mirror, 100 nm, inlaid in the thermal SiO₂, grounded through the mirror via at (−2140, 130) µm.
+6. Thermal SiO₂ (D1), 1.0 µm; 0.9 µm under the mirror.
 7. HR Si.
 
 No Au or Ti is buried under the centre DC; the leads are the only Au in the slot.
@@ -75,7 +88,7 @@ Top to bottom: vacuum; Au electrodes (E1 or E2); PECVD SiO₂ spacer and cap; th
 |---|---|---|---|---|---|
 | 1 | MARK | Si | ~1 µm etch | MLA150 + RIE (step 1) | Alignment marks |
 | – | D1 | Thermal SiO₂ | 1.0 µm, both sides | Oxidation, blanket (step 2) | Isolation under the mirror and electrodes |
-| 10 | M1 | Al-1%Cu | 450 nm | Drawn (not inverted): route A etch or route B lift-off (step 3) | SNSPD mirror and its ground; grounded to the Au fill through the mirror via |
+| 10 | M1 | Evaporated Al | 100 nm | Drawn (not inverted): recess etch, Al evaporation and lift-off with one resist (step 3) | SNSPD mirror and its ground; grounded to the Au fill through the mirror via |
 | – | Spacer | PECVD SiO₂ | 238 ± 10 nm | Blanket (step 4) | Cavity spacer for 493 nm |
 | 20 | NbN | NbN | 7 nm | Blanket sputter (step 5); meander by EBL and CF₄ etch (step 7) | Detector |
 | 22 | Ti/Au | Ti/Au | 10 / 350 nm [verify] | Lift-off (step 6) | NbN tab to slot contact pads; EBL marks. Not leads |
@@ -89,7 +102,7 @@ Top to bottom: vacuum; Au electrodes (E1 or E2); PECVD SiO₂ spacer and cap; th
 | Step | Max T | Time at T | Note |
 |---|---|---|---|
 | 2 Thermal SiO₂ (D1) | ~1000–1100 °C [verify furnace recipe] | hours | Before Al and NbN, so no limit applies |
-| 3 Al sputter (450 nm) | < 100 °C [verify] | min | Sputter heating not quantified [verify] |
+| 3 Al evaporation (100 nm), after the SiO₂ recess etch | Not quantified [verify] | min | Evaporation heating not quantified [verify] |
 | 4 Spacer PECVD | ≤ 300 °C | ~5 min | First anneal of the Al. Check the Al for hillocks after this step (darkfield) |
 | 5 NbN sputter | ~RT (unheated; plasma heating unquantified) | min | Dane 2017 recipe is unheated |
 | 6, 7, 11, 13 resist bakes | ≤ 115 °C (HSQ bake per datasheet [verify]) | min | – |
@@ -101,6 +114,7 @@ Top to bottom: vacuum; Au electrodes (E1 or E2); PECVD SiO₂ spacer and cap; th
 | Limit | Value | Source |
 |---|---|---|
 | Al hillocks / voids | significant at ~350 °C; Al-1%Cu or a Ti/TiW cap suppresses them | SINTEF; JoVE M1 step ("prevent whisker formation during bakeout") |
+| Al hillocks, mirror is evaporated Al | Hampel 2023: 50 nm e-beam evaporated Al under SiO₂ went through co-sputtered NbTiN at 500 °C (a 50 nm film, not the 100 nm mirror). Hillocks after the ≤ 300 °C steps must be checked on witness loop W8 ([QUALIFICATION.md](QUALIFICATION.md)) | Hampel 2023 (arXiv:2302.01462); team check on W8 |
 | **Rule for this run** | **≤ 300 °C for every step after step 3** | team inference from the two lines above |
 | NbN, inert ambient | Tc stable to 500 °C | arXiv:2501.07780 |
 | NbN, uncapped in O₂ | Tc drops | Ioffe paper (research report) |
@@ -109,7 +123,7 @@ Top to bottom: vacuum; Au electrodes (E1 or E2); PECVD SiO₂ spacer and cap; th
 ## Changed from v3
 
 - Substrate: ρ > 10⁴ Ω·cm → ρ > 20 kΩ·cm.
-- Layer 10: die-wide inverted Al plane → local mirror, |y| ≤ 20 µm, x = −2240 … +268 µm (A30); 150 nm → 450 nm.
+- Layer 10: die-wide inverted Al plane → local mirror, |y| ≤ 20 µm, x = −2240 … +268 µm (A30); 150 nm (v3) → 450 nm (2026-11-08) → 100 nm, inlaid (team decision 2026-11-09).
 - RF ground plane removed: no Al under the RF rails.
 - 10 µm PECVD SiO₂ (D2) removed, with its gap etch and its thermal load (≤ 300 °C, 1–2 h). Layer 45 (protect) removed.
 - Cap: 80 ± 10 nm → 160 ± 10 nm total over the wires. Spacer unchanged at 238 nm.
@@ -121,7 +135,7 @@ Top to bottom: vacuum; Au electrodes (E1 or E2); PECVD SiO₂ spacer and cap; th
 - L10 cut-outs under the SNSPD pads and at the mark sites removed (no Al there).
 - Window recess: −1.38 µm (A30, v3) → −1.19 µm (A30, E2) or ≤ −0.37 µm (E1).
 - Absorption in NbN: ≈ 0.40 (v3, with D2 and no ITO) → ≈ 0.66 (v4, 160 nm cap; DESIGN_LOG step 26).
-- Mirror-to-ground resistance: the < 10 Ω test → T10 strip four-point, about 5 Ω expected at 450 nm [team calc]; acceptance limit [verify]. At 150 nm the path was ≈ 14–18 Ω (DESIGN_LOG step 25 [team calc]).
-- Hillock check: now also after the spacer deposition (step 4).
+- Mirror-to-ground resistance: the < 10 Ω test → T10 strip four-point, 18.8–25.1 Ω expected at 100 nm (`sim/10c`, DESIGN_LOG step 37) [team calc]; acceptance limit [verify]. Superseded estimate: about 5 Ω at 450 nm [team calc]. At 150 nm the path was ≈ 14–18 Ω (DESIGN_LOG step 25 [team calc]).
+- Hillock check: now also after the spacer deposition (step 4). The mirror is evaporated Al, so W8 also checks hillocks after a 300 °C cycle.
 - Thermal: plating runs only on E2.
 - ITO (layers 30, 31) and the M1 via (layer 24) remain removed.

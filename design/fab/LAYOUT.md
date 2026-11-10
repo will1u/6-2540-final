@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Die layout and alignment
 
@@ -50,7 +50,7 @@ Electrode numbers match `*_sim.json` and `*_pads.csv`: 1 = RF, 2 = centre DC, 3�
 | SNSPD leads (Au, L50) | 5 µm wide, centre y = ±5 µm, from the tip at x = 170 µm to x = −4400 µm, then to SNS / SNG | tip at x = 153.5 µm | layer map; `make_chip.py` |
 | L22 Ti/Au contact pads | 27 × 7 µm, x = 143 … 170 µm, y = ±(1.5 … 8.5) µm; each covers the −x half of an NbN tab | x = 126.5 … 153.5 µm | layer map |
 | L40 SNSPD contact openings | 18 × 3 µm, centred (157, ±5) µm, x = 148 … 166 µm, y = ±(3.5 … 6.5) µm | centred (140.5, ±5) µm, x = 131.5 … 149.5 µm | `measured_v4.md` §6 |
-| Local Al mirror (L10) | strip \|y\| ≤ 20 µm, x = −2240 … +268 µm; 40 µm wide at x = 0, 250 µm wide at the via | x to +284.5 µm | `measured_v4.md` §7 |
+| Local Al mirror (L10), 100 nm, inlaid in the thermal SiO₂ | strip \|y\| ≤ 20 µm, x = −2240 … +268 µm; 40 µm wide at x = 0, 200 µm wide at the via branch (x = −2240 … −2040 µm) | x to +284.5 µm | `measured_v4.md` §7 |
 | Mirror branch | to y = 230 µm at x = −2240 … −2040 µm, under the Au fill | same | layer map |
 | Mirror path, Al end to via | 2538.0 µm | 2554.5 µm | `measured_v4.md` §7 |
 | Readout window (open in Au) | 30 × 30 µm, axial × radial | 60 × 30 µm | layer map |

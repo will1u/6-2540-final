@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes. Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Fabrication traveler
 
@@ -39,6 +39,8 @@ Wafer ID: ________ Run: ________ Generator revision/date: ________ Start date: _
 
 The figure is written by `figures/make_process_flow.py`. It is a composite schematic, not to scale.
 
+Step 3 has sub-steps 3a–3d (resist, 100 nm SiO₂ recess, Al evaporation, lift-off). The surface is flat after step 3. Decision: team decision 2026-11-09 ([decisions](../../notes/decisions.md)). Numbers: (`sim/10c`, DESIGN_LOG step 37).
+
 "Used in" lists the runs that use each step. R1_TRAP uses steps 0, 1, 2, 12–15, 17, 18 and 19 only. R1_FULL uses the remaining steps.
 
 | # | Step | GDS layer | Material | Target thickness | Tool (MIT.nano name where verified in the report) | Used in |
@@ -46,7 +48,7 @@ The figure is written by `figures/make_process_flow.py`. It is a composite schem
 | 0 | Wafer prep, clean | – | HR FZ Si, 100 mm, ρ > 20 kΩ·cm | 500–525 µm [verify] | Acid-Etch-General-* (piranha) | R1_TRAP, R1_FULL |
 | 1 | Alignment marks | 1 | Si etch | ~1 µm deep | DirectWrite-MLA150-*; RIE-F-Samco-230iP | R1_TRAP, R1_FULL |
 | 2 | Thermal SiO₂ D1, both sides | – | SiO₂ | 1.0 µm | Ox-Tube-Lindberg / Tube-OxAnneal-Expertech-CTR200 | R1_TRAP, R1_FULL |
-| 3 | Al-1%Cu local mirror | 10 | Al-1%Cu, under the detector and its leads only | 450 nm (was 150 nm) | Sputter-AJA-*; MLA150; RIE-Cl2-SAMCO-200iP (route A) | R1_FULL, A30 and B60 only |
+| 3 | Inlaid Al local mirror | 10 | evaporated Al, inlaid in the thermal SiO₂, under the detector and its leads only | 100 nm (was 450 nm; 150 nm in v3) | MLA150; SiO₂ RIE (as step 11); EBeam-Temescal-FC2800; lift-off | R1_FULL, A30 and B60 only |
 | 4 | SiO₂ spacer | – | PECVD SiO₂ | 238 ± 10 nm | PECVD-Samco-PD220 or PECVD-Oxford-TEOS | R1_FULL |
 | 5 | NbN film | – | NbN | 7 nm | Berggren-group AJA (RF substrate bias) [verify access] | R1_FULL |
 | 6 | Ti/Au NbN contacts and EBL marks (lift-off) | 22 | Ti/Au | 10 / 350 nm [verify] | MLA150; EBeam-Temescal-FC2800 | R1_FULL |
@@ -71,7 +73,7 @@ NODET dies have no Al, so step 3 does not apply to them. Whether NODET dies on R
 | Layer | Name | Use | Exposure | Used in |
 |---|---|---|---|---|
 | 1 | MARK | Si alignment marks | drawn | R1_TRAP, R1_FULL |
-| 10 | M1 | Al-1%Cu local mirror (A30, B60) | drawn, not inverted | R1_FULL |
+| 10 | M1 | Inlaid Al local mirror, 100 nm (A30, B60) | drawn, not inverted | R1_FULL |
 | 20 | NbN | Nanowire, EBL (datatype 0 nominal dose; 1–7 T8 dose array) | e-beam | R1_FULL |
 | 22 | Ti/Au | NbN contacts and EBL marks only | drawn | R1_FULL |
 | 40 | openings | Mirror ground via and SNSPD contacts only (no mirror probe opening; the mirror is measured on the test die, T10, T11 and the T4/T4b probe pads) | – | R1_FULL |
@@ -89,7 +91,7 @@ NODET dies have no Al, so step 3 does not apply to them. Whether NODET dies on R
 
 ## E. Witness wafers and short loops to run first
 
-[Qualification W1–W7 and facility questions](QUALIFICATION.md). For R1_TRAP, the short loops are W7 bond-and-leak (both branches), W5 plating (E2 only) and the E1 lift-off test, as listed in the [R1_TRAP sheet](RUNSHEET_R1_TRAP.md). The D2 stress and gap-etch loops are not needed in v4 ([open decisions](OPEN_DECISIONS.md#before-r1_trap)).
+[Qualification W1–W8 and facility questions](QUALIFICATION.md). For R1_TRAP, the short loops are W7 bond-and-leak (both branches), W5 plating (E2 only) and the E1 lift-off test, as listed in the [R1_TRAP sheet](RUNSHEET_R1_TRAP.md). The D2 stress and gap-etch loops are not needed in v4 ([open decisions](OPEN_DECISIONS.md#before-r1_trap)).
 
 ## F. Steps
 
@@ -98,7 +100,7 @@ Original step numbers are retained. 8a and 8b (the v3 M1 via and buried ITO) and
 | Stage | Recipes | R1_TRAP |
 |---|---|---|
 | 0–2 | [Substrate, marks, D1](process/01_FOUNDATION.md) | Required |
-| 3 | [Al local mirror](process/01_FOUNDATION.md#3-m1-al-1cu-local-mirror-l10) | No (no Al) |
+| 3 | [Inlaid Al local mirror](process/01_FOUNDATION.md#3-m1-inlaid-al-local-mirror-l10) | No (no Al) |
 | 4–8 | [Spacer, NbN, contacts, nanowire, cap](process/02_DETECTOR.md) | Skip |
 | 9–11 | [Layer-40 openings (11)](process/03_ELECTRODES.md#11-layer-40-openings-through-the-thin-stack); 9 and 10 removed | Skip |
 | 12–15 | [Electrodes, E1 or E2](process/03_ELECTRODES.md#electrodes-layer-50-e1-and-e2) | Required (choose E1 or E2) |

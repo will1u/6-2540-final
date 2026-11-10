@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
 
 # Steps 0 to 3 substrate and Al local mirror
 
@@ -36,7 +36,7 @@ Wafer ID: ________ Run: ________ Operator: ________ Generator revision: ________
 
 ## 2. Thermal SiO₂ D1, ~1 µm, both sides
 
-- **Purpose:** isolation of the Al local mirror and the Au electrodes from the Si. The backside SiO₂ also starts the stress balance.
+- **Purpose:** isolation of the Al local mirror and the Au electrodes from the Si. The backside SiO₂ also starts the stress balance. Step 3 etches a 100 nm recess into this SiO₂ for the mirror, so 0.9 µm remains under the mirror.
 - **Tool:** Ox-Tube-Lindberg or Tube-OxAnneal-Expertech-CTR200.
 - **Recipe:** wet oxidation to 1.0 µm [verify time/T on the tool chart]. JoVE used 0.5 µm at 900 °C for 4.5 h plus 0.2 µm LPCVD SiN. Romaszko gives 1–2 µm as typical for D1.
 - **Target:** 1.00 ± 0.05 µm, by ellipsometry on 5 points.
@@ -44,30 +44,30 @@ Wafer ID: ________ Run: ________ Operator: ________ Generator revision: ________
 - **Hazards:** none.
 - [ ] Done — date: ____ operator: ____ t_SiO₂ (5 pts): ____ notes: ____
 
-## 3. M1 Al-1%Cu local mirror (L10)
+## 3. M1 inlaid Al local mirror (L10)
 
-- **Purpose:** SNSPD mirror (238 nm PECVD SiO₂ spacer below the NbN; DESIGN_LOG steps 9, 26) and the ground of that mirror, tied to the Au ground fill through the mirror via (step 11). This is not an RF ground plane: v4 has no Al under the RF rails.
-- **Thickness:** **450 nm** (team decision 2026-11-08; was 150 nm). The thicker strip lowers the mirror-to-ground resistance (about 5 Ω expected on T10; acceptance limit [verify], see Inspect). ≥ 100 nm is opaque (TMM: 50 nm transmits 0.12 %).
+- **Purpose:** SNSPD mirror (238 nm PECVD SiO₂ spacer below the NbN; DESIGN_LOG steps 9, 26) and the ground of that mirror, tied to the Au ground fill through the mirror via (step 11). This is not an RF ground plane: v4 has no Al under the RF rails. The mirror is inlaid, so the surface under the spacer, NbN, cap and Au stays flat.
+- **Thickness:** **100 nm**, inlaid: the Al top is level with the SiO₂ beside it (recess depth 100 nm in step 3b, Al 100 nm nominal in step 3c). History: 150 nm (v3) → 450 nm (2026-11-08) → 100 nm, inlaid (team decision 2026-11-09, [decisions](../../../notes/decisions.md)). Reason: the 450 nm mirror left a 0.45 µm step under the centre DC and the slot leads, and the simulation showed that the mirror's pickup goes to ground and that the thickness changes the nanowire current by under 2 µA (`sim/10c`, DESIGN_LOG step 37). 100 nm is opaque (≥ 100 nm is opaque; 50 nm transmits 0.12 %). Expected: sheet resistance 0.30–0.40 Ω/sq; T10 strip 18.8–25.1 Ω (`sim/10c`, DESIGN_LOG step 37).
 - **Shape (drawn, not inverted):** |y| ≤ 20 µm from x = −2240 µm to just past the detector (x = +268 µm on A30; +284.5 µm on B60), plus a branch under the Au ground fill to the mirror ground via at (−2140, 130) µm. Nothing under the RF rails.
-- **Tool:** Sputter-AJA-* (Al-1%Cu target [verify availability]); MLA150; RIE-Cl2-SAMCO-200iP (route A only).
-- **Recipe:** choose one route. LOCAL_MIRROR H.2 step 3v leaves the choice open, so both are written out here.
-  - **Route A, etch (drawn L10 with the job not inverted):**
-    - Deposit Al-1%Cu: JoVE sputtered at 300 W RF, 2 mTorr, 40 sccm Ar, ~13 nm/min. 450 nm therefore needs ≈ 35 min [team calc; verify rate on the AJA].
-    - Litho: positive resist ~1.3–2 µm; MLA expose L10 **drawn**.
-    - Etch: BCl₃/Cl₂ ICP. JoVE: BCl₃ 20 / Cl₂ 30 sccm, 5 mTorr, 750 W, ~360 nm/min, so ≈ 75 s for 450 nm [team calc; verify over-etch]. DI rinse right after the Cl etch to avoid Al-Cu corrosion [inference]. A wet Al etchant is an alternative [verify availability and suitability for the 40 µm strip].
-    - Strip: solvent + O₂ ash.
-  - **Route B, lift-off (as Hampel 2023):**
-    - Litho first: LOR + positive resist [verify thickness for 450 nm]; MLA expose L10 **drawn**.
-    - Deposit Al-1%Cu as in route A (≈ 35 min at the JoVE rate [team calc]). Hampel used 50 nm e-beam Al, so a 450 nm lift-off is not covered by that source [verify process].
-    - Lift off [verify solvent and process].
+- **Tool:** MLA150; the SiO₂ RIE tool of step 3b (RIE-F-Samco-230iP or RIE-PlasmaTherm-210RL); EBeam-Temescal-FC2800 [verify Al source]; lift-off bath [verify].
+- **Recipe:**
+  - **3a Resist.** LOR + positive resist [verify thicknesses]. MLA150; expose layer 10 **drawn** (the resist is open where the mirror goes). Layer 10 data and alignment (L10 → L1, ±5 µm) are unchanged.
+  - **3b Recess.** RIE a 100 nm recess into the thermal SiO₂ through that resist. Same chemistry as the step-11 layer-40 etch: CHF₃ 25 / CF₄ 5 / Ar 50 sccm, 130 mTorr, 600 W (JoVE flows, as carried in `process/03_ELECTRODES.md` step 11) [verify on our tool; verify etch rate]. Tool as step 11. Target depth 100 ± 10 nm [design call; verify]. The depth is known by calibrating the etch rate on a dummy thermal-SiO₂ piece the same day (witness loop W8), then timing the etch [verify].
+  - **3c Al.** E-beam evaporate Al through the same resist. Set the Al thickness to the measured recess depth from 3b, 100 nm nominal. Tool: EBeam-Temescal-FC2800, the evaporator already named for E1 [verify that it has an Al source].
+  - **3d Lift-off.** As step 6 and E1: NMP or Remover PG [verify]. After lift-off the Al top is level with the SiO₂ beside it.
+  - The Al deposition and lift-off follow Hampel 2023 (arXiv:2302.01462), which made a 50 nm e-beam evaporated Al mirror by lift-off. The recess is this design's addition, not in Hampel, and is unproven until witness loop W8 passes.
+- **Fallback:** if W8 fails, skip 3b. The result is a 100 nm raised mirror, a 0.10 µm step under the Au, with the same mask and the same later steps. The planarity limits under Inspect then do not apply; step 15 and test structure T12 must show that the Au crosses the 0.10 µm step.
 - **Layer / align:** L10 → L1 (±5 µm).
 - **Inspect:**
-  - Rsq by 4-pt on a co-deposited Si witness: expect one third of the 150 nm value. At 150 nm the sheet resistance is 0.20–0.27 Ω/sq (DESIGN_LOG step 26), so at 450 nm it is 0.067–0.089 Ω/sq [team calc, ρ 3–4 µΩ·cm] [verify].
+  - Recess depth: target 100 ± 10 nm, from the same-day rate calibration on the dummy piece. On the device wafer the resist is still on after 3b, so the depth error shows up as the residual step after lift-off.
+  - Residual step and edge lip or groove after lift-off (≤ 20 nm each) by profilometer or AFM across the T10 strip and one trap mirror [design call; verify].
+  - Lift-off complete; no Al flags or residue.
+  - Rsq by 4-pt on a co-deposited witness: expected 0.30–0.40 Ω/sq [team calc, ρ 3–4 µΩ·cm] [verify].
   - Darkfield for hillocks / whiskers before the spacer, and again after the spacer deposition (step 4).
   - Mirror shape against the drawing, including the branch to the ground via.
-  - Mirror strip resistance: measured on test die T10 (four-point, taps 2510 µm apart, 62.75 squares; 4.2–5.6 Ω at 450 nm [team calc]); there is no mirror probe opening on the trap dies. Acceptance limit not set [verify].
+  - Mirror strip resistance: measured on test die T10 (four-point, taps 2510 µm apart, 62.75 squares; 18.8–25.1 Ω expected [`sim/10c`, DESIGN_LOG step 37]). There is no mirror probe opening on the trap dies. Acceptance limit not set [verify].
   - Cut-outs: none in v4 (no Al under the SNSPD pads or the mark sites).
 - **Hazards:** from here on the **≤ 300 °C rule** applies.
-- [ ] Done — date: ____ operator: ____ route (A/B): ____ t_Al: ____ Rsq: ____ notes: ____
+- [ ] Done — date: ____ operator: ____ recess depth: ____ t_Al: ____ residual step: ____ Rsq: ____ notes: ____
 
 Continue: [next stage](02_DETECTOR.md).
