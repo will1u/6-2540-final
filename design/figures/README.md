@@ -8,6 +8,8 @@
 | `report/collection_vs_height.pdf`, `.png` | `make_report_figures.py` `fig_collection_vs_height` | `design/sim/out/17_height_tradeoff/summary.json` | ion height (µm); geometric collection (%) |
 | `report/termination.pdf`, `.png` | `make_report_figures.py` `fig_termination` | `design/sim/out/19_lead_termination/summary.json` | RF current through the nanowire (µA, log); case (y) |
 | `report/stack.pdf`, `.png` | `make_report_figures.py` `fig_stack` | `design/fab/STACK.md` (typed values, not parsed) | layer bands (no axes) |
+| `report/transport_waveform.pdf`, `.png` | `make_report_figures.py` `fig_transport_waveform` | `design/sim/out/21_transport_waveform/trap_die_v4_A30_V2zero/waveform.csv` | time (µs); ion position (µm); electrode voltage (V) |
+| `report/rf_capacitance_sections.pdf`, `.png` | `make_report_figures.py` `fig_rf_capacitance_sections` | `design/sim/out/22_rf_capacitance/summary.json` | RF capacitance to ground (pF); configuration (y) |
 
 Regenerate from `design/sim`:
 

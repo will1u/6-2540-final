@@ -24,11 +24,11 @@ To the RF source, the trap is mostly a capacitor. A capacitor has impedance `Z =
 Formula: `I = ω C V`, with `ω = 2πf`.
 
 > **On this chip:** ω = 1.7593e+08 rad/s at 28 MHz. I per pF at 53 V is 9.32 mA; per fF it is 9.32 µA.
-> The chip's own RF capacitance is not in yet: sim 22 has no output. Until it does, the placeholder values that sim 18 used give 9.32 mA (1 pF), 18.65 mA (2 pF) and 46.62 mA (5 pF).
+> The chip's own RF capacitance, from sim 22 with the Si treated as a lossless dielectric (the cold case): 2.59 pF for A30 on E2, which draws 24.1 mA, and 2.39 pF on E1, which draws 22.3 mA. On E2, 0.63 of the field energy is in the Si and 0.20 in the SiO₂; section 3 says why that matters.
 > The die-wide Al plane was dropped for this reason. With it, C_RF-ground = 127 pF gives 1.18 A at 53 V and 28 MHz; without it, 2.9 pF gives 27.0 mA. Source: `fab/variants/LOCAL_MIRROR.md` for the capacitances; the currents are [team calc].
 
 Where this shows up:
-- [`../sim/18_e1_vs_e2.py`](../sim/18_e1_vs_e2.py) (the 1, 2 and 5 pF placeholders)
+- [`../sim/22_rf_capacitance.py`](../sim/22_rf_capacitance.py) and its [table](../sim/out/22_rf_capacitance/table.md) (the chip capacitance, section by section)
 - [`../fab/variants/LOCAL_MIRROR.md`](../fab/variants/LOCAL_MIRROR.md) (why the Al plane is local)
 
 ## 2. Why the drive needs a resonator
@@ -192,4 +192,4 @@ Inside the repo:
 - [`../fab/tests/03_READOUT.md`](../fab/tests/03_READOUT.md)
 
 Outside (opened in this session):
-- J. D. Siverns, L. R. Simkins, S. Weidt and W. K. Hensinger, "On the application of radio frequency voltages to ion traps via helical resonators", arXiv:1106.5013 (abstract page opened). The arXiv page gives the journal reference as Applied Physics B 106, 327 (2012). The repo's `pad_electrical_effects.md` cites "Appl. Phys. B 107, 921", which does not match; the team should check it. The section numbers used in that file (III.B for the model, V for the measured example) were not checked against the full text, which was not opened.
+- J. D. Siverns, L. R. Simkins, S. Weidt and W. K. Hensinger, "On the application of radio frequency voltages to ion traps via helical resonators", arXiv:1106.5013 (bib key `Siverns2012`; abstract page opened). The arXiv page gives the journal reference as Applied Physics B 106, 327 (2012). The repo's `pad_electrical_effects.md` cites "Appl. Phys. B 107, 921", which does not match and is not resolved. The section numbers used in that file (III.B for the model, V for the measured example) were not checked against the full text, which was not opened.

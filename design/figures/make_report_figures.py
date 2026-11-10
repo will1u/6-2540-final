@@ -232,6 +232,108 @@ def fig_stack():
     print("stack: bands drawn:", n)
 
 
+def fig_transport_waveform():
+    """Two stacked panels: ion position (top) and electrode voltages (bottom) against time."""
+    path = os.path.join(SIMOUT, "21_transport_waveform", "trap_die_v4_A30_V2zero", "waveform.csv")
+    with open(path, newline="") as fh:
+        rows = list(csv.reader(fh))
+    head = rows[0]
+    print("transport_waveform header:", head[:6], "...", head[-2:], "(", len(head), "columns )")
+    print("transport_waveform first two rows:", rows[1][:5], rows[2][:5])
+    phase = [r[1] for r in rows[1:]]
+    data = np.array([[float(v) if k != 1 else 0.0 for k, v in enumerate(r)] for r in rows[1:]])
+    t = data[:, 0]
+    y = data[:, 2]
+    cols = {int(h[1:]): data[:, k] for k, h in enumerate(head) if h.startswith("V")}
+    # phase boundaries: row where the phase string changes
+    bounds = [i for i in range(1, len(phase)) if phase[i] != phase[i - 1]]
+    tb = [float(t[i]) for i in bounds]
+    print("transport_waveform phase boundaries (row, t_us):", list(zip(bounds, tb)))
+    edges = [float(t[0])] + tb + [float(t[-1])]
+    names = ["tilt out", "move", "tilt in"]   # CSV phases untilt, move, tilt in that order
+    styles = [ps.STYLE_SOLID, ps.STYLE_DASHED, ps.STYLE_DASHDOT, ps.STYLE_DOTTED]
+    colours = [ps.BLUE, ps.ORANGE, ps.AQUA, ps.YELLOW]
+    hl = [7, 12, 8, 11]
+
+    fig, (axt, axb) = plt.subplots(2, 1, sharex=True, figsize=(ps.W2, 4.8),
+                                   gridspec_kw={"height_ratios": [1, 2.4], "hspace": 0.28})
+    axt.plot(t, y, color=ps.BLUE, lw=1.2)
+    axt.set_ylabel("ion position (µm)")
+    for n, v in cols.items():
+        if n not in hl:
+            axb.plot(t, v, color="#b9b7af", lw=0.5, zorder=1)
+    lines = {}
+    for k, n in enumerate(hl):
+        ls, mk = styles[k]
+        (lines[n],) = axb.plot(t, cols[n], color=colours[k], ls=ls, lw=1.2, label=f"electrode {n}", zorder=3)
+    axb.set_ylabel("electrode voltage (V)")
+    axb.set_xlabel("time (µs)")
+    for ax in (axt, axb):
+        for tbi in tb:
+            ax.axvline(tbi, color=ps.AXIS, lw=0.6, ls=":", zorder=0)
+    for k, nm in enumerate(names):
+        mid = 0.5 * (edges[k] + edges[k + 1])
+        axt.text(mid, 0.93, nm, transform=axt.get_xaxis_transform(), ha="center", va="top", fontsize=8)
+    axb.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=4, handlelength=2.4, columnspacing=1.0)
+    fig.tight_layout()
+    ps.save(fig, "transport_waveform")
+
+    # spot check: V7 at three rows, file vs plotted line
+    xd = lines[7].get_xdata()
+    yd = lines[7].get_ydata()
+    idx = [0, len(t) // 2, len(t) - 1]
+    print("transport_waveform V7 check, file:", [(float(rows[1 + j][0]), float(rows[1 + j][head.index("V7")])) for j in idx])
+    print("transport_waveform V7 check, plotted:", [(float(xd[j]), float(yd[j])) for j in idx])
+
+
+def fig_rf_capacitance_sections():
+    """Horizontal stacked bars: RF capacitance to ground per configuration, lossless-Si values."""
+    s = load_json(os.path.join(SIMOUT, "22_rf_capacitance", "summary.json"))
+    order = ["A30_E2", "A30_E1", "NODET_E2_full", "NODET_E2_thermal", "NODET_E1_full", "NODET_E1_thermal"]
+    pretty = {"A30_E2": "A30, E2", "A30_E1": "A30, E1", "NODET_E2_full": "NODET, E2",
+              "NODET_E2_thermal": "NODET, E2, thermal SiO₂ only", "NODET_E1_full": "NODET, E1",
+              "NODET_E1_thermal": "NODET, E1, thermal SiO₂ only"}
+    seg_names = ["rails over the lead slot", "rails, plain", "feed line", "U bar and pad"]
+    seg_cols = [ps.BLUE, ps.ORANGE, ps.AQUA, ps.YELLOW]
+    vals = {}
+    for key in order:
+        sec = s["configs"][key]["sections"]
+        slot = sec["slot"]["C_pF"] if "slot" in sec else 0.0      # NODET has no lead slot
+        vals[key] = [slot, sec["plain"]["C_pF"], sec["feed"]["C_pF"], sec["ubar"]["C_pF"] + sec["pad"]["C_pF"]]
+        total = s["configs"][key]["chip"]["C_chip_pF"]
+        print(f"rf_capacitance {key}: segments {[round(v, 4) for v in vals[key]]} sum {sum(vals[key]):.4f}, "
+              f"chip total {total:.4f} pF")
+    ylab = [pretty[k] for k in order]
+    ypos = np.arange(len(order))[::-1]
+    fig, ax = plt.subplots(figsize=(ps.W2, 3.0))
+    left = np.zeros(len(order))
+    containers = []
+    for j in range(4):
+        w = np.array([vals[k][j] for k in order])
+        bars = ax.barh(ypos, w, left=left, height=0.6, color=seg_cols[j], ec="white", lw=0.8, label=seg_names[j])
+        containers.append(bars)
+        left = left + w
+    for i, key in enumerate(order):
+        total = s["configs"][key]["chip"]["C_chip_pF"]
+        ax.text(total + 0.04, ypos[i], f"{total:.2f} pF", va="center", ha="left", fontsize=8)
+    ax.set_yticks(ypos)
+    ax.set_yticklabels(ylab)
+    ax.set_xlim(0, 3.2)
+    ax.set_xlabel("RF capacitance to ground (pF)")
+    ax.grid(False)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, 1.2), ncol=2, handlelength=1.4, columnspacing=1.0)
+    fig.tight_layout()
+    ps.save(fig, "rf_capacitance_sections")
+
+    # spot check A30_E2: four segment values and total, JSON vs plotted patches
+    i = order.index("A30_E2")
+    plotted = [containers[j][i].get_width() for j in range(4)]
+    print("rf_capacitance A30_E2 segments, JSON:", [round(v, 6) for v in vals["A30_E2"]])
+    print("rf_capacitance A30_E2 segments, plotted:", [round(v, 6) for v in plotted])
+    print("rf_capacitance A30_E2 total, JSON:", round(s["configs"]["A30_E2"]["chip"]["C_chip_pF"], 6),
+          "plotted sum:", round(sum(plotted), 6), "label:", f"{s['configs']['A30_E2']['chip']['C_chip_pF']:.2f} pF")
+
+
 def main():
     ps.apply()
     fig_rf_null_height()
@@ -239,6 +341,8 @@ def main():
     fig_collection_vs_height()
     fig_termination()
     fig_stack()
+    fig_transport_waveform()
+    fig_rf_capacitance_sections()
 
 
 if __name__ == "__main__":

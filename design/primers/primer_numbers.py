@@ -10,7 +10,7 @@ gds/measured_v4.json, and from the text of the repo files named in each block. T
 example values (53 V, 28 MHz, 10 pF) and the literature RC pairs, each with its source.
 Output: stdout only. Run from Git Bash: cd design/sim && ./run.sh ../primers/primer_numbers.py
 
-Limitations: sim 22 (chip RF capacitance) has no output yet, so section 1 uses 1, 2 and 5 pF.
+Section 1 reads the chip RF capacitance from sim/out/22_rf_capacitance/summary.json.
 Lumped models only; the sim 19 values are upper bounds. Order of magnitude where the source says so.
 """
 import json
@@ -68,10 +68,15 @@ i_pf = OMEGA * 1e-12 * V_RF * 1e3          # mA per pF
 print(f"omega = 2 pi f = {OMEGA:.4e} rad/s  (f = {F_RF/1e6:g} MHz, V = {V_RF:g} V)")
 print(f"I per pF at {V_RF:g} V, {F_RF/1e6:g} MHz = {i_pf:.2f} mA")
 print(f"I per fF at {V_RF:g} V, {F_RF/1e6:g} MHz = {i_pf:.2f} uA")
-print("sim 22 (chip RF capacitance) has no summary.json yet, so the chip value is being computed by sim 22.")
-print("Fallback: placeholder capacitances used by sim/18_e1_vs_e2.py")
-for c_pf in (1, 2, 5):
-    print(f"  I at {c_pf} pF = {OMEGA * c_pf * 1e-12 * V_RF * 1e3:.2f} mA")
+# chip RF capacitance from sim 22 (Si treated as a lossless dielectric: the cold case)
+s22 = jload("sim/out/22_rf_capacitance/summary.json")
+for cfg in ("A30_E2", "A30_E1"):
+    ch = s22["configs"][cfg]["chip"]
+    c_chip = ch["C_chip_pF"]
+    print(f"chip RF capacitance, {cfg.replace('_', ' on ')} (sim 22, Si lossless) = {c_chip:.2f} pF:"
+          f" I = {OMEGA * c_chip * 1e-12 * V_RF * 1e3:.1f} mA")
+ch = s22["configs"]["A30_E2"]["chip"]
+print(f"  share of the field energy in the Si = {ch['p_Si_length_weighted']:.2f}, in the SiO2 = {ch['p_SiO2_length_weighted']:.2f} (A30 on E2)")
 txt = ltext("fab/variants/LOCAL_MIRROR.md")
 m = re.search(r"C_RF–ground ≈ ([\d.]+) pF instead of ([\d.]+) pF", txt)
 c_plane, c_thin = float(m.group(1)), float(m.group(2))
