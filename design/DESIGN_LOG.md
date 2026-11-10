@@ -1819,7 +1819,7 @@ Largest tilt within ±10 V at 0.8 MHz axial and a 0.2 MHz split:
 - On A30 and B60 the SNSPD-lead slot already separates the halves left of x = 175 µm, so the cut only splits the solid part around the window and out to the right end.
 - The unsplit v4 files regenerate unchanged (geometry hashes match).
 
-`check_chip.py` passes on NODET_split. On A30_split and B60_split it fails one check: the NbN overhang inside the cut (|y| ≤ 2.5 µm, 3.5–5 µm on each side of the window) is not under Au. That is 24 µm² (A30) and 33 µm² (B60).
+`check_chip.py` passes on all three split dies. The NbN overhang inside the cut (|y| ≤ 2.5 µm, 3.5–5 µm on each side of the window) is not under Au: 24 µm² (A30) and 33 µm² (B60). The team accepted it on 2026-11-10, provided the etch does not damage it (`notes/decisions.md`). The checker reports the area, and the steps that reach it are in `fab/process/03_ELECTRODES.md` (E1 step 12, E2 step 15).
 
 **Result (sim 25 on the split dies, 0.8 MHz axial, 45°, all 36 DC electrodes; largest |V|):**
 

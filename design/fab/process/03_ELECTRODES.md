@@ -70,6 +70,7 @@ Layer 50 is the electrode Au, the ground fill, the pads, and in v4 the SNSPD lea
   - LOR + positive resist [verify thickness and spin for the 0.35 µm Au and the 0.40 µm via step].
   - MLA exposure of layer 50 **drawn**. With positive resist, exposed areas are removed, so the Au lands where layer 50 is drawn [verify dose and develop].
 - **Inspect:** resist opening at the 5 µm gaps and at the slot; undercut for lift-off [verify].
+- **Split-centre-DC dies only** (`make_chip.py --split`, proposal, DESIGN_LOG step 47): the 5 µm cut along the centre DC is a resist line in this option, so the NbN overhang under it (24 µm² A30, 33 µm² B60) stays covered by resist and the SiO₂ cap through the Ar pre-clean and the evaporation, and nothing etches it afterwards. Check that the resist line is intact across both window ends before step 13.
 - [ ] Done — date: ____ operator: ____ LOR t: ____ resist t: ____ overlay: ____ notes: ____
 
 ### 13 (E1). In-situ Ar pre-clean, Ti 10 nm / Au 350 nm
@@ -156,6 +157,12 @@ Steps 12 to 15 are the v3 plating steps, carried onto the thin stack. Changes fr
   - The window floor is the SiO₂ cap (160 nm target, see step 11). The F plasma and the end of the Ar etch can thin it. The cap is the optical matching layer (DESIGN_LOG step 26), so a loss of a few nm would shift the optics [inference; measure the cap after this step].
   - The SNSPD Au pads lose a few nm of Au.
   - Line-of-sight redeposition is unavoidable (Sussex).
+  - **Split-centre-DC dies only** (`make_chip.py --split`, proposal, DESIGN_LOG step 47; bare NbN accepted by the team on condition that the etch does not damage it, `notes/decisions.md` 2026-11-10):
+    - The 5 µm cut along the centre DC leaves the NbN meander overhang (24 µm² A30, 33 µm² B60) and the cap over the Al mirror under only the SiO₂ cap. That is the same cover as the window floor, but at the bottom of a 5 µm wide, 6 µm deep trench.
+    - The O₂ + F debris plasma (1), the Ar seed etch (2) and the F-plasma Ti etch (3) all reach it. The cap is the only thing between them and the NbN; O₂ plasma oxidises bare NbN (`02_DETECTOR.md` step 7).
+    - What keeps it safe: the cap must survive these steps. The SiO₂ etch rate of the Ti F-plasma on our tool is not in the repo [verify on a witness piece before the device wafer]. Set the over-etch from it.
+    - The narrow trench should etch no faster than the open window, so the cap measured on the window floor after this step should bound the loss in the cut [inference: narrow features etch more slowly in RIE; not measured here].
+    - The trench also holds Au redeposition and seed residue more easily than an open area. Residue on the cut floor would short the two halves, which the isolation check below catches.
 - **Inspect (both options, same list as E1 step 15):**
   - all electrodes isolated (neighbours > 100 MΩ at 10 V) [verify];
   - 5 µm gaps open; SNSPD leads continuous in the slot;
@@ -164,6 +171,7 @@ Steps 12 to 15 are the v3 plating steps, carried onto the thin stack. Changes fr
   - no lip or groove at the mirror edge under the Au (surface planar after step 3);
   - meander R₂ (test die T4/T4b; the v4 test die is drawn and checked, 2026-11-09);
   - window floor optically clean (no Au film);
+  - split-centre-DC dies only: halves 2 and 37 isolated (> 100 MΩ at 10 V, as for other neighbours); the cut floor over the meander ends is clean under the microscope (no Au residue); cap thickness on the window floor recorded; the detector's room-temperature resistance compared with an unsplit detector die from the same run, if both are on the wafer [verify: an acceptance limit];
   - AFM: Au roughness ~8 nm rms (PTB 8.3(5) nm).
 - **Checks for this option (not a verdict):**
   - gap depth-to-width 1.2 (6 µm Au over 5 µm gaps);

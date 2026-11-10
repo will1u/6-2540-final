@@ -141,8 +141,18 @@ if has_det:
     report(max(abs(b[1] - y_ax), abs(b[3] - y_ax)) <= 17.0 + 1e-6,
            f"NbN stays within 17 um of the axis, >= 3 um inside the centre-DC edge (max {max(abs(b[1]), abs(b[3])):.2f} um)")
     winbox = box(x_read - win["wx"] / 2, y_ax - win["wy"] / 2, x_read + win["wx"] / 2, y_ax + win["wy"] / 2)
-    bare = nbn.difference(au.union(winbox)).area
-    report(bare < 1e-3, f"all NbN lies under the centre-DC Au or the window ({bare:.3g} um^2 outside)")
+    if "_split" in sim:
+        # split dies: NbN bare inside the centre-DC cut is accepted (team, 2026-11-10, notes/decisions.md); it sits
+        # under the SiO2 cap only, like the window floor, and must survive the seed etch (03_ELECTRODES step 15 E2)
+        g = sim["_split"]["gap_um"] / 2
+        cut = box(x_read - 200, y_ax - g, x_read + 100, y_ax + g)
+        bare = nbn.difference(au.union(winbox).union(cut)).area
+        report(bare < 1e-3, f"all NbN lies under the centre-DC Au, the window or the split cut ({bare:.3g} um^2 outside)")
+        print(f"INFO NbN bare in the split cut (accepted; cap-only, see 03_ELECTRODES step 15 E2): "
+              f"{nbn.intersection(cut).difference(au.union(winbox)).area:.3g} um^2")
+    else:
+        bare = nbn.difference(au.union(winbox)).area
+        report(bare < 1e-3, f"all NbN lies under the centre-DC Au or the window ({bare:.3g} um^2 outside)")
     r = 0.029                                 # closing by 29 nm fills every NbN gap narrower than ~58 nm
     closed = nbn.buffer(r, join_style="mitre").buffer(-r, join_style="mitre").difference(nbn).area
     report(closed < 0.05, f"NbN gaps >= 60 nm (closing by {2 * r * 1000:.0f} nm adds {closed:.3g} um^2)")

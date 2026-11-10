@@ -80,7 +80,7 @@ Largest |V| for 45° at 0.8 MHz axial, all DC electrodes, from sim 25 on the spl
 
 - The same targets need 11.0–31.6 V on the unsplit dies.
 - On 32 channels (end caps grounded), the A30 readout needs 9.08 / 9.29 / 9.91 V [team calc, step 47].
-- Costs: one more electrode, lead and pad, plus a bare NbN overhang of 24 µm² (A30) / 33 µm² (B60) inside the cut, which `check_chip.py` flags.
+- Costs: one more electrode, lead and pad, plus a bare NbN overhang of 24 µm² (A30) / 33 µm² (B60) inside the cut. The team accepts it on condition that the etch does not damage it ([decision](../../../notes/decisions.md), [E2 step 15](../process/03_ELECTRODES.md)).
 - Not checked: transport with the split, light or charging through the cut, pad fan-out.
 - Other geometries tried (asymmetric RF rails, segment pitch, centre width): [sim 28](../../sim/out/28_tilt_geometry_3d/frontier.json), step 47.
 

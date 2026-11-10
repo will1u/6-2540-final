@@ -274,3 +274,11 @@ Format: date · decision · options rejected · reason · consequences.
   - The simulation is 2-D with ideal conductors and gives upper bounds.
 - **Consequences:** no layout change. Step 3 of the traveler is rewritten; the expected T10 strip resistance becomes 18.8–25.1 Ω instead of about 5 Ω; 0.9 µm of thermal SiO₂ remains under the mirror; new witness loop W8; the stack and process-flow figures show the inlaid mirror.
 - **Details:** DESIGN_LOG steps 37 and 38.
+
+## 2026-11-10 · Split centre DC: bare NbN in the cut is acceptable
+
+- **Context:** the split-centre-DC dies (`design/gds/make_chip.py --split`, DESIGN_LOG step 47) are a proposal; whether to split the centre DC is not decided. On A30 and B60 the 5 µm cut along y = 0 crosses the NbN meander overhang beside the window, so 24 µm² (A30) / 33 µm² (B60) of NbN is not under Au.
+- **Decision:** that bare NbN is acceptable. Condition: it must not be damaged during etching.
+- **Rejected:** stopping the cut short of the detector (keeps the halves joined at the readout); moving the detector or rerouting the overhang.
+- **Reason (team, in session):** "bare NbN is ok, you should just make sure it doesn't get damaged during etching."
+- **Consequences:** `check_chip.py` accepts NbN inside the cut on split dies and reports its area. The electrode process notes (`design/fab/process/03_ELECTRODES.md`, E1 step 12 and E2 step 15) say which steps reach the cut and what protects it.
