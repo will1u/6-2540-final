@@ -1,0 +1,38 @@
+[trap_die_v4_A30_V2zero] 4.88 s per zone solve (3 positions); DY = 2.0 um gives about 39.2 min (241 static solves + 240 midpoint checks)
+static solves done: 241 points, DY = 2.0 um, any bounded: False
+check A: max |diff| vs sim 12 table = 4.99e-06 V; max |V| = 6.6391 V (sim 12 6.6391); max change per 10 um = 1.7084 V (sim 12 1.7084)
+check B: max |dy| 0.007 nm; axial 0.800000-0.800000 MHz; max |g| 3.182e-04 V/m
+loading: zone vmax 7.448 V (sim 12 regular 7.45); blend min eig > 0: True; max |g| over blend 5.558e-12 V/m
+readout: zone vmax 6.287 V (sim 12 regular 6.29); blend min eig > 0: True; max |g| over blend 8.169e-12 V/m
+waveform: 1201 samples, phases untilt 100, move 1001, tilt 100; max |V| 7.4481 V; within DAC range: True
+DAC T=100 us F=100 kHz: N=10, max dV 8.8397 V, max dy 87.629 um, slew 0.884 V/us, max|V| 6.280 V
+DAC T=100 us F=1000 kHz: N=100, max dV 1.5005 V, max dy 8.998 um, slew 1.501 V/us, max|V| 6.638 V
+DAC T=300 us F=100 kHz: N=30, max dV 4.4434 V, max dy 29.911 um, slew 0.444 V/us, max|V| 6.363 V
+DAC T=300 us F=1000 kHz: N=300, max dV 0.5115 V, max dy 3.000 um, slew 0.511 V/us, max|V| 6.638 V
+DAC T=1000 us F=100 kHz: N=100, max dV 1.5005 V, max dy 8.998 um, slew 0.150 V/us, max|V| 6.638 V
+DAC T=1000 us F=1000 kHz: N=1000, max dV 0.1538 V, max dy 0.900 um, slew 0.154 V/us, max|V| 6.639 V
+quantisation at loading: largest |dy/dV| x lsb = 1.0422 nm, RSS = 2.2801 nm (zero-point x0 = 6.768 nm, sim 20)
+nbar T100us_F100kHz_f50kHz: 4.8920e+06
+nbar T100us_F100kHz_f200kHz: 7.3956e+07
+nbar T100us_F1000kHz_f50kHz: 3.5573e-05
+nbar T100us_F1000kHz_f200kHz: 5.3868e-04
+nbar T300us_F100kHz_f50kHz: 4.8920e+06
+nbar T300us_F100kHz_f200kHz: 7.3956e+07
+nbar T300us_F1000kHz_f50kHz: 5.4012e-09
+nbar T300us_F1000kHz_f200kHz: 8.2120e-08
+nbar T1000us_F100kHz_f50kHz: 4.8920e+06
+nbar T1000us_F100kHz_f200kHz: 7.3956e+07
+nbar T1000us_F1000kHz_f50kHz: 3.5074e-13
+nbar T1000us_F1000kHz_f200kHz: 5.3856e-12
+staircase cross-check: routine 1.857131e+01, analytic 1.857383e+01; within 2% or 1e-3: True
+  PASS  matches_sim12_table_within_1mV
+  PASS  max_abs_V_matches_sim12
+  PASS  max_10um_step_matches_sim12
+  PASS  no_bounded_solves
+  PASS  interp_axial_error_below_100nm
+  PASS  interp_axial_freq_within_1pct
+  PASS  zone_sets_match_sim12_vmax
+  PASS  tilt_blend_all_curvatures_positive
+  PASS  all_voltages_within_dac_range
+  PASS  staircase_routine_matches_analytic
+wrote C:\Users\willi\Repos\6.2540\6-2540-final\design\sim\out\21_transport_waveform\trap_die_v4_A30_V2zero
