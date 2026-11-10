@@ -234,6 +234,8 @@ Format: date · decision · options rejected · reason · consequences.
 
 ## 2026-11-08 · Local mirror Al 450 nm thick
 
+> Replaced on 2026-11-09: the mirror is now 100 nm, inlaid. See "Local mirror: 100 nm Al, inlaid" below.
+
 - **Decision:** make the local Al mirror (layer 10, Al-1%Cu) 450 nm thick instead of 150 nm.
 - **Rejected:** keeping 150 nm.
 - **Reason:** lower the resistance of the mirror's path to ground. The RF rails drive current into the 2.5 mm strip, and at 150 nm (≈ 15 Ω) the detector end swings 20–27 mV and adds up to 0.65 µA of nanowire pickup. At 450 nm it is 7–9 mV and ≤ 0.21 µA (DESIGN_LOG step 28).
@@ -251,3 +253,24 @@ Format: date · decision · options rejected · reason · consequences.
 - **Limits the team accepted with it:** the analysis uses a gapless, infinitely long five-wire model; the heating exponent is not universal; the photon rate behind the count estimate comes from one paper.
 - **Consequences:** no layout change. The height policy of 2026-11-02 (the height may differ between zones) stands.
 - **Details:** DESIGN_LOG step 30.
+
+## 2026-11-09 · Local mirror: 100 nm Al, inlaid (replaces the 450 nm of 2026-11-08)
+
+- **Decision:** the local Al mirror (layer 10) is 100 nm of evaporated Al, inlaid in the thermal SiO₂ so that its top is level with the SiO₂ beside it. Step 3 etches a 100 nm recess, evaporates the Al and lifts it off, all with one resist.
+- **Rejected:**
+  - 450 nm standing on the SiO₂ (the 2026-11-08 choice): it leaves a 0.45 µm step under the centre DC and the slot leads.
+  - 450 nm inlaid: flat, but it needs a 450 nm Al lift-off into a recess that no source we have read covers.
+  - 50 nm standing on the SiO₂, as Hampel 2023 built: about twice the strip heating and twice the extra nanowire current of 100 nm, and still a step.
+  - 100 nm standing on the SiO₂: kept only as the fallback if the recess gives trouble (skip the recess etch; same mask).
+- **Reason:**
+  - We want the built electrodes to be the flat, coplanar geometry that every simulation assumes.
+  - With E1, 0.35 µm of evaporated Au should not have to climb a 0.45 µm step where it leaves the mirror.
+  - The reason for 450 nm did not hold up. We doubted that the mirror's extra pickup ends up in the SNSPD, since the mirror is grounded, and had it simulated (`design/sim/10c_mirror_thickness.py`, DESIGN_LOG step 37). About 3.2 mA of RF current flows along the strip to the ground via at any thickness. What can reach the nanowire is at most 0.16–0.21 µA at 450 nm and 0.73–0.97 µA at 100 nm inlaid (E2), next to 0.96 µA (E2) or 1.92 µA (E1) of direct pickup and a switching current of 8–20 µA. The ion is not affected: at most about 2 nm of micromotion on A30, against 55–173 nm from the window.
+  - 100 nm rather than 50 nm: half the heating in the strip and half the extra nanowire current.
+- **What we accept with it:**
+  - More heat in the mirror strip: 34–45 µW at 100 nm inlaid against 7–10 µW at 450 nm (room-temperature resistivity, no thermal model). Hampel names RF heating as their remaining limit.
+  - The mirror is evaporated Al, not Al-1%Cu, so hillocks after the ≤ 300 °C steps have to be checked.
+  - The recess-and-lift-off step is not in any source we have read. It needs a witness wafer (W8) before a device wafer.
+  - The simulation is 2-D with ideal conductors and gives upper bounds.
+- **Consequences:** no layout change. Step 3 of the traveler is rewritten; the expected T10 strip resistance becomes 18.8–25.1 Ω instead of about 5 Ω; 0.9 µm of thermal SiO₂ remains under the mirror; new witness loop W8; the stack and process-flow figures show the inlaid mirror.
+- **Details:** DESIGN_LOG steps 37 and 38.
