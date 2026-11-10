@@ -86,5 +86,7 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 | `22_rf_capacitance.py` | Chip RF capacitance, dielectric loss and the resonator numbers (step 41) |
 | `23_dc_rf_coupling.py` | RF coupling from the rails onto the DC electrodes, and the effect of a filter capacitor (step 42) |
 | `24_rcwa_meander.py` | RCWA of the NbN meander absorption at normal incidence, in the separate `rcwa` env (step 43) |
+| `25_radial_tilt_sweep.py` | Radial tilt from 0 to 90°: voltage cost of each angle, including 45°, at 0.8 and 0.6 MHz axial (step 45) |
+| `26_dc_channel_count.py` | Zones and transport with 21–35 DAC channels, by grounding or tying electrodes at the carrier (step 46) |
 
 Full index of all scripts, with headline numbers and validity: [sim/INDEX.md](sim/INDEX.md).

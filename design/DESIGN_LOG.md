@@ -1730,3 +1730,64 @@ No layout, no GDS and no team decision changed in this step. Done by delegated a
 - The switching-current estimates still disagree (8–9 µA against 8–20 µA; `fab/tests/02_CRYOGENIC.md`).
 - `fab/LAYOUT.md` says the test dies have no bond pads while `fab/tests/02_CRYOGENIC.md` says to bond T4 and T4b.
 - The journal reference of the Siverns helical-resonator paper differs between the arXiv page and an earlier note here.
+
+---
+
+## 2026-11-10: Step 45, radial tilt up to 45° (`sim/25_radial_tilt_sweep.py`)
+
+**Why.** The 10° radial tilt in the zones came from step 11 ("in-plane 45° beams cool both radial modes") with no source and no other angle tried. Every beam runs parallel to the surface at 45° to the trap axis, k̂ = (1, 1, 0)/√2 in the ITVG frame. A Doppler beam cools mode i at a rate proportional to (k̂·êᵢ)², so with the radial axes exactly in the plane and vertical the vertical mode is not cooled. With the axes tilted by θ, the near-vertical mode gets ½ sin²θ: 0.015 at 10°, 0.058 at 20°, 0.125 at 30° and 0.25 at 45°, against 0.5 for the axial mode [team calc]. Allcock et al. 2010 (arXiv:0909.3272, read from the PDF) tilt the axes of a symmetric surface trap with a DC "tilt" quadrupole and note that the tilt would be 45° as soon as the radial degeneracy is lifted (p. 2); Table III (p. 5) gives 42° at 2.90 / 3.34 MHz. The question from the team: can this trap reach 45°?
+
+**Method.** Two ways of setting the tilt, on the v4 dies A30, B60 and NODET (E2), at both zones:
+- *natural split* (the sim 12 rule): keep the radial split the trap has and set tan 2θ = 2K_xz/ΔK. It cannot reach 45°.
+- *fixed split*: choose the split Δf_r and the angle; the DC supplies the two free radial curvatures (K_xx − K_zz and K_xz; their sum is fixed by Laplace and the axial row). θ is the angle of the higher-frequency mode from the in-plane axis and runs 0–90°, because which mode is naturally higher differs between zones.
+
+The voltages are minimum-norm solves over the 14 nearest electrodes (as sim 12) and over all 35. A Gaussian error of 10 mV on every voltage (200 draws) gives the scatter of the angle. Natural split at 10° reproduces sim 12 on every die (A30 7.45 / 6.29 V, B60 readout 2.25 V, NODET 7.93 / 7.89 V).
+
+**45°, fixed split 0.1 MHz, all DC electrodes, largest |V| without the ±10 V clip:**
+
+| Zone | 0.8 MHz axial | 0.6 MHz axial |
+|---|---|---|
+| Loading (A30, B60) | 11.30 V | 8.41 V |
+| Loading (NODET) | 11.04 V | 8.27 V |
+| Readout A30 | 13.27 V | 9.51 V |
+| Readout B60 | **6.81 V** | 5.88 V |
+| Readout NODET | 11.01 V | 8.23 V |
+
+- At 0.8 MHz axial and ±10 V, 45° fits only at the B60 readout. The largest tilt that fits at 0.1 MHz split is 25–27° at the loading zones and the NODET readout, and 23° at the A30 readout.
+- Each further 0.1 MHz of split costs about 4.6–4.9 V at 45° (A30 loading: 15.9 V at 0.2 MHz, 20.5 V at 0.3 MHz).
+- **What costs the voltage** (scratch decomposition of the minimum-norm solve, A30 and NODET): about 6.4–6.7 V for the 0.8 MHz axial curvature with the radial split held at zero (8.7–10.3 V at the A30 readout), plus about 4.9–5.0 V per 0.1 MHz for K_xz. The K_xz part is carried by top/bottom segment pairs driven in opposition (24/9, 22/8, 23/7 at loading; 26/11, 12/27, 13/28 at readout). At 50 µm the outer segments are weak at making K_xz.
+- **Robustness at 45°, 0.1 MHz:** 10 mV errors give an angle scatter of 0.8–1.4° (std). The stray curvature the trap will see is not known.
+- **A split centre DC** (the arrangement Allcock used) would be far stronger: a 2-D estimate with gapless strips (`trapcalc.strip_phi`) gives about 0.15 V per 0.1 MHz once the x-field is cancelled with an outer pair, against about 5 V now [team calc, 2-D, not run on the GDS]. It is a layout change.
+
+**Assessment (Claude's, not a team decision).** 45° at 0.8 MHz needs a larger DC range (the Sinara 5633 HV amplifier, 5× to ±50 V, step 46) or a split centre DC. Without either, 45° at 0.1 MHz split fits at 0.6 MHz axial, with the A30 readout at 9.5 V. The cooling benefit has not been turned into rates or temperatures: the per-mode formula (Itano & Wineland 1982) was not opened.
+
+**Also found.** The readout window lowers the ion vertically, so the excess micromotion it leaves is vertical. A beam in the plane has no component along it at any tilt, so RF-photon correlation with the in-plane beams (04_TRAPPING step 9) does not measure it. Allcock 2010 added a beam reflected off the trap surface for micromotion compensation (p. 5); the method itself was not read in detail.
+
+**Outputs.** `sim/out/25_radial_tilt_sweep/<die>/` and `<die>_fax0.6/` (`summary.json`, `vmax_vs_theta.png`, `projection_vs_theta.png`). Literature pointers: `research/research_notes/Radial tilt 2026-11/` (written by a delegated agent; checked against the PDF only for Allcock pp. 2–5).
+
+---
+
+## 2026-11-10: Step 46, the lab's DAC and the DC channel count (`sim/26_dc_channel_count.py`)
+
+**Input from the team.** The lab's DC DAC is a Sinara Zotino. From the Sinara wiki and the ARTIQ driver docs ([T4 note](research/research_notes/Test%20setup%202026-11/T4_zotino_dac.md)): 32 channels, ±10 V, 16 bit, 1 MSPS shared between the channels, a 3rd-order Butterworth output filter at 75 kHz; output noise is not published. The ±10 V the sims used is therefore the real limit. Two consequences:
+- The v4 dies have **35 DC electrodes** (2, 3–32, 33–36), three more than one Zotino.
+- Sim 21 assumed 1 MHz updates on every channel and a first-order filter. With 35 channels changing, a full update takes at least 35 µs (at most about 28.6 kHz before SPI and RTIO overhead [verify]), and 800 kHz / 28.57 kHz = 28 exactly, the commensurate case of step 40. Sim 21 needs a rerun with the Zotino rate and filter.
+
+**Question.** Can the trap run on fewer channels, by grounding electrodes or tying top/bottom pairs at the carrier, with no layout change?
+
+**Method.** A tied pair is one channel whose unit potential is the sum of both electrodes'; grounded electrodes leave the solve. Zone solves as sim 12 (14 nearest channels, 10°), the 45° fixed-split solve of step 45 (0.1 MHz, all channels), and transport from loading to readout on a 10 µm step with a fixed set of all channels and zero tilt (centre DC at 0 V on A30 and B60, free on NODET, as sim 12). "all35" reproduces sim 12 on all three dies (A30 7.45 / 6.29 V, transport 6.64 V and 1.708 V per step; NODET transport 7.20 V and 1.662 V).
+
+| Configuration | Channels | A30 zones at 10° (loading / readout) | A30 transport: max \|V\| / max step | NODET transport: max \|V\| / max step | 45° readout A30 at 0.8 / 0.6 MHz |
+|---|---|---|---|---|---|
+| all35 | 35 | 7.45 / 6.29 V | 6.64 / 1.708 V | 7.20 / 1.662 V | 13.27 / 9.51 V |
+| caps grounded (33–36) | 31 | 7.45 / 6.29 V | 6.66 / 1.709 V | 7.20 / 1.662 V | 13.60 / 9.70 V |
+| caps grounded, pairs 3+18, 4+19, 16+31, 17+32 tied | 27 | 7.43 / 6.32 V | 6.63 / 1.708 V | 7.20 / 1.662 V | 13.31 / 9.54 V |
+| caps and 3, 18 grounded | 29 | 7.45 / 6.29 V | 6.66 / 1.709 V | 7.20 / 1.662 V | 13.61 / 9.70 V |
+| also 4, 19, 17, 32 grounded | 25 | 7.45 / 6.29 V | 6.69 / 1.709 V | 7.20 / 1.662 V | 13.70 / 9.75 V |
+| also 5, 20, 16, 31 grounded | 21 | 7.39 / 6.29 V | 6.82 / 1.712 V | 7.21 / 1.662 V | 13.95 / 9.90 V |
+
+No configuration has a clipped step in transport, and the axial frequency stays at 0.800 MHz. B60 behaves like A30 (readout 2.25 V at 10° in every configuration).
+
+**Assessment (Claude's, not a team decision).** One Zotino is enough. Grounding the four end caps (31 channels) changes nothing that matters, and going down to 21 channels costs at most 0.18 V in transport and 0.7 V in the 45° readout solve. Fewer channels also shorten each full update (1 MSPS / 21 ≈ 48 kHz at most). The 45° tilt at 0.8 MHz still needs more than ±10 V in every configuration except at the B60 readout. The grounding is done at the carrier or the breakout, so the choice can wait until bonding. Not checked: anything beyond the two zones and the transport between them (for example loading at another position), and the role of the end caps if the zones ever move outward.
+
+**Outputs.** `sim/out/26_dc_channel_count/<die>/` (`summary.json`, `transport_maxV.png`).
