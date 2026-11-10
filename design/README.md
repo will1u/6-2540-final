@@ -16,7 +16,7 @@ For fabrication review, start with [fab overview](fab/README.md), [variants](fab
 | `GLOSSARY.md` | Every short label (dies, runs, E1/E2, layers, electrodes, T/W/a/b IDs, suffixes, symbols), each linked to its definition |
 | `check_numbers.py`, `facts_now.json` | Prints each key number from the sim outputs, checks that the current-state pages quote it, and flags known stale strings. Run it with `cd sim && ./run.sh ../check_numbers.py`. `facts_now.json` holds pointers (file and key), not values |
 | `sim/INDEX.md` | Index of the simulation scripts: question, headline number (with its `summary.json` key), validity and the decision each fed |
-| `primers/RF_PRIMER.md`, `primers/primer_numbers.py` | Basics of RF drive, loss, pickup, filters and SNSPD readout, worked on this chip; the script prints every number in the page |
+| `primers/RF_PRIMER.md`, `primers/primer_numbers.py`, `primers/make_circuit_figures.py` | Basics of RF drive, loss, pickup, filters and SNSPD readout, worked on this chip; the first script prints every number in the page, the second draws its circuit diagrams into `primers/figures/` |
 | `figures/` | `plotstyle.py`, `make_die_map.py`, `make_report_figures.py` → `figures/report/` (plots for the team's report); see `figures/README.md` |
 | `fab/briefs/` | One page per open design choice: options, numbers side by side with their sources, what is not known. No recommendation; the choice is the team's |
 | `fab/tests/00_SETUP.md`, `fab/tests/05_SIMPLER_TESTING.md` | What each test needs on the bench; what could replace the wafer-level test and what each option misses |

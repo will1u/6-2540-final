@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="382" viewBox="0 0 740 382"><rect width="740" height="382" fill="white"/><text x="20" y="28" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" fill="#111111" font-weight="bold">SNSPD and readout chain</text>
+<polyline points="120,110 120,110" fill="none" stroke="#111111" stroke-width="2"/>
+<g transform="translate(120,110) rotate(90)"><line x1="0" y1="0" x2="23" y2="0" stroke="#111111" stroke-width="2"/><line x1="67" y1="0" x2="90" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(23,0)"><path d="M0,0 a5.5,5.5 0 0 1 11,0 a5.5,5.5 0 0 1 11,0 a5.5,5.5 0 0 1 11,0 a5.5,5.5 0 0 1 11,0" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<g transform="translate(120,200) rotate(90)"><line x1="0" y1="0" x2="22" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="58" y1="0" x2="80" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(22,0)"><polyline points="0,0 3,-7 9,7 15,-7 21,7 27,-7 33,7 36,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<line x1="120" y1="280" x2="120" y2="290" stroke="#111111" stroke-width="2"/>
+<line x1="108" y1="290" x2="132" y2="290" stroke="#111111" stroke-width="2"/>
+<line x1="112" y1="295" x2="128" y2="295" stroke="#111111" stroke-width="2"/>
+<line x1="116" y1="300" x2="124" y2="300" stroke="#111111" stroke-width="2"/>
+<text x="105" y="160" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" fill="#111111" font-weight="bold">L<tspan dy="3" font-size="10">k</tspan><tspan dy="-3">​</tspan></text>
+<text x="105" y="250" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" fill="#b03a2e">hotspot</text>
+<text x="105" y="265" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" fill="#b03a2e">R<tspan dy="3" font-size="9">hs</tspan><tspan dy="-3"> (kΩ)</tspan></text>
+<text x="120" y="92" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#777777">nanowire</text>
+<circle cx="120" cy="110" r="3.5" fill="#111111"/>
+<polyline points="120,110 250,110" fill="none" stroke="#111111" stroke-width="2"/>
+<circle cx="250" cy="110" r="3.5" fill="#111111"/>
+<g transform="translate(250,110) rotate(-90)"><line x1="0" y1="0" x2="17" y2="0" stroke="#111111" stroke-width="2"/><line x1="53" y1="0" x2="70" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(17,0)"><path d="M0,0 a4.5,4.5 0 0 1 9,0 a4.5,4.5 0 0 1 9,0 a4.5,4.5 0 0 1 9,0 a4.5,4.5 0 0 1 9,0" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<text x="232" y="78" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" fill="#111111">bias-tee L</text>
+<line x1="250" y1="36" x2="250" y2="20" stroke="#111111" stroke-width="1.5"/><polygon points="250,20 253.505,28.2895 246.495,28.2895" fill="#111111"/>
+<text x="262" y="22" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#111111">I<tspan dy="3" font-size="9">b</tspan><tspan dy="-3"> (DC)</tspan></text>
+<g transform="translate(250,110) rotate(0)"><line x1="0" y1="0" x2="38" y2="0" stroke="#111111" stroke-width="2"/><line x1="52" y1="0" x2="90" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(38,0)"><line x1="3" y1="-11" x2="3" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="11" y1="-11" x2="11" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<text x="295" y="94" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">C</text>
+<polyline points="340,110 580,110" fill="none" stroke="#111111" stroke-width="2"/>
+<text x="375" y="94" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#777777">50 Ω line</text>
+<circle cx="420" cy="110" r="3.5" fill="#111111"/>
+<g transform="translate(420,110) rotate(90)"><line x1="0" y1="0" x2="17.5" y2="0" stroke="#111111" stroke-width="2"/><line x1="47.5" y1="0" x2="65" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(17.5,0)"><path d="M0,0 a3.75,3.75 0 0 1 7.5,0 a3.75,3.75 0 0 1 7.5,0 a3.75,3.75 0 0 1 7.5,0 a3.75,3.75 0 0 1 7.5,0" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<g transform="translate(420,175) rotate(90)"><line x1="0" y1="0" x2="31.5" y2="0" stroke="#111111" stroke-width="2"/><line x1="43.5" y1="0" x2="75" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(31.5,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="420" y1="250" x2="420" y2="260" stroke="#111111" stroke-width="2"/>
+<line x1="408" y1="260" x2="432" y2="260" stroke="#111111" stroke-width="2"/>
+<line x1="412" y1="265" x2="428" y2="265" stroke="#111111" stroke-width="2"/>
+<line x1="416" y1="270" x2="424" y2="270" stroke="#111111" stroke-width="2"/>
+<text x="436" y="165" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#111111">28 MHz notch</text>
+<text x="436" y="180" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#111111">(series L-C)</text>
+<g transform="translate(470,110) rotate(0)"><line x1="0" y1="0" x2="27" y2="0" stroke="#111111" stroke-width="2"/><line x1="63" y1="0" x2="90" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(27,0)"><polyline points="0,0 3,-7 9,7 15,-7 21,7 27,-7 33,7 36,0" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<text x="515" y="94" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">low-pass</text>
+<circle cx="560" cy="110" r="3.5" fill="#111111"/>
+<g transform="translate(560,110) rotate(90)"><line x1="0" y1="0" x2="64" y2="0" stroke="#111111" stroke-width="2"/><line x1="76" y1="0" x2="140" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(64,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="560" y1="250" x2="560" y2="260" stroke="#111111" stroke-width="2"/>
+<line x1="548" y1="260" x2="572" y2="260" stroke="#111111" stroke-width="2"/>
+<line x1="552" y1="265" x2="568" y2="265" stroke="#111111" stroke-width="2"/>
+<line x1="556" y1="270" x2="564" y2="270" stroke="#111111" stroke-width="2"/>
+<polyline points="560,110 620,110" fill="none" stroke="#111111" stroke-width="2"/>
+<rect x="620" y="86" width="90" height="48" fill="white" stroke="#111111" stroke-width="2"/>
+<text x="665" y="115" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#111111">amplifier</text>
+<text x="20" y="322" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">Photon: hotspot pushes I<tspan dy="3" font-size="9">b</tspan><tspan dy="-3"> into the line, pulse ≈ I</tspan><tspan dy="3" font-size="9">b</tspan><tspan dy="-3">×50 Ω (0.40 mV at 8 µA).</tspan></text>
+<text x="20" y="342" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">Recovery τ = L<tspan dy="3" font-size="9">k</tspan><tspan dy="-3">/50 Ω: A30 61.98 ns (corner 2.568 MHz), B60 118.80 ns (1.340 MHz).</tspan></text>
+<text x="20" y="362" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">A 1 nF bypass at the pad would low-pass the pulse at 3.18 MHz, close to the A30 corner.</text></svg>
