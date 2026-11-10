@@ -1,0 +1,368 @@
+zone     set      method       theta    df  vmax_unc   bnd   angle  split   f_ax
+loading  n14      natural        0.0     -     3.661 False  -90.00  0.031  0.600
+loading  n14      natural        5.0     -     3.919 False   84.93  0.031  0.600
+loading  n14      natural       10.0     -     4.193 False   79.73  0.032  0.600
+loading  n14      natural       15.0     -     4.504 False   74.42  0.035  0.600
+loading  n14      natural       20.0     -     4.887 False   69.05  0.039  0.600
+loading  n14      natural       30.0     -     6.190 False   58.28  0.060  0.600
+loading  n14      fixed split    0.0   0.1     4.061 False    0.00  0.100  0.600
+loading  n14      fixed split    0.0   0.2     4.368 False    0.00  0.200  0.600
+loading  n14      fixed split    0.0   0.3     4.677 False    0.00  0.300  0.600
+loading  n14      fixed split    0.0   0.5     5.294 False    0.00  0.502  0.600
+loading  n14      fixed split    5.0   0.1     4.868 False    5.00  0.100  0.600
+loading  n14      fixed split    5.0   0.2     5.979 False    5.00  0.200  0.600
+loading  n14      fixed split    5.0   0.3     7.091 False    5.00  0.300  0.600
+loading  n14      fixed split    5.0   0.5     9.313 False    5.00  0.502  0.600
+loading  n14      fixed split   10.0   0.1     5.641 False   10.00  0.100  0.600
+loading  n14      fixed split   10.0   0.2     7.525 False   10.00  0.200  0.600
+loading  n14      fixed split   10.0   0.3     9.410 False   10.00  0.300  0.600
+loading  n14      fixed split   10.0   0.5    13.179  True   10.06  0.469  0.598
+loading  n14      fixed split   15.0   0.1     6.356 False   15.00  0.100  0.600
+loading  n14      fixed split   15.0   0.2     8.957 False   15.00  0.200  0.600
+loading  n14      fixed split   15.0   0.3    11.557  True   15.00  0.300  0.600
+loading  n14      fixed split   15.0   0.5    16.758  True   16.59  0.389  0.591
+loading  n14      fixed split   20.0   0.1     6.993 False   20.00  0.100  0.600
+loading  n14      fixed split   20.0   0.2    10.230  True   20.00  0.200  0.600
+loading  n14      fixed split   20.0   0.3    13.467  True   21.58  0.263  0.597
+loading  n14      fixed split   20.0   0.5    19.941  True   25.87  0.331  0.585
+loading  n14      fixed split   30.0   0.1     7.955 False   30.00  0.100  0.600
+loading  n14      fixed split   30.0   0.2    12.154  True   31.18  0.191  0.599
+loading  n14      fixed split   30.0   0.3    16.354  True   39.06  0.229  0.591
+loading  n14      fixed split   30.0   0.5    24.752  True   37.67  0.337  0.577
+loading  n14      fixed split   45.0   0.1     8.429 False   45.00  0.100  0.600
+loading  n14      fixed split   45.0   0.2    13.102  True   50.04  0.191  0.597
+loading  n14      fixed split   45.0   0.3    17.775  True   56.81  0.274  0.589
+loading  n14      fixed split   45.0   0.5    27.120  True   46.40  0.361  0.573
+loading  n14      fixed split   60.0   0.1     7.651 False   60.00  0.100  0.600
+loading  n14      fixed split   60.0   0.2    11.545  True   60.10  0.200  0.600
+loading  n14      fixed split   60.0   0.3    15.440  True   66.24  0.309  0.593
+loading  n14      fixed split   60.0   0.5    23.332  True   62.22  0.391  0.580
+loading  n14      fixed split   70.0   0.1     6.526 False   70.00  0.100  0.600
+loading  n14      fixed split   70.0   0.2     9.297 False   70.00  0.200  0.600
+loading  n14      fixed split   70.0   0.3    12.067  True   71.17  0.308  0.599
+loading  n14      fixed split   70.0   0.5    18.383  True   72.24  0.449  0.589
+loading  n14      fixed split   75.0   0.1     5.829 False   75.00  0.100  0.600
+loading  n14      fixed split   75.0   0.2     7.901 False   75.00  0.200  0.600
+loading  n14      fixed split   75.0   0.3     9.974 False   75.00  0.300  0.600
+loading  n14      fixed split   75.0   0.5    15.062  True   76.25  0.480  0.595
+loading  n14      fixed split   80.0   0.1     5.068 False   80.00  0.100  0.600
+loading  n14      fixed split   80.0   0.2     6.380 False   80.00  0.200  0.600
+loading  n14      fixed split   80.0   0.3     7.692 False   80.00  0.300  0.600
+loading  n14      fixed split   80.0   0.5    11.307  True   80.00  0.502  0.600
+loading  n14      fixed split   85.0   0.1     4.267 False   85.00  0.100  0.600
+loading  n14      fixed split   85.0   0.2     4.779 False   85.00  0.200  0.600
+loading  n14      fixed split   85.0   0.3     5.290 False   85.00  0.300  0.600
+loading  n14      fixed split   85.0   0.5     7.230 False   85.00  0.502  0.600
+loading  n14      fixed split   90.0   0.1     3.451 False   90.00  0.100  0.600
+loading  n14      fixed split   90.0   0.2     3.147 False   90.00  0.200  0.600
+loading  n14      fixed split   90.0   0.3     2.842 False   90.00  0.300  0.600
+loading  n14      fixed split   90.0   0.5     3.051 False   90.00  0.502  0.600
+loading  all      natural        0.0     -     3.647 False  -90.00  0.037  0.600
+loading  all      natural        5.0     -     3.949 False   85.00  0.037  0.600
+loading  all      natural       10.0     -     4.270 False   80.01  0.039  0.600
+loading  all      natural       15.0     -     4.635 False   75.01  0.042  0.600
+loading  all      natural       20.0     -     5.082 False   70.02  0.048  0.600
+loading  all      natural       30.0     -     6.610 False   60.04  0.074  0.600
+loading  all      fixed split    0.0   0.1     4.058 False    0.00  0.100  0.600
+loading  all      fixed split    0.0   0.2     4.358 False    0.00  0.200  0.600
+loading  all      fixed split    0.0   0.3     4.658 False    0.00  0.300  0.600
+loading  all      fixed split    0.0   0.5     5.258 False    0.00  0.502  0.600
+loading  all      fixed split    5.0   0.1     4.861 False    5.00  0.100  0.600
+loading  all      fixed split    5.0   0.2     5.965 False    5.00  0.200  0.600
+loading  all      fixed split    5.0   0.3     7.069 False    5.00  0.300  0.600
+loading  all      fixed split    5.0   0.5     9.277 False    5.00  0.502  0.600
+loading  all      fixed split   10.0   0.1     5.632 False   10.00  0.100  0.600
+loading  all      fixed split   10.0   0.2     7.506 False   10.00  0.200  0.600
+loading  all      fixed split   10.0   0.3     9.380 False   10.00  0.300  0.600
+loading  all      fixed split   10.0   0.5    13.128  True   10.01  0.495  0.599
+loading  all      fixed split   15.0   0.1     6.345 False   15.00  0.100  0.600
+loading  all      fixed split   15.0   0.2     8.932 False   15.00  0.200  0.600
+loading  all      fixed split   15.0   0.3    11.520  True   15.00  0.300  0.600
+loading  all      fixed split   15.0   0.5    16.695  True   16.18  0.412  0.593
+loading  all      fixed split   20.0   0.1     6.980 False   20.00  0.100  0.600
+loading  all      fixed split   20.0   0.2    10.202  True   20.00  0.200  0.600
+loading  all      fixed split   20.0   0.3    13.424  True   20.61  0.284  0.599
+loading  all      fixed split   20.0   0.5    19.868  True   24.82  0.351  0.587
+loading  all      fixed split   30.0   0.1     7.939 False   30.00  0.100  0.600
+loading  all      fixed split   30.0   0.2    12.120  True   30.02  0.200  0.600
+loading  all      fixed split   30.0   0.3    16.302  True   36.65  0.242  0.593
+loading  all      fixed split   30.0   0.5    24.665  True   35.86  0.350  0.578
+loading  all      fixed split   45.0   0.1     8.412 False   45.00  0.100  0.600
+loading  all      fixed split   45.0   0.2    13.068  True   46.63  0.197  0.599
+loading  all      fixed split   45.0   0.3    17.723  True   52.97  0.268  0.591
+loading  all      fixed split   45.0   0.5    27.033  True   50.51  0.377  0.574
+loading  all      fixed split   60.0   0.1     7.639 False   60.00  0.100  0.600
+loading  all      fixed split   60.0   0.2    11.520  True   60.02  0.200  0.600
+loading  all      fixed split   60.0   0.3    15.401  True   64.08  0.298  0.595
+loading  all      fixed split   60.0   0.5    23.164  True   63.78  0.419  0.581
+loading  all      fixed split   70.0   0.1     6.520 False   70.00  0.100  0.600
+loading  all      fixed split   70.0   0.2     9.282 False   70.00  0.200  0.600
+loading  all      fixed split   70.0   0.3    12.044  True   70.03  0.301  0.600
+loading  all      fixed split   70.0   0.5    18.089  True   72.51  0.472  0.590
+loading  all      fixed split   75.0   0.1     5.825 False   75.00  0.100  0.600
+loading  all      fixed split   75.0   0.2     7.893 False   75.00  0.200  0.600
+loading  all      fixed split   75.0   0.3     9.960 False   75.00  0.300  0.600
+loading  all      fixed split   75.0   0.5    14.798  True   76.08  0.494  0.596
+loading  all      fixed split   80.0   0.1     5.067 False   80.00  0.100  0.600
+loading  all      fixed split   80.0   0.2     6.377 False   80.00  0.200  0.600
+loading  all      fixed split   80.0   0.3     7.688 False   80.00  0.300  0.600
+loading  all      fixed split   80.0   0.5    11.080  True   80.00  0.502  0.600
+loading  all      fixed split   85.0   0.1     4.270 False   85.00  0.100  0.600
+loading  all      fixed split   85.0   0.2     4.783 False   85.00  0.200  0.600
+loading  all      fixed split   85.0   0.3     5.296 False   85.00  0.300  0.600
+loading  all      fixed split   85.0   0.5     7.048 False   85.00  0.502  0.600
+loading  all      fixed split   90.0   0.1     3.457 False   90.00  0.100  0.600
+loading  all      fixed split   90.0   0.2     3.157 False   90.00  0.200  0.600
+loading  all      fixed split   90.0   0.3     2.857 False   90.00  0.300  0.600
+loading  all      fixed split   90.0   0.5     2.855 False   90.00  0.502  0.600
+loading  all_no2  natural        0.0     -     3.162 False  -90.00  0.199  0.600
+loading  all_no2  natural        5.0     -     4.794 False   85.00  0.202  0.600
+loading  all_no2  natural       10.0     -     6.530 False   80.00  0.212  0.600
+loading  all_no2  natural       15.0     -     8.505 False   75.00  0.230  0.600
+loading  all_no2  natural       20.0     -    10.928  True   71.44  0.277  0.600
+loading  all_no2  natural       30.0     -    19.192  True   51.22  0.290  0.587
+loading  all_no2  fixed split    0.0   0.1     9.211 False    0.00  0.100  0.600
+loading  all_no2  fixed split    0.0   0.2    11.748  True    0.00  0.200  0.600
+loading  all_no2  fixed split    0.0   0.3    14.284  True    0.00  0.257  0.585
+loading  all_no2  fixed split    0.0   0.5    19.357  True    0.00  0.337  0.541
+loading  all_no2  fixed split    5.0   0.1     9.985 False    5.00  0.100  0.600
+loading  all_no2  fixed split    5.0   0.2    13.320  True    5.00  0.200  0.600
+loading  all_no2  fixed split    5.0   0.3    16.656  True    5.29  0.260  0.587
+loading  all_no2  fixed split    5.0   0.5    23.328  True    5.51  0.341  0.546
+loading  all_no2  fixed split   10.0   0.1    10.696  True   10.00  0.100  0.600
+loading  all_no2  fixed split   10.0   0.2    14.743  True   10.00  0.200  0.600
+loading  all_no2  fixed split   10.0   0.3    18.790  True    9.89  0.251  0.586
+loading  all_no2  fixed split   10.0   0.5    26.884  True    9.72  0.337  0.553
+loading  all_no2  fixed split   15.0   0.1    11.284  True   15.00  0.100  0.600
+loading  all_no2  fixed split   15.0   0.2    15.920  True   15.00  0.200  0.600
+loading  all_no2  fixed split   15.0   0.3    20.555  True   15.92  0.243  0.584
+loading  all_no2  fixed split   15.0   0.5    29.826  True   15.73  0.327  0.549
+loading  all_no2  fixed split   20.0   0.1    11.732  True   20.00  0.100  0.600
+loading  all_no2  fixed split   20.0   0.2    16.815  True   20.02  0.195  0.599
+loading  all_no2  fixed split   20.0   0.3    21.897  True   20.18  0.237  0.582
+loading  all_no2  fixed split   20.0   0.5    32.063  True   20.37  0.322  0.548
+loading  all_no2  fixed split   30.0   0.1    12.154  True   30.00  0.100  0.600
+loading  all_no2  fixed split   30.0   0.2    17.660  True   30.75  0.187  0.596
+loading  all_no2  fixed split   30.0   0.3    23.166  True   33.38  0.231  0.579
+loading  all_no2  fixed split   30.0   0.5    34.177  True   33.25  0.317  0.548
+loading  all_no2  fixed split   45.0   0.1    11.549  True   45.00  0.100  0.600
+loading  all_no2  fixed split   45.0   0.2    16.450  True   45.10  0.196  0.599
+loading  all_no2  fixed split   45.0   0.3    21.351  True   47.86  0.253  0.586
+loading  all_no2  fixed split   45.0   0.5    31.152  True   50.92  0.358  0.561
+loading  all_no2  fixed split   60.0   0.1     9.631 False   60.00  0.100  0.600
+loading  all_no2  fixed split   60.0   0.2    12.614  True   60.00  0.200  0.600
+loading  all_no2  fixed split   60.0   0.3    15.596  True   61.27  0.275  0.595
+loading  all_no2  fixed split   60.0   0.5    23.132  True   62.58  0.407  0.583
+loading  all_no2  fixed split   70.0   0.1     7.866 False   70.00  0.100  0.600
+loading  all_no2  fixed split   70.0   0.2     9.300 False   70.00  0.200  0.600
+loading  all_no2  fixed split   70.0   0.3    12.027  True   70.19  0.298  0.599
+loading  all_no2  fixed split   70.0   0.5    18.779  True   72.43  0.456  0.590
+loading  all_no2  fixed split   75.0   0.1     6.914 False   75.00  0.100  0.600
+loading  all_no2  fixed split   75.0   0.2     7.903 False   75.00  0.200  0.600
+loading  all_no2  fixed split   75.0   0.3     9.931 False   75.00  0.300  0.600
+loading  all_no2  fixed split   75.0   0.5    16.551  True   76.47  0.480  0.595
+loading  all_no2  fixed split   80.0   0.1     5.954 False   80.00  0.100  0.600
+loading  all_no2  fixed split   80.0   0.2     6.382 False   80.00  0.200  0.600
+loading  all_no2  fixed split   80.0   0.3     7.650 False   80.00  0.300  0.600
+loading  all_no2  fixed split   80.0   0.5    13.617  True   80.08  0.501  0.600
+loading  all_no2  fixed split   85.0   0.1     5.015 False   85.00  0.100  0.600
+loading  all_no2  fixed split   85.0   0.2     4.784 False   85.00  0.200  0.600
+loading  all_no2  fixed split   85.0   0.3     5.253 False   85.00  0.300  0.600
+loading  all_no2  fixed split   85.0   0.5    11.225  True   85.00  0.501  0.600
+loading  all_no2  fixed split   90.0   0.1     4.139 False   90.00  0.100  0.600
+loading  all_no2  fixed split   90.0   0.2     3.158 False   90.00  0.200  0.600
+loading  all_no2  fixed split   90.0   0.3     3.791 False   90.00  0.300  0.600
+loading  all_no2  fixed split   90.0   0.5     9.086 False   90.00  0.502  0.600
+readout  n14      natural        0.0     -     0.904 False  -90.00  0.149  0.600
+readout  n14      natural        5.0     -     2.177 False   85.02  0.152  0.600
+readout  n14      natural       10.0     -     3.540 False   80.08  0.160  0.600
+readout  n14      natural       15.0     -     5.089 False   75.17  0.174  0.600
+readout  n14      natural       20.0     -     6.989 False   70.29  0.198  0.600
+readout  n14      natural       30.0     -    13.473  True   62.42  0.307  0.599
+readout  n14      fixed split    0.0   0.1     9.359 False    0.00  0.100  0.600
+readout  n14      fixed split    0.0   0.2    12.920  True   -0.00  0.199  0.599
+readout  n14      fixed split    0.0   0.3    16.482  True   -0.04  0.236  0.553
+readout  n14      fixed split    0.0   0.5    23.604  True   -0.09  0.304  0.442
+readout  n14      fixed split    5.0   0.1    10.120  True    5.02  0.099  0.600
+readout  n14      fixed split    5.0   0.2    14.442  True    5.18  0.193  0.595
+readout  n14      fixed split    5.0   0.3    18.763  True    6.65  0.224  0.543
+readout  n14      fixed split    5.0   0.5    27.407  True    8.49  0.283  0.394
+readout  n14      fixed split   10.0   0.1    10.749  True   10.05  0.100  0.600
+readout  n14      fixed split   10.0   0.2    15.700  True   10.59  0.189  0.591
+readout  n14      fixed split   10.0   0.3    20.651  True   14.82  0.203  0.512
+readout  n14      fixed split   10.0   0.5    30.554  True   21.40  0.243  0.298
+readout  n14      fixed split   15.0   0.1    11.228  True   15.07  0.100  0.600
+readout  n14      fixed split   15.0   0.2    16.658  True   17.79  0.171  0.573
+readout  n14      fixed split   15.0   0.3    22.088  True   25.28  0.190  0.480
+readout  n14      fixed split   15.0   0.5    32.948  True   35.74  0.251  0.030
+readout  n14      fixed split   20.0   0.1    11.542  True   20.09  0.100  0.600
+readout  n14      fixed split   20.0   0.2    17.286  True   25.58  0.164  0.559
+readout  n14      fixed split   20.0   0.3    23.029  True   35.36  0.201  0.455
+readout  n14      fixed split   20.0   0.5    34.517  True   43.34  0.286  0.214
+readout  n14      fixed split   30.0   0.1    11.642  True   30.11  0.100  0.600
+readout  n14      fixed split   30.0   0.2    17.485  True   38.86  0.176  0.549
+readout  n14      fixed split   30.0   0.3    23.329  True   49.91  0.253  0.416
+readout  n14      fixed split   30.0   0.5    35.017  True   43.17  0.334  0.000
+readout  n14      fixed split   45.0   0.1    10.489  True   45.09  0.100  0.600
+readout  n14      fixed split   45.0   0.2    15.181  True   48.85  0.201  0.577
+readout  n14      fixed split   45.0   0.3    19.873  True   56.30  0.298  0.509
+readout  n14      fixed split   45.0   0.5    29.257  True   49.16  0.369  0.226
+readout  n14      fixed split   60.0   0.1     8.080 False   60.00  0.100  0.600
+readout  n14      fixed split   60.0   0.2    10.363  True   60.02  0.200  0.600
+readout  n14      fixed split   60.0   0.3    13.573  True   61.73  0.302  0.587
+readout  n14      fixed split   60.0   0.5    22.843  True   58.02  0.374  0.509
+readout  n14      fixed split   70.0   0.1     6.085 False   70.00  0.100  0.600
+readout  n14      fixed split   70.0   0.2     7.136 False   70.00  0.200  0.600
+readout  n14      fixed split   70.0   0.3    11.154  True   69.99  0.300  0.600
+readout  n14      fixed split   70.0   0.5    22.399  True   65.49  0.378  0.651
+readout  n14      fixed split   75.0   0.1     5.059 False   75.00  0.100  0.600
+readout  n14      fixed split   75.0   0.2     5.551 False   75.00  0.200  0.600
+readout  n14      fixed split   75.0   0.3    10.246  True   74.99  0.300  0.600
+readout  n14      fixed split   75.0   0.5    20.886  True   70.71  0.392  0.685
+readout  n14      fixed split   80.0   0.1     4.056 False   80.00  0.100  0.600
+readout  n14      fixed split   80.0   0.2     3.997 False   80.00  0.200  0.600
+readout  n14      fixed split   80.0   0.3     8.853 False   80.00  0.300  0.600
+readout  n14      fixed split   80.0   0.5    18.564  True   78.24  0.427  0.659
+readout  n14      fixed split   85.0   0.1     3.105 False   85.00  0.100  0.600
+readout  n14      fixed split   85.0   0.2     2.834 False   85.00  0.200  0.600
+readout  n14      fixed split   85.0   0.3     7.017 False   85.00  0.300  0.600
+readout  n14      fixed split   85.0   0.5    15.505  True   84.77  0.479  0.616
+readout  n14      fixed split   90.0   0.1     2.236 False   90.00  0.100  0.600
+readout  n14      fixed split   90.0   0.2     1.985 False   90.00  0.200  0.600
+readout  n14      fixed split   90.0   0.3     4.998 False   90.00  0.300  0.600
+readout  n14      fixed split   90.0   0.5    12.009  True   90.00  0.498  0.603
+readout  all      natural        0.0     -     0.889 False  -90.00  0.151  0.600
+readout  all      natural        5.0     -     2.171 False   85.00  0.153  0.600
+readout  all      natural       10.0     -     3.536 False   80.00  0.161  0.600
+readout  all      natural       15.0     -     5.087 False   75.01  0.174  0.600
+readout  all      natural       20.0     -     6.991 False   70.01  0.197  0.600
+readout  all      natural       30.0     -    13.485  True   60.17  0.299  0.600
+readout  all      fixed split    0.0   0.1     7.838 False    0.00  0.100  0.600
+readout  all      fixed split    0.0   0.2    10.777  True    0.00  0.199  0.600
+readout  all      fixed split    0.0   0.3    13.715  True    0.00  0.299  0.599
+readout  all      fixed split    0.0   0.5    19.591  True   -0.00  0.469  0.577
+readout  all      fixed split    5.0   0.1     8.590 False    5.00  0.100  0.600
+readout  all      fixed split    5.0   0.2    12.283  True    5.01  0.199  0.600
+readout  all      fixed split    5.0   0.3    15.976  True    5.02  0.299  0.599
+readout  all      fixed split    5.0   0.5    23.362  True    6.00  0.410  0.524
+readout  all      fixed split   10.0   0.1     9.234 False   10.00  0.100  0.600
+readout  all      fixed split   10.0   0.2    13.571  True   10.03  0.199  0.600
+readout  all      fixed split   10.0   0.3    17.908  True   10.06  0.298  0.598
+readout  all      fixed split   10.0   0.5    26.581  True   14.15  0.351  0.450
+readout  all      fixed split   15.0   0.1     9.746 False   15.00  0.100  0.600
+readout  all      fixed split   15.0   0.2    14.595  True   15.05  0.199  0.599
+readout  all      fixed split   15.0   0.3    19.444  True   15.53  0.291  0.591
+readout  all      fixed split   15.0   0.5    29.142  True   26.67  0.297  0.282
+readout  all      fixed split   20.0   0.1    10.111  True   20.06  0.100  0.600
+readout  all      fixed split   20.0   0.2    15.325  True   20.08  0.199  0.599
+readout  all      fixed split   20.0   0.3    20.539  True   23.65  0.260  0.553
+readout  all      fixed split   20.0   0.5    30.967  True   36.61  0.302  0.018
+readout  all      fixed split   30.0   0.1    10.359  True   30.08  0.100  0.600
+readout  all      fixed split   30.0   0.2    15.821  True   30.14  0.199  0.599
+readout  all      fixed split   30.0   0.3    21.283  True   42.31  0.254  0.460
+readout  all      fixed split   30.0   0.5    32.208  True   45.10  0.354  0.113
+readout  all      fixed split   45.0   0.1     9.509 False   45.00  0.100  0.600
+readout  all      fixed split   45.0   0.2    14.120  True   45.10  0.200  0.599
+readout  all      fixed split   45.0   0.3    18.732  True   52.59  0.290  0.525
+readout  all      fixed split   45.0   0.5    27.955  True   51.15  0.386  0.375
+readout  all      fixed split   60.0   0.1     7.423 False   60.00  0.100  0.600
+readout  all      fixed split   60.0   0.2     9.948 False   60.00  0.200  0.600
+readout  all      fixed split   60.0   0.3    13.416  True   60.13  0.298  0.600
+readout  all      fixed split   60.0   0.5    22.405  True   59.72  0.410  0.554
+readout  all      fixed split   70.0   0.1     5.612 False   70.00  0.100  0.600
+readout  all      fixed split   70.0   0.2     7.064 False   70.00  0.200  0.600
+readout  all      fixed split   70.0   0.3    10.741  True   69.99  0.300  0.600
+readout  all      fixed split   70.0   0.5    21.168  True   67.37  0.414  0.659
+readout  all      fixed split   75.0   0.1     4.660 False   75.00  0.100  0.600
+readout  all      fixed split   75.0   0.2     5.517 False   75.00  0.200  0.600
+readout  all      fixed split   75.0   0.3     9.648 False   75.00  0.300  0.600
+readout  all      fixed split   75.0   0.5    19.347  True   73.24  0.450  0.652
+readout  all      fixed split   80.0   0.1     3.715 False   80.00  0.100  0.600
+readout  all      fixed split   80.0   0.2     3.868 False   80.00  0.200  0.600
+readout  all      fixed split   80.0   0.3     8.113 False   80.00  0.300  0.600
+readout  all      fixed split   80.0   0.5    16.788  True   79.97  0.500  0.601
+readout  all      fixed split   85.0   0.1     2.806 False   85.00  0.100  0.600
+readout  all      fixed split   85.0   0.2     2.488 False   85.00  0.200  0.600
+readout  all      fixed split   85.0   0.3     6.182 False   85.00  0.300  0.600
+readout  all      fixed split   85.0   0.5    13.570  True   84.99  0.501  0.600
+readout  all      fixed split   90.0   0.1     1.962 False   90.00  0.100  0.600
+readout  all      fixed split   90.0   0.2     1.557 False   90.00  0.200  0.600
+readout  all      fixed split   90.0   0.3     3.915 False   90.00  0.300  0.600
+readout  all      fixed split   90.0   0.5     9.791 False   90.00  0.502  0.600
+readout  all_no2  natural        0.0     -     3.170 False  -90.00  0.200  0.600
+readout  all_no2  natural        5.0     -     4.797 False   85.00  0.203  0.600
+readout  all_no2  natural       10.0     -     6.529 False   80.00  0.213  0.600
+readout  all_no2  natural       15.0     -     8.500 False   75.01  0.231  0.600
+readout  all_no2  natural       20.0     -    10.916  True   71.39  0.278  0.600
+readout  all_no2  natural       30.0     -    19.160  True   51.19  0.292  0.587
+readout  all_no2  fixed split    0.0   0.1     9.400 False    0.00  0.100  0.600
+readout  all_no2  fixed split    0.0   0.2    11.991  True    0.00  0.200  0.600
+readout  all_no2  fixed split    0.0   0.3    14.581  True    0.00  0.259  0.586
+readout  all_no2  fixed split    0.0   0.5    19.762  True    0.01  0.338  0.541
+readout  all_no2  fixed split    5.0   0.1    10.163  True    5.00  0.100  0.600
+readout  all_no2  fixed split    5.0   0.2    13.539  True    5.00  0.200  0.600
+readout  all_no2  fixed split    5.0   0.3    16.916  True    5.39  0.262  0.587
+readout  all_no2  fixed split    5.0   0.5    23.669  True    5.59  0.342  0.546
+readout  all_no2  fixed split   10.0   0.1    10.858  True   10.00  0.100  0.600
+readout  all_no2  fixed split   10.0   0.2    14.929  True   10.00  0.200  0.600
+readout  all_no2  fixed split   10.0   0.3    19.001  True    9.90  0.254  0.587
+readout  all_no2  fixed split   10.0   0.5    27.144  True    9.75  0.339  0.552
+readout  all_no2  fixed split   15.0   0.1    11.429  True   15.00  0.100  0.600
+readout  all_no2  fixed split   15.0   0.2    16.072  True   15.00  0.200  0.600
+readout  all_no2  fixed split   15.0   0.3    20.715  True   15.84  0.244  0.584
+readout  all_no2  fixed split   15.0   0.5    30.001  True   15.84  0.329  0.550
+readout  all_no2  fixed split   20.0   0.1    11.859  True   20.00  0.100  0.600
+readout  all_no2  fixed split   20.0   0.2    16.932  True   20.01  0.197  0.599
+readout  all_no2  fixed split   20.0   0.3    22.005  True   20.17  0.239  0.583
+readout  all_no2  fixed split   20.0   0.5    32.152  True   20.37  0.323  0.549
+readout  all_no2  fixed split   30.0   0.1    12.249  True   30.00  0.100  0.600
+readout  all_no2  fixed split   30.0   0.2    17.711  True   30.65  0.189  0.597
+readout  all_no2  fixed split   30.0   0.3    23.174  True   33.27  0.232  0.579
+readout  all_no2  fixed split   30.0   0.5    34.100  True   33.29  0.318  0.549
+readout  all_no2  fixed split   45.0   0.1    11.605  True   45.00  0.100  0.600
+readout  all_no2  fixed split   45.0   0.2    16.424  True   45.08  0.196  0.599
+readout  all_no2  fixed split   45.0   0.3    21.242  True   47.35  0.254  0.587
+readout  all_no2  fixed split   45.0   0.5    30.880  True   50.81  0.359  0.561
+readout  all_no2  fixed split   60.0   0.1     9.670 False   60.00  0.100  0.600
+readout  all_no2  fixed split   60.0   0.2    12.553  True   60.00  0.200  0.600
+readout  all_no2  fixed split   60.0   0.3    15.437  True   61.24  0.276  0.595
+readout  all_no2  fixed split   60.0   0.5    22.970  True   62.56  0.408  0.583
+readout  all_no2  fixed split   70.0   0.1     7.908 False   70.00  0.100  0.600
+readout  all_no2  fixed split   70.0   0.2     9.251 False   70.00  0.200  0.600
+readout  all_no2  fixed split   70.0   0.3    11.963  True   70.14  0.299  0.600
+readout  all_no2  fixed split   70.0   0.5    18.580  True   72.40  0.457  0.590
+readout  all_no2  fixed split   75.0   0.1     6.962 False   75.00  0.100  0.600
+readout  all_no2  fixed split   75.0   0.2     7.869 False   75.00  0.200  0.600
+readout  all_no2  fixed split   75.0   0.3     9.889 False   75.00  0.300  0.600
+readout  all_no2  fixed split   75.0   0.5    16.439  True   76.44  0.481  0.595
+readout  all_no2  fixed split   80.0   0.1     6.011 False   80.00  0.100  0.600
+readout  all_no2  fixed split   80.0   0.2     6.363 False   80.00  0.200  0.600
+readout  all_no2  fixed split   80.0   0.3     7.631 False   80.00  0.300  0.600
+readout  all_no2  fixed split   80.0   0.5    13.826  True   80.05  0.501  0.600
+readout  all_no2  fixed split   85.0   0.1     5.083 False   85.00  0.100  0.600
+readout  all_no2  fixed split   85.0   0.2     4.781 False   85.00  0.200  0.600
+readout  all_no2  fixed split   85.0   0.3     5.369 False   85.00  0.300  0.600
+readout  all_no2  fixed split   85.0   0.5    12.054  True   85.00  0.501  0.600
+readout  all_no2  fixed split   90.0   0.1     4.219 False   90.00  0.100  0.600
+readout  all_no2  fixed split   90.0   0.2     3.170 False   90.00  0.200  0.600
+readout  all_no2  fixed split   90.0   0.3     4.017 False   90.00  0.300  0.600
+readout  all_no2  fixed split   90.0   0.5     9.821 False   90.00  0.502  0.600
+robustness loading n14 df=0.1 MHz: nominal 45.00 deg, std 1.197 deg, max |change| 3.502 deg
+robustness loading all df=0.1 MHz: nominal 45.00 deg, std 1.060 deg, max |change| 2.911 deg
+robustness readout all df=0.1 MHz: nominal 45.00 deg, std 1.444 deg, max |change| 3.494 deg
+theta_max_fit loading n14 df=0.1 MHz: fits_45=True, theta_max_fit=45.0
+theta_max_fit loading n14 df=0.2 MHz: fits_45=False, theta_max_fit=22.77113914489746
+theta_max_fit loading n14 df=0.3 MHz: fits_45=False, theta_max_fit=15.05950927734375
+theta_max_fit loading n14 df=0.5 MHz: fits_45=False, theta_max_fit=8.36111068725586
+theta_max_fit loading all df=0.1 MHz: fits_45=True, theta_max_fit=45.0
+theta_max_fit loading all df=0.2 MHz: fits_45=False, theta_max_fit=22.84456729888916
+theta_max_fit loading all df=0.3 MHz: fits_45=False, theta_max_fit=15.091052055358887
+theta_max_fit loading all df=0.5 MHz: fits_45=False, theta_max_fit=8.627915382385254
+theta_max_fit readout n14 df=0.1 MHz: fits_45=False, theta_max_fit=41.357431411743164
+theta_max_fit readout n14 df=0.2 MHz: fits_45=False, theta_max_fit=29.049439430236816
+theta_max_fit readout n14 df=0.3 MHz: fits_45=False, theta_max_fit=13.98083209991455
+theta_max_fit readout n14 df=0.5 MHz: fits_45=False, theta_max_fit=None
+theta_max_fit readout all df=0.1 MHz: fits_45=True, theta_max_fit=45.0
+theta_max_fit readout all df=0.2 MHz: fits_45=False, theta_max_fit=30.15369415283203
+theta_max_fit readout all df=0.3 MHz: fits_45=False, theta_max_fit=16.398983001708984
+theta_max_fit readout all df=0.5 MHz: fits_45=False, theta_max_fit=0.26010990142822266
