@@ -31,7 +31,7 @@ What you are looking at: the layers at the readout window, from the Si substrate
 | Ion and wavelength | ¹³⁸Ba⁺, 493 nm detection | [progress goal table](../CLAUDE_PROGRESS.md) |
 | Ion height | 49.97 µm (loading), 49.98 µm (readout), planar model; over the A30 window the drop is 1.19 µm (E2), ≤ 0.37 µm (E1) | [sim/out/12_final_chip/trap_die_v4_A30/summary.json](sim/out/12_final_chip/trap_die_v4_A30/summary.json) (`loading.null_z`, `readout.null_z`, `readout.dh_recess`); E1 bound from [trap_die_v4_A30_E1/summary.json](sim/out/12_final_chip/trap_die_v4_A30_E1/summary.json) |
 | RF drive | 53 V at 28 MHz; radial ~3.0 MHz, q 0.30, depth ≈ 52 meV | [CLAUDE.md](CLAUDE.md), "Key design numbers" |
-| Axial frequency and DAC range | 0.8 MHz; ±10 V DACs | [CLAUDE.md](CLAUDE.md), "Key design numbers" |
+| Axial frequency and DAC range | 0.8 MHz; ±10 V DACs (Sinara Zotino, 32 channels) | [CLAUDE.md](CLAUDE.md), "Key design numbers"; [T4 note](research/research_notes/Test%20setup%202026-11/T4_zotino_dac.md) |
 | Zone spacing and segment pitch | 480 µm (zones at x = −240 and +240 µm); 15 + 15 segments at 120 µm pitch | [CLAUDE.md](CLAUDE.md), "Key design numbers" and "Conventions" |
 | Loading zone voltage, 10° tilt | 7.5 V (A30); 7.9 V (NODET) | [trap_die_v4_A30/summary.json](sim/out/12_final_chip/trap_die_v4_A30/summary.json) (`loading.vmax`); [trap_die_v4_NODET/summary.json](sim/out/12_final_chip/trap_die_v4_NODET/summary.json) (`loading.vmax`) |
 | Readout zone voltage, 10° tilt | 6.3 V (A30); 2.2 V (B60) | [trap_die_v4_A30/summary.json](sim/out/12_final_chip/trap_die_v4_A30/summary.json) (`readout.vmax`); [trap_die_v4_B60/summary.json](sim/out/12_final_chip/trap_die_v4_B60/summary.json) (`readout.vmax`) |

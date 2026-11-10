@@ -71,7 +71,7 @@ Elements come from [CLAUDE.md](../../CLAUDE.md) (DAC range), [OPEN_DECISIONS.md]
 
 ```mermaid
 flowchart LR
-  D["DAC<br/>±10 V"] --> L["Low-pass filter<br/>not chosen"]
+  D["DAC: Sinara Zotino<br/>±10 V, 32 ch"] --> L["Low-pass filter<br/>not chosen"]
   L --> F["Vacuum feedthrough"]
   F --> C["Carrier pin"]
   C --> B["Bond wire"]
@@ -81,13 +81,13 @@ flowchart LR
 
 | Element | What it does | Value or spec in the repo | Source | Confirmed? |
 |---|---|---|---|---|
-| DAC | Sets each electrode voltage | ±10 V. Model, update rate and resolution not in the repo. Transport needs an update rate above the 0.8 MHz axial frequency, or harder filtering. | [CLAUDE.md](../../CLAUDE.md) (key design numbers); [OPEN_DECISIONS.md](../OPEN_DECISIONS.md) (transport waveform) | [verify] |
+| DAC | Sets each electrode voltage | Sinara Zotino (the lab's, 2026-11-10): 32 channels, ±10 V, 16 bit, 1 MSPS shared between the channels, 3rd-order Butterworth output filter at 75 kHz; output noise not published. One Zotino has fewer channels than the 35 DC electrodes; see the Electrode row. Sim 21 assumed 1 MHz on every channel, which a Zotino cannot do when all channels change. | [T4 note](../../research/research_notes/Test%20setup%202026-11/T4_zotino_dac.md); [OPEN_DECISIONS.md](../OPEN_DECISIONS.md) (transport waveform) | Model confirmed by the team; specs from the Sinara wiki and ARTIQ docs |
 | Low-pass filter | Holds the electrode at RF ground and cuts DAC and cable noise | Not chosen. Literature: Dietl et al. used first-order RC filters with a 5 kHz corner ([T1 note](../../research/research_notes/Test%20setup%202026-11/T1_dietl_2025.md), Sec. 4.2, page 9, read from the PDF). | [OPEN_DECISIONS.md](../OPEN_DECISIONS.md) (RF grounding / filters); [RF primer section 6](../../primers/RF_PRIMER.md#6-filters-on-the-dc-lines) | [verify] |
 | Vacuum feedthrough | Carries DC into the chamber | Number not in the repo. | [04_TRAPPING.md](04_TRAPPING.md) step 1 | [verify] |
 | Carrier pin | Connects the chamber wiring to the die | Carrier open. Pin map not in the repo. | [04_PACKAGING.md](../process/04_PACKAGING.md) step 19 | [verify] |
 | Bond wire | Connects the carrier pin to the chip pad | Au wire on Au pad. | [04_PACKAGING.md](../process/04_PACKAGING.md) step 19 | [verify] |
 | Pad | Chip contact for one electrode | One pad per DC electrode. Pad list in [trap_die_v4_A30_pads.csv](../../gds/trap_die_v4_A30_pads.csv). | [LAYOUT.md](../LAYOUT.md) (pad rows) | [verify] |
-| Electrode | The DC electrode | Electrodes 2 to 36 (2 = centre DC). | [CLAUDE.md](../../CLAUDE.md) (electrode numbers) | [verify] |
+| Electrode | The DC electrode | Electrodes 2 to 36 (2 = centre DC): 35 DC electrodes, three more than one Zotino's 32 channels. Options: a second Zotino, or ground or tie electrodes at the carrier (sim 26, DESIGN_LOG step 46). | [CLAUDE.md](../../CLAUDE.md) (electrode numbers); [T4 note](../../research/research_notes/Test%20setup%202026-11/T4_zotino_dac.md) | [verify] |
 
 ### 3.3 SNSPD bias and readout chain
 
@@ -143,7 +143,7 @@ Only instruments that the repo's test pages or the trapping checklist name are l
 | RF amplifier | b6 to b8; trapping step 3 | Not specified in the repo | none | [verify] |
 | RF resonator | b6 to b8; trapping steps 1 and 3 | Frequency 28 MHz. Q not measured. No design in the repo. | [OPEN_DECISIONS.md](../OPEN_DECISIONS.md) (before any v4 run); [04_TRAPPING.md](04_TRAPPING.md) step 1 | [verify] |
 | RF pick-off divider | Trapping step 1 (calibration of the drive voltage) | Ratio not in the repo | [04_TRAPPING.md](04_TRAPPING.md) step 1 | [verify] |
-| DACs | Trapping steps 4, 6 and 7 (DC sets, transport); pre-cool | ±10 V; update rate above 0.8 MHz; resolution not in the repo | [CLAUDE.md](../../CLAUDE.md); [OPEN_DECISIONS.md](../OPEN_DECISIONS.md) (transport) | [verify] |
+| DACs | Trapping steps 4, 6 and 7 (DC sets, transport); pre-cool | Sinara Zotino: ±10 V, 32 channels, 16 bit, 1 MSPS shared, 75 kHz 3rd-order output filter | [T4 note](../../research/research_notes/Test%20setup%202026-11/T4_zotino_dac.md); [OPEN_DECISIONS.md](../OPEN_DECISIONS.md) (transport) | Model confirmed; channel count and update rate per channel open |
 | Bias source (isolated low-noise voltage source) | b2 to b10 | Series R 10 kΩ (Hampel value); ~10 µs ramps | [03_READOUT.md](03_READOUT.md); [02_CRYOGENIC.md](02_CRYOGENIC.md) b9 | [verify] |
 | Bias tee | b2 to b10 | Two ports: RF and DC | [03_READOUT.md](03_READOUT.md) | [verify] |
 | Amplifiers | b3, b4, b5 and the readout chain | ~46 dB total | [03_READOUT.md](03_READOUT.md) | [verify] |
@@ -211,7 +211,7 @@ Smallest set of columns that covers each device:
 6. Is there a temperature sensor on or near the chip? What is the base temperature? (b2 runs from base to 7 K; b10 uses 2 K and 5 K.)
 7. Can the 493 nm flood reach the detector through a window or a fibre, attenuated? If not, can an LED be mounted inside the cryostat? (Slichter 2017, Sec. 4 and Fig. 4, mounted an LED on the cold stage 36 mm from the chip; Hampel 2023, pages 2 to 3, used cryogenic LEDs for flood illumination; neither had an ion. Both checked against the PDF; [T2 note](../../research/research_notes/Test%20setup%202026-11/T2_snspd_bench_tests.md).)
 8. Can the test die be mounted and bonded in the same carrier as a trap die? ([LAYOUT.md](../LAYOUT.md) line 67 says test dies have no bond pads; [02_CRYOGENIC.md](02_CRYOGENIC.md) line 11 says to bond them.)
-9. What are the DAC model, its update rate and its resolution? The repo sets ±10 V and asks for an update rate above 0.8 MHz. ([CLAUDE.md](../../CLAUDE.md); [OPEN_DECISIONS.md](../OPEN_DECISIONS.md).)
+9. DAC: answered in part. It is a Sinara Zotino ([T4 note](../../research/research_notes/Test%20setup%202026-11/T4_zotino_dac.md)). Still open: how many Zotinos (one has 32 channels; the die has 35 DC electrodes), whether the Sinara 5633 HV amplifier (5×, ±50 V) is available, and how long one channel write takes in the lab's ARTIQ setup, which sets the update rate per channel for transport.
 10. How many DC and RF feedthroughs does the cryostat have, and what is the RF loss through them at 28 MHz? The drive needed for 53 V at the chip depends on it.
 11. Is there a room-temperature check of the SNSPD pads at the lab before cooling (a7 and a8 need an SMU at ≤ 1 V)? The repo names only the probe station in [01_ELECTRICAL.md](01_ELECTRICAL.md) and does not describe a lab check.
 12. What is the bandwidth of an oscilloscope that can sit after the amplifier (b3)?

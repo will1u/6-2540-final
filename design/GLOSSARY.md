@@ -212,7 +212,7 @@ Two numbering schemes both use the word "step". They are different things.
 | PGA / CPGA | Pin grid array package; CPGA is the ceramic version. Carrier options are PGA84L-like or CPGA. | [OPEN_DECISIONS](fab/OPEN_DECISIONS.md) (Carrier row); [01_ELECTRICAL](fab/tests/01_ELECTRICAL.md) (a10) |
 | SMU | Source-measure unit, the instrument used for the probe tests. | [01_ELECTRICAL](fab/tests/01_ELECTRICAL.md) |
 | LCR | LCR meter (inductance, capacitance, resistance), used for a10 at 1 MHz. | [01_ELECTRICAL](fab/tests/01_ELECTRICAL.md) (a10) |
-| DAC | Digital-to-analog converter that drives the electrode voltages (±10 V in this design). | [CLAUDE](CLAUDE.md) (Key design numbers) |
+| DAC | Digital-to-analog converter that drives the electrode voltages: the lab's Sinara Zotino, ±10 V, 32 channels. | [CLAUDE](CLAUDE.md) (Key design numbers); [T4 note](research/research_notes/Test%20setup%202026-11/T4_zotino_dac.md) |
 | ARTIQ | Control system for trapped-ion experiments. Its TTL input counts the photon edges in the readout. | [03_READOUT](fab/tests/03_READOUT.md) |
 | DRC | Design-rule check. | [CLAUDE](CLAUDE.md) (line 87) |
 | HR Si | High-resistivity silicon (ρ > 20 kΩ·cm), the substrate. | [CLAUDE](CLAUDE.md) (line 12) |
