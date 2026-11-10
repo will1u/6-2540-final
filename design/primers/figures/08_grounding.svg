@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="370" viewBox="0 0 740 370"><rect width="740" height="370" fill="white"/><text x="20" y="28" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" fill="#111111" font-weight="bold">Mirror strip: pickup flows to ground through its own resistance</text>
+<polyline points="60,70 510,70" fill="none" stroke="#111111" stroke-width="2"/>
+<text x="60" y="58" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#777777">RF rail, V at 28 MHz</text>
+<g transform="translate(110,70) rotate(90)"><line x1="0" y1="0" x2="54" y2="0" stroke="#111111" stroke-width="2"/><line x1="66" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(54,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<circle cx="110" cy="190" r="3.5" fill="#111111"/>
+<line x1="126" y1="150" x2="126" y2="178" stroke="#1f5fa8" stroke-width="1.5"/><polygon points="126,178 122.495,169.71 129.505,169.71" fill="#1f5fa8"/>
+<g transform="translate(230,70) rotate(90)"><line x1="0" y1="0" x2="54" y2="0" stroke="#111111" stroke-width="2"/><line x1="66" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(54,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<circle cx="230" cy="190" r="3.5" fill="#111111"/>
+<line x1="246" y1="150" x2="246" y2="178" stroke="#1f5fa8" stroke-width="1.5"/><polygon points="246,178 242.495,169.71 249.505,169.71" fill="#1f5fa8"/>
+<g transform="translate(350,70) rotate(90)"><line x1="0" y1="0" x2="54" y2="0" stroke="#111111" stroke-width="2"/><line x1="66" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(54,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<circle cx="350" cy="190" r="3.5" fill="#111111"/>
+<line x1="366" y1="150" x2="366" y2="178" stroke="#1f5fa8" stroke-width="1.5"/><polygon points="366,178 362.495,169.71 369.505,169.71" fill="#1f5fa8"/>
+<g transform="translate(470,70) rotate(90)"><line x1="0" y1="0" x2="54" y2="0" stroke="#111111" stroke-width="2"/><line x1="66" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(54,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<circle cx="470" cy="190" r="3.5" fill="#111111"/>
+<line x1="486" y1="150" x2="486" y2="178" stroke="#1f5fa8" stroke-width="1.5"/><polygon points="486,178 482.495,169.71 489.505,169.71" fill="#1f5fa8"/>
+<text x="88" y="135" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" fill="#111111">c<tspan dy="3" font-size="9">p</tspan><tspan dy="-3"> per length</tspan></text>
+<g transform="translate(110,190) rotate(0)"><line x1="0" y1="0" x2="40" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="80" y1="0" x2="120" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(40,0)"><polyline points="0,0 3.33333,-7 10,7 16.6667,-7 23.3333,7 30,-7 36.6667,7 40,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<g transform="translate(230,190) rotate(0)"><line x1="0" y1="0" x2="40" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="80" y1="0" x2="120" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(40,0)"><polyline points="0,0 3.33333,-7 10,7 16.6667,-7 23.3333,7 30,-7 36.6667,7 40,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<g transform="translate(350,190) rotate(0)"><line x1="0" y1="0" x2="40" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="80" y1="0" x2="120" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(40,0)"><polyline points="0,0 3.33333,-7 10,7 16.6667,-7 23.3333,7 30,-7 36.6667,7 40,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<text x="290" y="218" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#b03a2e">r<tspan dy="3" font-size="9">p</tspan><tspan dy="-3"> per length (Al strip)</tspan></text>
+<g transform="translate(470,190) rotate(0)"><line x1="0" y1="0" x2="50" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="80" y1="0" x2="130" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(50,0)"><polyline points="0,0 2.5,-7 7.5,7 12.5,-7 17.5,7 22.5,-7 27.5,7 30,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<text x="535" y="218" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#b03a2e">tail to via</text>
+<circle cx="600" cy="190" r="3.5" fill="#111111"/>
+<text x="612" y="180" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#111111">ground via</text>
+<g transform="translate(600,190) rotate(90)"><line x1="0" y1="0" x2="23" y2="0" stroke="#111111" stroke-width="2"/><line x1="57" y1="0" x2="80" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(23,0)"><path d="M0,0 a4.25,4.25 0 0 1 8.5,0 a4.25,4.25 0 0 1 8.5,0 a4.25,4.25 0 0 1 8.5,0 a4.25,4.25 0 0 1 8.5,0" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<text x="618" y="236" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#111111">bond wire 2 nH</text>
+<text x="618" y="251" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#111111">ωL = 0.352 Ω</text>
+<line x1="600" y1="270" x2="600" y2="280" stroke="#111111" stroke-width="2"/>
+<line x1="588" y1="280" x2="612" y2="280" stroke="#111111" stroke-width="2"/>
+<line x1="592" y1="285" x2="608" y2="285" stroke="#111111" stroke-width="2"/>
+<line x1="596" y1="290" x2="604" y2="290" stroke="#111111" stroke-width="2"/>
+<text x="110" y="242" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111" font-weight="bold">detector end</text>
+<text x="110" y="260" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">v<tspan dy="3" font-size="9">m</tspan><tspan dy="-3"> = 30.19 mV (3e-08 Ω·m)</tspan></text>
+<text x="110" y="276" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">40.25 mV (4e-08 Ω·m)</text>
+<text x="20" y="330" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">The strip carries i<tspan dy="3" font-size="9">mirror</tspan><tspan dy="-3"> = 3.194 mA to ground. Its resistance (T10 four-point test: 18.8 / 25.1 Ω)</tspan></text>
+<text x="20" y="352" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">lifts the detector end by v<tspan dy="3" font-size="9">m</tspan><tspan dy="-3">; dissipation 33.93 / 45.23 µW.</tspan></text></svg>

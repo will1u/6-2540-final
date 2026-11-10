@@ -8,6 +8,8 @@ One example runs through every section: the RF rail at 53 V (zero-to-peak) and 2
 cd design/sim && ./run.sh ../primers/primer_numbers.py
 ```
 
+The circuit diagrams are drawn by [`make_circuit_figures.py`](make_circuit_figures.py) into `figures/` (`./run.sh ../primers/make_circuit_figures.py`). They are schematics with this page's numbers as labels; the script computes nothing.
+
 > **What to take away**
 > 1. Current per pF: `I = ω C V`. At 53 V and 28 MHz, 1 pF draws 9.32 mA.
 > 2. Power to hold the voltage: `P = ω C V² / (2Q)`. Example: 10 pF and Q = 100 gives 24.7 mW.
@@ -22,6 +24,10 @@ cd design/sim && ./run.sh ../primers/primer_numbers.py
 To the RF source, the trap is mostly a capacitor. A capacitor has impedance `Z = 1 / (jωC)`, so at a fixed voltage the current is set by C and by how fast the voltage swings. You can get the first answer without any of the trap's geometry.
 
 Formula: `I = ω C V`, with `ω = 2πf`.
+
+![The RF source drives the chip capacitance to ground; two alternative loads shown on the right](figures/01_chip_capacitor.svg)
+
+*Left: the circuit the source sees. Right: the same rail with and without the die-wide Al plane.*
 
 > **On this chip:** ω = 1.7593e+08 rad/s at 28 MHz. I per pF at 53 V is 9.32 mA; per fF it is 9.32 µA.
 > The chip's own RF capacitance, from sim 22 with the Si treated as a lossless dielectric (the cold case): 2.59 pF for A30 on E2, which draws 24.1 mA, and 2.39 pF on E1, which draws 22.3 mA. On E2, 0.63 of the field energy is in the Si and 0.20 in the SiO₂; section 3 says why that matters.
@@ -44,6 +50,10 @@ Formulas:
 
 When the source is matched (critically coupled), the loaded Q is half the unloaded Q.
 
+![Parallel L, C and loss resistor driven by a source](figures/02_resonator.svg)
+
+*The tank: energy swaps between L and C; R_loss stands for every loss in section 3 and sets Q.*
+
 > **On this chip (example C_tot = 10 pF, not the chip):** W = 14.04 nJ. Power for Q = 50: 49.4 mW; Q = 100: 24.7 mW; Q = 200: 12.4 mW; Q = 500: 4.9 mW. L = 3.23 µH. Bandwidth at Q = 100: 280 kHz. A 1 pF error in C_tot moves the resonance by -1.40 MHz.
 
 Where this shows up:
@@ -57,6 +67,10 @@ Independent loss mechanisms add as `1/Q = Σ 1/Q_i`.
 - A dielectric holding a fraction p of the field energy, with loss tangent tan δ, gives `Q = 1 / (p tan δ)` and `P = ½ ω C V² p tan δ`.
 - A resistive substrate acts like a lossy dielectric with `tan δ = 1 / (ω ε0 ε_r ρ)`.
 - The RF rail is not one lumped resistor. The current enters at the feed and falls to zero at the open end as it charges the rail, so only part of the rail's resistance counts: for a current that falls linearly, the effective series resistance is one third of the end-to-end resistance R, and `P = V² ω² C² R / 6`. Derivation: Dietl et al., arXiv:2505.21284, Appendix A, Eqs. 10–12 ([reading pointers](../research/research_notes/Test%20setup%202026-11/T1_dietl_2025.md)).
+
+![Series-resistance loss, dielectric loss, and the RF rail as an RC ladder](figures/03_loss.svg)
+
+*(a) The two lumped loss models. (b) The rail as a ladder: the current, and so the dissipation, is largest at the feed.*
 
 The Si here is high-resistivity Si with ρ = 200 Ω·m (20 kΩ·cm, the lower spec in [`../CLAUDE.md`](../CLAUDE.md)), ε_r = 11.7.
 
@@ -91,6 +105,10 @@ A conductor near the RF rail shares a small mutual capacitance C_c with it. Ther
 
 In between, the conductor looks like a Thevenin source with voltage `V C_c / (C_c + C_g)` and impedance `1 / (jω (C_c + C_g))`.
 
+![RF rail coupled to a conductor through C_c, with C_g to ground and an optional low-impedance path; Thevenin equivalent on the right](figures/05_pickup.svg)
+
+*Left: the two limits (path to ground present or removed). Right: the Thevenin source for the in-between case.*
+
 The floating case is the worst one. The team's rule is to keep the mirror tied to ground ([`../CLAUDE.md`](../CLAUDE.md), "Physics decisions not to undo": a floating ITO raised RF pickup, and the mirror ground via stays).
 
 > **On this chip (E2, 100 nm inlaid Al mirror):** C_c per µm from the RF rail to the slot lead is 2.132 aF/µm. Over 2240 µm that is 4.776 fF, and I = 44.53 µA (the JSON value is 44.534 µA, agreeing to 0.1 %).
@@ -108,6 +126,10 @@ A DC filter does two jobs:
 - (b) it keeps DAC and cable noise at the ion's motional frequencies off the electrode.
 
 Job (a) is the capacitive divider again, `V_el = V C_c / (C_c + C_f)`, where C_f is a filter capacitor to ground close to the chip. Job (b) is an RC low-pass with corner `f_c = 1 / (2π R C)`, attenuation `1 / sqrt(1 + (f / f_c)²)` at frequency f, and time constant `τ = RC = 1 / (2π f_c)`. A voltage step needs a few τ to settle. So the same filter that cuts noise also slows the transport waveform.
+
+![DAC, series R, filter capacitor C_f at the electrode, and the C_c coupling from the RF rail](figures/06_dc_filter.svg)
+
+*One DC line. C_c brings RF in; C_f shunts it to ground (job a). R with C_f is the low-pass (job b).*
 
 > **On this chip:** the 0.5 pF rail-to-centre coupling is the estimate in [`../research/reports/SNSPD%20geometry%20audit.md`](../research/reports/SNSPD%20geometry%20audit.md) (lines 312–314). It is the report's estimate, not a measurement. With it, the RF voltage on the centre electrode is 263.68 mV for C_f = 100 pF, 26.49 mV for 1 nF and 2.65 mV for 10 nF.
 > Literature RC pairs quoted in the repo:
@@ -134,6 +156,10 @@ Superconducting, the nanowire is an inductor with kinetic inductance L_k. When a
 
 Readout chain: a bias tee feeds the DC bias through an inductor and passes the fast pulse through a capacitor to the amplifier. A notch at 28 MHz removes the RF pickup before the amplifier saturates, and a low-pass removes what is left. The reference chain is [`../fab/tests/03_READOUT.md`](../fab/tests/03_READOUT.md).
 
+![Nanowire as L_k in series with a hotspot resistance, bias tee, 50 ohm line, 28 MHz notch, low-pass and amplifier](figures/07a_snspd_readout.svg)
+
+*The readout chain in the order the signal meets it.*
+
 Why "just bypass the RF with a capacitor at the pad" costs signal: a 1 nF capacitor across the 50 Ω line has reactance `1 / (ωC)` of 5.68 Ω at 28 MHz. It also low-passes the pulse at `1 / (2π · 50 Ω · C)`, which is 3.18 MHz. That is close to the 2.568 MHz pulse corner of A30 above.
 
 Common mode versus differential: both leads pick up nearly the same RF current (section 5). Only the part that differs between the two leads flows through the nanowire. The A30 / E2 nanowire current from [`../sim/out/19_lead_termination/summary.json`](../sim/out/19_lead_termination/summary.json), rows with R_pair = 0 (upper bounds, lumped model):
@@ -141,6 +167,10 @@ Common mode versus differential: both leads pick up nearly the same RF current (
 - 1 nF shunt on the A side: 0.465 µA;
 - 28 MHz L-C trap ("4 trap nominal"): 0.0403 µA;
 - symmetric 50 Ω / 50 Ω termination with 5 % mismatch: 0.2002 µA.
+
+![Two lead nodes with equal injected RF current, joined by the nanowire, each grounded through a bond wire and a termination](figures/07b_lead_termination.svg)
+
+*The lumped model of sim 19. Z_term A and Z_term B are the terminations compared in the list above.*
 
 Series L-C trap: its impedance is zero at `f0 = 1 / (2π sqrt(LC))`. For C = 1 nF at 28 MHz, L = 32.3 nH. The trap that sim 19 simulates uses C = 100 pF, which needs L = 323 nH.
 
@@ -156,6 +186,10 @@ Where this shows up:
 Every RF current returns to its source. The impedance of the return path sets how far "ground" sits from 0 V.
 
 The lead model in [`../sim/19_lead_termination.py`](../sim/19_lead_termination.py) assumes a 2 nH bond wire. That value is tagged [verify] in the source.
+
+![Al mirror strip as a resistor ladder with distributed pickup from the RF rail, grounded through a via and a bond wire](figures/08_grounding.svg)
+
+*The strip model of sim 10c: pickup enters along the strip and all of it leaves through the ground end.*
 
 > **On this chip:** ωL for 2 nH at 28 MHz is 0.352 Ω.
 > The Al mirror strip (100 nm inlaid Al, E2) is grounded at one far end. Its detector end sits tens of mV from ground because the return path has resistance. For the two resistivity keys in the sim, 3e-08 and 4e-08 Ω·m:

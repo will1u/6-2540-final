@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="290" viewBox="0 0 720 290"><rect width="720" height="290" fill="white"/><text x="20" y="28" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" fill="#111111" font-weight="bold">The RF source sees a capacitor</text>
+<g transform="translate(140,215) rotate(-90)"><line x1="0" y1="0" x2="43" y2="0" stroke="#111111" stroke-width="2"/><line x1="77" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(43,0)"><circle cx="17" cy="0" r="17" fill="none" stroke="#111111" stroke-width="2"/><path d="M8,0 q4.5,-10 9,0 t9,0" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<polyline points="140,95 320,95" fill="none" stroke="#111111" stroke-width="2"/>
+<g transform="translate(320,95) rotate(90)"><line x1="0" y1="0" x2="54" y2="0" stroke="#111111" stroke-width="2"/><line x1="66" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(54,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<polyline points="140,215 320,215" fill="none" stroke="#111111" stroke-width="2"/>
+<line x1="230" y1="215" x2="230" y2="225" stroke="#111111" stroke-width="2"/>
+<line x1="218" y1="225" x2="242" y2="225" stroke="#111111" stroke-width="2"/>
+<line x1="222" y1="230" x2="238" y2="230" stroke="#111111" stroke-width="2"/>
+<line x1="226" y1="235" x2="234" y2="235" stroke="#111111" stroke-width="2"/>
+<circle cx="230" cy="215" r="3.5" fill="#111111"/>
+<text x="116" y="150" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" fill="#111111">RF source</text>
+<text x="116" y="167.5" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" fill="#111111">53 V, 28 MHz</text>
+<text x="340" y="150" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" fill="#111111">C<tspan dy="3" font-size="10">chip</tspan><tspan dy="-3"> = 2.59 pF</tspan></text>
+<text x="340" y="167.5" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" fill="#111111">(A30, E2)</text>
+<line x1="180" y1="80" x2="280" y2="80" stroke="#1f5fa8" stroke-width="2"/><polygon points="280,80 271.71,83.5048 271.71,76.4952" fill="#1f5fa8"/>
+<text x="230" y="64" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#1f5fa8" font-weight="bold">I = ωCV = 24.1 mA</text>
+<text x="470" y="28" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" fill="#111111" font-weight="bold">Same source, other loads</text>
+<polyline points="470,70 680,70" fill="none" stroke="#111111" stroke-width="2"/>
+<text x="470" y="58" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#777777">RF rail</text>
+<g transform="translate(520,70) rotate(90)"><line x1="0" y1="0" x2="54" y2="0" stroke="#111111" stroke-width="2"/><line x1="66" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(54,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="520" y1="190" x2="520" y2="200" stroke="#111111" stroke-width="2"/>
+<line x1="508" y1="200" x2="532" y2="200" stroke="#111111" stroke-width="2"/>
+<line x1="512" y1="205" x2="528" y2="205" stroke="#111111" stroke-width="2"/>
+<line x1="516" y1="210" x2="524" y2="210" stroke="#111111" stroke-width="2"/>
+<g transform="translate(640,70) rotate(90)"><line x1="0" y1="0" x2="54" y2="0" stroke="#111111" stroke-width="2"/><line x1="66" y1="0" x2="120" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(54,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="640" y1="190" x2="640" y2="200" stroke="#111111" stroke-width="2"/>
+<line x1="628" y1="200" x2="652" y2="200" stroke="#111111" stroke-width="2"/>
+<line x1="632" y1="205" x2="648" y2="205" stroke="#111111" stroke-width="2"/>
+<line x1="636" y1="210" x2="644" y2="210" stroke="#111111" stroke-width="2"/>
+<text x="520" y="225" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b03a2e">die-wide Al plane</text>
+<text x="520" y="241.25" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b03a2e">(dropped)</text>
+<text x="520" y="257.5" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b03a2e">127 pF → 1.18 A</text>
+<text x="640" y="225" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#111111">no plane</text>
+<text x="640" y="241.25" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#111111">2.9 pF → 27.0 mA</text></svg>

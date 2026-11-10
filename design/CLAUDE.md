@@ -98,7 +98,7 @@ cd 6-2540-final/design/sim && ./run.sh -c "import gds2itvg; print('ok')"
 | `fab/mask_list.md`, `process_checks.md`, `test_plan.md` | Exposure jobs; go/no-go checks; electrical, cryogenic and trapping tests |
 | `fab/tests/00_SETUP.md`, `05_SIMPLER_TESTING.md` | What each test needs on the bench (signal chains, equipment, questions for the lab); what could replace the wafer-level test and what each option misses |
 | `fab/briefs/` | One page per open design choice: options, numbers side by side with their sources, what is not known. No recommendation; the choice is the team's |
-| `primers/RF_PRIMER.md`, `primer_numbers.py` | Basics of RF drive, loss, pickup, filters and SNSPD readout, worked on this chip; the script prints every number in the page |
+| `primers/RF_PRIMER.md`, `primer_numbers.py`, `make_circuit_figures.py` | Basics of RF drive, loss, pickup, filters and SNSPD readout, worked on this chip; `primer_numbers.py` prints every number in the page, `make_circuit_figures.py` draws its circuit diagrams into `primers/figures/` |
 | `figures/` | `plotstyle.py` (one plot style), `make_die_map.py`, `make_report_figures.py` → `figures/report/` (plots for the team's report: axis labels and legends only, no captions) |
 | `research/research_notes/Test setup 2026-11/` | Reading pointers for testing: Dietl 2025 (from the PDF), SNSPD bench tests, electrical screening |
 

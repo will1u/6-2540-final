@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480"><rect width="640" height="480" fill="white"/><text x="20" y="28" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" fill="#111111" font-weight="bold">(a) Two lumped losses</text>
+<text x="20" y="62" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#777777">series R</text>
+<polyline points="30,90 60,90" fill="none" stroke="#111111" stroke-width="2"/>
+<g transform="translate(60,90) rotate(0)"><line x1="0" y1="0" x2="29" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="71" y1="0" x2="100" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(29,0)"><polyline points="0,0 3.5,-7 10.5,7 17.5,-7 24.5,7 31.5,-7 38.5,7 42,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<g transform="translate(160,90) rotate(90)"><line x1="0" y1="0" x2="39" y2="0" stroke="#111111" stroke-width="2"/><line x1="51" y1="0" x2="90" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(39,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="160" y1="180" x2="160" y2="190" stroke="#111111" stroke-width="2"/>
+<line x1="148" y1="190" x2="172" y2="190" stroke="#111111" stroke-width="2"/>
+<line x1="152" y1="195" x2="168" y2="195" stroke="#111111" stroke-width="2"/>
+<line x1="156" y1="200" x2="164" y2="200" stroke="#111111" stroke-width="2"/>
+<text x="110" y="68" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#b03a2e" font-weight="bold">R<tspan dy="3" font-size="10">s</tspan><tspan dy="-3">​</tspan></text>
+<text x="176" y="140" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" fill="#111111" font-weight="bold">C</text>
+<text x="20" y="215" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">Q = 1/(ωCR<tspan dy="3" font-size="9">s</tspan><tspan dy="-3">)</tspan></text>
+<text x="20" y="231.25" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">P = ½ I²R<tspan dy="3" font-size="9">s</tspan><tspan dy="-3">​</tspan></text>
+<text x="270" y="62" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#777777">lossy dielectric (Si, SiO₂)</text>
+<polyline points="280,90 390,90" fill="none" stroke="#111111" stroke-width="2"/>
+<g transform="translate(320,90) rotate(90)"><line x1="0" y1="0" x2="39" y2="0" stroke="#111111" stroke-width="2"/><line x1="51" y1="0" x2="90" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(39,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<g transform="translate(380,90) rotate(90)"><line x1="0" y1="0" x2="25" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="65" y1="0" x2="90" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(25,0)"><rect x="0" y="-9" width="40" height="18" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<polyline points="320,90 380,90" fill="none" stroke="#111111" stroke-width="2"/>
+<circle cx="320" cy="90" r="3.5" fill="#111111"/>
+<polyline points="320,180 380,180" fill="none" stroke="#111111" stroke-width="2"/>
+<circle cx="350" cy="180" r="3.5" fill="#111111"/>
+<line x1="350" y1="180" x2="350" y2="190" stroke="#111111" stroke-width="2"/>
+<line x1="338" y1="190" x2="362" y2="190" stroke="#111111" stroke-width="2"/>
+<line x1="342" y1="195" x2="358" y2="195" stroke="#111111" stroke-width="2"/>
+<line x1="346" y1="200" x2="354" y2="200" stroke="#111111" stroke-width="2"/>
+<text x="305" y="140" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" fill="#111111" font-weight="bold">C</text>
+<text x="396" y="140" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" fill="#b03a2e" font-weight="bold">R<tspan dy="3" font-size="10">d</tspan><tspan dy="-3">​</tspan></text>
+<text x="270" y="215" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">Q = 1/(p tan δ)</text>
+<text x="270" y="231.25" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">tan δ (Si, 28 MHz) = 0.274</text>
+<text x="20" y="280" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" fill="#111111" font-weight="bold">(b) The RF rail is a ladder, not one resistor</text>
+<polyline points="30,340 90,340" fill="none" stroke="#111111" stroke-width="2"/>
+<text x="30" y="328" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#777777">feed</text>
+<circle cx="90" cy="340" r="3.5" fill="#111111"/>
+<g transform="translate(90,340) rotate(90)"><line x1="0" y1="0" x2="34" y2="0" stroke="#111111" stroke-width="2"/><line x1="46" y1="0" x2="80" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(34,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="90" y1="420" x2="90" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="78" y1="430" x2="102" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="82" y1="435" x2="98" y2="435" stroke="#111111" stroke-width="2"/>
+<line x1="86" y1="440" x2="94" y2="440" stroke="#111111" stroke-width="2"/>
+<g transform="translate(90,340) rotate(0)"><line x1="0" y1="0" x2="44" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="86" y1="0" x2="130" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(44,0)"><polyline points="0,0 3.5,-7 10.5,7 17.5,-7 24.5,7 31.5,-7 38.5,7 42,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<circle cx="220" cy="340" r="3.5" fill="#111111"/>
+<g transform="translate(220,340) rotate(90)"><line x1="0" y1="0" x2="34" y2="0" stroke="#111111" stroke-width="2"/><line x1="46" y1="0" x2="80" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(34,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="220" y1="420" x2="220" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="208" y1="430" x2="232" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="212" y1="435" x2="228" y2="435" stroke="#111111" stroke-width="2"/>
+<line x1="216" y1="440" x2="224" y2="440" stroke="#111111" stroke-width="2"/>
+<g transform="translate(220,340) rotate(0)"><line x1="0" y1="0" x2="44" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="86" y1="0" x2="130" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(44,0)"><polyline points="0,0 3.5,-7 10.5,7 17.5,-7 24.5,7 31.5,-7 38.5,7 42,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<circle cx="350" cy="340" r="3.5" fill="#111111"/>
+<g transform="translate(350,340) rotate(90)"><line x1="0" y1="0" x2="34" y2="0" stroke="#111111" stroke-width="2"/><line x1="46" y1="0" x2="80" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(34,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="350" y1="420" x2="350" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="338" y1="430" x2="362" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="342" y1="435" x2="358" y2="435" stroke="#111111" stroke-width="2"/>
+<line x1="346" y1="440" x2="354" y2="440" stroke="#111111" stroke-width="2"/>
+<g transform="translate(350,340) rotate(0)"><line x1="0" y1="0" x2="44" y2="0" stroke="#b03a2e" stroke-width="2"/><line x1="86" y1="0" x2="130" y2="0" stroke="#b03a2e" stroke-width="2"/><g transform="translate(44,0)"><polyline points="0,0 3.5,-7 10.5,7 17.5,-7 24.5,7 31.5,-7 38.5,7 42,0" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="5 3"/></g></g>
+<circle cx="480" cy="340" r="3.5" fill="#111111"/>
+<g transform="translate(480,340) rotate(90)"><line x1="0" y1="0" x2="34" y2="0" stroke="#111111" stroke-width="2"/><line x1="46" y1="0" x2="80" y2="0" stroke="#111111" stroke-width="2"/><g transform="translate(34,0)"><line x1="2" y1="-11" x2="2" y2="11" fill="none" stroke="#111111" stroke-width="2"/><line x1="10" y1="-11" x2="10" y2="11" fill="none" stroke="#111111" stroke-width="2"/></g></g>
+<line x1="480" y1="420" x2="480" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="468" y1="430" x2="492" y2="430" stroke="#111111" stroke-width="2"/>
+<line x1="472" y1="435" x2="488" y2="435" stroke="#111111" stroke-width="2"/>
+<line x1="476" y1="440" x2="484" y2="440" stroke="#111111" stroke-width="2"/>
+<line x1="130" y1="318" x2="178" y2="318" stroke="#1f5fa8" stroke-width="3.9"/><polygon points="178,318 169.71,321.505 169.71,314.495" fill="#1f5fa8"/>
+<line x1="260" y1="318" x2="296" y2="318" stroke="#1f5fa8" stroke-width="3.3"/><polygon points="296,318 287.71,321.505 287.71,314.495" fill="#1f5fa8"/>
+<line x1="390" y1="318" x2="414" y2="318" stroke="#1f5fa8" stroke-width="2.7"/><polygon points="414,318 405.71,321.505 405.71,314.495" fill="#1f5fa8"/>
+<text x="500" y="334" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#777777">open end:</text>
+<text x="500" y="349" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#777777">current → 0</text>
+<text x="20" y="462" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">I falls linearly along the rail, so R<tspan dy="3" font-size="9">eff</tspan><tspan dy="-3"> = R/3 and P = V²ω²C²R/6 (Dietl et al., App. A).</tspan></text></svg>

@@ -29,7 +29,7 @@
 - [design/GLOSSARY.md](design/GLOSSARY.md): glossary.
 - [design/sim/INDEX.md](design/sim/INDEX.md): simulation index.
 - [design/check_numbers.py](design/check_numbers.py): checks the numbers in current-state pages against the sim outputs.
-- [design/primers/RF_PRIMER.md](design/primers/RF_PRIMER.md): RF primer.
+- [design/primers/RF_PRIMER.md](design/primers/RF_PRIMER.md): RF primer, with eight circuit diagrams in `design/primers/figures/` drawn by `design/primers/make_circuit_figures.py` (2026-11-10).
 - [design/fab/tests/00_SETUP.md](design/fab/tests/00_SETUP.md): test setup.
 - [design/fab/tests/05_SIMPLER_TESTING.md](design/fab/tests/05_SIMPLER_TESTING.md): simpler testing.
 - [design/fab/briefs/](design/fab/briefs/): decision briefs.
