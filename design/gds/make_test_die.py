@@ -2,7 +2,7 @@
 process module of the trap die (traveler sections A/E, test_plan.md (a)); same layer numbers as make_chip.py.
 Nothing here is wire bonded.
 
-v4 stack (DESIGN_LOG step 25): Si / 1 um SiO2 / Al 450 nm (layer 10) only as local patches / 238 nm SiO2 spacer /
+v4 stack (DESIGN_LOG step 25): Si / 1 um SiO2 / Al 100 nm, inlaid (layer 10) only as local patches / 238 nm SiO2 spacer /
 NbN (layer 20) with Ti/Au contacts (layer 22) / 160 nm SiO2 cap / Au electrodes (layer 50) directly on top.
 Layer 40 = openings through the thin SiO2 only: through the 160 nm cap onto a layer-22 pad, or through cap +
 spacer (0.40 um) onto Al. Layer 45 is retired and stays empty. Layers 24, 30, 31 stay empty.
