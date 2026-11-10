@@ -18,8 +18,8 @@ Checks:
   3. Top/bottom mirror: phi_top(x, y, z) = phi_bottom(-x, y, z).
   4. S vs U directly, per segment at its own centre: phi, axial curvature d2phi/dy2 and vertical field
      dphi/dz (the three things the DC solve uses most), relative difference.
-The zone solves and transport of U vs S come from 12_final_chip_check.py (out/12_log_v3_UNIFORM.txt,
-out/12_log_v3_NODET_rerun.txt); this script reads both summaries and prints the differences.
+The zone solves and transport of U vs S come from 12_final_chip_check.py (out/archive/12_log_v3_UNIFORM.txt,
+out/archive/12_log_v3_NODET_rerun.txt); this script reads both summaries and prints the differences.
 
 Outputs: sim/out/14_staircase_check/summary.json, profiles.png
 Usage:   ./run.sh 14_staircase_check.py      (run 12_final_chip_check.py on UNIFORM and NODET first)

@@ -1,4 +1,4 @@
-"""Parametric five-wire trap geometry, shared by the simulation scripts and gds/make_chip.py
+"""Parametric five-wire trap geometry, used by sims 02, 03, 04 and 05 only (make_chip.py does not import it)
 (Claude-authored).
 
 One function, build(P), returns the top-metal (Au electrode) polygons plus gds2itvg seed points,

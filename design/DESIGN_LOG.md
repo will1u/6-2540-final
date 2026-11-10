@@ -700,7 +700,7 @@ These numbers agree with the v1 run (step 11) to within 0.07 µm and 0.2 V. The 
 
 **Checks.** `check_chip.py` passes. It now skips the SNSPD rules when layer 20 is empty, and instead checks that layers 20–31 are empty and the centre DC is solid at the readout zone. A30 and B60 were rebuilt and still pass.
 
-**Simulation** (`out/12_log_v2_NODET.txt`):
+**Simulation** (`out/archive/12_log_v2_NODET.txt`):
 - Identical to A30 to every printed digit: 50.08 / 50.09 µm at loading / readout, 0.80 MHz axial, max |V| 9.05 V, transport max 7.33 V.
 - This is expected: the planar model already treated the A30 window as part of the centre DC.
 - Physically, the NODET die has **no recess correction**, so the readout ion sits at 50.09 µm, vs ≈ 48.9 µm over the A30 window.
@@ -888,7 +888,7 @@ The RF null is set by the RF electrodes; a DC field cannot move it. A vertical D
 - **Checks:** zero push reproduces the diagnostic voltages (A30 6.64 / 13.19 V, B60 3.38 / 15.24 V). The micromotion matches (q/2)·Δz (0.15 × 1.38 µm ≈ 207 nm vs 200 nm). The real shift runs ahead of the linear spring estimate (target 2.50 µm gives 3.36 µm on A30) because the pseudopotential softens above the null.
 - **Limits:** planar model for the trap fields; the drop itself is from the 3-D box (ion at ~37 µm, an upper bound); no charging of the bare SiO₂.
 
-Outputs: `out/12_final_chip/trap_die_v3_*`, `out/12_log_v3_*.txt`, `out/13_dc_height_tuning/` (`summary.json`, `dc_height.png`), `out/13_log.txt`.
+Outputs: `out/12_final_chip/trap_die_v3_*`, `out/archive/12_log_v3_*.txt`, `out/13_dc_height_tuning/` (`summary.json`, `dc_height.png`), `out/archive/13_log.txt`.
 
 ---
 
@@ -932,7 +932,7 @@ The NODET rerun reproduces the step-19 summary exactly.
 
 **Limits.** Planar device-stack model; far geometry simplified with a tolerance ≤ 1 µm (well below the 12 µm steps); fingers and tracks were not separated.
 
-Outputs: `out/14_staircase_check/` (`summary.json`, `profiles.png`), `out/14_log.txt`, `out/12_final_chip/trap_die_v3_UNIFORM/`, `out/12_log_v3_UNIFORM.txt`, `out/12_log_v3_NODET_rerun.txt`.
+Outputs: `out/14_staircase_check/` (`summary.json`, `profiles.png`), `out/14_log.txt`, `out/12_final_chip/trap_die_v3_UNIFORM/`, `out/archive/12_log_v3_UNIFORM.txt`, `out/archive/12_log_v3_NODET_rerun.txt`.
 
 ---
 

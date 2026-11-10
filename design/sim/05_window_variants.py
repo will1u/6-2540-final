@@ -18,7 +18,7 @@ The 'profile' model treats the opening over a buried ground at ground_depth with
 cross-section correction (gds2itvg crosssection.opening_profile); 'drawn' (opening at 0 V) is run
 too as a bound.
 
-Outputs: sim/out/05_window/<variant>/..., compare.png, summary.json
+Outputs: sim/out/05_window/<variant>/..., compare.png, summary_wx30.json (summary_wx<WX>.json for other window lengths)
 """
 
 import json

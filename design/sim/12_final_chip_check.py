@@ -1,10 +1,10 @@
-"""12 - Final check on the fabrication GDS itself (gds/trap_chip_v1.gds, layer 50).
+"""12 - Final check on the fabrication GDS itself (default input gds/trap_die_v4_A30_sim.json, which names the layer-50 GDS it reads).
 
 Single source of truth: the exported chip is read back with gds2itvg (device-stack 'profile'
-model; the ITO-on-D2 window enters as a fill of the centre DC electrode, see make_chip.py).
+model; the window floor enters as a fill of the centre DC electrode, see make_chip.py).
   1. RF null height and RF-only frequencies along the axis from beyond the loading zone to beyond
      the readout zone (and the RF-rail ends)
-  2. DC solutions at the loading zone (600 um left of readout) and readout zone: zero field, axial
+  2. DC solutions at the loading zone (the _zones entry in the layout JSON, 480 um left of readout on v4) and readout zone: zero field, axial
      f_ax, radial-mode tilt, |V| <= DC_LIMIT, using the N_ACTIVE electrodes nearest the ion
   3. Transport loading -> readout in 10 um steps (single-position solve per step, as in
      workflow.ipynb; no trajectory optimisation): voltage waveforms, axial frequency, height
