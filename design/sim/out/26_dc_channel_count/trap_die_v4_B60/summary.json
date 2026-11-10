@@ -1,0 +1,336 @@
+{
+ "die": "trap_die_v4_B60",
+ "window": true,
+ "configs": {
+  "all35": {
+   "n_channels": 35,
+   "zones": {
+    "loading": {
+     "natural10": {
+      "vmax": 7.448987054594622,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.915,
+       2.973
+      ],
+      "f_axial_MHz": 0.8
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 11.296647402382689,
+      "f_axial_MHz": 0.8000000000000002
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 8.412550015683168,
+      "f_axial_MHz": 0.6
+     }
+    },
+    "readout": {
+     "natural10": {
+      "vmax": 2.2473019677942836,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.895,
+       2.99
+      ],
+      "f_axial_MHz": 0.7999999999999989
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 6.813779361575655,
+      "f_axial_MHz": 0.8000000000000013
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 5.875095680474419,
+      "f_axial_MHz": 0.6000000000000015
+     }
+    }
+   },
+   "transport": {
+    "n_steps": 49,
+    "max_abs_V": 6.639087299366319,
+    "max_step_V": 1.7083558487352621,
+    "bounded_steps": 0,
+    "f_axial_MHz": [
+     0.7999999999999996,
+     0.8000000000000006
+    ]
+   }
+  },
+  "caps_gnd": {
+   "n_channels": 31,
+   "zones": {
+    "loading": {
+     "natural10": {
+      "vmax": 7.448987054594622,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.915,
+       2.973
+      ],
+      "f_axial_MHz": 0.8
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 11.29630207493428,
+      "f_axial_MHz": 0.8
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 8.41254156948475,
+      "f_axial_MHz": 0.6000000000000001
+     }
+    },
+    "readout": {
+     "natural10": {
+      "vmax": 2.2473019677942836,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.895,
+       2.99
+      ],
+      "f_axial_MHz": 0.7999999999999989
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 6.830110619349002,
+      "f_axial_MHz": 0.8000000000000007
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 5.884517921672922,
+      "f_axial_MHz": 0.6000000000000005
+     }
+    }
+   },
+   "transport": {
+    "n_steps": 49,
+    "max_abs_V": 6.6552474956794025,
+    "max_step_V": 1.708528974265553,
+    "bounded_steps": 0,
+    "f_axial_MHz": [
+     0.7999999999999995,
+     0.8000000000000004
+    ]
+   }
+  },
+  "caps_gnd_tie_far": {
+   "n_channels": 27,
+   "zones": {
+    "loading": {
+     "natural10": {
+      "vmax": 7.4326443327301845,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.915,
+       2.973
+      ],
+      "f_axial_MHz": 0.7999999999999998
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 11.302139295769761,
+      "f_axial_MHz": 0.8
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 8.417462721704036,
+      "f_axial_MHz": 0.6000000000000001
+     }
+    },
+    "readout": {
+     "natural10": {
+      "vmax": 2.2568417725445404,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.895,
+       2.99
+      ],
+      "f_axial_MHz": 0.7999999999999993
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 6.816748057328326,
+      "f_axial_MHz": 0.7999999999999998
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 5.87852218549234,
+      "f_axial_MHz": 0.5999999999999986
+     }
+    }
+   },
+   "transport": {
+    "n_steps": 49,
+    "max_abs_V": 6.630209000051311,
+    "max_step_V": 1.7083567921067666,
+    "bounded_steps": 0,
+    "f_axial_MHz": [
+     0.7999999999999996,
+     0.8000000000000004
+    ]
+   }
+  },
+  "gnd_29": {
+   "n_channels": 29,
+   "zones": {
+    "loading": {
+     "natural10": {
+      "vmax": 7.448987054594622,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.915,
+       2.973
+      ],
+      "f_axial_MHz": 0.8
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 11.296308750496696,
+      "f_axial_MHz": 0.7999999999999998
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 8.4127761695865,
+      "f_axial_MHz": 0.5999999999999999
+     }
+    },
+    "readout": {
+     "natural10": {
+      "vmax": 2.2473019677942836,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.895,
+       2.99
+      ],
+      "f_axial_MHz": 0.7999999999999989
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 6.8303389245243125,
+      "f_axial_MHz": 0.7999999999999987
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 5.884648895523294,
+      "f_axial_MHz": 0.5999999999999976
+     }
+    }
+   },
+   "transport": {
+    "n_steps": 49,
+    "max_abs_V": 6.662258642167654,
+    "max_step_V": 1.7085833906899182,
+    "bounded_steps": 0,
+    "f_axial_MHz": [
+     0.7999999999999996,
+     0.8000000000000004
+    ]
+   }
+  },
+  "gnd_25": {
+   "n_channels": 25,
+   "zones": {
+    "loading": {
+     "natural10": {
+      "vmax": 7.448987054594622,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.915,
+       2.973
+      ],
+      "f_axial_MHz": 0.8
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 11.297764933728832,
+      "f_axial_MHz": 0.8000000000000002
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 8.415001615190542,
+      "f_axial_MHz": 0.6000000000000002
+     }
+    },
+    "readout": {
+     "natural10": {
+      "vmax": 2.2473019677942836,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.895,
+       2.99
+      ],
+      "f_axial_MHz": 0.7999999999999989
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 6.835732884565443,
+      "f_axial_MHz": 0.8
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 5.887923477200657,
+      "f_axial_MHz": 0.6000000000000001
+     }
+    }
+   },
+   "transport": {
+    "n_steps": 49,
+    "max_abs_V": 6.689219045703481,
+    "max_step_V": 1.7087078066196848,
+    "bounded_steps": 0,
+    "f_axial_MHz": [
+     0.7999999999999995,
+     0.8000000000000004
+    ]
+   }
+  },
+  "gnd_21": {
+   "n_channels": 21,
+   "zones": {
+    "loading": {
+     "natural10": {
+      "vmax": 7.390698120514229,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.916,
+       2.972
+      ],
+      "f_axial_MHz": 0.8000000000000006
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 11.31846345712461,
+      "f_axial_MHz": 0.7999999999999998
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 8.437388363062327,
+      "f_axial_MHz": 0.6
+     }
+    },
+    "readout": {
+     "natural10": {
+      "vmax": 2.2473019677942836,
+      "bounded": false,
+      "freqs_MHz": [
+       0.8,
+       2.895,
+       2.99
+      ],
+      "f_axial_MHz": 0.7999999999999989
+     },
+     "fixed45_0.8MHz": {
+      "vmax_unclipped": 6.85242239380183,
+      "f_axial_MHz": 0.799999999999998
+     },
+     "fixed45_0.6MHz": {
+      "vmax_unclipped": 5.898729282720538,
+      "f_axial_MHz": 0.5999999999999976
+     }
+    }
+   },
+   "transport": {
+    "n_steps": 49,
+    "max_abs_V": 6.820444532998533,
+    "max_step_V": 1.711925291360624,
+    "bounded_steps": 0,
+    "f_axial_MHz": [
+     0.7999999999999995,
+     0.8000000000000004
+    ]
+   }
+  }
+ }
+}
