@@ -1662,3 +1662,51 @@ NODET: 2.57 pF (E2) and 2.37 pF (E1) with the full SiO₂ stack; 2.68 and 2.48 p
 **Checks.** Reproduces `10b` (0.2486 pF/mm per rail) and `10c` (0.1529 fF/µm rail to mirror, 2.132 aF/µm rail to lead); halving the grid changes the capacitance per length by under 0.5 %; the feed section is 0.88 of the textbook coplanar-waveguide value; reproduces the 1 pF row of sim 18.
 
 **Limits.** 2-D sections; ideal conductors; the ground fill beside the feed treated as solid; Si depth as in `10c`; package, bond wires and resonator not included.
+
+---
+
+## 2026-11-10: Step 42, RF coupling onto the DC electrodes and what a filter capacitor does (`sim/23_dc_rf_coupling.py`)
+
+Closes "DC-to-RF coupling capacitances (field solve) to decide on filter capacitors" at the level of a 2-D model. It does not choose a capacitor. Written by a delegated agent from a specification; rerun before logging, with the same `summary.json`.
+
+**Method.** The 2-D solver of `10c` with the current stack. Each conductor of the cross-section (RF rails, centre DC, slot lead, Al mirror, outer conductor) is set to 1 V in turn and the charge on every conductor is integrated: a capacitance matrix per unit length, for the lead-slot section and the plain section, for E1 and E2. Lengths: 2240 µm of slot section and 1760 µm of plain section for the centre DC; 120 µm for one outer segment. The RF voltage left on an electrode is the divider 53 V × C_c / (C_c + C_g + C_f). The null shift comes from the gds2itvg unit potentials of that electrode and the RF Hessian at the zone.
+
+| Electrode | Coupling to the rails, C_c | To ground, C_g | RF voltage with no capacitor | with 1 nF | with 10 nF |
+|---|---|---|---|---|---|
+| Centre DC, A30, E2 | 0.41 pF | 3.2 pF (3.1 pF of it to the Al mirror) | 6.1 V | 22 mV | 2.2 mV |
+| Centre DC, A30, E1 | 0.33 pF | 3.1 pF | 5.0 V | 17 mV | 1.7 mV |
+| Centre DC, NODET, E2 | 0.74 pF | 0.12 pF | 45 V | 39 mV | 3.9 mV |
+| One outer segment, E2 | 0.015 pF | 0.4–0.6 pF (pad and lead track, an estimate from the bond-pad notes) | 1.3–1.9 V | 0.8 mV | 0.08 mV |
+
+- **The centre DC is the electrode that matters.** It runs the full length between the rails. On NODET it has almost no capacitance to ground of its own, so with nothing attached it would follow the rails at 45 V. On A30 the grounded mirror under it takes most of that away, and it would still carry 6 V. This column is a limit, not a proposal: it says the centre DC cannot be left without an RF ground.
+- **Null shift at the readout zone, A30 on E2,** from the RF voltage on the centre DC: 2.8 µm with no capacitor, 96 nm with 100 pF, 10 nm with 1 nF, 1.0 nm with 10 nF. From the nearest top and bottom segments together: 0.10 nm with 1 nF.
+- **Current through the capacitor on the centre DC:** 3.9 mA (A30, E2), 6.9 mA (NODET, E2). It returns through the bond wire and the carrier ground.
+- The 0.41 pF agrees with the 0.5 pF estimated in the SNSPD geometry audit.
+- **Mirror to centre DC: 3.1 pF,** not the "about 12 pF" of `fab/variants/LOCAL_MIRROR.md`. That estimate took the full 40 µm width; with the lead slot only 15 µm of centre DC lies over the mirror.
+
+**Checks.** Reproduces `10c` (rail to lead 2.1322 aF/µm on E2 and 1.3698 on E1; rail to mirror 0.15294 fF/µm; lead to mirror 0.4888 fF/µm); the matrix is symmetric to 10⁻¹⁴; the charges sum to zero.
+
+**Limits.** 2-D: no segment ends, no lead tracks near the rails. The inductance of the bond wire and of the lead between the electrode and the capacitor is ignored [inference], which matters most for the 10 nF column. The outer segment's capacitance to ground is taken from estimates made for an older stack. The 3-D pickup on the SNSPD leads is still not modelled: gds2itvg builds its electrode model for the ion's region and cannot be evaluated at the chip surface, so a planar charge integral was not attempted.
+
+---
+
+## 2026-11-10: Step 43, RCWA of the NbN meander (`sim/24_rcwa_meander.py`)
+
+Closes "RCWA of the meander" for normal incidence. Written by a delegated agent from a specification; rerun before logging; the convergence rule was then tightened (see below) and the script rerun.
+
+**Method.** Rigorous coupled-wave analysis with the `grcwa` package (0.1.2, in a separate conda env `rcwa`; setup in the script's docstring), 493 nm, normal incidence, the stack of `09c`: vacuum / SiO₂ cap / 7 nm grating of NbN lines 130 nm wide on a 200 nm pitch with SiO₂ between / 238 nm SiO₂ spacer / Al. Absorption in the NbN layer only, from the power flux above and below the grating layer. Indices as `09c`.
+
+| SiO₂ cap | Field | Effective medium (`09c`, `15b`) | RCWA | RCWA / effective medium |
+|---|---|---|---|---|
+| 160 nm | along the wires | 0.830 | 0.822 | 0.99 |
+| 160 nm | across the wires | 0.494 | 0.833 | 1.69 |
+| 160 nm | unpolarised | 0.662 | 0.827 | 1.25 |
+| 80 nm | unpolarised | 0.440 | 0.583 | 1.32 |
+
+- **Along the wires the two models agree to 1 %.** Across the wires they do not: the effective-medium model mixes NbN and SiO₂ in series, which is right for a grating much thicker than its pitch. These lines are 7 nm thick and 130 nm wide, so nearly all of each line sees the field unscreened, and the rigorous result is almost independent of polarisation [inference for the explanation; the numbers are the solver's].
+- **The 160 nm cap is still at the maximum:** the RCWA cap scan peaks at 0.829 near 170 nm and is within 0.02 of that from 150 to 180 nm.
+- **What this would change, if adopted:** the absorbed fraction of all emitted photons scales with the unpolarised absorption, so the 1.47 % (A30, E2) and 2.71 % (B60, E2) of step 32 would become about 1.84 % and 3.4 % at normal incidence [team calc: ratio 1.25 applied; the emission-cone average of step 32 was not redone]. The key-number tables keep the effective-medium values, labelled as such, and quote this result beside them.
+
+**Checks.** A uniform NbN film reproduces the transfer-matrix result exactly; the in-script effective-medium calculation reproduces the stored `15b` values to 10⁻⁹; reflected, transmitted and absorbed power sum to 1. Convergence: along the wires the value is steady at 0.8217 from 11 to 199 harmonics; across the wires it drifts from 0.839 at 7 harmonics to 0.8325 at 199. The script first stopped at a change of 0.005 (5 harmonics); it now stops at 0.001, which gives 0.833 at 99 harmonics.
+
+**Limits.** Normal incidence only; the cone of angles from the ion is not averaged. The NbN index is the literature value of `09`, not a measurement of the team's film. A second lattice period of 1 nm is used to make the problem one-dimensional. No other RCWA code was run as a cross-check.
