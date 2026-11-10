@@ -11,51 +11,519 @@
   "design/GLOSSARY.md"
  ],
  "history_sections": {
-  "CLAUDE_PROGRESS.md": ["Done", "Decisions reversed along the way", "History"]
+  "CLAUDE_PROGRESS.md": [
+   "Done",
+   "Decisions reversed along the way",
+   "History"
+  ]
  },
  "facts": [
-  {"id": "lead_cm_E2", "label": "Common-mode RF current per slot lead, E2 (uA)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E2", "slot", "I_lead_in_trap_uA"], "show": ".1f", "must_contain": ["design/CLAUDE.md", "design/AGENTS.md", "design/fab/OPEN_DECISIONS.md"]},
-  {"id": "lead_cm_E1", "label": "Common-mode RF current per slot lead, E1 (uA)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E1", "slot", "I_lead_in_trap_uA"], "show": ".1f", "must_contain": ["design/fab/tests/02_CRYOGENIC.md"]},
-  {"id": "nw_pickup_E2", "label": "Direct RF pickup in the nanowire, E2 (uA)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E2", "window", "I_pk_uA"], "show": ".2f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "nw_pickup_E1", "label": "Direct RF pickup in the nanowire, E1 (uA)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E1", "window", "I_pk_uA"], "show": ".2f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "mirror_current", "label": "RF current along the Al mirror strip to ground (mA)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E2", "rho", "3e-08", "i_mirror_mA"], "show": ".1f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "mirror_extra_lo", "label": "Extra nanowire current through the mirror path, lower Al resistivity (uA)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E2", "rho", "3e-08", "i_wire_upper_uA"], "show": ".2f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "mirror_extra_hi", "label": "Extra nanowire current through the mirror path, higher Al resistivity (uA)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E2", "rho", "4e-08", "i_wire_upper_uA"], "show": ".2f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "t10_lo", "label": "Expected T10 mirror-strip resistance, lower (Ohm)", "file": "10c_mirror_thickness/summary.json", "keys": ["al100_inlaid", "E2", "rho", "3e-08", "t10_ohm"], "show": ".1f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "zone_load_A30", "label": "Loading zone max |V| with 10 deg tilt, A30 (V)", "file": "12_final_chip/trap_die_v4_A30/summary.json", "keys": ["loading", "vmax"], "show": ".1f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "zone_read_A30", "label": "Readout zone max |V| with 10 deg tilt, A30 (V)", "file": "12_final_chip/trap_die_v4_A30/summary.json", "keys": ["readout", "vmax"], "show": ".1f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "zone_read_B60", "label": "Readout zone max |V| with 10 deg tilt, B60 (V)", "file": "12_final_chip/trap_die_v4_B60/summary.json", "keys": ["readout", "vmax"], "show": ".1f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "zone_load_NODET", "label": "Loading zone max |V| with 10 deg tilt, NODET (V)", "file": "12_final_chip/trap_die_v4_NODET/summary.json", "keys": ["loading", "vmax"], "show": ".1f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "transport_vmax", "label": "Transport max |V|, centre DC at 0 V, A30 (V)", "file": "12_final_chip/trap_die_v4_A30_V2zero/summary.json", "keys": ["transport", "max_abs_V"], "show": ".1f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "transport_step", "label": "Largest voltage change per 10 um transport step, centre DC at 0 V (V)", "file": "12_final_chip/trap_die_v4_A30_V2zero/summary.json", "keys": ["transport", "max_step_change_V"], "show": ".2f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "null_load", "label": "RF null height at loading, planar model (um)", "file": "12_final_chip/trap_die_v4_A30/summary.json", "keys": ["loading", "null_z"], "show": ".2f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "null_read", "label": "RF null height at readout, planar model (um)", "file": "12_final_chip/trap_die_v4_A30/summary.json", "keys": ["readout", "null_z"], "show": ".2f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "recess_A30_E2", "label": "Null drop over the A30 window, E2 (um)", "file": "12_final_chip/trap_die_v4_A30/summary.json", "keys": ["readout", "dh_recess"], "show": ".2f", "scale": -1, "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "recess_A30_E1", "label": "Null drop over the A30 window, E1 (um)", "file": "12_final_chip/trap_die_v4_A30_E1/summary.json", "keys": ["readout", "dh_recess"], "show": ".2f", "scale": -1, "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "collect_A30_E2", "label": "Geometric collection, A30 on E2 (% of emitted 493 nm photons)", "file": "15b_collection_v4/summary.json", "keys": ["cases", "A30_E2_null+drop", "collection_pct"], "show": ".2f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "absorbed_A30_E2", "label": "Absorbed in NbN of all emitted photons, A30 on E2, 160 nm cap (%)", "file": "15b_collection_v4/summary.json", "keys": ["cases", "A30_E2_null+drop", "caps", "160", "absorbed_of_emitted_pct"], "show": ".2f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "collect_B60_E2", "label": "Geometric collection, B60 on E2 (%)", "file": "15b_collection_v4/summary.json", "keys": ["cases", "B60_E2_null+drop", "collection_pct"], "show": ".2f", "must_contain": ["design/CLAUDE.md"]},
-  {"id": "absorption_160", "label": "NbN absorption at 493 nm, 160 nm SiO2 cap (EMT)", "file": "09c_localmirror_optics/summary.json", "keys": ["v4_best_cap_spacer238", "A"], "show": ".2f", "must_contain": ["design/CLAUDE.md", "CLAUDE_PROGRESS.md"]},
-  {"id": "minjerk_T", "label": "Minimum-jerk transport time above which nbar stays below 0.1 (us)", "file": "20_transport_timing/summary.json", "keys": ["part1_settle_T_s", "minjerk", "0.1"], "show": ".0f", "scale": 1e6, "must_contain": ["CLAUDE_PROGRESS.md"]}
+  {
+   "id": "lead_cm_E2",
+   "label": "Common-mode RF current per slot lead, E2 (uA)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E2",
+    "slot",
+    "I_lead_in_trap_uA"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "design/AGENTS.md",
+    "design/fab/OPEN_DECISIONS.md"
+   ]
+  },
+  {
+   "id": "lead_cm_E1",
+   "label": "Common-mode RF current per slot lead, E1 (uA)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E1",
+    "slot",
+    "I_lead_in_trap_uA"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/fab/tests/02_CRYOGENIC.md"
+   ]
+  },
+  {
+   "id": "nw_pickup_E2",
+   "label": "Direct RF pickup in the nanowire, E2 (uA)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E2",
+    "window",
+    "I_pk_uA"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "nw_pickup_E1",
+   "label": "Direct RF pickup in the nanowire, E1 (uA)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E1",
+    "window",
+    "I_pk_uA"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "mirror_current",
+   "label": "RF current along the Al mirror strip to ground (mA)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E2",
+    "rho",
+    "3e-08",
+    "i_mirror_mA"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "mirror_extra_lo",
+   "label": "Extra nanowire current through the mirror path, lower Al resistivity (uA)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E2",
+    "rho",
+    "3e-08",
+    "i_wire_upper_uA"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "mirror_extra_hi",
+   "label": "Extra nanowire current through the mirror path, higher Al resistivity (uA)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E2",
+    "rho",
+    "4e-08",
+    "i_wire_upper_uA"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "t10_lo",
+   "label": "Expected T10 mirror-strip resistance, lower (Ohm)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E2",
+    "rho",
+    "3e-08",
+    "t10_ohm"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "zone_load_A30",
+   "label": "Loading zone max |V| with 10 deg tilt, A30 (V)",
+   "file": "12_final_chip/trap_die_v4_A30/summary.json",
+   "keys": [
+    "loading",
+    "vmax"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "zone_read_A30",
+   "label": "Readout zone max |V| with 10 deg tilt, A30 (V)",
+   "file": "12_final_chip/trap_die_v4_A30/summary.json",
+   "keys": [
+    "readout",
+    "vmax"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "zone_read_B60",
+   "label": "Readout zone max |V| with 10 deg tilt, B60 (V)",
+   "file": "12_final_chip/trap_die_v4_B60/summary.json",
+   "keys": [
+    "readout",
+    "vmax"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "zone_load_NODET",
+   "label": "Loading zone max |V| with 10 deg tilt, NODET (V)",
+   "file": "12_final_chip/trap_die_v4_NODET/summary.json",
+   "keys": [
+    "loading",
+    "vmax"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "transport_vmax",
+   "label": "Transport max |V|, centre DC at 0 V, A30 (V)",
+   "file": "12_final_chip/trap_die_v4_A30_V2zero/summary.json",
+   "keys": [
+    "transport",
+    "max_abs_V"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "transport_step",
+   "label": "Largest voltage change per 10 um transport step, centre DC at 0 V (V)",
+   "file": "12_final_chip/trap_die_v4_A30_V2zero/summary.json",
+   "keys": [
+    "transport",
+    "max_step_change_V"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "null_load",
+   "label": "RF null height at loading, planar model (um)",
+   "file": "12_final_chip/trap_die_v4_A30/summary.json",
+   "keys": [
+    "loading",
+    "null_z"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "null_read",
+   "label": "RF null height at readout, planar model (um)",
+   "file": "12_final_chip/trap_die_v4_A30/summary.json",
+   "keys": [
+    "readout",
+    "null_z"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "recess_A30_E2",
+   "label": "Null drop over the A30 window, E2 (um)",
+   "file": "12_final_chip/trap_die_v4_A30/summary.json",
+   "keys": [
+    "readout",
+    "dh_recess"
+   ],
+   "show": ".2f",
+   "scale": -1,
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "recess_A30_E1",
+   "label": "Null drop over the A30 window, E1 (um)",
+   "file": "12_final_chip/trap_die_v4_A30_E1/summary.json",
+   "keys": [
+    "readout",
+    "dh_recess"
+   ],
+   "show": ".2f",
+   "scale": -1,
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "collect_A30_E2",
+   "label": "Geometric collection, A30 on E2 (% of emitted 493 nm photons)",
+   "file": "15b_collection_v4/summary.json",
+   "keys": [
+    "cases",
+    "A30_E2_null+drop",
+    "collection_pct"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "absorbed_A30_E2",
+   "label": "Absorbed in NbN of all emitted photons, A30 on E2, 160 nm cap (%)",
+   "file": "15b_collection_v4/summary.json",
+   "keys": [
+    "cases",
+    "A30_E2_null+drop",
+    "caps",
+    "160",
+    "absorbed_of_emitted_pct"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "collect_B60_E2",
+   "label": "Geometric collection, B60 on E2 (%)",
+   "file": "15b_collection_v4/summary.json",
+   "keys": [
+    "cases",
+    "B60_E2_null+drop",
+    "collection_pct"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md"
+   ]
+  },
+  {
+   "id": "absorption_160",
+   "label": "NbN absorption at 493 nm, 160 nm SiO2 cap (EMT)",
+   "file": "09c_localmirror_optics/summary.json",
+   "keys": [
+    "v4_best_cap_spacer238",
+    "A"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "minjerk_T",
+   "label": "Minimum-jerk transport time above which nbar stays below 0.1 (us)",
+   "file": "20_transport_timing/summary.json",
+   "keys": [
+    "part1_settle_T_s",
+    "minjerk",
+    "0.1"
+   ],
+   "show": ".0f",
+   "scale": 1000000.0,
+   "must_contain": [
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "chip_C_E2",
+   "label": "Chip RF capacitance, A30 on E2, Si lossless (pF)",
+   "file": "22_rf_capacitance/summary.json",
+   "keys": [
+    "configs",
+    "A30_E2",
+    "chip",
+    "C_chip_pF"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "design/AGENTS.md",
+    "design/START_HERE.md",
+    "design/fab/OPEN_DECISIONS.md",
+    "CLAUDE_PROGRESS.md"
+   ]
+  },
+  {
+   "id": "chip_C_E1",
+   "label": "Chip RF capacitance, A30 on E1, Si lossless (pF)",
+   "file": "22_rf_capacitance/summary.json",
+   "keys": [
+    "configs",
+    "A30_E1",
+    "chip",
+    "C_chip_pF"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "design/AGENTS.md",
+    "design/START_HERE.md",
+    "design/fab/OPEN_DECISIONS.md"
+   ]
+  },
+  {
+   "id": "centre_dc_coupling",
+   "label": "Centre DC to RF rails coupling, A30 on E2 (pF)",
+   "file": "23_dc_rf_coupling/summary.json",
+   "keys": [
+    "per_electrode",
+    "E2",
+    "centre_A30",
+    "C_c_pF"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "design/AGENTS.md",
+    "design/fab/OPEN_DECISIONS.md"
+   ]
+  },
+  {
+   "id": "waveform_matches_sim12",
+   "label": "Sim 21 against the sim 12 table, largest difference (uV)",
+   "file": "21_transport_waveform/trap_die_v4_A30_V2zero/summary.json",
+   "keys": [
+    "checkA",
+    "max_abs_diff_V"
+   ],
+   "show": ".0f",
+   "scale": 1000000.0,
+   "must_contain": []
+  },
+  {
+   "id": "rcwa_across_160",
+   "label": "NbN absorption, RCWA, normal incidence, 160 nm cap, field across the wires",
+   "file": "24_rcwa_meander/summary.json",
+   "keys": [
+    "run3_rcwa",
+    "160",
+    "across",
+    "A_rcwa"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "design/AGENTS.md",
+    "design/fab/OPEN_DECISIONS.md"
+   ]
+  }
  ],
  "stale": [
-  {"pattern": "46 µA", "why": "600 um-zone value; the current stack gives 44.5 uA (sim 10c)"},
-  {"pattern": "1\\.42 µA", "why": "v3 pickup; v4 is 0.96 / 1.92 uA"},
-  {"pattern": "Steps 0–36", "why": "the design log runs past step 36"},
-  {"pattern": "80 nm SiO₂ cap over", "why": "the cap is 160 nm"},
-  {"pattern": "238 nm spacer / 80 nm cap", "why": "the cap is 160 nm"},
-  {"pattern": "≈ 80 nm (down to the L22|of HSQ/cap)", "why": "the cap is 160 nm"},
-  {"pattern": "not yet recomputed for v4", "why": "sim 15b recomputed collection for v4 (step 32)"},
-  {"pattern": "readout 6\\.1 V", "why": "step-25 value; step 28 gives 6.3 V"},
-  {"pattern": "loading 8\\.1 V", "why": "step-25 value; step 28 gives 7.5 V"},
-  {"pattern": "NODET 9\\.1 V", "why": "step-25 value; now 7.9 V"},
-  {"pattern": "max 6\\.4 V", "why": "step-25 value; now 6.6 V"},
-  {"pattern": "1\\.67 V per", "why": "step-25 value; now 1.71 V per 10 um"},
-  {"pattern": "at 6\\.1 V", "why": "step-25 value; step 28 gives 6.3 V"},
-  {"pattern": "TEST_DIE_V3", "why": "the test dies are v4 (step 35)"},
-  {"pattern": "test dies are still v3", "why": "the test dies are v4 (step 35)"},
-  {"pattern": "are not rewritten for v4", "why": "the fab pages were rewritten for v4 in step 36"},
-  {"pattern": "unresolved .Dietl 2025.", "why": "resolved: arXiv:2505.21284"},
-  {"pattern": "still inconsistent with 80 nm", "why": "generator metadata says 160 nm since step 35"}
+  {
+   "pattern": "(?<![0-9.])46 µA",
+   "why": "600 um-zone value; the current stack gives 44.5 uA (sim 10c)"
+  },
+  {
+   "pattern": "1\\.42 µA",
+   "why": "v3 pickup; v4 is 0.96 / 1.92 uA"
+  },
+  {
+   "pattern": "Steps 0–36",
+   "why": "the design log runs past step 36"
+  },
+  {
+   "pattern": "80 nm SiO₂ cap over",
+   "why": "the cap is 160 nm"
+  },
+  {
+   "pattern": "238 nm spacer / 80 nm cap",
+   "why": "the cap is 160 nm"
+  },
+  {
+   "pattern": "≈ 80 nm (down to the L22|of HSQ/cap)",
+   "why": "the cap is 160 nm"
+  },
+  {
+   "pattern": "not yet recomputed for v4",
+   "why": "sim 15b recomputed collection for v4 (step 32)"
+  },
+  {
+   "pattern": "readout 6\\.1 V",
+   "why": "step-25 value; step 28 gives 6.3 V"
+  },
+  {
+   "pattern": "loading 8\\.1 V",
+   "why": "step-25 value; step 28 gives 7.5 V"
+  },
+  {
+   "pattern": "NODET 9\\.1 V",
+   "why": "step-25 value; now 7.9 V"
+  },
+  {
+   "pattern": "max 6\\.4 V",
+   "why": "step-25 value; now 6.6 V"
+  },
+  {
+   "pattern": "1\\.67 V per",
+   "why": "step-25 value; now 1.71 V per 10 um"
+  },
+  {
+   "pattern": "at 6\\.1 V",
+   "why": "step-25 value; step 28 gives 6.3 V"
+  },
+  {
+   "pattern": "TEST_DIE_V3",
+   "why": "the test dies are v4 (step 35)"
+  },
+  {
+   "pattern": "test dies are still v3",
+   "why": "the test dies are v4 (step 35)"
+  },
+  {
+   "pattern": "are not rewritten for v4",
+   "why": "the fab pages were rewritten for v4 in step 36"
+  },
+  {
+   "pattern": "unresolved .Dietl 2025.",
+   "why": "resolved: arXiv:2505.21284"
+  },
+  {
+   "pattern": "still inconsistent with 80 nm",
+   "why": "generator metadata says 160 nm since step 35"
+  },
+  {
+   "pattern": "Chip RF capacitance is not computed",
+   "why": "computed in sim 22 (step 41)"
+  },
+  {
+   "pattern": "table is not a waveform: interpolate",
+   "why": "sim 21 wrote the waveform (step 40)"
+  }
  ]
 }

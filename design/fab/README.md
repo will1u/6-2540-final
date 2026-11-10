@@ -27,6 +27,10 @@ The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no A
 | Prepare exposures | [Mask list](mask_list.md) |
 | Record in-process measurements | [Process checks](process_checks.md) |
 | Test finished devices | [Test plan](test_plan.md) |
+| Deciding an open design choice | [Open decisions](OPEN_DECISIONS.md) and the decision briefs ([E1 vs E2](briefs/E1_vs_E2.md), [readout tilt](briefs/readout_tilt.md), [pad pitch](briefs/pad_pitch.md), [carrier and spacer](briefs/carrier_and_spacer.md), [mirror](briefs/mirror_raised_vs_inlaid.md)) |
+| Setting up a test bench or asking the lab what it has | [Test setup](tests/00_SETUP.md) |
+| Asking whether a simpler test would do | [Simpler testing](tests/05_SIMPLER_TESTING.md) |
+| New to the labels | [Glossary](../GLOSSARY.md) |
 
 [Layout](LAYOUT.md), [mask list](mask_list.md), [qualification](QUALIFICATION.md), [process checks](process_checks.md) and [test plan](test_plan.md) were rewritten for v4 on 2026-11-09 (DESIGN_LOG step 36).
 
@@ -35,7 +39,7 @@ The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no A
 | Area | Progress | Next requirement |
 |---|---|---|
 | Trap layout (v4) | `trap_die_v4_A30`, `_B60` and `_NODET`; 36 signal pads at 360 µm pitch (team adoption pending); mirror ground via at (−2140, 130) µm; A30, B60 and NODET pass `check_chip.py` (DESIGN_LOG step 29) | Team adoption of the pad pitch |
-| Trap simulations (v4) | 04b, 12 and 13 rerun on v4; 09c optics and 10b RF pickup done for v4; pad-pitch check (16) done; collection at the v4 heights done (`sim/15b_collection_v4.py`, step 32) | See the [simulation index](../sim/INDEX.md), "Not modelled yet" |
+| Trap simulations (v4) | 04b, 12 and 13 rerun on v4; 09c optics and 10b RF pickup done for v4; pad-pitch check (16) done; collection at the v4 heights done (`sim/15b_collection_v4.py`, step 32); transport waveform (sim 21): done, DESIGN_LOG step 40; chip RF capacitance (sim 22): done, step 41; DC-to-RF coupling (sim 23): done, step 42; RCWA of the meander (sim 24): done, step 43 | See the [simulation index](../sim/INDEX.md), "Not modelled yet" |
 | Detector | v3.1 meander (130 / 200 nm) under the v4 stack; absorption 0.66 with a 160 nm cap (effective-medium model, 09c) | Reconcile generated files, masks and detector predictions |
 | Fabrication | Process pages rewritten for v4; electrode Au (E1 or E2) open | Choose E1 or E2; facility confirmations; W5, W7 and W8 (inlaid mirror) [qualification](QUALIFICATION.md) |
 | First run | R1_TRAP selected on 2026-11-02; on the no-Al stack since 2026-11-08 | Choose E1 or E2; finish its qualification checklist |

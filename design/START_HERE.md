@@ -39,7 +39,7 @@ What you are looking at: the layers at the readout window, from the Si substrate
 | Detector geometry | Meander 130 nm wide on 200 nm pitch, 160 lines; line 36 µm (A30) / 69 µm (B60); window 30 × 30 µm (A30), 60 × 30 µm (B60) | [CLAUDE.md](CLAUDE.md), "Key design numbers"; [CLAUDE_PROGRESS.md](../CLAUDE_PROGRESS.md), deliverables |
 | Geometric collection, E2 | A30 2.22 %; B60 4.16 % of emitted 493 nm photons | [sim/out/15b_collection_v4/summary.json](sim/out/15b_collection_v4/summary.json) (`cases.A30_E2_null+drop.collection_pct`, `cases.B60_E2_null+drop.collection_pct`) |
 | Absorbed fraction, E2, 160 nm cap | A30 1.47 %; B60 2.71 % of all emitted photons | [sim/out/15b_collection_v4/summary.json](sim/out/15b_collection_v4/summary.json) (`caps.160.absorbed_of_emitted_pct`) |
-| NbN absorption, 160 nm SiO₂ cap | 0.66 (effective-medium theory) | [sim/out/09c_localmirror_optics/summary.json](sim/out/09c_localmirror_optics/summary.json) (`v4_best_cap_spacer238.A`) |
+| NbN absorption, 160 nm SiO₂ cap | 0.66 (effective-medium theory; the value the collection rows use). RCWA at normal incidence gives 0.83 ([sim 24](sim/out/24_rcwa_meander/table.md), DESIGN_LOG step 43) | [sim/out/09c_localmirror_optics/summary.json](sim/out/09c_localmirror_optics/summary.json) (`v4_best_cap_spacer238.A`) |
 | RF pickup in the nanowire | 0.96 µA (E2); 1.92 µA (E1); 2-D bound | [sim/out/10c_mirror_thickness/summary.json](sim/out/10c_mirror_thickness/summary.json) (`al100_inlaid.E2.window.I_pk_uA`, `al100_inlaid.E1.window.I_pk_uA`) |
 | Chip RF capacitance, A30 | 2.59 pF on E2; 2.39 pF on E1; Si treated as lossless (the cold case) | [sim/out/22_rf_capacitance/summary.json](sim/out/22_rf_capacitance/summary.json) (`configs.A30_E2.chip.C_chip_pF`, `configs.A30_E1.chip.C_chip_pF`) |
 | Die size | 10 × 10 mm | [CLAUDE.md](CLAUDE.md), "Conventions" |
@@ -81,7 +81,7 @@ What you are looking at: the layers at the readout window, from the Si substrate
 |---|---|---|
 | Electrode Au | E1: 0.35 µm lift-off; E2: 6 µm plated | [E1 vs E2](fab/briefs/E1_vs_E2.md) |
 | Readout radial tilt | Keep 10°; smaller tilt; zero tilt; wider DAC range | [readout tilt](fab/briefs/readout_tilt.md) |
-| RF grounding / filters | Centre-DC filtering; carrier grounds; symmetric detector termination or cancellation; RF bypass at the SNSPD lead pads (v4) | brief in preparation |
+| RF grounding / filters | Centre-DC filtering; carrier grounds; symmetric detector termination or cancellation; RF bypass at the SNSPD lead pads (v4) | [RF grounding and termination](fab/briefs/rf_grounding_and_termination.md) |
 | Pad pitch / beam access | 360 µm (current layout); 180, 240, 300, 400 µm | [pad pitch](fab/briefs/pad_pitch.md) |
 | Carrier | PGA84L-like 84-pin; 100-pin CPGA; lab carrier | [carrier and spacer](fab/briefs/carrier_and_spacer.md) |
 | Package spacer | Thickness ≥ approximately 0.6 mm [verify]; die-sized or larger; Si suggested | [carrier and spacer](fab/briefs/carrier_and_spacer.md) |

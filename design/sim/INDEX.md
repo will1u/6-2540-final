@@ -2,6 +2,7 @@
 
 1. **How to use this folder**
    - Run a script with `cd design/sim && ./run.sh <script>.py`. For the one-time `electrode` environment setup, see [design/CLAUDE.md](../CLAUDE.md) ("Setting up the electrode repo").
+   - Sim 24 uses the separate `rcwa` conda env, not `electrode`; the setup is in its docstring (`24_rcwa_meander.py`).
    - Outputs go to `design/sim/out/<script stem>/`, each with a `summary.json`. A few scripts also write named extra files (for example `summary_wx30.json`).
    - Version tags: v1 = square die; v2 = narrow 10 × 2.5 mm die with indium tin oxide (ITO) in the window; v3 = die-wide Al plane under 10 µm SiO₂.
    - v3.1 = new NbN meander on v3 (step 24). v4 = local Al mirror under the SNSPD only, the current architecture.
@@ -36,6 +37,10 @@
 | `18_e1_vs_e2.py` | E1 (0.35 µm lift-off Au) vs E2 (6 µm plated Au): one comparison table | `checks[0]`: "Rs(E1)/Rs(E2) = 17.14" (pass: true) | v4 (current) | 31 | Electrode Au choice E1 vs E2 is still open ([design/CLAUDE.md](../CLAUDE.md), open items) | `out/18_e1_vs_e2/` (`compare.md`, `summary.json`) |
 | `19_lead_termination.py` | RF current through the SNSPD nanowire for several lead terminations | `summary.json` rows keyed by case and die: "1 50 ohm line / short", A30, E2: `I_nw_uA` = 4.0575 µA (list of 288 rows). The E1 input 28.3 µA (line 37) is the 10b value; 10c gives 28.6 µA | v4 (current) | 33 | Lead termination is an open item ([design/CLAUDE.md](../CLAUDE.md), open items) | `out/19_lead_termination/` |
 | `20_transport_timing.py` | Classical axial heating of a 138Ba⁺ ion shuttled 480 µm | `part3_max_step_V` = 1.70836 V (largest step in the 10 µm transport waveform); `part3_max_abs_V` = 6.63909 V | v4 (current); reads `trap_die_v4_A30_V2zero/waveforms.csv` | 34 | The 10 µm table is not yet a playable waveform (open item, step 34) | `out/20_transport_timing/` |
+| `21_transport_waveform.py` | Can the 10 µm static table of sim 12 become a voltage-versus-time waveform a DAC could play, and what motional energy does the move leave (classical)? | `checkA.max_abs_diff_V` = 4.99e-6 V (5.0 µV, largest difference from the sim 12 table, A30); `checkB.max_abs_dy_nm` = 0.0067 nm (interpolation position error at the midpoints, A30) | v4 (current) | 40 | Transport items in [fab/OPEN_DECISIONS.md](../fab/OPEN_DECISIONS.md); [readout tilt brief](../fab/briefs/readout_tilt.md) | `out/21_transport_waveform/<die>/` (A30, B60, NODET) |
+| `22_rf_capacitance.py` | What RF capacitance does the chip have to ground, what loss does its dielectric allow, and what does that do to a resonator? | `configs.A30_E2.chip.C_chip_pF` = 2.590 pF (A30, E2); `configs.A30_E1.chip.C_chip_pF` = 2.395 pF (A30, E1) | v4 (current) | 41 | [E1 vs E2 brief](../fab/briefs/E1_vs_E2.md); [RF primer](../primers/RF_PRIMER.md); electrical test a10 ([process checks](../fab/process_checks.md)) | `out/22_rf_capacitance/` (`summary.json`, `table.md`, `sections.png`) |
+| `23_dc_rf_coupling.py` | How much of the 53 V RF on the rails couples onto each DC electrode, and what a filter capacitor does to that voltage and to the RF null? | `per_electrode.E2.centre_A30.C_c_pF` = 0.414 pF (centre DC to rails); `divider[2].V_el_V` = 0.02188 V (RF left on the A30 centre DC with 1 nF to ground, E2; `divider[2].C_f_pF` = 1000) | v4 (current) | 42 | [RF grounding and termination brief](../fab/briefs/rf_grounding_and_termination.md) (RF grounding and filters decision) | `out/23_dc_rf_coupling/` (`summary.json`, `table.md`) |
+| `24_rcwa_meander.py` | How much 493 nm light does the NbN meander absorb, by rigorous RCWA, compared with the effective-medium value? (160 nm cap, unpolarised) | `table` row with `cap` = 160.0 and `polarisation` = "unpol": `rcwa` = 0.827 (RCWA); `emt` = 0.662 (effective medium, the value still quoted) | v4 (current) | 43 | Absorption key number (the effective-medium value is still quoted; see step 43) | `out/24_rcwa_meander/` (`summary.json`, `table.md`); run in the `rcwa` env (see the script docstring) |
 
 3. **Shared modules**
    - `trapcalc.py`: shared plain-numpy physics helpers: the analytic five-wire model, the pseudopotential and secular frequencies, finite-difference gradients of gds2itvg unit potentials, the DC voltage solve (`solve_dc`) and the geometric collection fraction.
@@ -60,6 +65,20 @@
    | `gds/archive_v3_baseline/` (v3 `NODET` and `UNIFORM` GDS and `_sim.json`) | `14_staircase_check.py` | 39, 52, 54 |
    | `out/12_final_chip/pad180/` (folders) and `out/12_log_v4_*_pad180.txt` | `16_pad_pitch_check.py` | 21, 50, 58 |
    | `out/12_log_v4_*.txt` (current logs, not `_pad180`) | `16_pad_pitch_check.py` | 55, 88 |
+   | `out/22_rf_capacitance/summary.json` | `primers/primer_numbers.py` | 72 |
+   | `out/10c_mirror_thickness/summary.json` | `primers/primer_numbers.py` | 62 |
+   | `out/18_e1_vs_e2/summary.json` | `primers/primer_numbers.py` | 63 |
+   | `out/19_lead_termination/summary.json` | `primers/primer_numbers.py` | 53 |
+   | `out/12_final_chip/trap_die_v4_A30_V2zero/waveforms.csv` | `21_transport_waveform.py` | 221 |
+   | `out/12_final_chip/trap_die_v4_A30_V2zero/summary.json` | `21_transport_waveform.py` | 234 |
+   | `out/12_final_chip/trap_die_v4_{A30,A30_E1,NODET}/summary.json` | `figures/make_report_figures.py` | 41, 42, 43 |
+   | `out/12_final_chip/trap_die_v4_A30_V2zero/waveforms.csv` | `figures/make_report_figures.py` | 84 |
+   | `out/17_height_tradeoff/summary.json` | `figures/make_report_figures.py` | 129 |
+   | `out/19_lead_termination/summary.json` | `figures/make_report_figures.py` | 170 |
+   | `out/21_transport_waveform/trap_die_v4_A30_V2zero/waveform.csv` | `figures/make_report_figures.py` | 237 |
+   | `out/22_rf_capacitance/summary.json` | `figures/make_report_figures.py` | 291 |
+
+   The `primers/` and `figures/` scripts sit in `design/`, not in `sim/`. Their paths are written relative to the script's own folder, as the reads are coded. Line numbers are from grep on each script.
 
    `06_detector_size.py` (line 33) and `15_snspd_geometry.py` (line 41) carry the 04b window numbers as constants or comments; they do not read the files.
 
@@ -84,7 +103,8 @@
    Copied from the open items in the source documents. Each item is open in its source.
    - [ ] Ba⁺ angular-emission model: partly resolved (see [fab/OPEN_DECISIONS.md](../fab/OPEN_DECISIONS.md), "Source and model checks").
    - [ ] Suleimen 2026 (Phys. Rev. Applied 25, 044091): only the abstract is open; read the full text before using its width comparison ([fab/OPEN_DECISIONS.md](../fab/OPEN_DECISIONS.md)).
-   - [ ] RCWA/FDTD of the meander; the transfer matrix reads about 10 % low ([CLAUDE_PROGRESS.md](../../CLAUDE_PROGRESS.md), "Not modelled yet").
-   - [ ] 3-D lead pickup ([CLAUDE_PROGRESS.md](../../CLAUDE_PROGRESS.md), "Not modelled yet").
-   - [ ] Adiabatic transport timing ([CLAUDE_PROGRESS.md](../../CLAUDE_PROGRESS.md), "Not modelled yet"; a first estimate is in step 34).
-   - [ ] Chip RF capacitance is not computed; the RF heating in step 31 scales with its square ([fab/OPEN_DECISIONS.md](../fab/OPEN_DECISIONS.md), "Source and model checks").
+   - [x] RCWA of the meander at normal incidence: done (step 43, [DESIGN_LOG](../DESIGN_LOG.md)). Not done: the average over the ion's emission cone, and FDTD ([fab/OPEN_DECISIONS.md](../fab/OPEN_DECISIONS.md), "Source and model checks").
+   - [ ] 3-D pickup on the SNSPD leads: not modelled. Step 42 says why the planned method was not attempted ([DESIGN_LOG](../DESIGN_LOG.md)).
+   - [x] Transport: a playable waveform is done (step 40, [DESIGN_LOG](../DESIGN_LOG.md)). The DAC and filter values in it are [verify]; the lab's hardware is not known.
+   - [x] Chip RF capacitance: computed (step 41, [DESIGN_LOG](../DESIGN_LOG.md)); the RF heating in step 31 scales with its square.
+   - [ ] Not measured: the loss tangent of the SiO₂ films (sets the cold Q of the chip, step 41), and the Au film resistivity at 4 K ([fab/OPEN_DECISIONS.md](../fab/OPEN_DECISIONS.md), "Design choices" and "Before any v4 run").

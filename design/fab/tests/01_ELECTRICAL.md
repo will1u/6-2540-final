@@ -106,7 +106,7 @@
 
 **Stimulus:** LCR at 1 MHz
 
-**Pass:** No v4 pass value. The old “a few pF from the chip” estimate (0.36 pF/mm per rail, DESIGN_LOG step 10) was made for the v3 stack, which had a die-wide ground plane. v4 has no plane under the RF rails, so re-derive it before using it [verify]. Record the measured value (chip plus carrier) to predict the resonator frequency.
+**Pass:** No single pass value. `sim/22` (DESIGN_LOG step 41) gives the chip alone as 2.59 pF (A30, E2) or 2.39 pF (A30, E1) when the Si acts as a dielectric, which is the cold case at 28 MHz. At 1 MHz and room temperature the Si conducts, so the reading lies between that value and about 23 pF (the Si taken as a grounded conductor under the SiO₂), plus the carrier [team calc, first-order]. Record the measured value and the frequency; a reading at a higher frequency, or cold, is the one that predicts the resonator frequency.
 
 **Source:** Stick 2010 (7 pF trap + CPGA)
 

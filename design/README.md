@@ -1,5 +1,7 @@
 # design/: five-wire ¹³⁸Ba⁺ trap with an integrated NbN SNSPD
 
+**Entry page:** [START_HERE.md](START_HERE.md). Then [DESIGN_LOG.md](DESIGN_LOG.md) for the full history, latest steps first.
+
 > **Claude-authored** working folder, set up at the team's request on 2026-11-02. It holds the design files, simulations and fab procedures. Design decisions here are Claude's proposals; record the ones you adopt in your own `notes/decisions.md`.
 
 For fabrication review, start with [fab overview](fab/README.md), [variants](fab/VARIANTS.md) and [open decisions](fab/OPEN_DECISIONS.md).
@@ -9,7 +11,15 @@ For fabrication review, start with [fab overview](fab/README.md), [variants](fab
 | Path | What it is |
 |---|---|
 | `CLAUDE.md`, `AGENTS.md` | Identical context files for AI agents working in this folder: rules, environment, conventions, current state. |
-| `DESIGN_LOG.md` | Chronological log of every design step: script, inputs, numbers, decision, citation. **Start here.** |
+| `START_HERE.md` | One-page entry: the chip, the die map and stack, the defining numbers, the team's decisions, open items, tests, and where to go next. **Start here.** |
+| `DESIGN_LOG.md` | Chronological log of every design step: script, inputs, numbers, decision, citation. The full history; read the latest steps first. |
+| `GLOSSARY.md` | Every short label (dies, runs, E1/E2, layers, electrodes, T/W/a/b IDs, suffixes, symbols), each linked to its definition |
+| `check_numbers.py`, `facts_now.json` | Prints each key number from the sim outputs, checks that the current-state pages quote it, and flags known stale strings. Run it with `cd sim && ./run.sh ../check_numbers.py`. `facts_now.json` holds pointers (file and key), not values |
+| `sim/INDEX.md` | Index of the simulation scripts: question, headline number (with its `summary.json` key), validity and the decision each fed |
+| `primers/RF_PRIMER.md`, `primers/primer_numbers.py` | Basics of RF drive, loss, pickup, filters and SNSPD readout, worked on this chip; the script prints every number in the page |
+| `figures/` | `plotstyle.py`, `make_die_map.py`, `make_report_figures.py` → `figures/report/` (plots for the team's report); see `figures/README.md` |
+| `fab/briefs/` | One page per open design choice: options, numbers side by side with their sources, what is not known. No recommendation; the choice is the team's |
+| `fab/tests/00_SETUP.md`, `fab/tests/05_SIMPLER_TESTING.md` | What each test needs on the bench; what could replace the wafer-level test and what each option misses |
 | `research/reports/Trap integrated SNSPD design.md` | Literature report with section/figure pointers and a "Read these sections yourself" list. |
 | `research/research_notes/…` | Raw research notes behind the report. |
 | `sim/` | Simulation scripts, numbered in the order they were run. Outputs go to `sim/out/<script>/`. |
@@ -72,3 +82,9 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 | `18_e1_vs_e2.py` | Do the two electrode options differ functionally? Au resistance, RF heating, SiO₂ gap screening, next to the already-simulated differences. |
 | `19_lead_termination.py` | RF current through the nanowire for several terminations of the SNSPD leads, and what each does to the detector pulse. |
 | `20_transport_timing.py` | How fast can the ion be moved? Residual motion for smooth ramps and for a DAC staircase through a filter. |
+| `21_transport_waveform.py` | Can the static transport table become a voltage-versus-time waveform a DAC could play? (step 40; headline numbers in [sim/INDEX.md](sim/INDEX.md)) |
+| `22_rf_capacitance.py` | Chip RF capacitance, dielectric loss and the resonator numbers (step 41) |
+| `23_dc_rf_coupling.py` | RF coupling from the rails onto the DC electrodes, and the effect of a filter capacitor (step 42) |
+| `24_rcwa_meander.py` | RCWA of the NbN meander absorption at normal incidence, in the separate `rcwa` env (step 43) |
+
+Full index of all scripts, with headline numbers and validity: [sim/INDEX.md](sim/INDEX.md).

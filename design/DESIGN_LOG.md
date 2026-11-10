@@ -1648,7 +1648,7 @@ Closes "chip RF capacitance is not computed". Written by a delegated agent from 
 | | Rails, slot | Rails, plain | Feed | U bar + pad | **Chip** |
 |---|---|---|---|---|---|
 | A30, E2 (pF) | 1.12 | 0.86 | 0.53 | 0.07 | **2.59** |
-| A30, E1 (pF) | 1.03 | 0.79 | 0.50 | 0.07 | **2.40** |
+| A30, E1 (pF) | 1.03 | 0.79 | 0.50 | 0.07 | **2.39** |
 
 NODET: 2.57 pF (E2) and 2.37 pF (E1) with the full SiO₂ stack; 2.68 and 2.48 pF with thermal SiO₂ only.
 
@@ -1675,10 +1675,10 @@ Closes "DC-to-RF coupling capacitances (field solve) to decide on filter capacit
 |---|---|---|---|---|---|
 | Centre DC, A30, E2 | 0.41 pF | 3.2 pF (3.1 pF of it to the Al mirror) | 6.1 V | 22 mV | 2.2 mV |
 | Centre DC, A30, E1 | 0.33 pF | 3.1 pF | 5.0 V | 17 mV | 1.7 mV |
-| Centre DC, NODET, E2 | 0.74 pF | 0.12 pF | 45 V | 39 mV | 3.9 mV |
+| Centre DC, NODET, E2 | 0.74 pF | 0.12 pF | 45.5 V | 39 mV | 3.9 mV |
 | One outer segment, E2 | 0.015 pF | 0.4–0.6 pF (pad and lead track, an estimate from the bond-pad notes) | 1.3–1.9 V | 0.8 mV | 0.08 mV |
 
-- **The centre DC is the electrode that matters.** It runs the full length between the rails. On NODET it has almost no capacitance to ground of its own, so with nothing attached it would follow the rails at 45 V. On A30 the grounded mirror under it takes most of that away, and it would still carry 6 V. This column is a limit, not a proposal: it says the centre DC cannot be left without an RF ground.
+- **The centre DC is the electrode that matters.** It runs the full length between the rails. On NODET it has almost no capacitance to ground of its own, so with nothing attached it would follow the rails at 45.5 V. On A30 the grounded mirror under it takes most of that away, and it would still carry 6 V. This column is a limit, not a proposal: it says the centre DC cannot be left without an RF ground.
 - **Null shift at the readout zone, A30 on E2,** from the RF voltage on the centre DC: 2.8 µm with no capacitor, 96 nm with 100 pF, 10 nm with 1 nF, 1.0 nm with 10 nF. From the nearest top and bottom segments together: 0.10 nm with 1 nF.
 - **Current through the capacitor on the centre DC:** 3.9 mA (A30, E2), 6.9 mA (NODET, E2). It returns through the bond wire and the carrier ground.
 - The 0.41 pF agrees with the 0.5 pF estimated in the SNSPD geometry audit.
