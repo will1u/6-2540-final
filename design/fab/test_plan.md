@@ -6,6 +6,9 @@
 
 Use the run map's die IDs throughout. Test before dicing and repeat applicable electrical checks through the carrier after packaging.
 
+- [Test setup: what has to be on the bench](tests/00_SETUP.md)
+- [Can the testing be simpler than a wafer-level test?](tests/05_SIMPLER_TESTING.md)
+
 | Order | Module | Applies to |
 |---|---|---|
 | 1 | [Electrical tests](tests/01_ELECTRICAL.md) | Both runs (R1_TRAP and R1_FULL); the applicability list is at the top of the page. Detector and Al-mirror checks on A30 / B60 and the test dies only |
