@@ -1,0 +1,29 @@
+Exact gap-union cache: CacheInfo(hits=11059, misses=38, maxsize=256, currsize=38)
+G3_d0.5: 35 DC electrodes active; missing from build_electrodes: none; not in expected list: none; ground keys present in els: []
+f_axial target 0.8 MHz; window none
+
+[loading] y = -240 um, null x = 10.736 um, null z = 49.875 um (target 50)
+  RF-only radial freqs (MHz) [1.0000e-04 3.0243e+00 3.0248e+00], RF-only angle 69.62 deg
+  fbar = 2.9711 MHz
+  axial only: vmax_unclipped 4.435 V, clipped bounded False, f_axial 0.8000 MHz, residual 1.72e-17 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 5.222 V
+  df 0.1 MHz: 45 deg vmax_unclipped 9.657 V, fits True, theta_max 0.072 (theta 0.072)
+    robustness at 45 deg: nominal 45.00 deg, std 2.190, max |change| 5.447 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 16.330 V, fits False, theta_max None
+  df 0.3 MHz: 45 deg vmax_unclipped 25.953 V, fits False, theta_max None
+  df 0.5 MHz: 45 deg vmax_unclipped 45.210 V, fits False, theta_max None
+  all curvatures positive: True; max residual field 2.20e-04 V/um; axial-only bounded at 10 V: False
+
+[readout] y = 240 um, null x = 10.736 um, null z = 49.875 um (target 50)
+  RF-only radial freqs (MHz) [1.0000e-04 3.0243e+00 3.0248e+00], RF-only angle 69.62 deg
+  fbar = 2.9711 MHz
+  axial only: vmax_unclipped 4.436 V, clipped bounded False, f_axial 0.8000 MHz, residual 2.63e-18 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 5.222 V
+  df 0.1 MHz: 45 deg vmax_unclipped 9.658 V, fits True, theta_max 0.068 (theta 0.068)
+    robustness at 45 deg: nominal 45.00 deg, std 2.268, max |change| 5.617 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 16.331 V, fits False, theta_max None
+  df 0.3 MHz: 45 deg vmax_unclipped 25.951 V, fits False, theta_max None
+  df 0.5 MHz: 45 deg vmax_unclipped 45.207 V, fits False, theta_max None
+  all curvatures positive: True; max residual field 2.20e-04 V/um; axial-only bounded at 10 V: False
+
+wrote design\sim\out\28_tilt_geometry_3d\G3_d0.5\summary.json

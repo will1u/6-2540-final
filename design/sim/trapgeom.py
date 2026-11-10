@@ -86,7 +86,11 @@ def _seed_point(w, box):
         else:
             xs = w["x"] + 100.0
         if not x0 < xs < x1:
-            raise ValueError("no seed on metal for piece %s" % (box,))
+            # short piece (a c_split_x island): seed halfway between the hole and the longer free end
+            hl, hr = w["x"] - w["wx"] / 2, w["x"] + w["wx"] / 2
+            xs = (hr + x1) / 2 if x1 - hr >= hl - x0 else (x0 + hl) / 2
+            if not (x0 < xs < x1 and (xs < hl or xs > hr)):
+                raise ValueError("no seed on metal for piece %s" % (box,))
         return [xs, ym]
     return [xm, ym]
 

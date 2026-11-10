@@ -1,0 +1,31 @@
+Exact gap-union cache: CacheInfo(hits=5074, misses=26, maxsize=256, currsize=26)
+G5_p240: 23 DC electrodes active; missing from build_electrodes: none; not in expected list: none; ground keys present in els: []
+f_axial target 0.8 MHz; window none
+
+[loading] y = -240 um, null x = 0.000 um, null z = 49.964 um (target 50)
+  RF-only radial freqs (MHz) [0.     2.9987 2.9993], RF-only angle 90.00 deg
+  fbar = 2.9410 MHz
+  axial only: vmax_unclipped 5.366 V, clipped bounded False, f_axial 0.8000 MHz, residual 5.07e-18 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 6.514 V
+  df 0.1 MHz: 45 deg vmax_unclipped 11.880 V, fits False, theta_max 26.089 (theta 26.089)
+    robustness at theta_max, theta=26.089 deg: nominal 26.09 deg, std 2.196, max |change| 7.279 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 19.859 V, fits False, theta_max 12.418 (theta 12.418)
+    robustness at theta_max, theta=12.418 deg: nominal 12.42 deg, std 0.584, max |change| 1.903 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 27.837 V, fits False, theta_max 8.568 (theta 8.568)
+  df 0.5 MHz: 45 deg vmax_unclipped 43.794 V, fits False, theta_max 5.587 (theta 5.587)
+  all curvatures positive: True; max residual field 3.64e-03 V/um; axial-only bounded at 10 V: False
+
+[readout] y = 240 um, null x = -0.000 um, null z = 49.964 um (target 50)
+  RF-only radial freqs (MHz) [0.     2.9987 2.9993], RF-only angle -90.00 deg
+  fbar = 2.9410 MHz
+  axial only: vmax_unclipped 5.367 V, clipped bounded False, f_axial 0.8000 MHz, residual 1.42e-18 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 6.521 V
+  df 0.1 MHz: 45 deg vmax_unclipped 11.887 V, fits False, theta_max 26.052 (theta 26.052)
+    robustness at theta_max, theta=26.052 deg: nominal 26.05 deg, std 2.192, max |change| 6.860 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 19.869 V, fits False, theta_max 12.405 (theta 12.405)
+    robustness at theta_max, theta=12.405 deg: nominal 12.40 deg, std 0.589, max |change| 1.661 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 27.851 V, fits False, theta_max 8.559 (theta 8.559)
+  df 0.5 MHz: 45 deg vmax_unclipped 43.814 V, fits False, theta_max 5.581 (theta 5.581)
+  all curvatures positive: True; max residual field 3.64e-03 V/um; axial-only bounded at 10 V: False
+
+wrote design\sim\out\28_tilt_geometry_3d\G5_p240\summary.json

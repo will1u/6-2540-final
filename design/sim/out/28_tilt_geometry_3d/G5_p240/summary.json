@@ -1,0 +1,353 @@
+{
+ "variant": "G5_p240",
+ "tag": "G5_p240",
+ "fax_MHz": 0.8,
+ "window": false,
+ "params": {
+  "c": 40.0,
+  "a": 84.0,
+  "g": 5.0,
+  "half_len": 2000.0,
+  "dc_depth": 200.0,
+  "seg_w": 235.0,
+  "n_seg": 9,
+  "seg_x0": -1077.5
+ },
+ "missing_electrodes": [],
+ "zones": {
+  "loading": {
+   "y": -240.0,
+   "null_x": 1.6363121475855253e-06,
+   "null_z": 49.963764172844236,
+   "null_residual_V_per_um": 3.1776498990254446e-08,
+   "rf_only_freqs_MHz": [
+    4.9283609711784935e-05,
+    2.998710039519397,
+    2.9992634832930087
+   ],
+   "rf_only_angle_deg": 89.99999621914938,
+   "fbar_MHz": 2.9410037940770994,
+   "df": {
+    "0.1": {
+     "v45_unclipped": 11.880221046979447,
+     "fits_45": false,
+     "theta_max_deg": 26.088881492614746,
+     "theta_used_deg": 26.088881492614746,
+     "robustness": {
+      "at": "theta_max, theta=26.089 deg",
+      "std_deg": 2.1958518620160308,
+      "max_abs_deg": 7.27905570927706,
+      "nominal_angle_deg": 26.088881492615144
+     }
+    },
+    "0.2": {
+     "v45_unclipped": 19.85865530138089,
+     "fits_45": false,
+     "theta_max_deg": 12.418069839477539,
+     "theta_used_deg": 12.418069839477539,
+     "robustness": {
+      "at": "theta_max, theta=12.418 deg",
+      "std_deg": 0.5837194400723537,
+      "max_abs_deg": 1.9029755004178526,
+      "nominal_angle_deg": 12.418069839477681
+     }
+    },
+    "0.3": {
+     "v45_unclipped": 27.83708955578236,
+     "fits_45": false,
+     "theta_max_deg": 8.568005561828613,
+     "theta_used_deg": 8.568005561828613,
+     "robustness": null
+    },
+    "0.5": {
+     "v45_unclipped": 43.793958064585276,
+     "fits_45": false,
+     "theta_max_deg": 5.587062835693359,
+     "theta_used_deg": 5.587062835693359,
+     "robustness": null
+    }
+   },
+   "records": [
+    {
+     "label": "axial only (df 0, 45 deg)",
+     "df_MHz": 0.0,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 5.365861158145767,
+     "vmax_clipped": 5.365861158145767,
+     "bounded_at_10V": false,
+     "angle_deg": 90.0,
+     "split_MHz": 1.3969838619232178e-15,
+     "freqs_MHz": [
+      0.7999999994931195,
+      2.945124648649682,
+      2.945124648787369
+     ],
+     "f_axial_MHz": 0.7999999999999998,
+     "residual_field_V_per_um": 5.070887363494828e-18,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.1,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 11.880221046979447,
+     "vmax_clipped": 9.999999999959215,
+     "bounded_at_10V": true,
+     "angle_deg": 44.79554208694236,
+     "split_MHz": 0.09978170280412538,
+     "freqs_MHz": [
+      0.7999963030607846,
+      2.8948066232548384,
+      2.9945883485158244
+     ],
+     "f_axial_MHz": 0.7999964481900401,
+     "residual_field_V_per_um": 3.96087523437445e-06,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.2,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 19.85865530138089,
+     "vmax_clipped": 9.999999999999998,
+     "bounded_at_10V": true,
+     "angle_deg": 25.354658161681243,
+     "split_MHz": 0.2089478909497615,
+     "freqs_MHz": [
+      0.7987086582352241,
+      2.838952330112285,
+      3.047900221658527
+     ],
+     "f_axial_MHz": 0.7987086625523928,
+     "residual_field_V_per_um": 0.0008901238423639483,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.3,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 27.83708955578236,
+     "vmax_clipped": 9.999999999999998,
+     "bounded_at_10V": true,
+     "angle_deg": 20.186554729997624,
+     "split_MHz": 0.33177908684536067,
+     "freqs_MHz": [
+      0.7966686843896249,
+      2.7749848898155753,
+      3.106763977371908
+     ],
+     "f_axial_MHz": 0.7966686883968376,
+     "residual_field_V_per_um": 0.0018291782954506358,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.5,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 43.793958064585276,
+     "vmax_clipped": 9.999999999999998,
+     "bounded_at_10V": true,
+     "angle_deg": 16.667444746304653,
+     "split_MHz": 0.5761924521315568,
+     "freqs_MHz": [
+      0.797865241421329,
+      2.64315563880095,
+      3.2193480909887944
+     ],
+     "f_axial_MHz": 0.7978652424653797,
+     "residual_field_V_per_um": 0.0036372905119948008,
+     "all_curvatures_positive": true
+    }
+   ],
+   "axial_only": {
+    "label": "axial only (df 0, 45 deg)",
+    "df_MHz": 0.0,
+    "theta_target_deg": 45.0,
+    "vmax_unclipped": 5.365861158145767,
+    "vmax_clipped": 5.365861158145767,
+    "bounded_at_10V": false,
+    "angle_deg": 90.0,
+    "split_MHz": 1.3969838619232178e-15,
+    "freqs_MHz": [
+     0.7999999994931195,
+     2.945124648649682,
+     2.945124648787369
+    ],
+    "f_axial_MHz": 0.7999999999999998,
+    "residual_field_V_per_um": 5.070887363494828e-18,
+    "all_curvatures_positive": true
+   },
+   "dV_per_0p1MHz_45": 6.514359888833679,
+   "all_curvatures_positive": true,
+   "max_residual_field_V_per_um": 0.0036372905119948008,
+   "bounded_axial_only": false
+  },
+  "readout": {
+   "y": 240.0,
+   "null_x": -1.4938069821326417e-06,
+   "null_z": 49.96376276637636,
+   "null_residual_V_per_um": 3.182366451696824e-08,
+   "rf_only_freqs_MHz": [
+    4.928227891979101e-05,
+    2.9987102924305007,
+    2.999263734908701
+   ],
+   "rf_only_angle_deg": -89.99999646007517,
+   "fbar_MHz": 2.9410118507774525,
+   "df": {
+    "0.1": {
+     "v45_unclipped": 11.887293857057283,
+     "fits_45": false,
+     "theta_max_deg": 26.051931381225586,
+     "theta_used_deg": 26.051931381225586,
+     "robustness": {
+      "at": "theta_max, theta=26.052 deg",
+      "std_deg": 2.1917927864192097,
+      "max_abs_deg": 6.860443343984144,
+      "nominal_angle_deg": 26.051931381225387
+     }
+    },
+    "0.2": {
+     "v45_unclipped": 19.86896973313921,
+     "fits_45": false,
+     "theta_max_deg": 12.404851913452148,
+     "theta_used_deg": 12.404851913452148,
+     "robustness": {
+      "at": "theta_max, theta=12.405 deg",
+      "std_deg": 0.5888038781386682,
+      "max_abs_deg": 1.6609988966700087,
+      "nominal_angle_deg": 12.404851913452063
+     }
+    },
+    "0.3": {
+     "v45_unclipped": 27.850645609221115,
+     "fits_45": false,
+     "theta_max_deg": 8.559207916259766,
+     "theta_used_deg": 8.559207916259766,
+     "robustness": null
+    },
+    "0.5": {
+     "v45_unclipped": 43.81399736138496,
+     "fits_45": false,
+     "theta_max_deg": 5.581483840942383,
+     "theta_used_deg": 5.581483840942383,
+     "robustness": null
+    }
+   },
+   "records": [
+    {
+     "label": "axial only (df 0, 45 deg)",
+     "df_MHz": 0.0,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 5.366683982083449,
+     "vmax_clipped": 5.366683982083449,
+     "bounded_at_10V": false,
+     "angle_deg": 0.0,
+     "split_MHz": 3.2596290111541748e-15,
+     "freqs_MHz": [
+      0.7999999995425967,
+      2.9451249020491903,
+      2.9451249021734345
+     ],
+     "f_axial_MHz": 0.8000000000000003,
+     "residual_field_V_per_um": 1.4194646525192303e-18,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.1,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 11.887293857057283,
+     "vmax_clipped": 9.999999999972736,
+     "bounded_at_10V": true,
+     "angle_deg": 44.792295626616635,
+     "split_MHz": 0.09978069117358607,
+     "freqs_MHz": [
+      0.7999962456112395,
+      2.8948073605416327,
+      2.9945880740768227
+     ],
+     "f_axial_MHz": 0.7999963934059963,
+     "residual_field_V_per_um": 4.022835912962716e-06,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.2,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 19.86896973313921,
+     "vmax_clipped": 9.999999999999998,
+     "bounded_at_10V": true,
+     "angle_deg": 25.299000164152233,
+     "split_MHz": 0.20921982470176462,
+     "freqs_MHz": [
+      0.7987085617464881,
+      2.8388117721890667,
+      3.0480315972753256
+     ],
+     "f_axial_MHz": 0.7987085645690599,
+     "residual_field_V_per_um": 0.0008924771508577239,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.3,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 27.850645609221115,
+     "vmax_clipped": 9.999999999999998,
+     "bounded_at_10V": true,
+     "angle_deg": 20.15498829816255,
+     "split_MHz": 0.33213814856782,
+     "freqs_MHz": [
+      0.7966663321627676,
+      2.7747957692324072,
+      3.1069339182729845
+     ],
+     "f_axial_MHz": 0.7966663348467445,
+     "residual_field_V_per_um": 0.001831534243870951,
+     "all_curvatures_positive": true
+    },
+    {
+     "label": "fixed split 45 deg",
+     "df_MHz": 0.5,
+     "theta_target_deg": 45.0,
+     "vmax_unclipped": 43.81399736138496,
+     "vmax_clipped": 9.999999999999998,
+     "bounded_at_10V": true,
+     "angle_deg": 16.665242289837806,
+     "split_MHz": 0.5761596926144371,
+     "freqs_MHz": [
+      0.7978555523822968,
+      2.643175199214445,
+      3.2193348918522195
+     ],
+     "f_axial_MHz": 0.7978555529958904,
+     "residual_field_V_per_um": 0.0036379621447303334,
+     "all_curvatures_positive": true
+    }
+   ],
+   "axial_only": {
+    "label": "axial only (df 0, 45 deg)",
+    "df_MHz": 0.0,
+    "theta_target_deg": 45.0,
+    "vmax_unclipped": 5.366683982083449,
+    "vmax_clipped": 5.366683982083449,
+    "bounded_at_10V": false,
+    "angle_deg": 0.0,
+    "split_MHz": 3.2596290111541748e-15,
+    "freqs_MHz": [
+     0.7999999995425967,
+     2.9451249020491903,
+     2.9451249021734345
+    ],
+    "f_axial_MHz": 0.8000000000000003,
+    "residual_field_V_per_um": 1.4194646525192303e-18,
+    "all_curvatures_positive": true
+   },
+   "dV_per_0p1MHz_45": 6.520609874973834,
+   "all_curvatures_positive": true,
+   "max_residual_field_V_per_um": 0.0036379621447303334,
+   "bounded_axial_only": false
+  }
+ }
+}

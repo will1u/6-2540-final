@@ -1,0 +1,31 @@
+Exact gap-union cache: CacheInfo(hits=11663, misses=39, maxsize=256, currsize=39)
+G4_c60_gap5_win: 36 DC electrodes active; missing from build_electrodes: none; not in expected list: none; ground keys present in els: []
+f_axial target 0.8 MHz; window open 30x30 um at readout
+
+[loading] y = -240 um, null x = -0.000 um, null z = 49.895 um (target 50)
+  RF-only radial freqs (MHz) [2.0000e-04 2.2480e+00 2.2484e+00], RF-only angle -90.00 deg
+  fbar = 2.1650 MHz
+  axial only: vmax_unclipped 4.145 V, clipped bounded False, f_axial 0.8000 MHz, residual 6.88e-18 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 0.096 V
+  df 0.1 MHz: 45 deg vmax_unclipped 4.241 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 2.602, max |change| 8.608 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 4.337 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 1.288, max |change| 3.770 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 4.433 V, fits True, theta_max 45.000 (theta 45.000)
+  df 0.5 MHz: 45 deg vmax_unclipped 4.625 V, fits True, theta_max 45.000 (theta 45.000)
+  all curvatures positive: True; max residual field 7.63e-18 V/um; axial-only bounded at 10 V: False
+
+[readout] y = 240 um, null x = -0.000 um, null z = 49.895 um (target 50)
+  RF-only radial freqs (MHz) [2.0000e-04 2.2480e+00 2.2484e+00], RF-only angle -90.00 deg
+  fbar = 2.1741 MHz
+  axial only: vmax_unclipped 1.236 V, clipped bounded False, f_axial 0.8000 MHz, residual 4.53e-19 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 0.036 V
+  df 0.1 MHz: 45 deg vmax_unclipped 1.272 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 1.596, max |change| 5.212 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 1.308 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 0.790, max |change| 2.305 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 1.344 V, fits True, theta_max 45.000 (theta 45.000)
+  df 0.5 MHz: 45 deg vmax_unclipped 1.481 V, fits True, theta_max 45.000 (theta 45.000)
+  all curvatures positive: True; max residual field 1.11e-18 V/um; axial-only bounded at 10 V: False
+
+wrote design\sim\out\28_tilt_geometry_3d\G4_c60_gap5_win\summary.json

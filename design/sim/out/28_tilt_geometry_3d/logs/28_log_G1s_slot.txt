@@ -1,0 +1,31 @@
+Exact gap-union cache: CacheInfo(hits=12917, misses=41, maxsize=256, currsize=41)
+G1s_slot: 36 DC electrodes active; missing from build_electrodes: none; not in expected list: none; ground keys present in els: []
+f_axial target 0.8 MHz; window none
+
+[loading] y = -240 um, null x = 0.000 um, null z = 49.963 um (target 50)
+  RF-only radial freqs (MHz) [0.     2.9991 2.9996], RF-only angle 90.00 deg
+  fbar = 2.9450 MHz
+  axial only: vmax_unclipped 6.919 V, clipped bounded False, f_axial 0.8000 MHz, residual 3.12e-18 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 0.217 V
+  df 0.1 MHz: 45 deg vmax_unclipped 7.136 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 0.745, max |change| 2.109 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 7.352 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 0.372, max |change| 1.019 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 7.569 V, fits True, theta_max 45.000 (theta 45.000)
+  df 0.5 MHz: 45 deg vmax_unclipped 8.002 V, fits True, theta_max 45.000 (theta 45.000)
+  all curvatures positive: True; max residual field 3.28e-18 V/um; axial-only bounded at 10 V: False
+
+[readout] y = 240 um, null x = 0.000 um, null z = 49.963 um (target 50)
+  RF-only radial freqs (MHz) [0.     2.9991 2.9996], RF-only angle 90.00 deg
+  fbar = 2.9450 MHz
+  axial only: vmax_unclipped 6.919 V, clipped bounded False, f_axial 0.8000 MHz, residual 3.22e-18 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 0.217 V
+  df 0.1 MHz: 45 deg vmax_unclipped 7.136 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 0.748, max |change| 1.985 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 7.352 V, fits True, theta_max 45.000 (theta 45.000)
+    robustness at 45 deg: nominal 45.00 deg, std 0.374, max |change| 0.975 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 7.569 V, fits True, theta_max 45.000 (theta 45.000)
+  df 0.5 MHz: 45 deg vmax_unclipped 8.002 V, fits True, theta_max 45.000 (theta 45.000)
+  all curvatures positive: True; max residual field 5.31e-18 V/um; axial-only bounded at 10 V: False
+
+wrote design\sim\out\28_tilt_geometry_3d\G1s_slot\summary.json

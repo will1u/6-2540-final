@@ -1,0 +1,34 @@
+Exact gap-union cache: CacheInfo(hits=11060, misses=38, maxsize=256, currsize=38)
+G0_win: 35 DC electrodes active; missing from build_electrodes: none; not in expected list: none; ground keys present in els: []
+f_axial target 0.8 MHz; window open 30x30 um at readout
+
+[loading] y = -240 um, null x = 0.000 um, null z = 49.963 um (target 50)
+  RF-only radial freqs (MHz) [0.     2.9991 2.9996], RF-only angle 90.00 deg
+  fbar = 2.9455 MHz
+  natural 10 deg: vmax_unclipped 7.168 V (clipped bounded False)
+  axial only: vmax_unclipped 6.576 V, clipped bounded False, f_axial 0.8000 MHz, residual 1.36e-17 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 4.938 V
+  df 0.1 MHz: 45 deg vmax_unclipped 11.513 V, fits False, theta_max 23.558 (theta 66.442)
+    robustness at theta_max, theta=66.442 deg: nominal 66.44 deg, std 1.873, max |change| 4.429 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 16.451 V, fits False, theta_max 11.777 (theta 78.223)
+    robustness at theta_max, theta=78.223 deg: nominal 78.22 deg, std 0.515, max |change| 1.253 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 21.389 V, fits False, theta_max 8.321 (theta 81.679)
+  df 0.5 MHz: 45 deg vmax_unclipped 31.265 V, fits False, theta_max 5.630 (theta 84.370)
+  all curvatures positive: True; max residual field 2.67e-03 V/um; axial-only bounded at 10 V: False
+
+[readout] y = 240 um, null x = 0.000 um, null z = 49.963 um (target 50)
+  RF-only radial freqs (MHz) [0.     2.9991 2.9996], RF-only angle 90.00 deg
+  fbar = 2.9436 MHz
+  natural 10 deg: vmax_unclipped 5.319 V (clipped bounded False)
+  axial only: vmax_unclipped 7.894 V, clipped bounded False, f_axial 0.8000 MHz, residual 6.30e-18 V/um
+  V per 0.1 MHz at 45 deg (vmax_unclipped(0.1) - axial only): 4.936 V
+  df 0.1 MHz: 45 deg vmax_unclipped 12.829 V, fits False, theta_max 27.139 (theta 62.861)
+    robustness at theta_max, theta=62.861 deg: nominal 62.86 deg, std 1.177, max |change| 2.861 deg
+  df 0.2 MHz: 45 deg vmax_unclipped 17.765 V, fits False, theta_max 21.834 (theta 68.166)
+    robustness at theta_max, theta=68.166 deg: nominal 68.17 deg, std 0.504, max |change| 1.204 deg
+  df 0.3 MHz: 45 deg vmax_unclipped 22.701 V, fits False, theta_max 16.565 (theta 73.435)
+  df 0.5 MHz: 45 deg vmax_unclipped 32.573 V, fits False, theta_max 1.922 (theta 88.078)
+  all curvatures positive: True; max residual field 1.94e-03 V/um; axial-only bounded at 10 V: False
+
+wrote design\sim\out\28_tilt_geometry_3d\G0_win\summary.json
+ACCEPTANCE skipped: the sim 25 reference is at 0.8 MHz without the window
