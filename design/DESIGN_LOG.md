@@ -1710,3 +1710,23 @@ Closes "RCWA of the meander" for normal incidence. Written by a delegated agent 
 **Checks.** A uniform NbN film reproduces the transfer-matrix result exactly; the in-script effective-medium calculation reproduces the stored `15b` values to 10⁻⁹; reflected, transmitted and absorbed power sum to 1. Convergence: along the wires the value is steady at 0.8217 from 11 to 199 harmonics; across the wires it drifts from 0.839 at 7 harmonics to 0.8325 at 199. The script first stopped at a change of 0.005 (5 harmonics); it now stops at 0.001, which gives 0.833 at 99 harmonics.
 
 **Limits.** Normal incidence only; the cone of angles from the ion is not averaged. The NbN index is the literature value of `09`, not a measurement of the team's film. A second lattice period of 1 nm is used to make the problem one-dimensional. No other RCWA code was run as a cross-check.
+
+---
+
+## 2026-11-10: Step 44, readability pass (documentation; no design change)
+
+No layout, no GDS and no team decision changed in this step. Done by delegated agents from written specifications, with each package checked before it was committed.
+
+**New pages.** `START_HERE.md` (entry page), `GLOSSARY.md`, `sim/INDEX.md`, `primers/RF_PRIMER.md` with `primer_numbers.py`, `fab/tests/00_SETUP.md` and `05_SIMPLER_TESTING.md`, six briefs in `fab/briefs/`, `figures/` (one plot style, a die map, eight report plots with no captions), and three source notes in `research/research_notes/Test setup 2026-11/`.
+
+**Numbers kept honest.** `check_numbers.py` reads each key number from the sim outputs through the pointers in `facts_now.json`, checks that the current-state pages quote it, and flags known stale strings. It found 30 stale lines (the 80 nm cap, v3 pickup and collection, step-25 voltages, "46 µA" from the 600 µm-zone run, v3 test dies, the Dietl statements); all are fixed and it now reports none. `fab/check_links.py ..` covers all of `design/`: 0 broken links.
+
+**Sources re-read.** Dietl 2025 was read from the arXiv PDF (pages 4–12). The 120 probe needles and the Table 2 limits are in the paper; two earlier notes here said the needles were not. Hampel 2023 (pages 2–3) and Slichter 2017 (pages 9–11) were read from their PDFs for the test pages: both tested detectors on trap chips with LED flood light and no ion.
+
+**Housekeeping.** 26 superseded log files moved to `sim/out/archive/` (none is read by a script); stale docstrings fixed in sims 05, 12 and `trapgeom.py`; `CLAUDE_PROGRESS.md` reordered so the current state comes first.
+
+**Found and not fixed.**
+- `sim/16_pad_pitch_check.py --resume` refuses to run. Its stored input hashes date from step 29; the die files were regenerated in step 35. It needs a full rerun to be usable again. Its input files are all present.
+- The switching-current estimates still disagree (8–9 µA against 8–20 µA; `fab/tests/02_CRYOGENIC.md`).
+- `fab/LAYOUT.md` says the test dies have no bond pads while `fab/tests/02_CRYOGENIC.md` says to bond T4 and T4b.
+- The journal reference of the Siverns helical-resonator paper differs between the arXiv page and an earlier note here.

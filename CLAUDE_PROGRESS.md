@@ -1,27 +1,46 @@
 # Claude progress: five-wire Ba⁺ trap with an integrated NbN SNSPD
 
-> **Claude-authored running status.** Last update: 2026-11-09 (loose-ends pass: DESIGN_LOG steps 30–36; fab pages, test dies and figures are now v4; 50 µm height and E1 vs E2 assessed). Before that: 2026-11-08 (v4 local-mirror architecture, slot leads, A30 + B60; 360 µm pad layout validated, team adoption pending).
+> **Claude-authored running status.** Last update: 2026-11-10 (readability pass and DESIGN_LOG steps 40–43: start-here page, glossary, simulation index, RF primer, test-setup pages, decision briefs, report figures; new sims 21–24).
+> - New here? Start at [design/START_HERE.md](design/START_HERE.md).
 > - Full detail with numbers and citations for every step: [design log](design/DESIGN_LOG.md) (numbered design steps and documentation updates).
 > - New team member? Set up the `electrode` repo first: `design/CLAUDE.md`, "Setting up the electrode repo".
 > - Folder index and how to run: `design/README.md`.
 
-**2026-11-09, loose-ends pass (DESIGN_LOG steps 30–36).** Written by delegated agents from a specification; every number below was rerun before logging. One team decision came out of it: keep the 50 µm ion height (logged in `notes/decisions.md`). The rest are assessments, not decisions.
-- **Ion height (step 30, `sim/17`; team decision 2026-11-09: keep 50 µm):** 50 µm is adequate. Going to 40 µm with the same 30 µm window gives 1.44× the light for 2.4× the heating (h⁻⁴) and 2.6× the clipped beam power; shrinking the whole trap loses light. The same gain is available at 50 µm from the 160 nm cap, B60, E1 or a wider centre DC.
-- **E1 vs E2 (step 31, `sim/18`):** identical as traps. E2 screens charge on the SiO₂ gap floor about 35× better and its SNSPD leads are 4 Ω instead of 69 Ω each (room temperature). E1 collects 1.18× more light and perturbs the RF null about three times less. The choice is still the team's.
-- **Collection on v4 (step 32, `sim/15b`):** A30 on E2 collects 2.22 % and absorbs 1.47 % of all emitted 493 nm photons with the 160 nm cap; B60 4.16 % and 2.71 %.
-- **SNSPD lead termination (step 33, `sim/19`):** a plain 50 Ω line with the return grounded puts about 4.1 µA of 28 MHz current through the A30 nanowire on E2 (switching current 8–20 µA). A 28 MHz L-C trap or a differential readout brings it below 0.3 µA; a 1 nF bypass also low-passes the pulse at 3.2 MHz.
-- **Transport timing (step 34, `sim/20`):** smooth ramps are easy (minimum-jerk: < 0.1 quanta above 44 µs). The 10 µm voltage table is not a waveform: it must be interpolated well below 1 µm per DAC update.
-- **Layouts (step 35):** v4 test dies `test_die_v4` / `test_die_v4_TRAP` with an independent checker; the cap is 160 nm in `make_chip.py` and the sim metadata; `gds/measured_v4.md` holds areas, squares and hashes measured from the released files.
-- **Raised or misaligned mirror (step 39, `sim/10d`; open):** a 100 nm raised mirror only lifts the RF null by 0.13–0.16 µm, uniformly, with q changed by under 0.5 %, so for the ion raised and inlaid are equivalent. The larger effect is misalignment of the mirror on E1: 2 µm off centre moves the null 0.5 µm sideways (5 µm: 1.05 µm), against 15–30 nm on E2, because the mirror edge is drawn on the centre-DC edge and a shifted mirror reaches under the gap. The shift is static and the DC electrodes compensate it (about 18 V/m per µm; untrimmed, the ion still follows the null to within about 4 %), so it is not a problem. Optional proposal: narrow the mirror to |y| ≤ 18 µm (layer 10 only) and hold the layer-10 overlay to about 1 µm.
-- **Al mirror: 100 nm, inlaid (step 38; team decision 2026-11-09, `notes/decisions.md`).** Step 3 is now resist, a 100 nm recess in the thermal SiO₂, Al evaporation and lift-off with one resist, so the SiO₂ cap and all the Au are at one level. `sim/10c`: 3.2 mA goes along the strip to ground; the extra nanowire current is at most 0.73–0.97 µA (E2); the strip dissipates 34–45 µW; T10 is expected at 18.8–25.1 Ω. Every fab page and both figures are updated. Unproven until witness loop W8 passes; fallback is the same mirror without the recess.
-- **Al mirror thickness, the analysis behind it (step 37, `sim/10c`):** the 450 nm mirror stands 0.45 µm proud of the SiO₂ beside it, so the centre DC and slot leads sit 0.45 µm above the RF rails. Its pickup goes to ground (about 3.1 mA along the strip); the part that can reach the nanowire is ≤ 0.2 µA at 450 nm, ≤ 1.0 µA at 100 nm and ≤ 1.9 µA at 50 nm, next to a direct pickup of 0.96–1.92 µA. The ion does not notice. A thin mirror costs heat: 65–87 µW in a 50 nm strip against 7–10 µW at 450 nm. The team chose 100 nm, inlaid (step 38).
-- **Fab pages (step 36):** every page in `design/fab/` is v4, with E1 and E2 written as equal branches; two new figures, `fab/figures/stack_v4.svg` and `process_flow_v4.svg`.
+## Where things stand
 
-**2026-11-08, v4 SNSPD overhang audit:** completed the requested GDS, ray-footprint, optical-stack and straight-wire inductance checks for A30/B60, E1/E2 and 80/160 nm SiO₂ caps; see the final audit entry in `design/DESIGN_LOG.md`. Centred overhang causes no ray-envelope collection loss; its main quantified cost is about 14/22 ns of extra straight-section current-recovery time constant. Radial alignment margin is about 0.93 µm at 160 nm cap. The generator metadata and the process pages say 160 nm since step 35. No layout or design choice changed; actual switching current, internal efficiency and recovery still require qualification.
+- **Architecture:** v4 has a local Al mirror under the SNSPD with no ground plane, Au leads in a slot along the centre DC, and the trap dies A30, B60 and NODET pass `check_chip.py` ([stack figure](design/fab/figures/stack_v4.svg)).
+- **First run:** R1_TRAP is trap only (6 NODET and 2 trap-only test dies) and is run 1a, chosen first ([run sheet](design/fab/RUNSHEET_R1_TRAP.md)).
+- **Mirror (team decision, 2026-11-09):** the Al mirror is 100 nm thick and inlaid in a 100 nm recess in the SiO₂ ([team decisions](notes/decisions.md)).
+- **Ion height (team decision, 2026-11-09):** the ion height stays at 50 µm ([team decisions](notes/decisions.md)).
+- **Electrode Au, E1 or E2:** open, with both branches written out on the fab pages ([brief](design/fab/briefs/E1_vs_E2.md)).
+- **Readout tilt:** open; the v4 A30 readout fits a 10° tilt at 6.3 V ([brief](design/fab/briefs/readout_tilt.md)).
+- **RF grounding and lead termination:** open; no filter or termination values are chosen ([brief](design/fab/briefs/rf_grounding_and_termination.md)).
+- **Pad pitch:** the generated 360 µm layout is not yet adopted by the team ([brief](design/fab/briefs/pad_pitch.md)).
+- **Carrier and spacer:** the carrier (84-pin, 100-pin or the lab carrier) and the spacer are open ([brief](design/fab/briefs/carrier_and_spacer.md)).
+- **Mirror, raised or inlaid:** open, with the raised 100 nm mirror as the named fallback ([brief](design/fab/briefs/mirror_raised_vs_inlaid.md)).
+- **Testing:** planned in the [test plan](design/fab/test_plan.md), with the [setup page](design/fab/tests/00_SETUP.md) and the [simpler testing page](design/fab/tests/05_SIMPLER_TESTING.md).
+- **What blocks a run:** the witness loops and facility questions in [qualification](design/fab/QUALIFICATION.md) are not yet done.
 
-## Fabrication review
+## 2026-11-10: readability pass and four new simulations
 
-Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decision log](notes/decisions.md). **The architecture changed to v4 on 2026-11-08** (local mirror, no D2; leads in a slot along the centre DC; A30 + B60 retained; R1_TRAP on the no-Al stack). The trap-die GDS is v4 and passes `check_chip.py`. Since 2026-11-09 the traveler, run sheet, mask list, test plan and test dies are v4 as well, with the electrode step written as two branches (E1 and E2) until the team chooses. Figures: [stack](design/fab/figures/stack_v4.svg), [process flow](design/fab/figures/process_flow_v4.svg).
+**New pages and tools**
+- [design/START_HERE.md](design/START_HERE.md): entry page for new team members.
+- [design/GLOSSARY.md](design/GLOSSARY.md): glossary.
+- [design/sim/INDEX.md](design/sim/INDEX.md): simulation index.
+- [design/check_numbers.py](design/check_numbers.py): checks the numbers in current-state pages against the sim outputs.
+- [design/primers/RF_PRIMER.md](design/primers/RF_PRIMER.md): RF primer.
+- [design/fab/tests/00_SETUP.md](design/fab/tests/00_SETUP.md): test setup.
+- [design/fab/tests/05_SIMPLER_TESTING.md](design/fab/tests/05_SIMPLER_TESTING.md): simpler testing.
+- [design/fab/briefs/](design/fab/briefs/): decision briefs.
+- [design/figures/README.md](design/figures/README.md): report figures.
+- [design/research/research_notes/Test%20setup%202026-11/](design/research/research_notes/Test%20setup%202026-11/): source notes for the test setup.
+- [design/sim/out/archive/](design/sim/out/archive/): archive of old logs.
+
+**New results**
+- Step 40, `21_transport_waveform.py`: a 1 ms move of the A30 well at 1 MHz DAC updates has at most 0.154 V and 0.9 µm per update and leaves below 10⁻³ quanta in the classical one-dimensional model; at 100 kHz updates the same model leaves 5 × 10⁶ quanta. The DAC and filter values are [verify], and the radial modes and heating during the move are not modelled.
+- Step 41, `22_rf_capacitance.py`: the chip has 2.59 pF of RF capacitance on A30 with E2 and 2.39 pF with E1, from 2-D sections with ideal conductors. The first-order loss estimate gives Q ≈ 6 at room temperature for the chip alone (Si at the 20 kΩ·cm lower spec, tan δ = 0.27 [inference]); package, bond wires and resonator are not included.
+- Step 42, `23_dc_rf_coupling.py`: the centre DC on A30 with E2 carries 6.1 V of RF with no filter capacitor, 22 mV with 1 nF and 2.2 mV with 10 nF, from a 2-D capacitance model. The model ignores the inductance of the bond wire and of the lead to the capacitor, and it does not choose a capacitor.
+- Step 43, `24_rcwa_meander.py`: at 493 nm and normal incidence, RCWA gives 0.827 absorbed in the NbN for unpolarised light with a 160 nm SiO₂ cap, against 0.662 from the effective-medium model. The result covers normal incidence only (no average over the emission cone), and the NbN index is the literature value.
 
 ## Goal
 
@@ -56,9 +75,15 @@ Ground rules agreed with the team:
 | Layer map | `design/gds/layer_map.md` |
 | Simulation layouts | `design/gds/*_sim.json` (read by gds2itvg) |
 | Generators / checks | `make_chip.py`, `make_test_die.py`, `make_run.py`, `make_wafer.py`; `check_chip.py` (DRC + connectivity + fab consistency + no ITO + no pads in the beam-exit corners; **all pass** on v4 A30, B60 and NODET); `check_test_die.py` (written from the specification, independent of the generator); `measure_dies.py` → `measured_v4.md` (areas, meander squares, file hashes) |
-| Simulations | `design/sim/01…20_*.py` (outputs in `design/sim/out/`). New 2026-11-09: `15b` collection on v4, `17` height trade-off, `18` E1 vs E2, `19` lead termination, `20` transport timing |
+| Simulations | `design/sim/01…24_*.py` (outputs in `design/sim/out/`). New 2026-11-09: `15b` collection on v4, `17` height trade-off, `18` E1 vs E2, `19` lead termination, `20` transport timing. New 2026-11-10: `21` transport waveform, `22` chip RF capacitance, `23` DC-to-RF coupling, `24` RCWA of the meander |
 | Literature | `design/research/reports/Trap integrated SNSPD design.md`, `design/references_design.bib`; pointers from 2026-11-09 in `design/research/research_notes/Loose ends 2026-11/` |
 | Fab | `design/fab/TRAVELER.md` (v4 index), `process/01…04`, `RUNSHEET_R1_TRAP.md`, `mask_list.md`, `process_checks.md`, `test_plan.md`, `figures/stack_v4.svg`, `figures/process_flow_v4.svg`; `check_links.py` checks the links between them |
+| Entry page and glossary | `design/START_HERE.md`, `design/GLOSSARY.md` |
+| Simulation index | `design/sim/INDEX.md`; `design/check_numbers.py` checks the numbers in current-state pages against the sim outputs |
+| RF primer | `design/primers/RF_PRIMER.md` |
+| Decision briefs | `design/fab/briefs/` (E1 vs E2, readout tilt, RF grounding and lead termination, pad pitch, carrier and spacer, mirror raised or inlaid) |
+| Test setup pages | `design/fab/tests/00_SETUP.md`, `design/fab/tests/05_SIMPLER_TESTING.md` |
+| Report figures | `design/figures/README.md` |
 
 ## Key design numbers
 
@@ -74,10 +99,78 @@ Ground rules agreed with the team:
 | Geometric collection | v4 (sim 15b, step 32), isotropic Ba⁺ emission: 2.22 % (A30, E2), 4.16 % (B60, E2); absorbed in NbN 1.47 % / 2.71 % of all emitted photons with the 160 nm cap. Todaro: 2.0 % geometric. |
 | Beam clipping (10 × 10 mm die) | ≈ 1.7e-2 at 493 nm, 3.2e-2 at 650 nm (was 1.1e-5 / 1.1e-4 on the 2.5 mm die) |
 | RF pickup bound (2-D) | v4 (sim 10c, steps 37–38): nanowire 0.96 µA (E2) / 1.92 µA (E1), plus at most 0.73–0.97 µA through the mirror path; each slot lead collects 44.5 µA (E2) / 28.6 µA (E1) of common-mode current. v3 was 1.4 µA with no ITO |
-| Simulated on the v3 fab GDS | Null height 50.08 µm (loading), 50.09 µm (readout); with the window recess ≈ 48.7 µm (A30) or ≈ 47.6 µm (B60). Loading zone and NODET: axial 0.8 MHz, radial 2.89 / 2.97 MHz, 10° tilt, max \|V\| 9.05 V. **A30/B60 readout: the open window splits the radial modes, so the 10° tilt needs 13.2 / 15.2 V (over ±10 V); no tilt needs 6.6 / 3.4 V.** Transport max 7.33 V; ≤ 1.6 V per 10 µm step (A30), up to 4.5 V near the B60 window. |
 | Simulated on the v4 fab GDS | Null 49.97 / 49.98 µm; readout incl. recess ≈ 48.8 µm (E2). 10° tilt (480 µm zones, steps 28–29): loading 7.5 V, **readout 6.3 V** (A30) / 2.2 V (B60) (fits ±10 V; v3 needed 13.2 V). NODET 7.9 V. Transport with the centre DC held at 0 V: max 6.6 V, ≤ 1.71 V per 10 µm step (7.6–8.0 V steps if the centre DC is used, because of the slot end and window). |
+| Chip RF capacitance (sim 22) | 2.59 pF (A30, E2); 2.39 pF (A30, E1); 2-D sections with ideal conductors, Si treated as lossless (DESIGN_LOG step 41) |
+| RF voltage on the centre DC with a filter capacitor (sim 23) | 6.1 V with no capacitor (A30, E2); 22 mV with 1 nF; 2.2 mV with 10 nF (DESIGN_LOG step 42) |
+| NbN absorption, RCWA at normal incidence (sim 24) | 0.827 with a 160 nm cap, unpolarised (RCWA), against 0.662 from the effective-medium model (`09c`, DESIGN_LOG step 43). The other rows of this table use the effective-medium value. |
 
-## Done ✅ (chronological)
+## Open items / decisions for the team
+
+- [ ] Ground vias (step 22): add the via contact check to W3 (with / without Ar pre-clean, sidewall cross-section); confirm the AJA substrate RF etch.
+- [ ] **v3.1 SNSPD geometry** (step 24) is Claude's design call, not a team decision (team, 2026-11-08), so it stays out of `notes/decisions.md` until the team adopts it. Open from it: centre-DC filter capacitor, Al RF potential under the leads, Isw at 5 K (maybe 8–9 µA), measured NbN thickness, Suleimen 2026 full text, isotropy derivation check.
+- [ ] **v4 follow-ups** (step 25): choose E1 vs E2 ([brief](design/fab/briefs/E1_vs_E2.md)); RF bypass / symmetric termination for the slot leads (sim 10c: 44.5 µA common-mode per lead on E2; [brief](design/fab/briefs/rf_grounding_and_termination.md)); order Si with ρ > 20 kΩ·cm; measure resonator Q with a die mounted.
+- [ ] Bond pads (step 21): run W7 bond-and-leak before R1; get MIT.nano bonder and tool part numbers; draw the bond diagram against the carrier.
+- [ ] **Pad pitch / package (step 29):** adopt or revise the validated 360 µm layout after reviewing future perpendicular beam access near the zones; choose 84-pin vs 100-pin/lab carrier and complete its electrical pin map. Spacer proposal: ≥ approximately 0.6 mm thick, die-sized or larger, Si suggested; not adopted. Briefs: [pad pitch](design/fab/briefs/pad_pitch.md), [carrier and spacer](design/fab/briefs/carrier_and_spacer.md).
+- [ ] Not yet team decisions (Claude's layout calls or open): readout radial tilt (v4 A30 fits 10° at 6.3 V; team to confirm; [brief](design/fab/briefs/readout_tilt.md)), 0.8 MHz axial with ±10 V DACs.
+- [ ] Reasons the team still owes `notes/decisions.md` (asked 2026-11-08): A30/B60 detector variants; and "not recorded" on Ba⁺/project scope, NODET die, R1_TRAP first. (Si substrate, no ITO and the 10 × 10 mm die were answered 2026-11-08; the 50 µm ion height on 2026-11-09.)
+- [ ] Before tape-out, run the witness wafers in [qualification](design/fab/QUALIFICATION.md). Also confirm:
+  - the Plating-U04 bath;
+  - the Dane NbN recipe (Berggren group);
+- [ ] Before R1_TRAP (v4): no D2 stress or gap-etch loops any more; W5 plating only if E2; W7 bond-and-leak on the v4 stack.
+- [ ] Ask MIT.nano staff the facility questions in [facility questions](design/fab/QUALIFICATION.md#facility-confirmations): which tools accept Au, NbN sputter access, gold plating tank.
+- [ ] Check whether T4/T4b on the test die can be wire-bonded for the cold SNSPD test (marked [verify] in `test_plan.md` (b)).
+- [ ] Ask the lab the 14 questions in the [test setup page](design/fab/tests/00_SETUP.md#6-questions-for-the-lab) (carrier, DC and coaxial lines, resonator, thermometry, light on the detector, DAC).
+- [ ] Not modelled yet:
+  - 3-D lead pickup: still open; step 42 did not attempt the planned field solve, because gds2itvg cannot be evaluated at the chip surface.
+  - RCWA over the emission cone, and any FDTD: step 43 covers normal incidence only.
+  - a thermal model of the mirror strip (none yet; see [open decisions](design/fab/OPEN_DECISIONS.md)).
+  - measured loss tangent of the SiO₂ films (none measured, step 41) and measured Au resistivity at 4 K (no literature value found, step 31).
+
+## History
+
+### 2026-11-09, loose-ends pass (DESIGN_LOG steps 30–39)
+
+**2026-11-09, loose-ends pass (DESIGN_LOG steps 30–36).** Written by delegated agents from a specification; every number below was rerun before logging. One team decision came out of it: keep the 50 µm ion height (logged in `notes/decisions.md`). The rest are assessments, not decisions.
+- **Ion height (step 30, `sim/17`; team decision 2026-11-09: keep 50 µm):** 50 µm is adequate. Going to 40 µm with the same 30 µm window gives 1.44× the light for 2.4× the heating (h⁻⁴) and 2.6× the clipped beam power; shrinking the whole trap loses light. The same gain is available at 50 µm from the 160 nm cap, B60, E1 or a wider centre DC.
+- **E1 vs E2 (step 31, `sim/18`):** identical as traps. E2 screens charge on the SiO₂ gap floor about 35× better and its SNSPD leads are 4 Ω instead of 69 Ω each (room temperature). E1 collects 1.18× more light and perturbs the RF null about three times less. The choice is still the team's.
+- **Collection on v4 (step 32, `sim/15b`):** A30 on E2 collects 2.22 % and absorbs 1.47 % of all emitted 493 nm photons with the 160 nm cap; B60 4.16 % and 2.71 %.
+- **SNSPD lead termination (step 33, `sim/19`):** a plain 50 Ω line with the return grounded puts about 4.1 µA of 28 MHz current through the A30 nanowire on E2 (switching current 8–20 µA). A 28 MHz L-C trap or a differential readout brings it below 0.3 µA; a 1 nF bypass also low-passes the pulse at 3.2 MHz.
+- **Transport timing (step 34, `sim/20`):** smooth ramps are easy (minimum-jerk: < 0.1 quanta above 44 µs). The 10 µm voltage table is not a waveform: it must be interpolated well below 1 µm per DAC update.
+- **Layouts (step 35):** v4 test dies `test_die_v4` / `test_die_v4_TRAP` with an independent checker; the cap is 160 nm in `make_chip.py` and the sim metadata; `gds/measured_v4.md` holds areas, squares and hashes measured from the released files.
+- **Raised or misaligned mirror (step 39, `sim/10d`; open):** a 100 nm raised mirror only lifts the RF null by 0.13–0.16 µm, uniformly, with q changed by under 0.5 %, so for the ion raised and inlaid are equivalent. The larger effect is misalignment of the mirror on E1: 2 µm off centre moves the null 0.5 µm sideways (5 µm: 1.05 µm), against 15–30 nm on E2, because the mirror edge is drawn on the centre-DC edge and a shifted mirror reaches under the gap. The shift is static and the DC electrodes compensate it (about 18 V/m per µm; untrimmed, the ion still follows the null to within about 4 %), so it is not a problem. Optional proposal: narrow the mirror to |y| ≤ 18 µm (layer 10 only) and hold the layer-10 overlay to about 1 µm.
+- **Al mirror: 100 nm, inlaid (step 38; team decision 2026-11-09, `notes/decisions.md`).** Step 3 is now resist, a 100 nm recess in the thermal SiO₂, Al evaporation and lift-off with one resist, so the SiO₂ cap and all the Au are at one level. `sim/10c`: 3.2 mA goes along the strip to ground; the extra nanowire current is at most 0.73–0.97 µA (E2); the strip dissipates 34–45 µW; T10 is expected at 18.8–25.1 Ω. Every fab page and both figures are updated. Unproven until witness loop W8 passes; fallback is the same mirror without the recess.
+- **Al mirror thickness, the analysis behind it (step 37, `sim/10c`):** the 450 nm mirror stands 0.45 µm proud of the SiO₂ beside it, so the centre DC and slot leads sit 0.45 µm above the RF rails. Its pickup goes to ground (about 3.1 mA along the strip); the part that can reach the nanowire is ≤ 0.2 µA at 450 nm, ≤ 1.0 µA at 100 nm and ≤ 1.9 µA at 50 nm, next to a direct pickup of 0.96–1.92 µA. The ion does not notice. A thin mirror costs heat: 65–87 µW in a 50 nm strip against 7–10 µW at 450 nm. The team chose 100 nm, inlaid (step 38).
+- **Fab pages (step 36):** every page in `design/fab/` is v4, with E1 and E2 written as equal branches; two new figures, `fab/figures/stack_v4.svg` and `process_flow_v4.svg`.
+
+### 2026-11-08, v4 SNSPD overhang audit
+
+**2026-11-08, v4 SNSPD overhang audit:** completed the requested GDS, ray-footprint, optical-stack and straight-wire inductance checks for A30/B60, E1/E2 and 80/160 nm SiO₂ caps; see the final audit entry in `design/DESIGN_LOG.md`. Centred overhang causes no ray-envelope collection loss; its main quantified cost is about 14/22 ns of extra straight-section current-recovery time constant. Radial alignment margin is about 0.93 µm at 160 nm cap. The generator metadata and the process pages say 160 nm since step 35. No layout or design choice changed; actual switching current, internal efficiency and recovery still require qualification.
+
+### Fabrication review
+
+Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decision log](notes/decisions.md). **The architecture changed to v4 on 2026-11-08** (local mirror, no D2; leads in a slot along the centre DC; A30 + B60 retained; R1_TRAP on the no-Al stack). The trap-die GDS is v4 and passes `check_chip.py`. Since 2026-11-09 the traveler, run sheet, mask list, test plan and test dies are v4 as well, with the electrode step written as two branches (E1 and E2) until the team chooses. Figures: [stack](design/fab/figures/stack_v4.svg), [process flow](design/fab/figures/process_flow_v4.svg).
+
+### In progress (as of 2026-11-09)
+
+- Fabrication notes reorganized into linked modules. Qualification and detector reconciliation remain open; see [checklist](design/fab/OPEN_DECISIONS.md).
+
+### Closed on 2026-11-10
+
+- Rewrite traveler / R1_TRAP sheet / mask list / stack for v4: done 2026-11-09 (steps 35–36).
+- Rework the test dies (no D2, no die-wide Al): done 2026-11-09 (step 35).
+- Set the cap to 160 nm in the rewritten traveler: done 2026-11-09 (steps 35–36; the optics basis is step 26).
+- Mirror ground path: via moved to just past the RF open end (step 28). The Al was 450 nm from 2026-11-08 and is 100 nm, inlaid from 2026-11-09 (steps 37–38; at most +0.97 µA), measured on T10 instead of a probe opening on the trap die.
+- Adiabatic transport timing: first estimate step 34, waveform step 40 (`sim/20`, `sim/21`).
+- RCWA/FDTD of the meander (TMM reads about 10 % low), and the v3.1 "RCWA check of absorption": RCWA at normal incidence, step 43 (`sim/24`). FDTD and the emission-cone average are not done.
+- Field-solve DC-to-RF coupling: 2-D field solve, step 42 (`sim/23`). The filter capacitor choice is still open.
+
+### Simulated on the v3 fab GDS
+
+| Item | Value |
+|---|---|
+| Simulated on the v3 fab GDS | Null height 50.08 µm (loading), 50.09 µm (readout); with the window recess ≈ 48.7 µm (A30) or ≈ 47.6 µm (B60). Loading zone and NODET: axial 0.8 MHz, radial 2.89 / 2.97 MHz, 10° tilt, max \|V\| 9.05 V. **A30/B60 readout: the open window splits the radial modes, so the 10° tilt needs 13.2 / 15.2 V (over ±10 V); no tilt needs 6.6 / 3.4 V.** Transport max 7.33 V; ≤ 1.6 V per 10 µm step (A30), up to 4.5 V near the B60 window. |
+
+### Done ✅ (chronological)
 
 1. **Read the inputs:** notes PDF, the electrode repo (gds2itvg) and the bib. Questions to the team settled authorship, the Si substrate and e-beam access.
 2. **Literature:** 5 parallel research threads, combined into one report with 28 design implications. Main finding: Todaro's pocket sits inside the centre DC, and the height drop comes from RF-rail termination plus the recess.
@@ -117,31 +210,7 @@ Ground rules agreed with the team:
 
 26. **360 µm pad-layout validation** (DESIGN_LOG step 29): measured all 84 PGA84L finger centres and mapped all 42 A30 pads without crossings; worst top/bottom angle 20.03°, side angles ≤ 8.58°. A30/B60/NODET pass `check_chip.py` (5.00 µm spacing, no floating Au or corner pads). All seven sim 12 runs pass: regular zone maxima ≤ 7.93 V; centre-zero transport 1.708 V per 10 µm; planar null heights unchanged, 49.96–49.98 µm at the confirmed two-decimal precision. A 0.117 V diagnostic readout-set change triggered sim 13; needed height-tuning voltages changed by ≤ 0.0041 V. Old outputs are archived. Layer map and v4 packaging map updated. **Pitch adoption, future perpendicular beam access, carrier choice and spacer remain open; `notes/decisions.md` unchanged.**
 
-## In progress ⏳
-
-- Fabrication notes reorganized into linked modules. Qualification and detector reconciliation remain open; see [checklist](design/fab/OPEN_DECISIONS.md).
-
-## Open items / decisions for the team
-
-- [ ] Ground vias (step 22): add the via contact check to W3 (with / without Ar pre-clean, sidewall cross-section); confirm the AJA substrate RF etch.
-- [ ] **v3.1 SNSPD geometry** (step 24) is Claude's design call, not a team decision (team, 2026-11-08), so it stays out of `notes/decisions.md` until the team adopts it. Open from it: centre-DC filter capacitor, Al RF potential under the leads, Isw at 5 K (maybe 8–9 µA), measured NbN thickness, RCWA check of absorption, Suleimen 2026 full text, isotropy derivation check.
-- [ ] **v4 follow-ups** (step 25): choose E1 vs E2; rewrite traveler / R1_TRAP sheet / mask list / stack for v4; rework the test dies (no D2, no die-wide Al); set the cap to 160 nm in the rewritten traveler (09c, step 26); RF bypass / symmetric termination for the slot leads (sim 10c: 44.5 µA common-mode per lead on E2); mirror ground path: via moved; Al 450 nm on 2026-11-08, then 100 nm inlaid on 2026-11-09 (steps 37–38; at most +0.97 µA), measured on T10 instead of a probe opening; order Si with ρ > 20 kΩ·cm; measure resonator Q with a die mounted.
-- [ ] Bond pads (step 21): run W7 bond-and-leak before R1; get MIT.nano bonder and tool part numbers; draw the bond diagram against the carrier; field-solve DC-to-RF coupling.
-- [ ] **Pad pitch / package (step 29):** adopt or revise the validated 360 µm layout after reviewing future perpendicular beam access near the zones; choose 84-pin vs 100-pin/lab carrier and complete its electrical pin map. Spacer proposal: ≥ approximately 0.6 mm thick, die-sized or larger, Si suggested; not adopted.
-- [ ] Not yet team decisions (Claude's layout calls or open): readout radial tilt (v4 A30 fits 10° at 6.3 V; team to confirm), 0.8 MHz axial with ±10 V DACs.
-- [ ] Reasons the team still owes `notes/decisions.md` (asked 2026-11-08): A30/B60 detector variants; and "not recorded" on Ba⁺/project scope, NODET die, R1_TRAP first. (Si substrate, no ITO and the 10 × 10 mm die were answered 2026-11-08; the 50 µm ion height on 2026-11-09.)
-- [ ] Before tape-out, run the witness wafers in [qualification](design/fab/QUALIFICATION.md). Also confirm:
-  - the Plating-U04 bath;
-  - the Dane NbN recipe (Berggren group);
-- [ ] Before R1_TRAP (v4): no D2 stress or gap-etch loops any more; W5 plating only if E2; W7 bond-and-leak on the v4 stack.
-- [ ] Ask MIT.nano staff the facility questions in [facility questions](design/fab/QUALIFICATION.md#facility-confirmations): which tools accept Au, NbN sputter access, gold plating tank.
-- [ ] Check whether T4/T4b on the test die can be wire-bonded for the cold SNSPD test (marked [verify] in `test_plan.md` (b)).
-- [ ] Not modelled yet:
-  - RCWA/FDTD of the meander (TMM reads about 10 % low);
-  - 3-D lead pickup;
-  - adiabatic transport timing.
-
-## Decisions reversed along the way
+### Decisions reversed along the way
 
 | Was | Replaced by | Why |
 |---|---|---|
