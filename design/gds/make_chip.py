@@ -41,6 +41,11 @@ Variants:
   --nodet    trap_die_v4_NODET: no SNSPD, no window, no slot (solid centre DC), no Al, no layer 40.
              This is the R1_TRAP die: Au on SiO2 over high-resistivity Si.
   --uniform  SIMULATION REFERENCE ONLY (sim/14): NODET with equal-depth outer DC rectangles, no leads/pads.
+  --split    (Claude-authored proposal, see sims 25 and 28; not a team decision) adds "_split" to the variant
+             (trap_die_v4_A30_split, _B60_split, _NODET_split). The same die, except the centre DC is cut
+             lengthwise along y = 0 by a 5 um gap (G), so it becomes two electrodes: 2 = top half (as now),
+             37 = bottom half. The bottom half gets its own lead and pad (mirror of the top one). Combines with
+             --det60 and --nodet. Not for --uniform.
 
 Writes trap_die_v4_<V>.gds, <stem>_pads.csv and the gds2itvg layouts:
   <stem>_sim.json      option E2 electrodes (6 um plated Au)
@@ -92,6 +97,14 @@ if "--nodet" in sys.argv:               # plain trap: no SNSPD, no window, solid
 UNIFORM = "--uniform" in sys.argv
 if UNIFORM:
     VARIANT, HAS_DET = "UNIFORM", False
+# --split (Claude-authored proposal, sims 25 and 28): centre DC cut lengthwise at y = 0 into electrode 2 (top)
+# and electrode 37 (bottom). SPLIT_G is the cut width (= G).
+SPLIT = "--split" in sys.argv
+SPLIT_G = 5.0
+if SPLIT and UNIFORM:
+    raise SystemExit("--split is not supported with --uniform")
+if SPLIT:
+    VARIANT = VARIANT + "_split"
 WIRE_W, WIRE_P = 0.130, 0.200         # f = 0.65 (step 24)
 LEAD_W, PITCH = 6.0, 12.0              # Au track width and pitch (outer DC leads)
 GAP_FAR = 10.0
@@ -108,7 +121,7 @@ EDGE_AU = 100.0
 SLOT_HALF = 12.5                       # slot |y| < 12.5: gap 5 / lead 5 / gap 5 / lead 5 / gap 5
 SN_W, SN_Y = 5.0, 5.0                  # Au lead width and centre |y|
 # the NbN tab centres sit 27 um left of the meander (snspd_geom: 0.5 block + 0.5 gap + 6 taper + 20 = half a
-# 40 um tab); the slot ends 20 um left of them (A30: x = 235, 50 um before the window; B60: x = 218.5)
+# 40 um tab); the slot ends 20 um left of them (A30: x = 175, 50 um before the window edge at 225; B60: x = 158.5)
 X_TAB = X_READ - DET_WX / 2 - 27.0
 X_SLOT_END = X_TAB - 20.0
 X_LEAD_END = X_SLOT_END - G            # lead tips, 5 um from the solid centre DC
@@ -154,7 +167,18 @@ centre = rect(XRF0 - 40.0, -C / 2, XRF1 - G, C / 2)
 if HAS_DET:
     slot = rect(XRF0 - 41.0, -SLOT_HALF, X_SLOT_END, SLOT_HALF)
     centre = gdstk.boolean(centre, [win, slot], "not")
-add("2", centre, seed=(X_LOAD, DC_HALF_Y))
+if SPLIT:
+    # cut the centre DC along y = 0; every piece lies on one side of the cut, and each half holds its seed
+    halves = gdstk.boolean(centre, [rect(XRF0 - 41.0, -SPLIT_G / 2, XRF1 - G + 1.0, SPLIT_G / 2)], "not")
+    top_h = [p for p in halves if p.bounding_box()[0][1] > 0]
+    bot_h = [p for p in halves if p.bounding_box()[1][1] < 0]
+    assert len(top_h) + len(bot_h) == len(halves), "a centre-DC piece straddles y = 0"
+    assert gdstk.inside([(X_LOAD, DC_HALF_Y)], top_h)[0], "top seed off metal"
+    assert gdstk.inside([(X_LOAD, -DC_HALF_Y)], bot_h)[0], "bottom seed off metal"
+    add("2", top_h, seed=(X_LOAD, DC_HALF_Y))
+    add("37", bot_h, seed=(X_LOAD, -DC_HALF_Y))
+else:
+    add("2", centre, seed=(X_LOAD, DC_HALF_Y))
 add("1", [rect(XRF0, y_rf0, XRF1, y_rf1), rect(XRF0, -y_rf1, XRF1, -y_rf0),
           rect(XRF1, -y_rf1, XRF1 + U_BAR, y_rf1)], seed=(X_LOAD, (y_rf0 + y_rf1) / 2))
 X_RFPAD = 4700.0
@@ -201,6 +225,11 @@ add("2", path([(XRF0 - 40.0, DC_HALF_Y), (-3600.0, DC_HALF_Y), (-3700.0, Y_CPAD)
 pad_polys.append(rect(X_CPAD - 100, Y_CPAD - 100, X_CPAD + 100, Y_CPAD + 100))
 add("2", pad_polys[-1])
 pads.append(("C", "2", X_CPAD, Y_CPAD, L_AU))
+if SPLIT:   # bottom half of the split centre DC: the same lead and pad, mirrored in y
+    add("37", path([(XRF0 - 40.0, -DC_HALF_Y), (-3600.0, -DC_HALF_Y), (-3700.0, -Y_CPAD), (X_CPAD, -Y_CPAD)], C / 2 - SLOT_HALF))
+    pad_polys.append(rect(X_CPAD - 100, -Y_CPAD - 100, X_CPAD + 100, -Y_CPAD + 100))
+    add("37", pad_polys[-1])
+    pads.append(("C2", "37", X_CPAD, -Y_CPAD, L_AU))
 
 # ------------------------------------------------------------------ SNSPD: NbN, Au leads in the slot, contacts
 vias, mirror = [], []
@@ -326,6 +355,9 @@ for opt, t_au in STACKS.items():
         "electrodes": {k: seeds[k] for k in sorted(seeds, key=int)},
         "ground": ground_seeds,
     }
+    if SPLIT:
+        sim["_comment"] += " Centre DC split lengthwise: 2 = top half, 37 = bottom half."
+        sim["_split"] = {"gap_um": SPLIT_G, "bottom_half": "37"}
     name = STEM + ("_sim.json" if opt == "E2" else f"_{opt}_sim.json")
     with open(os.path.join(HERE, name), "w") as fh:
         json.dump(sim, fh, indent=1)
@@ -334,6 +366,8 @@ role = {"1": "RF", "2": "centre DC", "SNSPD_S": "SNSPD signal (Au lead in the ce
         "33": "top cap left", "34": "top cap right", "35": "bottom cap left", "36": "bottom cap right"}
 role.update({n: f"top segment, centre {seg_cent[k] - X_READ:+.0f} um from readout" for k, n in enumerate(n_top)})
 role.update({n: f"bottom segment, centre {seg_cent[k] - X_READ:+.0f} um from readout" for k, n in enumerate(n_bot)})
+if SPLIT:
+    role.update({"2": "centre DC, top half (split)", "37": "centre DC, bottom half (split)"})
 with open(os.path.join(HERE, STEM + "_pads.csv"), "w", newline="") as fh:
     w = csv.writer(fh)
     w.writerow(["pad", "electrode", "role", "x_um", "y_um", "layer"])

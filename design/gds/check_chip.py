@@ -172,7 +172,13 @@ if has_det:
                f"mirror via at ({c.x:.0f}, {c.y:.0f}) enclosed >= 25 um by ground Au and by the Al")
 else:
     report(not any(L in by_layer for L in (10, 20, 22, 40)), "plain die: nothing on layers 10, 20, 22, 40")
-    report(au.contains(box(x_read - 15, y_ax - 15, x_read + 15, y_ax + 15)), "plain die: centre DC is solid Au at the readout zone")
+    if "_split" in sim:   # split centre DC (make_chip --split): solid on each side of the cut, not across it
+        g = sim["_split"]["gap_um"] / 2
+        report(au.contains(box(x_read - 15, y_ax + g, x_read + 15, y_ax + 15)) and
+               au.contains(box(x_read - 15, y_ax - 15, x_read + 15, y_ax - g)),
+               "plain die (split): centre DC is solid Au on both halves at the readout zone")
+    else:
+        report(au.contains(box(x_read - 15, y_ax - 15, x_read + 15, y_ax + 15)), "plain die: centre DC is solid Au at the readout zone")
 
 # ---------------------------------------------------------------- pads, marks
 rows = list(csv.DictReader(open(os.path.join(HERE, STEM + "_pads.csv"))))
