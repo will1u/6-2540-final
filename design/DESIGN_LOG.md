@@ -1609,3 +1609,56 @@ Inlaying costs 2 % in strip current against the 100 nm raised case (3.19 against
 - So the mirror-outline proposal above is a convenience, not a requirement. It would make the DC set computed from the drawn layout correct without a trim.
 
 **Limits.** 2-D cross-section through the lead slot: no window and no mirror end. The mirror ends 28 µm past the readout-zone centre, where a raised mirror gives an axial change in null height of 0.13–0.16 µm that this model cannot resolve. Ideal conductors; SiO₂ drawn with vertical steps; leads and DC electrodes at RF ground; absolute height and q biased as noted above.
+
+---
+
+## 2026-11-10: Step 40, a transport waveform that a DAC could play (`sim/21_transport_waveform.py`)
+
+Closes the "10 µm table is not a waveform" item of step 34 as far as a model can. Written by a delegated agent from a specification; the acceptance numbers below were read back from the three `summary.json` files before logging.
+
+**Method.** The static solve of sim 12 (fixed electrode set, zero tilt, centre DC at 0 V on A30 and B60, free on NODET) repeated every 2 µm between loading and readout (5 µm on B60, the script's fallback when the machine was loaded); a cubic spline per electrode; a minimum-jerk position against time; samples at a DAC update rate; 16-bit quantisation over ±10 V; a first-order filter. At each zone the transport set is blended linearly into the regular 10° zone set. Defaults: 1 ms move, 100 µs per tilt ramp, 1 MHz updates. The DAC and filter values are **[verify]**: the lab's hardware is not known.
+
+| Check | A30 | B60 | NODET |
+|---|---|---|---|
+| Largest difference from the sim 12 table on its 10 µm grid | 5.0 µV | 5.0 µV | 5.0 µV |
+| Largest \|V\| while moving / largest change per 10 µm | 6.64 V / 1.708 V | 6.64 V / 1.708 V | 7.20 V / 1.662 V |
+| Well position error at the midpoints, with interpolated voltages | 0.007 nm | 0.29 nm (5 µm grid) | 0.006 nm |
+| Axial frequency deviation at the midpoints | 3 × 10⁻⁷ | 1 × 10⁻⁵ | 2 × 10⁻⁷ |
+| Zone sets against sim 12 (loading / readout) | 7.45 / 6.29 V | 7.45 / 2.25 V | 7.93 / 7.89 V |
+
+- **Interpolation is not the limit.** The static solutions vary so smoothly with position that a spline through 2 µm points puts the well within 0.01 nm of where it should be (zero-point size 6.77 nm).
+- **The tilt hand-off is safe by construction.** Both end sets have zero field at the same point, so every blend between them does too (largest residual 10⁻¹¹ V/m). Along the blend the radial axes turn from 0° to 10°, the radial frequencies stay between 2.76 and 3.12 MHz (A30), all curvatures stay positive, and the largest voltage never exceeds the larger of the two end sets.
+- **DAC, A30, 1 ms move at 1 MHz:** 1001 updates, at most 0.154 V and 0.9 µm per update. At 100 kHz the same move takes 9 µm and 1.5 V steps.
+- **Resolution.** One 16-bit step on the most sensitive electrode moves the well 1.0 nm; all electrodes together, 2.3 nm root-sum-square.
+- **Motion left after the move (classical model of step 34):** below 10⁻³ quanta for every case at 1 MHz updates (3.6 × 10⁻⁵ at 100 µs with a 50 kHz filter).
+- **A rate to avoid.** At 100 kHz updates the model leaves 5 × 10⁶ quanta whatever the move time. 100 kHz divides the 0.8 MHz axial frequency exactly, so every update kicks the ion at the same phase and the kicks add up to one jump of the full 480 µm, reduced only by the filter. This is the commensurate case of step 34. An update rate that is not a sub-multiple of the axial frequency, or a different axial frequency, avoids it; that case was not scanned here.
+
+**Outputs.** `sim/out/21_transport_waveform/<die>/waveform.csv` (time, phase, position, V2 to V36), `static_fine.csv`, `summary.json`, plots.
+
+**Limits.** The model of step 34: classical, one dimension, the well follows the filtered voltages linearly, no heating during the move. Quantisation noise and DAC glitches are not modelled. The radial modes during the move are not examined.
+
+---
+
+## 2026-11-10: Step 41, chip RF capacitance, loss and the resonator (`sim/22_rf_capacitance.py`)
+
+Closes "chip RF capacitance is not computed". Written by a delegated agent from a specification; rerun before logging, with the same `summary.json`.
+
+**Method.** The 2-D solver of `10c`, one cross-section per stretch of the RF net measured on the released A30 layout, times the length of the stretch: rails beside the lead slot and mirror (2240 µm), plain rails (1760 µm), the U bar (75 µm), the 60 µm feed line with 10 µm gaps to the Au ground fill (2525 µm), the pad with 30 µm gaps (200 µm). Ends and corners are neglected [inference]. B60 is taken equal to A30.
+
+| | Rails, slot | Rails, plain | Feed | U bar + pad | **Chip** |
+|---|---|---|---|---|---|
+| A30, E2 (pF) | 1.12 | 0.86 | 0.53 | 0.07 | **2.59** |
+| A30, E1 (pF) | 1.03 | 0.79 | 0.50 | 0.07 | **2.40** |
+
+NODET: 2.57 pF (E2) and 2.37 pF (E1) with the full SiO₂ stack; 2.68 and 2.48 pF with thermal SiO₂ only.
+
+- **RF current into the chip** at 53 V, 28 MHz: 24.2 mA (E2), 22.3 mA (E1).
+- **Where the field energy is:** 63 % in the Si and 20 % in the SiO₂ (A30, E2).
+- **Loss, first-order estimate [inference].** Si at the 20 kΩ·cm lower spec has tan δ = 0.27 at 28 MHz at room temperature. With 63 % of the energy in it, the chip alone has Q ≈ 6 at room temperature; inside a resonator with other, lossless capacitance the limit is (C_total / C_chip) times that, about 21 for 9.6 pF in total. 0.27 is not small, so this is an order of magnitude. Cold, with the carriers frozen out, only the SiO₂ counts: Q of the chip 490 to 49 000 for tan δ of 10⁻² to 10⁻⁴ **[verify]** (no loss tangent has been measured for these films). **A resonator Q measured at room temperature with a die mounted will not predict the cold value.** Dietl 2025 (Sec. 2.2) reports more heating than modelled where RF reaches bare low-resistivity Si.
+- **RF heating in the Au (the bound of step 31, at the computed capacitance):** 0.031 mW (E2) and 0.45 mW (E1) with bulk resistivity and RRR 2. The ratio is 14.6, not the 17 of step 31, because E1 has less capacitance.
+- **Resonator, A30 on E2:** with 3, 7 or 17 pF of other capacitance (values other groups report for a die, a package and a whole system; sources in `table.md`) the inductance for 28 MHz is 5.8, 3.4 or 1.7 µH, and the drive power at a loaded Q of 100 is 14, 24 or 48 mW. One pF of error moves the resonance by 9, 5 or 3 %.
+- **Electrical test a10** (capacitance at 1 MHz, room temperature): the Si conducts at 1 MHz, so the reading is not the chip capacitance above. It lies between 2.6 pF (Si as a dielectric) and 23 pF (Si as a grounded conductor under the SiO₂) for A30, plus the carrier. A single reading cannot be compared with one expected value.
+
+**Checks.** Reproduces `10b` (0.2486 pF/mm per rail) and `10c` (0.1529 fF/µm rail to mirror, 2.132 aF/µm rail to lead); halving the grid changes the capacitance per length by under 0.5 %; the feed section is 0.88 of the textbook coplanar-waveguide value; reproduces the 1 pF row of sim 18.
+
+**Limits.** 2-D sections; ideal conductors; the ground fill beside the feed treated as solid; Si depth as in `10c`; package, bond wires and resonator not included.

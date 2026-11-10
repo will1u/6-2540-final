@@ -1,0 +1,874 @@
+{
+ "measured_gaps_um": {
+  "A30 x=3000 (feed)": [
+   [
+    -30.0,
+    30.0
+   ],
+   [
+    40.0,
+    324.0
+   ]
+  ],
+  "A30 x=4500 (feed)": [
+   [
+    -30.0,
+    30.0
+   ],
+   [
+    40.0,
+    4900.0
+   ]
+  ],
+  "A30 x=4700 (pad)": [
+   [
+    -100.0,
+    100.0
+   ],
+   [
+    130.0,
+    4900.0
+   ]
+  ],
+  "NODET x=3000 (feed)": [
+   [
+    -30.0,
+    30.0
+   ],
+   [
+    40.0,
+    324.0
+   ]
+  ],
+  "NODET x=4500 (feed)": [
+   [
+    -30.0,
+    30.0
+   ],
+   [
+    40.0,
+    4900.0
+   ]
+  ],
+  "NODET x=4700 (pad)": [
+   [
+    -100.0,
+    100.0
+   ],
+   [
+    130.0,
+    4900.0
+   ]
+  ]
+ },
+ "inputs": {
+  "V_RF": 53.0,
+  "F_RF": 28000000.0,
+  "EPS_OX": 3.9,
+  "EPS_SI": 11.7,
+  "RHO_SI": 200.0,
+  "Z_BACK": -516.0,
+  "SQ_RAIL": 47.61904761904762,
+  "SQ_FEED": 44.0,
+  "PAD_GAP": 30.0,
+  "FEED_GAP": 10.0,
+  "B60": "taken equal to A30 [inference]"
+ },
+ "configs": {
+  "A30_E2": {
+   "die": "A30",
+   "t_au_um": 6.0,
+   "stack": "full",
+   "sections": {
+    "slot": {
+     "L_um": 2240.0,
+     "unit_pF_per_mm": 0.25069426121509464,
+     "unit_basis": "per rail",
+     "C_pF": 1.1231102902436239,
+     "p_Si": 0.6073356694185429,
+     "p_SiO2": 0.21393237857887062,
+     "C_groundSi_pF": 9.636436727321588,
+     "C_rf_mirror_fF_per_um": 0.1529351356209032,
+     "C_rf_lead_fF_per_um": 0.002132199039728383
+    },
+    "plain": {
+     "L_um": 1760.0,
+     "unit_pF_per_mm": 0.24565717044991892,
+     "unit_basis": "per rail",
+     "C_pF": 0.8647132399837146,
+     "p_Si": 0.5985674619470116,
+     "p_SiO2": 0.218458435357058,
+     "C_groundSi_pF": 7.608222209393933
+    },
+    "ubar": {
+     "L_um": 75.0,
+     "unit_pF_per_mm": 0.3368746931484633,
+     "unit_basis": "full strip",
+     "C_pF": 0.02526560198613475,
+     "p_Si": 0.6831289047633518,
+     "p_SiO2": 0.16175999179979247,
+     "C_groundSi_pF": 0.41093139654632843
+    },
+    "feed": {
+     "L_um": 2525.0,
+     "unit_pF_per_mm": 0.20973171846172517,
+     "unit_basis": "full strip",
+     "C_pF": 0.5295725891158561,
+     "p_Si": 0.6627469622388266,
+     "p_SiO2": 0.19105912634886946,
+     "C_groundSi_pF": 3.9656149656119233
+    },
+    "pad": {
+     "L_um": 200.0,
+     "unit_pF_per_mm": 0.2366723444304109,
+     "unit_basis": "full strip",
+     "C_pF": 0.047334468886082184,
+     "p_Si": 0.8058307231485096,
+     "p_SiO2": 0.08924462516660644,
+     "C_groundSi_pF": 1.0064395807285613
+    }
+   },
+   "chip": {
+    "C_chip_pF": 2.5899961902154116,
+    "C_chip_groundSi_pF": 22.627644879602332,
+    "p_Si_length_weighted": 0.6323158124506275,
+    "p_SiO2_length_weighted": 0.20236773421974905,
+    "p_Si_C_weighted": 0.6201051617061262,
+    "p_SiO2_C_weighted": 0.20797889432836378
+   }
+  },
+  "A30_E1": {
+   "die": "A30",
+   "t_au_um": 0.35,
+   "stack": "full",
+   "sections": {
+    "slot": {
+     "L_um": 2240.0,
+     "unit_pF_per_mm": 0.23005673281779093,
+     "unit_basis": "per rail",
+     "C_pF": 1.0306541630237034,
+     "p_Si": 0.6609069064378524,
+     "p_SiO2": 0.2333447552069789,
+     "C_groundSi_pF": 9.536652359308166,
+     "C_rf_mirror_fF_per_um": 0.15581344000474623,
+     "C_rf_lead_fF_per_um": 0.001369818122856574
+    },
+    "plain": {
+     "L_um": 1760.0,
+     "unit_pF_per_mm": 0.22492207277651213,
+     "unit_basis": "per rail",
+     "C_pF": 0.7917256961733227,
+     "p_Si": 0.652773271303291,
+     "p_SiO2": 0.23877988885728074,
+     "C_groundSi_pF": 7.529694467357718
+    },
+    "ubar": {
+     "L_um": 75.0,
+     "unit_pF_per_mm": 0.3161093253334814,
+     "unit_basis": "full strip",
+     "C_pF": 0.023708199400011103,
+     "p_Si": 0.7271659723989681,
+     "p_SiO2": 0.1725101883456778,
+     "C_groundSi_pF": 0.4092599899567723
+    },
+    "feed": {
+     "L_um": 2525.0,
+     "unit_pF_per_mm": 0.19887062399000022,
+     "unit_basis": "full strip",
+     "C_pF": 0.5021483255747505,
+     "p_Si": 0.6970001471854839,
+     "p_SiO2": 0.2026181100356243,
+     "C_groundSi_pF": 3.9298157313493816
+    },
+    "pad": {
+     "L_um": 200.0,
+     "unit_pF_per_mm": 0.23216820158925724,
+     "unit_basis": "full strip",
+     "C_pF": 0.04643364031785145,
+     "p_Si": 0.8188466907863653,
+     "p_SiO2": 0.09253786125799662,
+     "C_groundSi_pF": 1.0042398637787708
+    }
+   },
+   "chip": {
+    "C_chip_pF": 2.3946700244896393,
+    "C_chip_groundSi_pF": 22.40966241175081,
+    "p_Si_length_weighted": 0.677580086124283,
+    "p_SiO2_length_weighted": 0.21852962062792994,
+    "p_Si_C_weighted": 0.6695048153531852,
+    "p_SiO2_C_weighted": 0.22536593016456802
+   }
+  },
+  "NODET_E2_full": {
+   "die": "NODET",
+   "t_au_um": 6.0,
+   "stack": "full",
+   "sections": {
+    "plain": {
+     "L_um": 4000.0,
+     "unit_pF_per_mm": 0.24565717044991892,
+     "unit_basis": "per rail",
+     "C_pF": 1.9652573635993513,
+     "p_Si": 0.5985674619470134,
+     "p_SiO2": 0.21845843535705822,
+     "C_groundSi_pF": 17.291414112258938
+    },
+    "ubar": {
+     "L_um": 75.0,
+     "unit_pF_per_mm": 0.3368746931484633,
+     "unit_basis": "full strip",
+     "C_pF": 0.02526560198613475,
+     "p_Si": 0.6831289047633518,
+     "p_SiO2": 0.16175999179979247,
+     "C_groundSi_pF": 0.41093139654632843
+    },
+    "feed": {
+     "L_um": 2525.0,
+     "unit_pF_per_mm": 0.20973171846172517,
+     "unit_basis": "full strip",
+     "C_pF": 0.5295725891158561,
+     "p_Si": 0.6627469622388266,
+     "p_SiO2": 0.19105912634886946,
+     "C_groundSi_pF": 3.9656149656119233
+    },
+    "pad": {
+     "L_um": 200.0,
+     "unit_pF_per_mm": 0.2366723444304109,
+     "unit_basis": "full strip",
+     "C_pF": 0.047334468886082184,
+     "p_Si": 0.8058307231485096,
+     "p_SiO2": 0.08924462516660644,
+     "C_groundSi_pF": 1.0064395807285613
+    }
+   },
+   "chip": {
+    "C_chip_pF": 2.5674300235874243,
+    "C_chip_groundSi_pF": 22.67440005514575,
+    "p_Si_length_weighted": 0.6294274617541241,
+    "p_SiO2_length_weighted": 0.20385867057021087,
+    "p_Si_C_weighted": 0.6164588536740826,
+    "p_SiO2_C_weighted": 0.20986668789167148
+   }
+  },
+  "NODET_E2_thermal": {
+   "die": "NODET",
+   "t_au_um": 6.0,
+   "stack": "thermal",
+   "sections": {
+    "plain": {
+     "L_um": 4000.0,
+     "unit_pF_per_mm": 0.2565874058855677,
+     "unit_basis": "per rail",
+     "C_pF": 2.0526992470845418,
+     "p_Si": 0.6422154929100204,
+     "p_SiO2": 0.1821228605274111,
+     "C_groundSi_pF": 23.92803615733555
+    },
+    "ubar": {
+     "L_um": 75.0,
+     "unit_pF_per_mm": 0.34797806311615415,
+     "unit_basis": "full strip",
+     "C_pF": 0.02609835473371156,
+     "p_Si": 0.7137694477618586,
+     "p_SiO2": 0.13572141150025308,
+     "C_groundSi_pF": 0.5719648912092425
+    },
+    "feed": {
+     "L_um": 2525.0,
+     "unit_pF_per_mm": 0.21818939075879581,
+     "unit_basis": "full strip",
+     "C_pF": 0.5509282116659594,
+     "p_Si": 0.7043204820609932,
+     "p_SiO2": 0.15490648432174517,
+     "C_groundSi_pF": 5.478294202266858
+    },
+    "pad": {
+     "L_um": 200.0,
+     "unit_pF_per_mm": 0.24121543629633715,
+     "unit_basis": "full strip",
+     "C_pF": 0.04824308725926743,
+     "p_Si": 0.8270812062393301,
+     "p_SiO2": 0.07006308134723292,
+     "C_groundSi_pF": 1.4015126621588891
+    }
+   },
+   "chip": {
+    "C_chip_pF": 2.67796890074348,
+    "C_chip_groundSi_pF": 31.37980791297054,
+    "p_Si_length_weighted": 0.6715029615697199,
+    "p_SiO2_length_weighted": 0.16820912311088482,
+    "p_Si_C_weighted": 0.65901976716119,
+    "p_SiO2_C_weighted": 0.17405279643998758
+   }
+  },
+  "NODET_E1_full": {
+   "die": "NODET",
+   "t_au_um": 0.35,
+   "stack": "full",
+   "sections": {
+    "plain": {
+     "L_um": 4000.0,
+     "unit_pF_per_mm": 0.22492207277651213,
+     "unit_basis": "per rail",
+     "C_pF": 1.799376582212097,
+     "p_Si": 0.6527732713032921,
+     "p_SiO2": 0.23877988885728177,
+     "C_groundSi_pF": 17.112941971267542
+    },
+    "ubar": {
+     "L_um": 75.0,
+     "unit_pF_per_mm": 0.3161093253334814,
+     "unit_basis": "full strip",
+     "C_pF": 0.023708199400011103,
+     "p_Si": 0.7271659723989681,
+     "p_SiO2": 0.1725101883456778,
+     "C_groundSi_pF": 0.4092599899567723
+    },
+    "feed": {
+     "L_um": 2525.0,
+     "unit_pF_per_mm": 0.19887062399000022,
+     "unit_basis": "full strip",
+     "C_pF": 0.5021483255747505,
+     "p_Si": 0.6970001471854839,
+     "p_SiO2": 0.2026181100356243,
+     "C_groundSi_pF": 3.9298157313493816
+    },
+    "pad": {
+     "L_um": 200.0,
+     "unit_pF_per_mm": 0.23216820158925724,
+     "unit_basis": "full strip",
+     "C_pF": 0.04643364031785145,
+     "p_Si": 0.8188466907863653,
+     "p_SiO2": 0.09253786125799662,
+     "C_groundSi_pF": 1.0042398637787708
+    }
+   },
+   "chip": {
+    "C_chip_pF": 2.37166674750471,
+    "C_chip_groundSi_pF": 22.456257556352465,
+    "p_Si_length_weighted": 0.6749007710211339,
+    "p_SiO2_length_weighted": 0.22032001759508876,
+    "p_Si_C_weighted": 0.6661324677928895,
+    "p_SiO2_C_weighted": 0.2275977690692426
+   }
+  },
+  "NODET_E1_thermal": {
+   "die": "NODET",
+   "t_au_um": 0.35,
+   "stack": "thermal",
+   "sections": {
+    "plain": {
+     "L_um": 4000.0,
+     "unit_pF_per_mm": 0.23578953075018064,
+     "unit_basis": "per rail",
+     "C_pF": 1.886316246001445,
+     "p_Si": 0.697652042074837,
+     "p_SiO2": 0.1985945103898115,
+     "C_groundSi_pF": 23.74472046375357
+    },
+    "ubar": {
+     "L_um": 75.0,
+     "unit_pF_per_mm": 0.3271505959319259,
+     "unit_basis": "full strip",
+     "C_pF": 0.024536294694894444,
+     "p_Si": 0.7581996666802046,
+     "p_SiO2": 0.14464864961598228,
+     "C_groundSi_pF": 0.5702487025547348
+    },
+    "feed": {
+     "L_um": 2525.0,
+     "unit_pF_per_mm": 0.2073020401751116,
+     "unit_basis": "full strip",
+     "C_pF": 0.5234376514421568,
+     "p_Si": 0.7393021249520276,
+     "p_SiO2": 0.16428343249685268,
+     "C_groundSi_pF": 5.4409465778323804
+    },
+    "pad": {
+     "L_um": 200.0,
+     "unit_pF_per_mm": 0.23673937478705276,
+     "unit_basis": "full strip",
+     "C_pF": 0.04734787495741055,
+     "p_Si": 0.8402651469726821,
+     "p_SiO2": 0.07286328197772766,
+     "C_groundSi_pF": 1.399177737264123
+    }
+   },
+   "chip": {
+    "C_chip_pF": 2.481638067095907,
+    "C_chip_groundSi_pF": 31.15509348140481,
+    "p_Si_length_weighted": 0.7179800056174661,
+    "p_SiO2_length_weighted": 0.18156103143096222,
+    "p_Si_C_weighted": 0.7097566530494522,
+    "p_SiO2_C_weighted": 0.1884252401872128
+   }
+  }
+ },
+ "convergence": {
+  "plain": {
+   "coarse_pF_per_mm": 0.24565717044991892,
+   "fine_pF_per_mm": 0.24538162467389152,
+   "rel_change": 0.001121667955072256
+  },
+  "feed": {
+   "coarse_pF_per_mm": 0.10486585923086258,
+   "fine_pF_per_mm": 0.10435452106588938,
+   "rel_change": 0.004876116676329223
+  }
+ },
+ "checks": {
+  "ref10c": {
+   "mirror_fF_um": 0.1529351356209032,
+   "lead_fF_um": 0.002132199039728383,
+   "ref_mirror": 0.1529351356209032,
+   "ref_lead": 0.002132199039728383
+  },
+  "ref10b": {
+   "rail_pF_mm": 0.2485938411437458,
+   "ref": 0.2485938411437458
+  },
+  "sim18_1pF": {
+   "P upper bound, C_rf = 1 pF, bulk rho, RRR = 2 E1": {
+    "mine_uW": "78.70",
+    "sim18_uW": "78.70"
+   },
+   "P upper bound, C_rf = 1 pF, bulk rho, RRR = 2 E2": {
+    "mine_uW": "4.59",
+    "sim18_uW": "4.59"
+   },
+   "P upper bound, C_rf = 1 pF, bulk rho, RRR = 5 E1": {
+    "mine_uW": "31.48",
+    "sim18_uW": "31.48"
+   },
+   "P upper bound, C_rf = 1 pF, bulk rho, RRR = 5 E2": {
+    "mine_uW": "1.84",
+    "sim18_uW": "1.84"
+   },
+   "P upper bound, C_rf = 1 pF, bulk rho, RRR = 10 E1": {
+    "mine_uW": "15.74",
+    "sim18_uW": "15.74"
+   },
+   "P upper bound, C_rf = 1 pF, bulk rho, RRR = 10 E2": {
+    "mine_uW": "0.92",
+    "sim18_uW": "0.92"
+   },
+   "P upper bound, C_rf = 1 pF, film rho, RRR = 2 E1": {
+    "mine_uW": "129.01",
+    "sim18_uW": "129.01"
+   },
+   "P upper bound, C_rf = 1 pF, film rho, RRR = 2 E2": {
+    "mine_uW": "7.53",
+    "sim18_uW": "7.53"
+   },
+   "P upper bound, C_rf = 1 pF, film rho, RRR = 5 E1": {
+    "mine_uW": "51.61",
+    "sim18_uW": "51.61"
+   },
+   "P upper bound, C_rf = 1 pF, film rho, RRR = 5 E2": {
+    "mine_uW": "3.01",
+    "sim18_uW": "3.01"
+   },
+   "P upper bound, C_rf = 1 pF, film rho, RRR = 10 E1": {
+    "mine_uW": "25.80",
+    "sim18_uW": "25.80"
+   },
+   "P upper bound, C_rf = 1 pF, film rho, RRR = 10 E2": {
+    "mine_uW": "1.51",
+    "sim18_uW": "1.51"
+   }
+  },
+  "feed_sanity": {
+   "solver_pF_mm": 0.20973171846172517,
+   "textbook_pF_mm": 0.2381733479477875,
+   "ratio": 0.880584331827517
+  }
+ },
+ "loss": {
+  "tan_d_Si_28MHz": 0.27434529280406506,
+  "tan_d_Si_1MHz": 7.681668198513822,
+  "Q": {
+   "A30_E2": {
+    "tan_SiO2_0.0001": {
+     "Q_room": 5.763917872893666,
+     "Q_cold": 49414.992160465175
+    },
+    "tan_SiO2_0.001": {
+     "Q_room": 5.757873327144235,
+     "Q_cold": 4941.499216046518
+    },
+    "tan_SiO2_0.01": {
+     "Q_room": 5.698117905356309,
+     "Q_cold": 494.14992160465175
+    }
+   },
+   "A30_E1": {
+    "tan_SiO2_0.0001": {
+     "Q_room": 5.378866945585033,
+     "Q_cold": 45760.38695013373
+    },
+    "tan_SiO2_0.001": {
+     "Q_room": 5.3731826686551925,
+     "Q_cold": 4576.0386950133725
+    },
+    "tan_SiO2_0.01": {
+     "Q_room": 5.316993762541199,
+     "Q_cold": 457.60386950133733
+    }
+   },
+   "NODET_E2_full": {
+    "tan_SiO2_0.0001": {
+     "Q_room": 5.7903595520192415,
+     "Q_cold": 49053.59174583601
+    },
+    "tan_SiO2_0.001": {
+     "Q_room": 5.78421455575482,
+     "Q_cold": 4905.359174583602
+    },
+    "tan_SiO2_0.01": {
+     "Q_room": 5.723474409055485,
+     "Q_cold": 490.53591745836013
+    }
+   },
+   "NODET_E2_thermal": {
+    "tan_SiO2_0.0001": {
+     "Q_room": 5.42768833912544,
+     "Q_cold": 59449.80756726208
+    },
+    "tan_SiO2_0.001": {
+     "Q_room": 5.423232134216154,
+     "Q_cold": 5944.980756726209
+    },
+    "tan_SiO2_0.01": {
+     "Q_room": 5.379069254329081,
+     "Q_cold": 594.4980756726209
+    }
+   },
+   "NODET_E1_full": {
+    "tan_SiO2_0.0001": {
+     "Q_room": 5.400212979741128,
+     "Q_cold": 45388.522155886545
+    },
+    "tan_SiO2_0.001": {
+     "Q_room": 5.39443663039254,
+     "Q_cold": 4538.852215588654
+    },
+    "tan_SiO2_0.01": {
+     "Q_room": 5.337345599185613,
+     "Q_cold": 453.88522155886545
+    }
+   },
+   "NODET_E1_thermal": {
+    "tan_SiO2_0.0001": {
+     "Q_room": 5.076333049213522,
+     "Q_cold": 55077.898165622915
+    },
+    "tan_SiO2_0.001": {
+     "Q_room": 5.072125731885508,
+     "Q_cold": 5507.789816562292
+    },
+    "tan_SiO2_0.01": {
+     "Q_room": 5.030432983100063,
+     "Q_cold": 550.7789816562292
+    }
+   }
+  },
+  "tan_SiO2_values_verify": [
+   0.0001,
+   0.001,
+   0.01
+  ]
+ },
+ "heating": {
+  "A30_E2": {
+   "bulk_RRR2": {
+    "I_mA": 24.149764195890665,
+    "P18_mW": 0.030794780955093106,
+    "P_linear_mW": 0.027657578331306113
+   },
+   "bulk_RRR5": {
+    "I_mA": 24.149764195890665,
+    "P18_mW": 0.012317912382037242,
+    "P_linear_mW": 0.011063031332522445
+   },
+   "bulk_RRR10": {
+    "I_mA": 24.149764195890665,
+    "P18_mW": 0.006158956191018621,
+    "P_linear_mW": 0.005531515666261222
+   },
+   "film_RRR2": {
+    "I_mA": 24.149764195890665,
+    "P18_mW": 0.05048324746736575,
+    "P_linear_mW": 0.04534029234640347
+   },
+   "film_RRR5": {
+    "I_mA": 24.149764195890665,
+    "P18_mW": 0.020193298986946297,
+    "P_linear_mW": 0.018136116938561386
+   },
+   "film_RRR10": {
+    "I_mA": 24.149764195890665,
+    "P18_mW": 0.010096649493473149,
+    "P_linear_mW": 0.009068058469280693
+   }
+  },
+  "A30_E1": {
+   "bulk_RRR2": {
+    "I_mA": 22.328494781910358,
+    "P18_mW": 0.45128763120197496,
+    "P_linear_mW": 0.4053129336467615
+   },
+   "bulk_RRR5": {
+    "I_mA": 22.328494781910358,
+    "P18_mW": 0.18051505248079,
+    "P_linear_mW": 0.1621251734587046
+   },
+   "bulk_RRR10": {
+    "I_mA": 22.328494781910358,
+    "P18_mW": 0.090257526240395,
+    "P_linear_mW": 0.0810625867293523
+   },
+   "film_RRR2": {
+    "I_mA": 22.328494781910358,
+    "P18_mW": 0.7398157888556967,
+    "P_linear_mW": 0.6644474322078059
+   },
+   "film_RRR5": {
+    "I_mA": 22.328494781910358,
+    "P18_mW": 0.29592631554227866,
+    "P_linear_mW": 0.26577897288312236
+   },
+   "film_RRR10": {
+    "I_mA": 22.328494781910358,
+    "P18_mW": 0.14796315777113933,
+    "P_linear_mW": 0.13288948644156118
+   }
+  },
+  "NODET_E2_full": {
+   "bulk_RRR2": {
+    "I_mA": 23.939351684501705,
+    "P18_mW": 0.030260500013425562,
+    "P_linear_mW": 0.02717772698842296
+   },
+   "bulk_RRR5": {
+    "I_mA": 23.939351684501705,
+    "P18_mW": 0.012104200005370222,
+    "P_linear_mW": 0.010871090795369182
+   },
+   "bulk_RRR10": {
+    "I_mA": 23.939351684501705,
+    "P18_mW": 0.006052100002685111,
+    "P_linear_mW": 0.005435545397684591
+   },
+   "film_RRR2": {
+    "I_mA": 23.939351684501705,
+    "P18_mW": 0.049607377071189444,
+    "P_linear_mW": 0.04455365080069338
+   },
+   "film_RRR5": {
+    "I_mA": 23.939351684501705,
+    "P18_mW": 0.01984295082847578,
+    "P_linear_mW": 0.01782146032027735
+   },
+   "film_RRR10": {
+    "I_mA": 23.939351684501705,
+    "P18_mW": 0.00992147541423789,
+    "P_linear_mW": 0.008910730160138675
+   }
+  },
+  "NODET_E2_thermal": {
+   "bulk_RRR2": {
+    "I_mA": 24.97004347774919,
+    "P18_mW": 0.032922281746839796,
+    "P_linear_mW": 0.02956834106358391
+   },
+   "bulk_RRR5": {
+    "I_mA": 24.97004347774919,
+    "P18_mW": 0.013168912698735918,
+    "P_linear_mW": 0.011827336425433562
+   },
+   "bulk_RRR10": {
+    "I_mA": 24.97004347774919,
+    "P18_mW": 0.006584456349367959,
+    "P_linear_mW": 0.005913668212716781
+   },
+   "film_RRR2": {
+    "I_mA": 24.97004347774919,
+    "P18_mW": 0.05397095368334393,
+    "P_linear_mW": 0.048472690268170346
+   },
+   "film_RRR5": {
+    "I_mA": 24.97004347774919,
+    "P18_mW": 0.02158838147333757,
+    "P_linear_mW": 0.019389076107268137
+   },
+   "film_RRR10": {
+    "I_mA": 24.97004347774919,
+    "P18_mW": 0.010794190736668785,
+    "P_linear_mW": 0.009694538053634068
+   }
+  },
+  "NODET_E1_full": {
+   "bulk_RRR2": {
+    "I_mA": 22.11400654558882,
+    "P18_mW": 0.4426591072616131,
+    "P_linear_mW": 0.3975634361876917
+   },
+   "bulk_RRR5": {
+    "I_mA": 22.11400654558882,
+    "P18_mW": 0.17706364290464524,
+    "P_linear_mW": 0.15902537447507667
+   },
+   "bulk_RRR10": {
+    "I_mA": 22.11400654558882,
+    "P18_mW": 0.08853182145232262,
+    "P_linear_mW": 0.07951268723753833
+   },
+   "film_RRR2": {
+    "I_mA": 22.11400654558882,
+    "P18_mW": 0.7256706676419887,
+    "P_linear_mW": 0.6517433380126093
+   },
+   "film_RRR5": {
+    "I_mA": 22.11400654558882,
+    "P18_mW": 0.29026826705679554,
+    "P_linear_mW": 0.2606973352050438
+   },
+   "film_RRR10": {
+    "I_mA": 22.11400654558882,
+    "P18_mW": 0.14513413352839777,
+    "P_linear_mW": 0.1303486676025219
+   }
+  },
+  "NODET_E1_thermal": {
+   "bulk_RRR2": {
+    "I_mA": 23.13940629191719,
+    "P18_mW": 0.4846619882180411,
+    "P_linear_mW": 0.43528729504179403
+   },
+   "bulk_RRR5": {
+    "I_mA": 23.13940629191719,
+    "P18_mW": 0.19386479528721642,
+    "P_linear_mW": 0.1741149180167176
+   },
+   "bulk_RRR10": {
+    "I_mA": 23.13940629191719,
+    "P18_mW": 0.09693239764360821,
+    "P_linear_mW": 0.0870574590083588
+   },
+   "film_RRR2": {
+    "I_mA": 23.13940629191719,
+    "P18_mW": 0.7945278495377723,
+    "P_linear_mW": 0.7135857295767115
+   },
+   "film_RRR5": {
+    "I_mA": 23.13940629191719,
+    "P18_mW": 0.31781113981510895,
+    "P_linear_mW": 0.28543429183068464
+   },
+   "film_RRR10": {
+    "I_mA": 23.13940629191719,
+    "P18_mW": 0.15890556990755447,
+    "P_linear_mW": 0.14271714591534232
+   }
+  }
+ },
+ "resonator": [
+  {
+   "chip": "A30_E2",
+   "C_chip_pF": 2.5899961902154116,
+   "C_other_pF": 3.0,
+   "C_tot_pF": 5.589996190215412,
+   "L_uH": 5.779798376770034,
+   "P_mW": {
+    "50": 27.624927747230718,
+    "100": 13.812463873615359,
+    "200": 6.906231936807679,
+    "500": 2.762492774723072
+   },
+   "df_over_f_pct_per_pF": -8.944549924294893,
+   "source": "design/research/research_notes/Bond pad sizing for ion traps/ion_trap_pad_literature.md line 97 (Zhao et al.: RF-to-ground 3 pF after wire-bond pads removed; a trap-die value, used as a size reference [inference])"
+  },
+  {
+   "chip": "A30_E2",
+   "C_chip_pF": 2.5899961902154116,
+   "C_other_pF": 7.0,
+   "C_tot_pF": 9.589996190215412,
+   "L_uH": 3.3690368865132974,
+   "P_mW": {
+    "50": 47.39233137844227,
+    "100": 23.696165689221136,
+    "200": 11.848082844610568,
+    "500": 4.739233137844227
+   },
+   "df_over_f_pct_per_pF": -5.2137664091060385,
+   "source": "design/research/research_notes/Bond pad sizing for ion traps/ion_trap_pad_literature.md line 95 (Stick et al.: 7 pF RF-to-ground, trap and CPGA package)"
+  },
+  {
+   "chip": "A30_E2",
+   "C_chip_pF": 2.5899961902154116,
+   "C_other_pF": 17.0,
+   "C_tot_pF": 19.589996190215412,
+   "L_uH": 1.649262745773022,
+   "P_mW": {
+    "50": 96.81084045647114,
+    "100": 48.40542022823557,
+    "200": 24.202710114117785,
+    "500": 9.681084045647115
+   },
+   "df_over_f_pct_per_pF": -2.5523231099439125,
+   "source": "design/research/research_notes/Bond pad sizing for ion traps/pad_electrical_effects.md line 20 (Siverns et al.: 17 +/- 2 pF, ion trap plus vacuum system)"
+  },
+  {
+   "chip": "A30_E1",
+   "C_chip_pF": 2.3946700244896393,
+   "C_other_pF": 3.0,
+   "C_tot_pF": 5.394670024489639,
+   "L_uH": 5.9890689809919,
+   "P_mW": {
+    "50": 26.659654957821147,
+    "100": 13.329827478910573,
+    "200": 6.664913739455287,
+    "500": 2.665965495782115
+   },
+   "df_over_f_pct_per_pF": -9.268407478681743,
+   "source": "design/research/research_notes/Bond pad sizing for ion traps/ion_trap_pad_literature.md line 97 (Zhao et al.: RF-to-ground 3 pF after wire-bond pads removed; a trap-die value, used as a size reference [inference])"
+  },
+  {
+   "chip": "A30_E1",
+   "C_chip_pF": 2.3946700244896393,
+   "C_other_pF": 7.0,
+   "C_tot_pF": 9.394670024489638,
+   "L_uH": 3.439083099474043,
+   "P_mW": {
+    "50": 46.427058589032704,
+    "100": 23.213529294516352,
+    "200": 11.606764647258176,
+    "500": 4.642705858903271
+   },
+   "df_over_f_pct_per_pF": -5.322166704063267,
+   "source": "design/research/research_notes/Bond pad sizing for ion traps/ion_trap_pad_literature.md line 95 (Stick et al.: 7 pF RF-to-ground, trap and CPGA package)"
+  },
+  {
+   "chip": "A30_E1",
+   "C_chip_pF": 2.3946700244896393,
+   "C_other_pF": 17.0,
+   "C_tot_pF": 19.39467002448964,
+   "L_uH": 1.665872678708176,
+   "P_mW": {
+    "50": 95.84556766706157,
+    "100": 47.92278383353079,
+    "200": 23.961391916765393,
+    "500": 9.584556766706157
+   },
+   "df_over_f_pct_per_pF": -2.5780278776006518,
+   "source": "design/research/research_notes/Bond pad sizing for ion traps/pad_electrical_effects.md line 20 (Siverns et al.: 17 +/- 2 pF, ion trap plus vacuum system)"
+  }
+ ],
+ "acceptance": {
+  "reproduces_10c_slot_E2": true,
+  "reproduces_10b_rail": true,
+  "grid_converged": true,
+  "reproduces_sim18_1pF_row": true,
+  "feed_sanity": true
+ }
+}
