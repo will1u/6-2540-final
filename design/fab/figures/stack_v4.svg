@@ -32,14 +32,11 @@
 
   <!-- layers, bottom to top -->
   <rect class="si" x="160" y="320" width="780" height="40"/>
-  <rect class="d1" x="160" y="298" width="780" height="22"/>
-  <rect class="sp" x="160" y="288" width="330" height="10"/>
-  <rect class="sp" x="610" y="288" width="330" height="10"/>
-  <rect class="al" x="490" y="288" width="120" height="10"/>
-  <rect class="sp" x="490" y="278" width="120" height="10"/>
-  <rect class="cap" x="160" y="280" width="330" height="8"/>
-  <rect class="cap" x="610" y="280" width="330" height="8"/>
-  <rect class="cap" x="490" y="270" width="120" height="8"/>
+  <rect class="d1" x="160" y="288" width="780" height="32"/>
+  <!-- The Al mirror is inlaid 0.10 um into the thermal SiO2, so the SiO2 cap and all the Au sit at one level. -->
+  <rect class="sp" x="160" y="278" width="780" height="10"/>
+  <rect class="al" x="490" y="288" width="120" height="6"/>
+  <rect class="cap" x="160" y="270" width="780" height="8"/>
 
   <!-- NbN wires, 7 nm, end-on (16 rects, |y| <= 16 um) -->
   <g class="nb">
@@ -59,15 +56,15 @@
   <rect class="au" x="490" y="264" width="15" height="6"/>
   <rect class="au" x="595" y="264" width="15" height="6"/>
 
-  <rect class="au2" x="223" y="236" width="252" height="44"/>
-  <rect class="au2" x="625" y="236" width="252" height="44"/>
-  <rect class="au" x="223" y="274" width="252" height="6"/>
-  <rect class="au" x="625" y="274" width="252" height="6"/>
+  <rect class="au2" x="223" y="226" width="252" height="44"/>
+  <rect class="au2" x="625" y="226" width="252" height="44"/>
+  <rect class="au" x="223" y="264" width="252" height="6"/>
+  <rect class="au" x="625" y="264" width="252" height="6"/>
 
-  <rect class="au2" x="160" y="236" width="48" height="44"/>
-  <rect class="au2" x="892" y="236" width="48" height="44"/>
-  <rect class="au" x="160" y="274" width="48" height="6"/>
-  <rect class="au" x="892" y="274" width="48" height="6"/>
+  <rect class="au2" x="160" y="226" width="48" height="44"/>
+  <rect class="au2" x="892" y="226" width="48" height="44"/>
+  <rect class="au" x="160" y="264" width="48" height="6"/>
+  <rect class="au" x="892" y="264" width="48" height="6"/>
 
   <!-- ion and dimension line -->
   <circle cx="550" cy="160" r="5" fill="#c0392b"/>
@@ -89,17 +86,18 @@
   <path class="lead" d="M722,203 L722,240"/>
 
   <text class="l" x="148" y="252" text-anchor="end">outer DC, continues</text>
-  <path class="lead" d="M151,249 L163,256"/>
+  <path class="lead" d="M151,249 L163,250"/>
 
   <text class="l" x="148" y="344" text-anchor="end">HR Si, ρ &gt; 20 kΩ·cm</text>
   <path class="lead" d="M151,341 L174,340"/>
 
   <text class="l" x="148" y="313" text-anchor="end">thermal SiO₂ 1.0 µm</text>
+  <text class="l" x="148" y="326" text-anchor="end">(0.9 µm under the mirror)</text>
   <path class="lead" d="M151,310 L178,309"/>
 
   <text class="l" x="148" y="282" text-anchor="end">PECVD SiO₂ spacer</text>
   <text class="l" x="148" y="295" text-anchor="end">238 nm</text>
-  <path class="lead" d="M151,292 L175,293"/>
+  <path class="lead" d="M151,285 L175,283"/>
 
   <text class="l" x="952" y="222">NbN 7 nm, 130 nm wires</text>
   <text class="l" x="952" y="235">on 200 nm pitch</text>
@@ -107,26 +105,23 @@
 
   <text class="l" x="952" y="254">SiO₂ cap 160 ± 10 nm</text>
   <text class="l" x="952" y="267">(window floor)</text>
-  <path class="lead" d="M950,262 L939,284"/>
+  <path class="lead" d="M950,262 L884,274"/>
 
-  <text class="l" x="952" y="300">Al-1%Cu mirror 450 nm</text>
+  <text class="l" x="952" y="300">Al mirror 100 nm, inlaid</text>
   <text class="l" x="952" y="313">|y| ≤ 20 µm</text>
-  <path class="lead" d="M950,304 L606,293"/>
+  <path class="lead" d="M950,304 L606,291"/>
 
-  <text class="g" x="160" y="388">No Al under the RF rails; no ground plane.</text>
+  <text class="g" x="160" y="378">No Al under the RF rails; no ground plane. The detector is inset: NbN under the SiO₂ cap, on the floor of the Au window.</text>
+  <text class="g" x="160" y="393">The Al mirror is inlaid in the thermal SiO₂, so the SiO₂ cap and all the Au are at one level.</text>
 
   <!-- ===================== Panel (b): slot, away from the detector, B60 / A30. 6 px per µm, centred on x = 290 ===================== -->
   <text class="t" x="30" y="418">(b) Across the slot, away from the detector (A30, B60)</text>
 
   <rect class="si" x="50" y="560" width="480" height="40"/>
-  <rect class="d1" x="50" y="538" width="480" height="22"/>
-  <rect class="sp" x="50" y="528" width="120" height="10"/>
-  <rect class="sp" x="410" y="528" width="120" height="10"/>
-  <rect class="al" x="170" y="528" width="240" height="10"/>
-  <rect class="sp" x="170" y="518" width="240" height="10"/>
-  <rect class="cap" x="50" y="520" width="120" height="8"/>
-  <rect class="cap" x="410" y="520" width="120" height="8"/>
-  <rect class="cap" x="170" y="510" width="240" height="8"/>
+  <rect class="d1" x="50" y="528" width="480" height="32"/>
+  <rect class="sp" x="50" y="518" width="480" height="10"/>
+  <rect class="al" x="170" y="528" width="240" height="6"/>
+  <rect class="cap" x="50" y="510" width="480" height="8"/>
 
   <!-- centre DC halves (|y| 12.5 to 20), SNSPD leads (|y| 2.5 to 7.5), RF rails (|y| 25 to 40) -->
   <rect class="au2" x="170" y="466" width="45" height="44"/>
@@ -139,10 +134,10 @@
   <rect class="au" x="245" y="504" width="30" height="6"/>
   <rect class="au" x="305" y="504" width="30" height="6"/>
 
-  <rect class="au2" x="50" y="476" width="90" height="44"/>
-  <rect class="au2" x="440" y="476" width="90" height="44"/>
-  <rect class="au" x="50" y="514" width="90" height="6"/>
-  <rect class="au" x="440" y="514" width="90" height="6"/>
+  <rect class="au2" x="50" y="466" width="90" height="44"/>
+  <rect class="au2" x="440" y="466" width="90" height="44"/>
+  <rect class="au" x="50" y="504" width="90" height="6"/>
+  <rect class="au" x="440" y="504" width="90" height="6"/>
 
   <!-- labels (b) -->
   <text class="l" x="240" y="442" text-anchor="end">SNSPD return lead</text>
@@ -188,30 +183,19 @@
   <text class="t" x="30" y="692">(d) Mirror ground via (detail)</text>
 
   <rect class="si" x="40" y="830" width="260" height="40"/>
-  <rect class="d1" x="40" y="808" width="260" height="22"/>
-  <rect class="al" x="60" y="798" width="200" height="10"/>
-  <rect class="sp" x="40" y="798" width="20" height="10"/>
-  <rect class="sp" x="260" y="798" width="40" height="10"/>
-  <rect class="sp" x="60" y="788" width="50" height="10"/>
-  <rect class="sp" x="210" y="788" width="50" height="10"/>
-  <rect class="cap" x="40" y="790" width="20" height="8"/>
-  <rect class="cap" x="260" y="790" width="40" height="8"/>
-  <rect class="cap" x="60" y="780" width="50" height="8"/>
-  <rect class="cap" x="210" y="780" width="50" height="8"/>
+  <rect class="d1" x="40" y="798" width="260" height="32"/>
+  <!-- as in panel (a): Al inlaid in the thermal SiO2 -->
+  <rect class="sp" x="40" y="788" width="70" height="10"/>
+  <rect class="sp" x="210" y="788" width="90" height="10"/>
+  <rect class="al" x="60" y="798" width="200" height="6"/>
+  <rect class="cap" x="40" y="780" width="70" height="8"/>
+  <rect class="cap" x="210" y="780" width="90" height="8"/>
 
-  <!-- E2 dashed outlines above the Au ground fill footprint -->
-  <rect class="au2" x="40" y="740" width="20" height="44"/>
-  <rect class="au2" x="60" y="730" width="50" height="44"/>
-  <rect class="au2" x="110" y="730" width="100" height="44"/>
-  <rect class="au2" x="210" y="730" width="50" height="44"/>
-  <rect class="au2" x="260" y="740" width="40" height="44"/>
+  <!-- E2 dashed outline above the Au ground fill footprint -->
+  <rect class="au2" x="40" y="730" width="260" height="44"/>
 
   <!-- E1 Au ground fill: on the cap, dipping through the 100 um opening onto the Al -->
-  <rect class="au" x="40" y="784" width="20" height="6"/>
-  <rect class="au" x="60" y="774" width="50" height="6"/>
-  <rect class="au" x="110" y="774" width="100" height="24"/>
-  <rect class="au" x="210" y="774" width="50" height="6"/>
-  <rect class="au" x="260" y="784" width="40" height="6"/>
+  <path class="au" d="M40,774 L300,774 L300,780 L210,780 L210,798 L110,798 L110,780 L40,780 Z"/>
 
   <!-- labels (d) -->
   <text class="l" x="40" y="716">layer 40 opening through cap + spacer, ≈ 0.40 µm</text>
@@ -219,22 +203,22 @@
 
   <text class="l" x="312" y="772">Au ground</text>
   <text class="l" x="312" y="785">fill</text>
-  <path class="lead" d="M310,781 L297,787"/>
+  <path class="lead" d="M310,779 L296,777"/>
 
   <text class="l" x="312" y="812">Al mirror</text>
   <text class="l" x="312" y="825">branch</text>
-  <path class="lead" d="M310,818 L257,803"/>
+  <path class="lead" d="M310,818 L257,801"/>
 
   <text class="l" x="312" y="846">≥ 25 µm</text>
   <text class="l" x="312" y="859">enclosure</text>
-  <path class="lead" d="M310,850 L226,806"/>
+  <path class="lead" d="M310,850 L226,801"/>
 
   <!-- ===================== Panel (e): SNSPD contact (detail), 2 px per µm ===================== -->
   <text class="t" x="400" y="692">(e) SNSPD contact (detail)</text>
 
   <rect class="si" x="415" y="832" width="310" height="40"/>
-  <rect class="d1" x="415" y="810" width="310" height="22"/>
-  <rect class="al" x="415" y="800" width="310" height="10"/>
+  <rect class="d1" x="415" y="800" width="310" height="32"/>
+  <rect class="al" x="415" y="800" width="310" height="6"/>
   <rect class="sp" x="415" y="790" width="310" height="10"/>
   <rect class="nb" x="415" y="788" width="80" height="2"/>
   <rect class="tiau" x="465" y="788" width="54" height="2"/>
@@ -269,7 +253,7 @@
   <rect class="d1" x="770" y="724" width="22" height="12"/>
   <text class="l" x="800" y="734">thermal SiO₂ (D1)</text>
   <rect class="al" x="770" y="748" width="22" height="12"/>
-  <text class="l" x="800" y="758">Al-1%Cu mirror (layer 10)</text>
+  <text class="l" x="800" y="758">Al mirror (layer 10)</text>
   <rect class="sp" x="770" y="772" width="22" height="12"/>
   <text class="l" x="800" y="782">PECVD SiO₂ spacer</text>
   <rect class="nb" x="770" y="796" width="22" height="12"/>

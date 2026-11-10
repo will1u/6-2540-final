@@ -164,7 +164,7 @@
     <g class="mk"><circle cx="379" cy="331" r="6.5"/><text x="379" y="334.5">3</text></g>
     <path class="lead" d="M361,325 L371,330"/><text class="l" x="390" y="335">spacer 238 nm SiO₂</text>
     <g class="mk"><circle cx="379" cy="345" r="6.5"/><text x="379" y="348.5">2</text></g>
-    <path class="lead" d="M261,337 L371,344"/><text class="l" x="390" y="349">Al 450 nm, local</text>
+    <path class="lead" d="M261,337 L371,344"/><text class="l" x="390" y="349">Al 100 nm, inlaid, local</text>
     <path class="lead" d="M361,347 L370,359"/><text class="l" x="372" y="362">D1: 1 µm thermal SiO₂</text>
     <text class="l" x="372" y="378">HR Si (ρ &gt; 20 kΩ·cm)</text>
 

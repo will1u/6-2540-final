@@ -73,7 +73,7 @@
   <text x="58" y="448">rewritten for v4 with E1 and E2 as equal branches</text>
   <text x="45" y="470">· Done 11-09: v4 test dies (T2v, T10, T11, T12;</text>
   <text x="58" y="486">no-Al TEST_TRAP) with an independent checker</text>
-  <text x="45" y="508">· Mirror path: via moved, Al 450 nm (decided, +0.2 µA);</text>
+  <text x="45" y="508">· Mirror: via moved; Al 100 nm, inlaid (decided 2026-11-09);</text>
   <text x="58" y="524">measured on T10 / T11; set the R acceptance</text>
   <text x="45" y="546">· Order Si with ρ &gt; 20 kΩ·cm</text>
   <text x="45" y="568">· MIT.nano: Au tools, plating (if E2), training</text>
