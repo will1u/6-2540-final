@@ -88,5 +88,7 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 | `24_rcwa_meander.py` | RCWA of the NbN meander absorption at normal incidence, in the separate `rcwa` env (step 43) |
 | `25_radial_tilt_sweep.py` | Radial tilt from 0 to 90°: voltage cost of each angle, including 45°, at 0.8 and 0.6 MHz axial (step 45) |
 | `26_dc_channel_count.py` | Zones and transport with 21–35 DAC channels, by grounding or tying electrodes at the carrier (step 46) |
+| `27_tilt_geometry_2d.py` | 2-D screen of electrode geometries for a cheap radial tilt (step 47) |
+| `28_tilt_geometry_3d.py` | 3-D tilt frontier for parametric geometries: split centre DC, islands, asymmetric rails, pitch (step 47) |
 
 Full index of all scripts, with headline numbers and validity: [sim/INDEX.md](sim/INDEX.md).

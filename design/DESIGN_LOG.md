@@ -1791,3 +1791,61 @@ No configuration has a clipped step in transport, and the axial frequency stays 
 **Assessment (Claude's, not a team decision).** One Zotino is enough. Grounding the four end caps (31 channels) changes nothing that matters, and going down to 21 channels costs at most 0.18 V in transport and 0.7 V in the 45° readout solve. Fewer channels also shorten each full update (1 MSPS / 21 ≈ 48 kHz at most). The 45° tilt at 0.8 MHz still needs more than ±10 V in every configuration except at the B60 readout. The grounding is done at the carrier or the breakout, so the choice can wait until bonding. Not checked: anything beyond the two zones and the transport between them (for example loading at another position), and the role of the end caps if the zones ever move outward.
 
 **Outputs.** `sim/out/26_dc_channel_count/<die>/` (`summary.json`, `transport_maxV.png`).
+
+---
+
+## 2026-11-10: Step 47, a split centre DC for a 45° radial tilt (sims 27, 28; `gds/make_chip.py --split`)
+
+**Why.** Step 45 found that the in-plane beams need a large radial tilt, and that today's layout reaches 45° within ±10 V only at the B60 readout. The voltage goes into the xz curvature, about 5 V per 0.1 MHz of radial split, carried by outer-segment pairs at 114–314 µm from the axis. The team asked whether other electrode geometries could give more than 20° within 10 V, and then for the real dies to be redone with a split centre DC.
+
+**Geometry survey (parametric `trapgeom.py` layouts, v4 dimensions and stack).**
+- Sim 27 is a 2-D screen with infinite strips. It is used only to rank: infinite outer strips are far stronger than finite segments, so 2-D puts today's layout at 0.38 V per 0.1 MHz, against about 5 V in 3-D.
+- Sim 28 runs 3-D (gds2itvg) on 12 variants. Its baseline reproduces sim 25 on the uniform v4 die to 0.1 %.
+
+Largest tilt within ±10 V at 0.8 MHz axial and a 0.2 MHz split:
+
+| Variant | Largest tilt | 45° cost at 0.2 / 0.5 MHz split |
+|---|---|---|
+| Today's layout | 11.8° | 16.5 / 31.3 V |
+| Centre DC split along its length, 5 µm gap | 45° | 7.0 / 7.6 V |
+| Split islands only under each zone | 45° | 0.9 / 1.3 V |
+| Asymmetric RF rails (1.3/0.7, 1.5/0.5 of 84 µm) | 7.5° / 0° | 15.8 / 46 V |
+| Segment pitch 60–240 µm | 4–18° | 14–24 V |
+
+- Chiaverini et al. 2005 (QIC 5, 419, p. 426, Fig. 5b; checked against the PDF) rotate the axes by 30° with 1.5× and 0.5× RF rails. That is the angle the confining DC sets by itself, not a chosen angle and split.
+- Pointers for the geometry papers are in `research/research_notes/Tilt geometry 2026-11/`.
+
+**The real dies.** `make_chip.py --split` (with `--det60`, `--nodet`) writes `trap_die_v4_{A30,B60,NODET}_split`. These are the v4 dies with one change: a 5 µm cut along y = 0 through the centre DC. Its top half stays electrode 2, and the bottom half becomes electrode 37, with a mirrored lead and pad C2 at (−4650, −450) µm.
+- On A30 and B60 the SNSPD-lead slot already separates the halves left of x = 175 µm, so the cut only splits the solid part around the window and out to the right end.
+- The unsplit v4 files regenerate unchanged (geometry hashes match).
+
+`check_chip.py` passes on NODET_split. On A30_split and B60_split it fails one check: the NbN overhang inside the cut (|y| ≤ 2.5 µm, 3.5–5 µm on each side of the window) is not under Au. That is 24 µm² (A30) and 33 µm² (B60).
+
+**Result (sim 25 on the split dies, 0.8 MHz axial, 45°, all 36 DC electrodes; largest |V|):**
+
+| Die | Loading, split 0.1 / 0.2 / 0.5 MHz | Readout, split 0.1 / 0.2 / 0.5 MHz | Angle scatter, 10 mV errors, 0.2 MHz (loading / readout) |
+|---|---|---|---|
+| A30_split (E2) | 6.88 / 7.08 / 7.69 V | 8.76 / 8.97 / 9.59 V | 0.40° / 0.50° |
+| B60_split (E2) | 6.88 / 7.08 / 7.69 V | 2.44 / 2.66 / 3.31 V | – / 0.28° |
+| NODET_split | 6.62 / 6.82 / 7.41 V | 6.63 / 6.83 / 7.42 V | 0.93° / – |
+
+- Every case is unclipped, with angle 45.00°, axial 0.800 MHz, all curvatures positive and zero residual field. The E1 dies agree to 0.03 V.
+- The unsplit dies need 11.0–31.6 V for the same targets.
+- With the four end caps grounded (32 channels, one Zotino), the A30 readout rises to 9.08 / 9.29 / 9.91 V; the other zones change by less than 0.02 V [team calc, scratch check of the same solve].
+- The 14-nearest-electrode set fails at the A30 readout (10.6–11.4 V), so the solve needs the outer electrodes there.
+- Sim 12 on the split dies: the RF null and RF frequencies are unchanged. The default 10° readout drops to 1.68 V (A30) and 0.74 V (B60), and the free transport maximum is 7.05–7.22 V (unsplit 7.13–7.26 V).
+
+**Assessment (Claude's, not a team decision).**
+- Splitting the centre DC is the only geometry change tried that gives 45° within ±10 V at every zone of every die. It does so at radial splits up to at least 0.5 MHz, with the A30 readout the tightest at 9.6 V (9.9 V on 32 channels).
+- The cost is one more electrode, one more pad and lead, and the bare NbN overhang in the cut.
+
+**Not checked.**
+- Transport and the sim 21 waveform with the split.
+- Light or charging through the 5 µm gap over the NbN tabs, the meander overhang and the Al mirror.
+- Pad fan-out with the extra pad: `check_package_fanout.py` reads only the unsplit pad file.
+- Any cooling rate: the per-mode formula is still unread (step 45).
+
+**Outputs.**
+- `sim/out/27_tilt_geometry_2d/` and `sim/out/28_tilt_geometry_3d/`;
+- `sim/out/25_radial_tilt_sweep/trap_die_v4_*_split*/` and `sim/out/12_final_chip/trap_die_v4_*_split/`;
+- `gds/trap_die_v4_*_split*`.

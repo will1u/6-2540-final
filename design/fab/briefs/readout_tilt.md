@@ -13,6 +13,7 @@
 | Keep 10° | The radial axes rotated 10° in the loading and readout zone sets (current) |
 | Smaller tilt | A tilt between 0° and 10° (sim 25) |
 | Larger tilt, up to 45° | Rotate the radial axes further, so the in-plane beams reach the near-vertical mode more strongly (sim 25) |
+| Split centre DC | Cut the centre DC lengthwise into two electrodes, so 45° fits within ±10 V (step 47; a layout change) |
 | Zero tilt | No radial rotation; simulated only in sim 13's window-drop push, not as a zone set |
 | Wider DAC range | Widen the ±10 V limit: the lab's Sinara Zotino is ±10 V; the Sinara 5633 HV amplifier gives 5× up to ±50 V [verify: M-Labs page only] |
 
@@ -63,6 +64,25 @@ Largest |V| for a 45° tilt with the radial modes split by 0.1 MHz, all DC elect
 - 10 mV errors on every voltage scatter the 45° axes by 0.8–1.4° (std).
 - The voltage goes on top/bottom outer-segment pairs driven in opposition. A split centre DC would need about 0.15 V per 0.1 MHz in a 2-D estimate (step 45) [team calc, not run on the GDS]; it is a layout change.
 - Grounding or tying electrodes to fit one 32-channel Zotino changes these numbers by at most 0.7 V (sim 26, step 46).
+
+## Split centre DC (sims 27, 28 and the split dies, DESIGN_LOG step 47)
+
+The centre DC sits right under the ion, so driving its two halves in opposition makes the xz curvature far more cheaply than the outer segments do. `make_chip.py --split` writes the v4 dies with that one change: a 5 µm cut along the centre DC, a new electrode 37 and a pad C2.
+
+Largest |V| for 45° at 0.8 MHz axial, all DC electrodes, from sim 25 on the split dies:
+
+| Zone | Split 0.1 MHz | Split 0.2 MHz | Split 0.5 MHz | Source |
+| --- | --- | --- | --- | --- |
+| Loading, A30 and B60 | 6.88 V | 7.08 V | 7.69 V | [sim 25](../../sim/out/25_radial_tilt_sweep/trap_die_v4_A30_split/summary.json), `loading.records` |
+| Readout, A30 | 8.76 V | 8.97 V | 9.59 V | same file, `readout.records` |
+| Readout, B60 | 2.44 V | 2.66 V | 3.31 V | `trap_die_v4_B60_split/summary.json` |
+| Loading / readout, NODET | 6.62 / 6.63 V | 6.82 / 6.83 V | 7.41 / 7.42 V | `trap_die_v4_NODET_split/summary.json` |
+
+- The same targets need 11.0–31.6 V on the unsplit dies.
+- On 32 channels (end caps grounded), the A30 readout needs 9.08 / 9.29 / 9.91 V [team calc, step 47].
+- Costs: one more electrode, lead and pad, plus a bare NbN overhang of 24 µm² (A30) / 33 µm² (B60) inside the cut, which `check_chip.py` flags.
+- Not checked: transport with the split, light or charging through the cut, pad fan-out.
+- Other geometries tried (asymmetric RF rails, segment pitch, centre width): [sim 28](../../sim/out/28_tilt_geometry_3d/frontier.json), step 47.
 
 ## What each option changes elsewhere
 
