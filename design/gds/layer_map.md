@@ -2,10 +2,10 @@
 
 > **Claude-authored.** Generated alongside `make_chip.py`, `make_test_die.py` and `make_wafer.py`.
 > - Units are µm; the GDS database unit is 1 nm.
-> - Top cells: `TRAP_DIE_V4_A30`, `TRAP_DIE_V4_B60`, `TRAP_DIE_V4_NODET`, `TEST_DIE_V3`, `TEST_DIE_V3_TRAP` and `WAFER_V4`.
-> - **v4 (2026-11-08, DESIGN_LOG step 25): local-mirror architecture** (team decision; `notes/decisions.md`). No die-wide Al, no 10 µm D2, no gap etch. The Au electrodes sit on Si / 1 µm thermal SiO₂ / 238 nm spacer / 80 nm cap. The Al is a local mirror under the centre DC. The SNSPD leads are Au in a slot along the centre DC. A30 and B60 (60 × 30 µm window) both kept.
+> - Top cells: `TRAP_DIE_V4_A30`, `TRAP_DIE_V4_B60`, `TRAP_DIE_V4_NODET`, `TEST_DIE_V4`, `TEST_DIE_V4_TRAP` and `WAFER_V4`.
+> - **v4 (2026-11-08, DESIGN_LOG step 25): local-mirror architecture** (team decision; `notes/decisions.md`). No die-wide Al, no 10 µm D2, no gap etch. The Au electrodes sit on Si / 1 µm thermal SiO₂ / 238 nm spacer / 160 nm cap. The Al is a local mirror under the centre DC. The SNSPD leads are Au in a slot along the centre DC. A30 and B60 (60 × 30 µm window) both kept.
 > - `TRAP_DIE_V4_NODET` (`make_chip.py --nodet`, the R1_TRAP die) uses only layers 1 and 50, plus 100/101: Au on thermal SiO₂ over high-resistivity Si.
-> - **The test dies are still v3** (die-wide M1, D2 openings, L45). Their rework for v4 is open (`fab/OPEN_DECISIONS.md`).
+> - **The test dies are v4** (`test_die_v4`, `test_die_v4_TRAP`; DESIGN_LOG step 35): the same thin stack, each meander on its own local Al mirror. The v3 test dies are in `archive_v3_baseline/`.
 > - R&D run layouts `RUN_R1_TRAP` and `RUN_R1_FULL` (`make_run.py`) reference these die cells.
 > - Earlier versions are archived: v1 square die in `archive_v1_square/`, v2 narrow die in `archive_v2_narrow/`, v3 baseline (die-wide Al + 10 µm D2) in `archive_v3_baseline/`.
 

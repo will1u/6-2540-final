@@ -5,7 +5,7 @@
 [Test plan](../test_plan.md) · [Fab overview](../README.md) · [Open decisions](../OPEN_DECISIONS.md)
 
 > [!warning] Draft limits and unresolved source
-> The numerical limits below are draft **[verify]** values. “Dietl 2025” is M. Dietl et al., arXiv:2505.21284. Its Table 2 gives the 100 nA leakage pass limit at 50 V DC and 300 V (labelled RF in the paper). The 120-needle probe card and the Au comb structure attributed to it earlier were not found in the paper, and no breakdown or flashover voltage is given. The source of the limits is identified; see the [L2 source note](../../research/research_notes/Loose%20ends%202026-11/L2_open_sources.md) (item I1). The limits themselves remain **[verify]**.
+> The numerical limits below are draft **[verify]** values. “Dietl 2025” is M. Dietl et al., arXiv:2505.21284. Its Table 2 gives the 100 nA leakage pass limit at 50 V DC and 300 V (labelled RF in the paper). The paper's test uses 120 probe needles on loop electrodes with two bond pads each (its Sec. 3, page 6); an Au comb structure was not found in it, and no breakdown or flashover voltage is given. Reading pointers: [Dietl note](../../research/research_notes/Test%20setup%202026-11/T1_dietl_2025.md). The source of the limits is identified; see the [L2 source note](../../research/research_notes/Loose%20ends%202026-11/L2_open_sources.md) (item I1). The limits themselves remain **[verify]**.
 
 **When:** step 17 (wafer, before dicing) and again after packaging (step 19, through the carrier pins).
 **Tool:** ProbeStation-Summit-11000 + SMUs.

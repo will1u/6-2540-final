@@ -17,7 +17,7 @@
 - **Al mirror thickness, the analysis behind it (step 37, `sim/10c`):** the 450 nm mirror stands 0.45 µm proud of the SiO₂ beside it, so the centre DC and slot leads sit 0.45 µm above the RF rails. Its pickup goes to ground (about 3.1 mA along the strip); the part that can reach the nanowire is ≤ 0.2 µA at 450 nm, ≤ 1.0 µA at 100 nm and ≤ 1.9 µA at 50 nm, next to a direct pickup of 0.96–1.92 µA. The ion does not notice. A thin mirror costs heat: 65–87 µW in a 50 nm strip against 7–10 µW at 450 nm. The team chose 100 nm, inlaid (step 38).
 - **Fab pages (step 36):** every page in `design/fab/` is v4, with E1 and E2 written as equal branches; two new figures, `fab/figures/stack_v4.svg` and `process_flow_v4.svg`.
 
-**2026-11-08, v4 SNSPD overhang audit:** completed the requested GDS, ray-footprint, optical-stack and straight-wire inductance checks for A30/B60, E1/E2 and 80/160 nm SiO₂ caps; see the final audit entry in `design/DESIGN_LOG.md`. Centred overhang causes no ray-envelope collection loss; its main quantified cost is about 14/22 ns of extra straight-section current-recovery time constant. Radial alignment margin is about 0.93 µm at 160 nm cap. Step 26's 160 nm cap target is still inconsistent with 80 nm in generator metadata and older process notes. No layout or design choice changed; actual switching current, internal efficiency and recovery still require qualification.
+**2026-11-08, v4 SNSPD overhang audit:** completed the requested GDS, ray-footprint, optical-stack and straight-wire inductance checks for A30/B60, E1/E2 and 80/160 nm SiO₂ caps; see the final audit entry in `design/DESIGN_LOG.md`. Centred overhang causes no ray-envelope collection loss; its main quantified cost is about 14/22 ns of extra straight-section current-recovery time constant. Radial alignment margin is about 0.93 µm at 160 nm cap. The generator metadata and the process pages say 160 nm since step 35. No layout or design choice changed; actual switching current, internal efficiency and recovery still require qualification.
 
 ## Fabrication review
 
@@ -68,14 +68,14 @@ Ground rules agreed with the team:
 | RF drive | 53 V at 28 MHz → radial 3.0 MHz, q 0.30, depth ≈ 52 meV |
 | Outer segments | 15 + 15 at 120 µm pitch (100 µm before step 28) |
 | Zone spacing | Loading ↔ readout 480 µm (team decision 2026-11-08, laser setup; was 600 µm) |
-| Readout window | 30 µm opening inside the centre DC; floor = 80 nm SiO₂ cap over the grounded local mirror (v4) |
+| Readout window | 30 µm opening inside the centre DC; floor = the 160 nm SiO₂ cap, over the NbN and the grounded local mirror (v4) |
 | Window effect on height | v4: −1.19 µm (E2) / ≤ −0.37 µm (E1), grounded floor (3-D FD). v3: −1.38 µm over bare SiO₂. |
 | NbN absorption | v4: 0.66 with a 160 nm cap, 0.44 with the drawn 80 nm (sim 09c, step 26); v3.1: 0.54 (f 0.65, EMT) |
-| Geometric collection | 2.23 % (A30) with isotropic Ba⁺ emission at the v3 height (step 24); not yet recomputed for v4. Todaro: 2.0 % geometric. |
+| Geometric collection | v4 (sim 15b, step 32), isotropic Ba⁺ emission: 2.22 % (A30, E2), 4.16 % (B60, E2); absorbed in NbN 1.47 % / 2.71 % of all emitted photons with the 160 nm cap. Todaro: 2.0 % geometric. |
 | Beam clipping (10 × 10 mm die) | ≈ 1.7e-2 at 493 nm, 3.2e-2 at 650 nm (was 1.1e-5 / 1.1e-4 on the 2.5 mm die) |
-| RF pickup bound (2-D) | 1.42 µA with no ITO (was ≈ 0 with the grounded buried ITO); ~7–9 % of the estimated NbN switching current |
+| RF pickup bound (2-D) | v4 (sim 10c, steps 37–38): nanowire 0.96 µA (E2) / 1.92 µA (E1), plus at most 0.73–0.97 µA through the mirror path; each slot lead collects 44.5 µA (E2) / 28.6 µA (E1) of common-mode current. v3 was 1.4 µA with no ITO |
 | Simulated on the v3 fab GDS | Null height 50.08 µm (loading), 50.09 µm (readout); with the window recess ≈ 48.7 µm (A30) or ≈ 47.6 µm (B60). Loading zone and NODET: axial 0.8 MHz, radial 2.89 / 2.97 MHz, 10° tilt, max \|V\| 9.05 V. **A30/B60 readout: the open window splits the radial modes, so the 10° tilt needs 13.2 / 15.2 V (over ±10 V); no tilt needs 6.6 / 3.4 V.** Transport max 7.33 V; ≤ 1.6 V per 10 µm step (A30), up to 4.5 V near the B60 window. |
-| Simulated on the v4 fab GDS | Null 49.97 / 49.98 µm; readout incl. recess ≈ 48.8 µm (E2). 10° tilt: loading 8.1 V, **readout 6.1 V** (fits ±10 V; v3 needed 13.2 V). NODET 9.1 V. Transport with the centre DC held at 0 V: max 6.4 V, ≤ 1.67 V per 10 µm step (8 V steps if the centre DC is used, because of the slot end and window). |
+| Simulated on the v4 fab GDS | Null 49.97 / 49.98 µm; readout incl. recess ≈ 48.8 µm (E2). 10° tilt (480 µm zones, steps 28–29): loading 7.5 V, **readout 6.3 V** (A30) / 2.2 V (B60) (fits ±10 V; v3 needed 13.2 V). NODET 7.9 V. Transport with the centre DC held at 0 V: max 6.6 V, ≤ 1.71 V per 10 µm step (7.6–8.0 V steps if the centre DC is used, because of the slot end and window). |
 
 ## Done ✅ (chronological)
 
@@ -125,10 +125,10 @@ Ground rules agreed with the team:
 
 - [ ] Ground vias (step 22): add the via contact check to W3 (with / without Ar pre-clean, sidewall cross-section); confirm the AJA substrate RF etch.
 - [ ] **v3.1 SNSPD geometry** (step 24) is Claude's design call, not a team decision (team, 2026-11-08), so it stays out of `notes/decisions.md` until the team adopts it. Open from it: centre-DC filter capacitor, Al RF potential under the leads, Isw at 5 K (maybe 8–9 µA), measured NbN thickness, RCWA check of absorption, Suleimen 2026 full text, isotropy derivation check.
-- [ ] **v4 follow-ups** (step 25): choose E1 vs E2; rewrite traveler / R1_TRAP sheet / mask list / stack for v4; rework the test dies (no D2, no die-wide Al); set the cap to 160 nm in the rewritten traveler (09c, step 26); RF bypass / symmetric termination for the slot leads (10b: ≈ 46 µA common-mode per lead); mirror ground path: via moved; Al 450 nm on 2026-11-08, then 100 nm inlaid on 2026-11-09 (steps 37–38; at most +0.97 µA), measured on T10 instead of a probe opening; order Si with ρ > 20 kΩ·cm; measure resonator Q with a die mounted.
+- [ ] **v4 follow-ups** (step 25): choose E1 vs E2; rewrite traveler / R1_TRAP sheet / mask list / stack for v4; rework the test dies (no D2, no die-wide Al); set the cap to 160 nm in the rewritten traveler (09c, step 26); RF bypass / symmetric termination for the slot leads (sim 10c: 44.5 µA common-mode per lead on E2); mirror ground path: via moved; Al 450 nm on 2026-11-08, then 100 nm inlaid on 2026-11-09 (steps 37–38; at most +0.97 µA), measured on T10 instead of a probe opening; order Si with ρ > 20 kΩ·cm; measure resonator Q with a die mounted.
 - [ ] Bond pads (step 21): run W7 bond-and-leak before R1; get MIT.nano bonder and tool part numbers; draw the bond diagram against the carrier; field-solve DC-to-RF coupling.
 - [ ] **Pad pitch / package (step 29):** adopt or revise the validated 360 µm layout after reviewing future perpendicular beam access near the zones; choose 84-pin vs 100-pin/lab carrier and complete its electrical pin map. Spacer proposal: ≥ approximately 0.6 mm thick, die-sized or larger, Si suggested; not adopted.
-- [ ] Not yet team decisions (Claude's layout calls or open): readout radial tilt (v4 A30 fits 10° at 6.1 V; team to confirm), 0.8 MHz axial with ±10 V DACs.
+- [ ] Not yet team decisions (Claude's layout calls or open): readout radial tilt (v4 A30 fits 10° at 6.3 V; team to confirm), 0.8 MHz axial with ±10 V DACs.
 - [ ] Reasons the team still owes `notes/decisions.md` (asked 2026-11-08): A30/B60 detector variants; and "not recorded" on Ba⁺/project scope, NODET die, R1_TRAP first. (Si substrate, no ITO and the 10 × 10 mm die were answered 2026-11-08; the 50 µm ion height on 2026-11-09.)
 - [ ] Before tape-out, run the witness wafers in [qualification](design/fab/QUALIFICATION.md). Also confirm:
   - the Plating-U04 bath;

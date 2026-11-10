@@ -10,7 +10,7 @@
 The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no Al and no detector. **R1_FULL** adds 2 A30 and 2 B60 detector dies, plus 2 NODET and 2 TEST dies, on the same v4 stack.
 
 > [!important] Current readiness
-> The v4 generator (`gds/make_chip.py`) implements the local-mirror stack. A30 and NODET pass `check_chip.py`. The detector generators use the v3.1 meander, and some recipe estimates still describe the earlier v3 detector. The v4 test dies are drawn and checked (2026-11-09). Reconcile the detector files before R1_FULL export: see [the reconciliation checklist](OPEN_DECISIONS.md#detector-documents-and-generated-layouts). The process still needs witness-wafer qualification and facility confirmation.
+> The v4 generator (`gds/make_chip.py`) implements the local-mirror stack. A30, B60 and NODET pass `check_chip.py` (DESIGN_LOG step 29). The detector generators use the v3.1 meander, and some recipe estimates still describe the earlier v3 detector. The v4 test dies are drawn and checked (2026-11-09). Reconcile the detector files before R1_FULL export: see [the reconciliation checklist](OPEN_DECISIONS.md#detector-documents-and-generated-layouts). The process still needs witness-wafer qualification and facility confirmation.
 
 ## Start with your task
 
@@ -28,14 +28,14 @@ The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no A
 | Record in-process measurements | [Process checks](process_checks.md) |
 | Test finished devices | [Test plan](test_plan.md) |
 
-[Layout](LAYOUT.md), [mask list](mask_list.md), [qualification](QUALIFICATION.md), [process checks](process_checks.md) and [test plan](test_plan.md) are not rewritten for v4 in this pass. Check them against the v4 files before use.
+[Layout](LAYOUT.md), [mask list](mask_list.md), [qualification](QUALIFICATION.md), [process checks](process_checks.md) and [test plan](test_plan.md) were rewritten for v4 on 2026-11-09 (DESIGN_LOG step 36).
 
 ## Project progress
 
 | Area | Progress | Next requirement |
 |---|---|---|
-| Trap layout (v4) | `trap_die_v4_A30`, `_B60` and `_NODET`; 36 signal pads at 360 µm pitch (team adoption pending); mirror ground via at (−2140, 130) µm; A30 and NODET pass `check_chip.py` | Record the B60 check result [verify]; team adoption of the pad pitch |
-| Trap simulations (v4) | 04b, 12 and 13 rerun on v4; 09c optics and 10b RF pickup done for v4; pad-pitch check (16) done | Collection at the v4 heights: `sim/15b_collection_v4.py` exists; rerun 15 still to be checked |
+| Trap layout (v4) | `trap_die_v4_A30`, `_B60` and `_NODET`; 36 signal pads at 360 µm pitch (team adoption pending); mirror ground via at (−2140, 130) µm; A30, B60 and NODET pass `check_chip.py` (DESIGN_LOG step 29) | Team adoption of the pad pitch |
+| Trap simulations (v4) | 04b, 12 and 13 rerun on v4; 09c optics and 10b RF pickup done for v4; pad-pitch check (16) done; collection at the v4 heights done (`sim/15b_collection_v4.py`, step 32) | See the [simulation index](../sim/INDEX.md), "Not modelled yet" |
 | Detector | v3.1 meander (130 / 200 nm) under the v4 stack; absorption 0.66 with a 160 nm cap (effective-medium model, 09c) | Reconcile generated files, masks and detector predictions |
 | Fabrication | Process pages rewritten for v4; electrode Au (E1 or E2) open | Choose E1 or E2; facility confirmations; W5, W7 and W8 (inlaid mirror) [qualification](QUALIFICATION.md) |
 | First run | R1_TRAP selected on 2026-11-02; on the no-Al stack since 2026-11-08 | Choose E1 or E2; finish its qualification checklist |
@@ -57,4 +57,4 @@ Relative Markdown links connect notes and individual process steps. Each recipe 
 - **Selected:** already recorded as the team's choice. **Open:** still needs a decision or check. **Proposed:** an alternative to the adopted process.
 - **[verify]:** not checked on the tool or against the source. **[team calc]:** calculated for this project. **[inference]:** reasoning rather than data.
 
-Recipe shorthand: JoVE = Hong 2017; PTB = Bautista-Salvador 2019 and thesis 2015; Sussex = Siegele-Brown 2022; Todaro = Todaro 2021 and supplement; Hampel = Hampel 2023. See [references](../references_design.bib), [literature report](../research/reports/Trap%20integrated%20SNSPD%20design.md) and [design log](../DESIGN_LOG.md). The unresolved “Dietl 2025” attribution is flagged in [Open decisions](OPEN_DECISIONS.md#source-and-model-checks).
+Recipe shorthand: JoVE = Hong 2017; PTB = Bautista-Salvador 2019 and thesis 2015; Sussex = Siegele-Brown 2022; Todaro = Todaro 2021 and supplement; Hampel = Hampel 2023. See [references](../references_design.bib), [literature report](../research/reports/Trap%20integrated%20SNSPD%20design.md) and [design log](../DESIGN_LOG.md). “Dietl 2025” is arXiv:2505.21284; reading pointers are in the [Dietl note](../research/research_notes/Test%20setup%202026-11/T1_dietl_2025.md).

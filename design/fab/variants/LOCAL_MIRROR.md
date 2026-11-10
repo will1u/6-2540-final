@@ -9,7 +9,7 @@
 
 > [!note] This page is the record of the argument; the process pages hold the current values (2026-11-09)
 > [Stack](../STACK.md) and the [process pages](../TRAVELER.md#f-steps) were rewritten for v4 on 2026-11-09 (DESIGN_LOG step 36). Where this page differs from them, they are right:
-> - the SiO₂ over the wires is 160 nm, so the mirror via is ≈ 0.40 µm deep and the contact openings ≈ 160 nm (H.2 step 11v below still says 0.32 µm and 80 nm);
+> - the SiO₂ over the wires is 160 nm, so the mirror via is ≈ 0.40 µm deep and the contact openings ≈ 160 nm (H.2 step 11v below was written with the earlier 80 nm cap and is updated to these values);
 > - the trap dies have no mirror probe opening: the mirror ground path is measured on the test die (T10 strip, T11 via chain; step 35);
 > - the H.5 GDS changes were made in `gds/make_chip.py` v4, with the leads in the slot (option a).
 > - The mirror thickness and step 3 were changed on 2026-11-09 (100 nm, inlaid). [process/01_FOUNDATION.md](../process/01_FOUNDATION.md) is current.
@@ -59,7 +59,7 @@ Capacitance the mirror adds to the centre DC (electrode 2), which sits 318 nm ab
 | **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Evaporated Al **100 nm, inlaid**: SiO₂ recess, Al evaporation and lift-off with one resist (team decision 2026-11-09; `sim/10c`, DESIGN_LOG step 37; supersedes the 450 nm of 2026-11-08). Hampel used 50 nm e-beam Al by lift-off, not inlaid. No mark cut-outs needed |
 | 4–8 | Spacer 238 nm, NbN, L22 leads, L20 nanowire, HSQ + cap | Same order: leads before the nanowire, cap straight after. **The cap is now the top surface over the detector (vacuum above)**, so its thickness matters optically again: rerun 09b before fixing it (H.4) |
 | 9, 10 | 10 µm D2 | **Skipped** |
-| **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: HSQ/cap + spacer ≈ 0.32 µm down to the Al. SNSPD pads: ≈ 80 nm down to the L22 Au. Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. Add a small Al probe opening on the mirror so it can be checked electrically (H.5) |
+| **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: HSQ/cap + spacer ≈ 0.40 µm down to the Al. SNSPD pads: ≈ 160 nm down to the L22 Au. Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. Add a small Al probe opening on the mirror so it can be checked electrically (H.5) |
 | **12v–15v** | Seed, nLOF mold, 6 µm plating, seed removal | **Ti/Au lift-off electrodes, L50 drawn**: LOR + positive resist, MLA. In-situ Ar pre-clean before the Ti (AlF₃ on the via floor; step 22). Ti 10 nm / Au 350 nm (Hampel 350 nm) [verify thickness]. Lift-off in NMP. Option E2: keep steps 12–15 as written and plate 6 µm on the thin stack; the cap protects the NbN under the plating resist (Todaro's damage step) [inference] |
 | 16a, 16 | L45 protect, gap etch | **Skipped** (no D2 to clear) |
 | 17–19 | Test, dice, package | Same, except: no M1 bond openings (the mirror is grounded through the fill); test fill ↔ mirror probe pad < 10 Ω; check that 350 nm evaporated Au wedge-bonds [verify] |
@@ -86,5 +86,5 @@ A `--localmirror` flag in `make_chip.py` would need:
 - L40 = the mirror ground via + SNSPD pad openings + a mirror probe opening only (no M1 bond openings, no fill-to-M1 vias);
 - no L45;
 - `_sim.json` stack per H.4;
-- **a lead-routing decision.** The L22 leads now run under the centre DC with only ≈ 80 nm of HSQ/cap between them and the Au, over ≈ 2.3 mm inside the trap and ≈ 2.6 mm under the centre lead. A pinhole anywhere shorts the SNSPD to electrode 2. Either (a) move the leads into the electrode layer, in a slot cut along the centre DC (Hampel's Fig. 1 layout; a GDS change and a new five-wire geometry to simulate), or (b) keep them buried and thicken the SiO₂ over the leads only [inference; adds a step].
+- **a lead-routing decision.** The L22 leads now run under the centre DC with only the thin HSQ/cap (80 nm when this was written) between them and the Au, over ≈ 2.3 mm inside the trap and ≈ 2.6 mm under the centre lead. A pinhole anywhere shorts the SNSPD to electrode 2. Either (a) move the leads into the electrode layer, in a slot cut along the centre DC (Hampel's Fig. 1 layout; a GDS change and a new five-wire geometry to simulate), or (b) keep them buried and thicken the SiO₂ over the leads only [inference; adds a step].
 - `check_chip.py` rules for the above.
