@@ -63,6 +63,8 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 | `13_dc_height_tuning.py` | Can DC voltages push the ion back up over the readout window? DC needed and excess micromotion vs upward shift, at 0° and 10° radial tilt. |
 | `14_staircase_check.py` | Staircase fingers + leads vs plain equal-depth segments (`trap_die_v3_UNIFORM`, read from `gds/archive_v3_baseline/`) and the electrode repo's five-wire example: unit potentials, symmetry, zone voltages, transport. |
 | `09c_localmirror_optics.py`, `10b_rf_pickup_v4.py` | v4 versions of 09 and 10: NbN absorption with vacuum above the cap (sets the 160 nm cap); RF pickup with the slot leads and the local mirror. |
+| `10c_mirror_thickness.py` | 10b's solver over Al mirror thicknesses 50–450 nm and an inlaid mirror: strip current, swing, extra nanowire current, strip dissipation, lead common mode, micromotion estimate (step 37). |
+| `10d_mirror_step.py` | The same solver on the full cross-section with a raised mirror (0, 100, 450 nm) and a sideways-misaligned mirror (0, 2, 5 µm): shift of the RF null, change in q, micromotion if not re-tuned (step 39). Options `--one`, `--au E1\|E2`. |
 | `15_snspd_geometry.py` | SNSPD geometry budget on the v3 stack: collection, refraction footprint, absorption vs fill factor, turn crowding, kinetic inductance. |
 | `15b_collection_v4.py` | Collection and NbN absorption on the v4 stack, for A30/B60 and both electrode options. |
 | `16_pad_pitch_check.py` | Compares the 360 µm pad layout with the 180 µm one: wire fan-out to the PGA84L fingers, sim 12 and 13 differences. |

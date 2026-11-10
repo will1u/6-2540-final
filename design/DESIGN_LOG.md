@@ -1478,7 +1478,7 @@ Closes "adiabatic transport timing" at the level of a first estimate. Input: `si
 - **Step numbers are kept:** 0–3 foundation (step 3 = local Al mirror, detector dies only), 4–8 detector, 9 and 10 removed, 11 layer-40 openings through the thin stack, 12–15 electrodes as branch E1 or branch E2, 16a and 16 removed, 17–19 test, dice, package. R1_TRAP uses 0–2, 12–15 and 17–19.
 - **Rule the writers worked under:** values are carried from the v3 pages, `LOCAL_MIRROR.md` and steps 25–29; nothing new is invented; anything no source gives is tagged `[verify]`. No page recommends E1 or E2.
 - **New test identifiers:** a15 (T2v), a16 (T10), a17 (T11), a18 (T12), a19 (SNSPD leads to the centre DC). a4 is retired. a13 (ground link) no longer uses the < 10 Ω limit, because the Al strip alone is about 5 Ω.
-- **Figures:** `fab/figures/stack_v4.svg` (five cross-section panels, E1 solid and E2 dashed) and `fab/figures/process_flow_v4.svg` (one composite cross-section per step, written by `make_process_flow.py`).
+- **Figures:** `fab/figures/stack_v4.svg` (five cross-section panels, E1 solid and E2 dashed) and `fab/figures/process_flow_v4.svg` (one composite cross-section per step, written by `make_process_flow.py`). Both are drawn flat, with the Al mirror embedded and the NbN inset under a level SiO₂ cap (the stack figure was corrected to this on 2026-11-09; it first showed the layers over the Al raised). Neither draws the real 0.45 µm step at the mirror edge, |y| = 20 µm; the stack figure and `fab/STACK.md` state it in words.
 - **Link checker:** `fab/check_links.py` checks every relative link and heading anchor under `design/fab`.
 - **Sources resolved:** "Dietl 2025" is M. Dietl et al., "Test and characterization of multilayer ion traps on fused silica", arXiv:2505.21284. Its Table 2 gives the 50 V DC / 300 V RF, 0–100 nA leakage limits and the 1 mA, 0–100 mV continuity test used in a1–a3. Those traps have Al electrodes on fused silica; no comb structure or flashover measurement was found in it, so the T1 limits remain `[verify]`. Suleimen 2026 is Phys. Rev. Applied 25, 044091; only the abstract is open.
 - **Opened by the rewrite, for the team:** whether R1_TRAP also deposits the 398 nm of PECVD SiO₂ so its electrodes sit on the same surface as the detector dies; whether NODET dies on R1_FULL get steps 4–8; the T10 acceptance limit; no v4 witness covers the 300 °C cap deposition on NbN now that W1-b is gone.
@@ -1486,3 +1486,126 @@ Closes "adiabatic transport timing" at the level of a first estimate. Input: `si
 **Reproducibility.** `sim/run_cached_geometry.py` reuses exact unions of identical immutable Shapely polygon pairs only inside the solver's gap-splitting routine (bounded cache, restored afterward); no coordinates, precision, solver source or physical model were changed. Repeated union results were checked byte-for-byte on overlapping polygon pairs. The compiler cache was placed in a writable ignored directory. Solver revision, package versions and input hashes are recorded in [environment.json](sim/out/16_pad_pitch_check/environment.json) and the comparison files. Re-run sim 12 with `cd design/sim` then `./run.sh 16_pad_pitch_check.py`; `--resume` rechecks completed cases only when simulation inputs match. The fan-out script requires Python with `pdfplumber` (the bundled document runtime was used here). Sim 13 used `./run.sh run_cached_geometry.py 13_dc_height_tuning.py` with a writable NUMBA_CACHE_DIR.
 
 **Still open.** Confirm future perpendicular beam clearance before adopting the inward rows; choose 84-pin vs 100-pin/lab carrier and its electrical pin map; qualify the proposed ≥ approximately 0.6 mm, die-sized-or-larger spacer (Si suggested). The planned 45° beam arrangement remains the stated use case; no future-beam clearance was approved in this step.
+
+---
+
+## 2026-11-09: Step 37, what the Al mirror thickness buys, and the step it leaves (`sim/10c_mirror_thickness.py`)
+
+**Question (team, 2026-11-09).** The stack figure showed the detector raised over the mirror; the process-flow figure showed it flat. Which is built, and is the 450 nm Al (team decision 2026-11-08, step 28) worth the step it causes?
+
+**The step is real.** Step 3 leaves the Al standing on the thermal SiO₂ at |y| ≤ 20 µm and no later step planarizes, so the SiO₂ spacer, NbN, SiO₂ cap and Au over the mirror sit one Al thickness above the same layers beside it: 0.45 µm today. The mirror edge is also the centre-DC edge. With E1 the 0.35 µm evaporated Au has to climb that step wherever it leaves the mirror. All simulations assume coplanar electrodes.
+
+**Hampel 2023 (arXiv:2302.01462 v1, read in full).** No mention of planarization, a recess or the step. Their mirror is 50 nm e-beam evaporated Al by lift-off on 150 nm PECVD SiO₂, left raised, under a 350 nm evaporated Au lift-off (Au 7× the step). NbTiN was co-sputtered at 500 °C over that Al. With the mirror grounded they report no induced-current signature up to 54 V at 70 MHz and attribute the remainder to RF heating. Those devices did not trap an ion. The published APL version was not re-opened.
+
+**Simulation (`10c`, same 2-D solver as `10b`; 53 V, 28 MHz; SiO₂ cap 160 nm; ρ(Al) 3–4 µΩ·cm, room temperature).** The reference case reproduces `10b` exactly. Values are for E2; E1 is within 3 % except the direct pickup.
+
+| Al mirror | Step | T10 strip | Current to the via | Swing at the detector | Extra wire current (upper bound) | Strip dissipation | Lead common mode from the mirror | Micromotion, A30 / B60 |
+|---|---|---|---|---|---|---|---|---|
+| 50 nm, raised | 50 nm | 38–50 Ω | 3.13 mA | 59–79 mV | 1.43–1.91 µA | 65–87 µW | 8.0–10.7 µA | ≤ 4.1 / 8.2 nm |
+| 100 nm, raised | 100 nm | 19–25 Ω | 3.14 mA | 30–40 mV | 0.72–0.95 µA | 33–44 µW | 4.0–5.4 µA | ≤ 2.1 / 4.1 nm |
+| 150 nm, raised | 150 nm | 13–17 Ω | 3.14 mA | 20–26 mV | 0.48–0.64 µA | 22–29 µW | 2.7–3.6 µA | ≤ 1.4 / 2.7 nm |
+| 450 nm, raised (today) | 450 nm | 4.2–5.6 Ω | 3.15 mA | 6.6–8.8 mV | 0.16–0.21 µA | 7.4–9.8 µW | 0.9–1.2 µA | ≤ 0.5 / 0.9 nm |
+| 450 nm, inlaid 0.45 µm into the thermal SiO₂ | 0 | 4.2–5.6 Ω | 3.42 mA | 7.2–9.6 mV | 0.17–0.23 µA | 8.7–11.5 µW | 1.0–1.3 µA | ≤ 0.5 / 1.0 nm |
+
+For comparison: direct rail-to-wire pickup 0.96 µA (E2) / 1.90–1.92 µA (E1); direct lead pickup 44.5 µA (E2) / 28.5 µA (E1) per lead; switching current 8–20 µA; window micromotion 173 nm (A30 E2), ≤ 55 nm (E1) (step 27); RF rail dissipation 1.8–7.4 µW (E2), 31–126 µW (E1) (step 31, which assumed RRR 5 for the Au).
+
+**Reading (Claude's assessment, not a team decision).**
+1. The mirror's pickup goes to ground: about 3.1 mA flows along the strip to the via at every thickness. What can reach the nanowire is a second-order term, the swing of the strip's detector end coupled through the 137 fF between mirror and meander. It is under 0.1 % of the strip current.
+2. For the SNSPD that term is small at every thickness. At 50 nm it is at most the size of the direct pickup on E1 and twice it on E2; at 100 nm it is at most equal to the direct pickup on E2. All are below the 4 µA that an unmatched lead termination can add (step 33). The 450 nm choice bought 0.3–0.45 µA relative to 150 nm.
+3. For the ion it does not matter: the mirror swing seen through the window gives at most a few nm of micromotion (small-patch estimate), against 55–173 nm from the window itself.
+4. The cost of a thin mirror is heat, not induced current. A 50 nm strip dissipates 65–87 µW, which makes the mirror the largest RF dissipator on an E2 chip and comparable to the rails on E1. Hampel names RF heating as their residual limit. These numbers use room-temperature resistivity, so they overstate the cold value; there is no thermal model.
+5. The mirror swing adds 2–4 % (450 nm) to 18–38 % (50 nm) to the common-mode pickup on each slot lead. It reaches the nanowire only through a termination mismatch, as in step 33.
+6. Inlaying the 450 nm mirror removes the step and costs about 9 % more strip current, because the Si is 0.45 µm closer to the rails. It needs a 450 nm Al lift-off into a recess, which no source read so far covers.
+
+**Options for the team.** (a) A thin raised mirror by evaporation and lift-off, as Hampel built: 100 nm leaves a 0.10 µm step under 0.35 µm Au and halves the 50 nm penalties; 50 nm is the fully sourced case. This reverses the 450 nm decision. (b) Keep 450 nm and inlay it: flat, but a new process with its own witness loop. (c) Keep 450 nm raised and rely on step 15 and T12 to show the E1 Au crosses the step. Claude's recommendation was (a) at 100 nm. **Decided the same day: 100 nm, inlaid (step 38).**
+
+**Limits.** 2-D model; ideal conductors; ω V C upper bounds; room-temperature Al resistivity; no thermal model; the micromotion figure is a small-patch estimate; the raised cases are solved with coplanar electrodes, so the step itself is not in the field model.
+
+**Figures.** `fab/figures/stack_v4.svg` was redrawn flat on 2026-11-09 to match the process-flow figure, with the true step stated under panel (a) and in `fab/STACK.md`.
+
+---
+
+## 2026-11-09: Step 38, the Al mirror becomes 100 nm, inlaid (`sim/10c_mirror_thickness.py`; `fab/`)
+
+**Team decision (2026-11-09; `notes/decisions.md`).** The local Al mirror is 100 nm of evaporated Al, inlaid in the thermal SiO₂. It replaces the 450 nm mirror of 2026-11-08. The team's reasons: the built electrodes should be the coplanar geometry that was simulated; E1's 0.35 µm Au should not climb a 0.45 µm step; and step 37 showed the reason for 450 nm was weak, because the mirror's pickup goes to ground.
+
+**Process (Claude's design call under the `design/` exception).** Step 3 keeps its number and becomes four sub-steps with one resist and the existing layer-10 data:
+
+| Sub-step | What | Where the recipe comes from |
+|---|---|---|
+| 3a | LOR + positive resist, layer 10 drawn (open where the mirror goes) | old step 3 lift-off route |
+| 3b | RIE a 100 nm recess into the 1.0 µm thermal SiO₂ | CHF₃ / CF₄ / Ar of step 11 |
+| 3c | e-beam evaporate Al to the measured recess depth, 100 nm nominal | evaporator of E1; Hampel 2023 for evaporated Al |
+| 3d | lift-off; the Al top is level with the SiO₂ | as step 6 / E1 |
+
+- 0.9 µm of thermal SiO₂ remains under the mirror.
+- Planarity limit: residual step and any lip or groove at the mirror edge ≤ 20 nm (a design call, to be checked).
+- Fallback: skip 3b, which gives a 100 nm raised mirror with the same mask.
+- New witness loop W8: recess depth and RIE rate with the lift-off resist on the wafer, lift-off after the fluorine etch, residual step and edge profile, hillocks on evaporated Al after 300 °C.
+- No GDS change; nothing was regenerated.
+
+**Simulation (`10c`, new case `al100_inlaid`: Al 100 nm over 0.90 µm thermal SiO₂; 53 V, 28 MHz; ρ(Al) 3–4 µΩ·cm at room temperature).** Reran; the ten acceptance checks pass and the earlier rows are unchanged.
+
+| | E2 | E1 |
+|---|---|---|
+| Sheet resistance; T10 strip | 0.30–0.40 Ω/sq; 18.8–25.1 Ω | same |
+| Current along the strip to the via | 3.19 mA | 3.25 mA |
+| Swing at the detector end | 30.2–40.3 mV | 30.8–41.0 mV |
+| Extra nanowire current, upper bound | 0.73–0.97 µA | 0.74–0.99 µA |
+| Direct rail-to-wire pickup, for comparison | 0.96 µA | 1.92 µA |
+| Dissipation in the strip | 34–45 µW | 35–47 µW |
+| Common mode added to each slot lead (direct) | 4.1–5.5 µA (44.5) | 4.1–5.5 µA (28.6) |
+| Micromotion from the mirror swing, A30 / B60 | ≤ 2.1 / 4.2 nm | ≤ 2.1 / 4.3 nm |
+
+Inlaying costs 2 % in strip current against the 100 nm raised case (3.19 against 3.14 mA on E2), because the Si is 0.1 µm closer; the 450 nm inlay cost 9 %.
+
+**What this accepts.** The strip dissipates about four times what the 450 nm strip did (34–45 against 7–10 µW), on room-temperature resistivity and with no thermal model; Hampel names RF heating as their residual limit, so the cold RF test should watch the switching current against RF amplitude. The mirror is evaporated Al without Cu. No source read so far covers a recess-and-lift-off inlay, lift-off after a fluorine etch, or hillocks on 100 nm evaporated Al (`research/research_notes/Loose ends 2026-11/L3_inlaid_mirror.md`), so W8 carries that risk.
+
+**Pages and figures.** Rewritten for the 100 nm inlaid mirror, each citing `sim/10c` and step 37 where it states the thickness or a pickup number: `fab/STACK.md`, `process/01_FOUNDATION.md` (step 3 as 3a–3d with the fallback), `02_DETECTOR.md`, `03_ELECTRODES.md`, `04_PACKAGING.md`, `QUALIFICATION.md` (W8), `process_checks.md`, `tests/01_ELECTRICAL.md` (T10 expected 18.8–25.1 Ω), `tests/02_CRYOGENIC.md`, `tests/03_READOUT.md`, `test_plan.md`, `TRAVELER.md`, `mask_list.md`, `RUN_PLAN.md`, `README.md`, `VARIANTS.md`, `LAYOUT.md`, `variants/LOCAL_MIRROR.md` (row 3v and the stack line only). `fab/figures/stack_v4.svg` and `process_flow_v4.svg` draw the Al inside the top of the thermal SiO₂; the process flow has three panels for step 3 (18 panels). The Al labels in `architecture_crosssection.svg` and `open_decisions_map.svg` were updated. `gds/layer_map.md` row 10 and the test-die docstring were updated as text only. A consistency pass over all the pages followed; the direct lead pickup on E1 now reads 28.6 µA (160 nm cap, `10c`) where pages had 28.3 µA (80 nm cap, `10b`).
+
+**Still open.** W8 before a device wafer; an Al source on the E1 evaporator; the SiO₂ RIE rate on our tool; over-etch into the 100 nm Al at the mirror via; the T10 acceptance limit; a thermal estimate for the strip.
+
+---
+
+## 2026-11-09: Step 39, what a raised mirror and a misaligned mirror do to the RF null (`sim/10d_mirror_step.py`)
+
+**Question (team).** Even a 100 nm raised mirror should not matter much; can the worst case be simulated?
+
+**Model.** The 2-D finite-volume solver of `10b` / `10c` on the full cross-section through the lead slot (both signs of x), with the real heights: the SiO₂ and the Au over the mirror drawn `s` higher than beside it, and the mirror shifted sideways by `d`. RF rails at 1 V, everything else at RF ground. The null is found from a linear fit of the field around its minimum. Cases: `s` = 0 (inlaid 100 nm), 100 nm, 450 nm; `d` = 0, 2, 5 µm (5 µm is the overlay the mask list carries for layer 10, marked [verify]; the tool budget on the same page is 0.5–1 µm per layer); E2 and E1. Reference: inlaid, `d` = 0. 53 V, 28 MHz, ¹³⁸Ba⁺.
+
+**Checks.** Left-right symmetry holds to under 1 nm at `d` = 0. The micromotion figure equals (q/2) × displacement in every case. The null shift is linear in the step on E2 (ratio 4.51 for 4.5). On E1 the ratio is 5.35; it is not checked there, because a 450 nm step is taller than the 0.35 µm Au. The absolute values of this boxed 2-D model are off against `gds2itvg`: null 47.4–47.8 µm above the Au instead of 49.97 µm, q 0.347 instead of 0.30. The cause was not tracked down (grounded lid and walls at 400 µm, real gaps), so only differences between cases are used.
+
+**Results: shift of the RF null against the reference, and the micromotion if the DC set is not re-tuned.**
+
+| Mirror | `d` (µm) | E2: sideways / height (nm) | E2: Δq | E2: micromotion (nm) | E1: sideways / height (nm) | E1: Δq | E1: micromotion (nm) |
+|---|---|---|---|---|---|---|---|
+| inlaid | 0 | 0 / 0 | 0 | 0 | 0 / 0 | 0 | 0 |
+| inlaid | 2 | 15 / 10 | 0.01 % | 3 | 496 / 332 | −2.4 % | 101 |
+| inlaid | 5 | 30 / 23 | 0.03 % | 7 | 1052 / 785 | −4.6 % | 217 |
+| raised 100 nm | 0 | 0 / 163 | +0.47 % | 28 | 0 / 130 | +0.42 % | 23 |
+| raised 100 nm | 2 | 45 / 143 | +0.42 % | 26 | 529 / 458 | −2.0 % | 119 |
+| raised 100 nm | 5 | 60 / 132 | +0.39 % | 25 | 1108 / 911 | −4.2 % | 238 |
+| raised 450 nm | 0 | 0 / 734 | −0.9 % | 126 | 0 / 694 | −3.8 % | 116 |
+| raised 450 nm | 2 | 142 / 623 | −1.1 % | 110 | 653 / 959 | −3.5 % | 194 |
+| raised 450 nm | 5 | 129 / 505 | −1.3 % | 89 | 1244 / 1336 | −5.8 % | 298 |
+
+**Reading (Claude's assessment, not a team decision).**
+1. **The step itself is harmless.** A 100 nm raised mirror lifts the null by 0.13–0.16 µm and changes q by under 0.5 %. The lift is the same wherever the mirror runs, and it runs under both zones, so the ion simply sits at the new null. Left uncorrected it would be 23–28 nm of micromotion, which ordinary micromotion compensation removes; the window already costs 55–173 nm (step 27). The hand estimate before the run was 70 nm; the simulation gives about twice that.
+2. **The 450 nm mirror was not harmless in the same way:** 0.7 µm of lift and 116–126 nm if uncorrected. Going to 100 nm removed most of it, inlaid or not.
+3. **Misalignment of the mirror matters far more than the step, on E1.** Inlaid and with no step at all, a mirror 2 µm off centre moves the null 0.5 µm sideways on E1 and 5 µm off moves it 1.05 µm, about 0.2–0.25 µm per µm of misalignment. On E2 the same errors move it 15–30 nm. Cause [inference]: the mirror edge is drawn on the centre-DC edge, so a shifted mirror reaches into the 5 µm gap next to one RF rail, 0.4 µm under the surface, and pulls the gap floor to ground there. With 0.35 µm Au the field above sees that; with 6 µm Au the gap is a deep trench and the field above does not.
+4. The step adds only 30–55 nm sideways to that on top of the misalignment.
+5. A sideways shift is also uniform along the mirror and is compensated like any stray field, but 0.5–1 µm is of the size of the window drop and changes the DC set needed.
+
+**What follows.**
+- For the ion, 100 nm raised and 100 nm inlaid are equivalent. The inlay now rests only on the fab argument (0.35 µm Au over a 0.10 µm step, which Hampel's 350 nm over 50 nm suggests is fine) and on keeping the build identical to the drawings. The raised mirror is the simpler process and is already the named fallback.
+- **Proposal (not done; it changes layer 10 of the A30 and B60 dies):** pull the mirror edge in from the centre-DC edge, from |y| ≤ 20 µm to |y| ≤ 18 µm. The NbN reaches |y| = 16 µm, so that leaves 2 µm on each side: 2 µm of mirror beyond the NbN and 2 µm of Au beyond the mirror. A mirror misaligned by up to 2 µm then stays under the centre-DC Au and never reaches the gap. `check_chip.py` requires the mirror to cover the NbN by 3 µm today; that rule would become 2 µm. Layer 50 does not change, so the trap simulations stand.
+- Whatever the outline, the layer-10 to layer-50 overlay should be held to about 1 µm, not the 5 µm carried on the mask list, when the electrodes are E1.
+
+**Addendum, same day: these shifts are compensated by the DC electrodes, and the micromotion column overstates the uncorrected case.** [hand estimate, not simulated]
+- A shifted null is a static offset, the same along the whole mirror. The ion sits on the RF null whenever the DC field there is zero, so the DC set only has to be trimmed for where the null really is. That is ordinary micromotion compensation.
+- The trim is small. The DC field needed to move the DC zero-field point is m(ω_ax²/2)Δ/e ≈ 18 V/m per µm of null shift at 0.8 MHz axial, so about 19 V/m for the worst case here (1.05 µm sideways).
+- The micromotion column assumed the ion stays at the old null. It does not: the RF confinement (3 MHz) is much stiffer than the radial DC curvature (ω_ax²/2, about 0.57 MHz equivalent), so with no trim at all the ion follows the null to within ω_ax²/(2ω_r²) ≈ 4 % of the shift. For the worst case that is about 50 nm off the null and about 8 nm of micromotion, not 217 nm. The DC quadrupole that sets the 10° tilt can raise this to roughly 10 % of the shift.
+- What compensation does not undo: q lower by 2–5 % on E1 at 2–5 µm misalignment, and the ion up to 1 µm off the centre of the 30 µm window. Neither is a problem.
+- So the mirror-outline proposal above is a convenience, not a requirement. It would make the DC set computed from the drawn layout correct without a trim.
+
+**Limits.** 2-D cross-section through the lead slot: no window and no mirror end. The mirror ends 28 µm past the readout-zone centre, where a raised mirror gives an axial change in null height of 0.13–0.16 µm that this model cannot resolve. Ideal conductors; SiO₂ drawn with vertical steps; leads and DC electrodes at RF ground; absolute height and q biased as noted above.
