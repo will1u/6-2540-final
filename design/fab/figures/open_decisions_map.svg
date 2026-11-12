@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Claude-authored figure, 2026-11-08 (updated after the v4 decisions). Summarises OPEN_DECISIONS.md; update both together. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 640" width="1090" height="640">
+<!-- Claude-authored figure, 2026-11-08, updated 2026-11-11. Summarises OPEN_DECISIONS.md; update both together. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 912" width="1090" height="912">
   <defs>
     <style>
       text { font-family: "Segoe UI", Helvetica, Arial, sans-serif; fill: #222; font-size: 12px; }
@@ -15,8 +15,8 @@
     </style>
   </defs>
 
-  <rect x="0" y="0" width="1090" height="640" fill="#ffffff"/>
-  <text class="h" x="30" y="32">Open design decisions, 2026-11-09 (after the loose-ends pass)</text>
+  <rect x="0" y="0" width="1090" height="912" fill="#ffffff"/>
+  <text class="h" x="30" y="32">Open design decisions, 2026-11-11</text>
   <text class="s" x="30" y="52">Orange = open choice · green = decided by the team (notes/decisions.md) · dashed = work before a run. Source: OPEN_DECISIONS.md.</text>
   <text class="g" x="1060" y="32" text-anchor="end">Claude-authored figure</text>
 
@@ -51,10 +51,10 @@
 
   <rect class="open" x="370" y="220" width="330" height="120" rx="6"/>
   <text class="b" x="385" y="242">Readout radial tilt</text>
-  <text x="385" y="262">v3 needed 13.2 V for 10°, past ±10 V.</text>
-  <text x="385" y="278">v4: A30 6.3 V, B60 2.2 V (load 7.5 V): fits.</text>
+  <text x="385" y="262">v3 needed 13.2 V (A30) for 10°, past ±10 V.</text>
+  <text x="385" y="278">v4 needs 6.3 V (A30) / 2.2 V (B60) for 10°.</text>
   <text x="385" y="296">Team to confirm 10°.</text>
-  <text class="r" x="385" y="314">Options: smaller or zero tilt,</text>
+  <text class="r" x="385" y="314">Options: keep 10°, smaller or zero tilt,</text>
   <text class="r" x="385" y="329">or a wider DAC range</text>
 
   <rect class="open" x="710" y="220" width="350" height="120" rx="6"/>
@@ -65,6 +65,35 @@
   <text class="r" x="725" y="314">Resolve: bond diagram, coupling calc,</text>
   <text class="r" x="725" y="329">RF on/off tests</text>
 
+  <!-- rows added 2026-11-11 to match OPEN_DECISIONS.md (pad pitch, carrier, spacer, ITO); bottom section moved down 272 -->
+  <rect class="open" x="30" y="356" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="378">Pad pitch / beam access</text>
+  <text x="45" y="398">Current layout 360 µm; also 180, 240, 300,</text>
+  <text x="45" y="414">400 µm. PGA84L fan-out passes (worst 20.03°).</text>
+  <text class="r" x="45" y="434">Resolve: team adoption. Proposed reason: wire</text>
+  <text class="r" x="45" y="449">angles below 45° (no other reason given).</text>
+
+  <rect class="open" x="370" y="356" width="330" height="120" rx="6"/>
+  <text class="b" x="385" y="378">Carrier</text>
+  <text x="385" y="398">PGA84L-like, 100-pin CPGA, or the lab carrier.</text>
+  <text x="385" y="414">Step 29 checks nominal PGA84L geometry only.</text>
+  <text class="r" x="385" y="434">Resolve: cryostat fit and a carrier-specific</text>
+  <text class="r" x="385" y="449">electrical pin map (fan-out IDs are not pins)</text>
+
+  <rect class="open" x="710" y="356" width="350" height="120" rx="6"/>
+  <text class="b" x="725" y="378">Package spacer</text>
+  <text x="725" y="398">Proposed ≥ approx. 0.6 mm; die-sized or larger;</text>
+  <text x="725" y="414">Si suggested. Open proposal [verify], not adopted.</text>
+  <text class="r" x="725" y="434">Resolve: verify the actual carrier, die and</text>
+  <text class="r" x="725" y="449">spacer stack and beam clearance.</text>
+
+  <rect class="open" x="30" y="492" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="514">ITO cap over the detector</text>
+  <text x="45" y="534">Raised in team notes as a possibility.</text>
+  <text x="45" y="550">Conflicts with the 2026-11-07 no-ITO decision.</text>
+  <text class="r" x="45" y="570">Stands only if the team reopens it.</text>
+
+  <g transform="translate(0,272)">
   <!-- work before runs -->
   <text class="b" x="30" y="378">Before any v4 run (work, not choices)</text>
   <rect class="chk" x="30" y="388" width="505" height="232" rx="6"/>
@@ -81,10 +110,11 @@
   <rect class="chk" x="555" y="388" width="505" height="232" rx="6"/>
   <text class="b" x="570" y="410">Simulations and tests not yet rerun for v4</text>
   <text x="570" y="432">· Done (09c): cap 160 nm → absorption 0.66 (80 nm: 0.44)</text>
-  <text x="570" y="454">· Done (10b): wire 0.96 µA (E2); slot leads 46 µA each, common mode</text>
+  <text x="570" y="454">· Done (10c): common-mode slot leads 44.5 µA (E2), 28.6 µA (E1)</text>
   <text x="570" y="476">· RF loss / resonator Q with no ground plane (bench test)</text>
   <text x="570" y="498">· Gap model: the local Al under the slot gaps and the</text>
   <text x="583" y="514">window is not in the gds2itvg stack (ground_depth null)</text>
   <text x="570" y="536">· Done 11-09: areas and squares measured from the GDS.</text>
   <text x="583" y="552">Before R1_FULL: NbN recipe + W1, W2 EBL, cold tests</text>
+  </g>
 </svg>
