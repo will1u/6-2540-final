@@ -1,4 +1,4 @@
-> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes; mirror 100 nm inlaid 2026-11-09.
+> **Claude-authored.** Reorganized 2026-11-08 from the project fabrication notes; mirror 100 nm inlaid 2026-11-09; raised mirror and current stack values 2026-11-12 (see the note below and the NbN leads section at the end).
 
 # Local mirror without D2
 
@@ -12,7 +12,8 @@
 > - the SiO₂ over the wires is 160 nm, so the mirror via is ≈ 0.40 µm deep and the contact openings ≈ 160 nm (H.2 step 11v below was written with the earlier 80 nm cap and is updated to these values);
 > - the trap dies have no mirror probe opening: the mirror ground path is measured on the test die (T10 strip, T11 via chain; step 35);
 > - the H.5 GDS changes were made in `gds/make_chip.py` v4, with the leads in the slot (option a).
-> - The mirror thickness and step 3 were changed on 2026-11-09 (100 nm, inlaid). [process/01_FOUNDATION.md](../process/01_FOUNDATION.md) is current.
+> - The mirror thickness and step 3 were changed on 2026-11-09 (100 nm, inlaid). [process/01_FOUNDATION.md](../process/01_FOUNDATION.md) was current on 2026-11-09. It was not updated for the raised mirror of 2026-11-12 [verify].
+> - **Current values, 2026-11-12** (team decisions in [notes/decisions.md](../../../notes/decisions.md)): the mirror is 100 nm of Al, raised on the base SiO₂ (was inlaid). The SiO₂ under the electrodes is about 1.35 µm (1.0 µm thermal, 238 nm spacer, 110 nm cap: 1.348 µm). Between the Au and the Al off the wires it is 348 nm. The marks are written in Al with layer 10. The cap is 160 ± 10 nm over the wires only; the contact openings cross 110 nm. The sections below keep the 2026-11-08 and 2026-11-09 values as the record.
 
 Team request, 2026-11-08 (DESIGN_LOG step 23). Written as an alternative to the [baseline traveler](../TRAVELER.md) and adopted the same day.
 
@@ -49,17 +50,17 @@ Hampel gives no dimensions. Measured from Hampel Fig. 1 (arXiv v1, p. 2) against
 | Under the RF rails | No | No | No, by construction |
 | Ground | CHF₃ vias + 20 nm Au, "via the trap electrodes" | same | Widen the far end (x ≈ −2500 … −2300) to reach under the Au ground fill and put the via there (H.2 step 11v). Exact spot to be checked in the GDS: the fill must enclose it ≥ 25 µm, as in step 22 |
 
-Capacitance the mirror adds to the centre DC (electrode 2), which sits 398 nm above it (238 nm spacer + 160 nm HSQ/cap): 40 µm × ≈ 2.73 mm ≈ **9.5 pF** [team calc, ε_r 3.9]. That is harmless on a filtered DC line [inference].
+Capacitance the mirror adds to the centre DC (electrode 2), which sat 398 nm above it on the 2026-11-08 stack (238 nm spacer + 160 nm HSQ/cap): 40 µm × ≈ 2.73 mm ≈ **9.5 pF** [team calc, ε_r 3.9]. With 348 nm between them (238 nm spacer + 110 nm cap, 2026-11-12), the same formula gives about **10.8 pF** [team calc; not simulated]. That is harmless on a filtered DC line [inference].
 
 ## H.2 Steps (changes against the [baseline recipes](../TRAVELER.md#f-steps))
 
 | Step | Baseline | Variant |
 |---|---|---|
 | 0–2 | Prep, L1 marks, 1 µm thermal SiO₂ (D1) | Same |
-| **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Evaporated Al **100 nm, inlaid**: SiO₂ recess, Al evaporation and lift-off with one resist (team decision 2026-11-09; `sim/10c`, DESIGN_LOG step 37; supersedes the 450 nm of 2026-11-08). Hampel used 50 nm e-beam Al by lift-off, not inlaid. No mark cut-outs needed |
-| 4–8 | Spacer 238 nm, NbN, L22 leads, L20 nanowire, HSQ + cap | Same order: leads before the nanowire, cap straight after. **The cap is now the top surface over the detector (vacuum above)**, so its thickness matters optically again: the cap is fixed at 160 nm (sim 09c, DESIGN_LOG step 26; 09b is superseded) (H.4) |
+| **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Evaporated Al **100 nm, raised** on the base SiO₂: Al evaporation and lift-off with one resist, exposed together with layer 1 for the marks (team decision 2026-11-12; was inlaid, team decision 2026-11-09, `sim/10c`, DESIGN_LOG step 37; the 450 nm of 2026-11-08 came before that). Hampel used 50 nm e-beam Al by lift-off, not inlaid (raised; [verify] against Hampel 2023). No mark cut-outs needed |
+| 4–8 | Spacer 238 nm, NbN, L22 leads, L20 nanowire, HSQ + cap | Same order: leads before the nanowire, cap straight after. **The cap is now the top surface over the detector (vacuum above)**, so its thickness matters optically again: the cap was fixed at 160 nm (sim 09c, DESIGN_LOG step 26; 09b is superseded) (H.4). From 2026-11-12 the cap is 110 nm blanket, which gives 160 ± 10 nm over the wires with the HSQ |
 | 9, 10 | 10 µm D2 | **Skipped** |
-| **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: HSQ/cap + spacer ≈ 0.40 µm down to the Al. SNSPD pads: ≈ 160 nm down to the L22 Au. Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. No mirror probe opening on the trap dies. The mirror is checked on the test die: T10 for the strip, T11 for the via ([step 11](../process/03_ELECTRODES.md#11-layer-40-openings-through-the-thin-stack)) |
+| **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: 110 nm cap + 238 nm spacer = 348 nm down to the Al (2026-11-12; was ≈ 0.40 µm). SNSPD contact openings: 110 nm down to the L22 Au (was ≈ 160 nm). Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. No mirror probe opening on the trap dies. The mirror is checked on the test die: T10 for the strip, T11 for the via ([step 11](../process/03_ELECTRODES.md#11-layer-40-openings-through-the-thin-stack)) |
 | **12v–15v** | Seed, nLOF mold, 6 µm plating, seed removal | **Ti/Au lift-off electrodes, L50 drawn**: LOR + positive resist, MLA. In-situ Ar pre-clean before the Ti (AlF₃ on the via floor; step 22). Ti 10 nm / Au 350 nm (Hampel 350 nm) [verify thickness]. Lift-off in NMP. Option E2: keep steps 12–15 as written and plate 6 µm on the thin stack; the cap protects the NbN under the plating resist (Todaro's damage step) [inference] |
 | 16a, 16 | L45 protect, gap etch | **Skipped** (no D2 to clear) |
 | 17–19 | Test, dice, package | Same, except: no M1 bond openings (the mirror is grounded through the fill); fill ↔ mirror on the test die: T10 strip 18.8–25.1 Ω expected at 100 nm (`sim/10c`, step 37; [step 11](../process/03_ELECTRODES.md#11-layer-40-openings-through-the-thin-stack)); acceptance not set [verify]; check that 350 nm evaporated Au wedge-bonds [verify] |
@@ -68,7 +69,7 @@ Thermal budget: no D2, so the long 300 °C exposure goes away.
 
 ## H.3 Cross-section under the readout window (variant)
 
-HR Si / 1 µm thermal SiO₂ / 100 nm Al, inlaid (local mirror; step 37) / 238 nm PECVD SiO₂ / 7 nm NbN / 160 nm HSQ + PECVD SiO₂ cap (step 26; was 80) / **vacuum**. For E1/A30 the window is a 30 × 30 µm hole in 0.35 µm Au; E2 retains 6 µm Au. The ion sees the cap directly. Away from the detector the electrodes sit on spacer + cap over D1, with no Al under them.
+HR Si / 1.0 µm thermal SiO₂ / 100 nm Al, raised (local mirror; 2026-11-12, was inlaid) / 238 nm PECVD SiO₂ spacer / 7 nm NbN / 160 nm over the wires (HSQ + 110 nm PECVD SiO₂ cap; step 26 had 80 nm) / **vacuum**. For E1/A30 the window is a 30 × 30 µm hole in 0.35 µm Au; E2 retains 6 µm Au. The ion sees the cap directly. Away from the detector the electrodes sit on spacer + cap over D1, with no Al under them.
 
 ## H.4 What the variant changes in the physics (each needs a rerun or a test)
 
@@ -88,3 +89,13 @@ A `--localmirror` flag in `make_chip.py` would need:
 - `_sim.json` stack per H.4;
 - **a lead-routing decision.** The L22 leads now run under the centre DC with only the thin HSQ/cap (80 nm when this was written) between them and the Au, over ≈ 2.3 mm inside the trap and ≈ 2.6 mm under the centre lead. A pinhole anywhere shorts the SNSPD to electrode 2. Either (a) move the leads into the electrode layer, in a slot cut along the centre DC (Hampel's Fig. 1 layout; a GDS change and a new five-wire geometry to simulate), or (b) keep them buried and thicken the SiO₂ over the leads only [inference; adds a step].
 - `check_chip.py` rules for the above.
+
+## NbN leads (considered 2026-11-12, not built)
+
+A team member was told that SNSPD leads can also be made of NbN. Three versions were considered. No GDS was written for any of them.
+
+- **(a) Keep the Au slot leads and thin Ti/Au contacts.** Chosen for this run (team decision 2026-11-12, [notes/decisions.md](../../../notes/decisions.md)). No layout change.
+- **(b) NbN from each tab into the slot, so that no Ti/Au lies under the centre-DC Au.** Ti/Au only as a pad in the slot. Changes layers 20 and 22 of A30 and B60; the electrode Au is unchanged. Option for a later run; not decided [verify].
+- **(c) NbN leads along the whole 2.2 mm slot, under the SiO₂ cap, with the Au strips as grounded shields and the contacts outside the trap.** No lead resistance (the Au leads are 69 Ω each on E1 at room temperature, DESIGN_LOG step 31). The leads are enclosed between a grounded mirror and grounded Au. But it reverses the 2026-11-08 slot-lead decision, adds stitched 2.2 mm e-beam lines, and needs a new pickup simulation and layout checks. Option for a later run; not decided [verify].
+
+In no version does the contact layer disappear. It is still needed as the etch stop for the openings (the fluorine plasma that opens the SiO₂ also etches NbN, and 7 nm cannot stop it) and for the e-beam crosses.

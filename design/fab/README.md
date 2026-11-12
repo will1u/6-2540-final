@@ -7,10 +7,10 @@
 > [!note] v4 is the adopted process; the electrode Au is still open
 > The adopted architecture is the v4 local mirror: Au electrodes on a thin SiO₂ stack over high-resistivity Si, with an Al mirror only under the detector and its leads. There is no 10 µm SiO₂ (D2) and no ITO ([decisions](../../notes/decisions.md), 2026-11-08). The electrode Au is open: **E1** (Ti/Au lift-off, 0.35 µm) or **E2** (6 µm plated Au). The process pages give both branches. Do not fabricate a branch until the team chooses one.
 
-The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no Al and no detector. **R1_FULL** adds 2 A30 and 2 B60 detector dies, plus 2 NODET and 2 TEST dies, on the same v4 stack.
+The next run is **R1_ONE** (team decision 2026-11-12): one 100 mm wafer with a 3 × 3 block of nine dies, in five lithography layers (1 + 10, 22, 20, 40, 50). It carries four chip types: the **SNSPD-only die** (eight detector cells, no trap), the **A30** die (SNSPD and trap; the team's choice for the chips it needs), a **B60** die as the spare, and the **NODET** die (trap only). The test dies are not in this run. R1_TRAP and R1_FULL are superseded by R1_ONE and kept.
 
 > [!important] Current readiness
-> The v4 generator (`gds/make_chip.py`) implements the local-mirror stack. A30, B60 and NODET pass `check_chip.py` (DESIGN_LOG step 29). The detector generators use the v3.1 meander, and some recipe estimates still describe the earlier v3 detector. The v4 test dies are drawn and checked (2026-11-09). Reconcile the detector files before R1_FULL export: see [the reconciliation checklist](OPEN_DECISIONS.md#detector-documents-and-generated-layouts). The process still needs witness-wafer qualification and facility confirmation.
+> The v4 generator (`gds/make_chip.py`) implements the local-mirror stack. A30, B60 and NODET pass `check_chip.py` (DESIGN_LOG step 29). The detector generators use the v3.1 meander, and some recipe estimates still describe the earlier v3 detector. The v4 test dies are drawn and checked (2026-11-09) but are not in R1_ONE. Reconcile the detector files before the R1_ONE export: see [the reconciliation checklist](OPEN_DECISIONS.md#detector-documents-and-generated-layouts). The process still needs witness-wafer qualification and facility confirmation.
 
 ## Start with your task
 
@@ -19,7 +19,8 @@ The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no A
 | Compare runs, die sizes and process options | [Variants](VARIANTS.md) |
 | See the adopted architecture | [Local mirror (adopted v4)](variants/LOCAL_MIRROR.md) |
 | See undecided choices and run requirements | [Open decisions](OPEN_DECISIONS.md) |
-| Prepare the first trap-only run | [R1_TRAP run sheet](RUNSHEET_R1_TRAP.md) |
+| Plan the one-wafer run R1_ONE: which chip serves which test, the die map | [Run plan](RUN_PLAN.md) |
+| Prepare the optional second wafer (layer 50 only) | [R1_TRAP run sheet](RUNSHEET_R1_TRAP.md) (superseded as the first run) |
 | Follow the full-stack process, steps 0–19 | [Traveler](TRAVELER.md), then the [process pages](process/01_FOUNDATION.md) |
 | Check pads, marks and die layout | [Layout](LAYOUT.md) |
 | Compare stacks and temperature limits | [Stack and thermal budget](STACK.md) |
@@ -41,9 +42,11 @@ The first run is **R1_TRAP**: 6 NODET and 2 TEST_TRAP dies, trap only, with no A
 | Trap layout (v4) | `trap_die_v4_A30`, `_B60` and `_NODET`; 36 signal pads at 360 µm pitch (team adoption pending); mirror ground via at (−2140, 130) µm; A30, B60 and NODET pass `check_chip.py` (DESIGN_LOG step 29) | Team adoption of the pad pitch |
 | Trap simulations (v4) | 04b, 12 and 13 rerun on v4; 09c optics and 10b RF pickup done for v4; pad-pitch check (16) done; collection at the v4 heights done (`sim/15b_collection_v4.py`, step 32); transport waveform (sim 21): done, DESIGN_LOG step 40; chip RF capacitance (sim 22): done, step 41; DC-to-RF coupling (sim 23): done, step 42; RCWA of the meander (sim 24): done, step 43 | See the [simulation index](../sim/INDEX.md), "Not modelled yet" |
 | Detector | v3.1 meander (130 / 200 nm) under the v4 stack; absorption 0.66 with a 160 nm cap (effective-medium model, 09c) | Reconcile generated files, masks and detector predictions |
-| Fabrication | Process pages rewritten for v4; electrode Au (E1 or E2) open | Choose E1 or E2; facility confirmations; W5, W7 and W8 (inlaid mirror) [qualification](QUALIFICATION.md) |
-| First run | R1_TRAP selected on 2026-11-02; on the no-Al stack since 2026-11-08 | Choose E1 or E2; finish its qualification checklist |
-| Local mirror | Adopted 2026-11-08 as the v4 architecture; implemented in the v4 GDS | Electrode Au choice; no mirror probe opening on the trap dies (none planned; the mirror is measured on the test dies) |
+| SNSPD-only die | `snspd_die_v4` (2026-11-12): eight A30-type detector cells, 16 Au bond pads, T3 and T11; `check_snspd_die.py` ALL CHECKS PASS | Process checks on the R1_ONE wafer |
+| One-wafer run | `run_R1_ONE` (2026-11-12): nine dies in a 3 × 3 block; `check_run.py R1_ONE` ALL CHECKS PASS | Choose E1 or E2; facility confirmations |
+| Fabrication | Process pages rewritten for v4; electrode Au (E1 or E2) open | Choose E1 or E2; facility confirmations; W5 and W7 [qualification](QUALIFICATION.md) |
+| First run | R1_ONE chosen 2026-11-12 (one wafer for all four chips). R1_TRAP, selected 2026-11-02, is superseded | Choose E1 or E2; facility confirmations |
+| Local mirror | Adopted 2026-11-08 as the v4 architecture; 100 nm Al, raised, from 2026-11-12 (was inlaid); implemented in the v4 GDS | Electrode Au choice; no mirror probe opening on the trap dies (none planned; the mirror is measured on the test dies) |
 
 ## Reading in Obsidian
 

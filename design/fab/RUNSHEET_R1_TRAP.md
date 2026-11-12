@@ -3,6 +3,13 @@
 > - Full recipes: [foundation](process/01_FOUNDATION.md), [Au electrodes](process/03_ELECTRODES.md) (E2 steps 12–15 only), [packaging](process/04_PACKAGING.md).
 > - **[verify]** marks values not yet checked on the MIT.nano tool, or not given by any source.
 
+> [!warning] Superseded 2026-11-12 by the one-wafer run R1_ONE ([RUN_PLAN.md](RUN_PLAN.md))
+> This sheet now describes the **optional second wafer**, on which only layer 50 is exposed (the trap-only backup and the trial of the electrode step and of wire bonding; recommended, not yet decided by the team). Two differences from the sheet below:
+> 1. That wafer uses layer 50 of `gds/run_R1_ONE.gds`, not `gds/run_R1_TRAP.gds`.
+> 2. Its dies sit on the base SiO₂ only: no spacer, NbN or cap.
+>
+> The die table and block size in section 1 are the old R1_TRAP ones. Die IDs for the second wafer come from `gds/run_R1_ONE_map.csv`.
+
 # Run sheet: R1_TRAP (plain five-wire trap, no detector, v4)
 
 [Fab overview](README.md) · [Variants](VARIANTS.md) · [Open decisions](OPEN_DECISIONS.md) · [Local mirror (v4 basis)](variants/LOCAL_MIRROR.md) · [Qualification](QUALIFICATION.md)
@@ -273,12 +280,12 @@ Record these as the starting calibration for run 1b:
 - the leakage numbers (a1, a2, a5) and the RF capacitance (a10);
 - the RF resonator Q with a die mounted, if measured [open item 9].
 
-Run 1b adds the NbN steps, the spacer and cap, and the e-beam (current T8 dose and T9 geometry arrays). The A30 and B60 cap and spacer etch (about 0.40 µm: 238 nm spacer plus 160 nm cap) still needs its calibration before run 1b ([open decisions](OPEN_DECISIONS.md#before-r1_full)). Complete [detector reconciliation](OPEN_DECISIONS.md#detector-documents-and-generated-layouts) before export.
+Run 1b adds the NbN steps, the spacer and cap, and the e-beam (current T8 dose and T9 geometry arrays). The A30 and B60 cap and spacer etch (348 nm off the wires: 238 nm spacer plus 110 nm cap; 398 nm over the wires) still needs its calibration before run 1b ([open decisions](OPEN_DECISIONS.md#before-r1_full)). Complete [detector reconciliation](OPEN_DECISIONS.md#detector-documents-and-generated-layouts) before export.
 
 ## 6. Open before the run
 
 - [ ] **1. Electrode Au, E1 or E2.** Open; it blocks the traveler rewrite. Both branches stay in this sheet until the team chooses ([open decisions](OPEN_DECISIONS.md)).
-- [ ] **2. 398 nm PECVD SiO₂.** Whether R1_TRAP also deposits 398 nm of PECVD SiO₂ on the 1.0 µm thermal SiO₂, so that the electrode substrate matches the detector dies (1.0 µm thermal, 238 nm spacer and 160 nm cap, about 1.4 µm of SiO₂). The sources do not decide this. [verify with the team]
+- [ ] **2. Electrode substrate.** Whether the electrode substrate should match the detector dies, which have 1.0 µm thermal SiO₂, 238 nm spacer and 110 nm cap (1.348 µm of SiO₂ off the mirror). The second wafer's dies sit on base SiO₂ only (see the banner), so this matters only if the team wants that match there. The sources do not decide this. [verify with the team]
 - [x] **3. TEST_TRAP for v4.** Done 2026-11-09: `make_run.py` writes `test_die_v4_TRAP` (T1 and T6 only, on layers 1 and 50), checked by `gds/check_test_die.py`; `run_R1_TRAP.gds` regenerated.
 - [ ] **4. Substitute for the T2 capacitor.** T2 (a4, and the W7 bonding structure) is retired in v4. Its replacement T2v (Au / SiO₂ / Al capacitor) is on `test_die_v4` only, not on TEST_TRAP [verify the a4 and W7 use].
 - [ ] **5. Ar pre-clean before the Au electrodes.** The traveler's reason (AlF₃ on the Al at via floors) does not apply without Al. Keep or drop the in-situ Ar pre-clean before the E1 Ti or the E2 seed. [verify with the team]
