@@ -8,7 +8,7 @@ Figures (one function each, written to design/figures/report/<name>.pdf and .png
   transport_static         fig_transport_static: static transport voltages vs ion position (sim 12, trap_die_v4_A30_V2zero waveforms.csv)
   collection_vs_height     fig_collection_vs_height: geometric collection vs ion height (sim 17, summary.json table_A)
   termination              fig_termination: RF current through the nanowire per lead termination (sim 19, summary.json)
-  stack                    fig_stack: readout-zone layer stack, thicknesses from design/fab/STACK.md
+  stack                    fig_stack: readout-zone layer stack, final stack of 2026-11-12 (typed in the function)
   transport_waveform       fig_transport_waveform: ion position and electrode voltages vs time (sim 21, waveform.csv)
   rf_capacitance_sections  fig_rf_capacitance_sections: RF capacitance to ground per configuration (sim 22, summary.json)
 The die map (die_map.pdf, .png, .svg) is made by make_die_map.py, not by this file.
@@ -211,14 +211,15 @@ def fig_termination():
 
 
 def fig_stack():
-    # Layers and thicknesses copied from design/fab/STACK.md, "Readout cross section" (a), top to bottom.
+    # Final stack of 2026-11-12, top to bottom (raised 100 nm Al mirror; base SiO2 1.0 um nominal).
+    # Typed by hand; the values are the ones in design/fab/TRAVELER.md and design/CLAUDE.md.
     layers = [
         ("Vacuum; ion (planar height 49.98 µm at readout)", None, "#ffffff"),
-        ("HSQ + PECVD SiO₂ cap (window floor), 160 ± 10 nm", None, "#ecebe7"),
+        ("HSQ 50 nm + PECVD SiO₂ cap 110 nm\n(window floor), 160 ± 10 nm over the wires", None, "#ecebe7"),
         ("NbN meander (L20), 7 nm", None, "#d5d3cc"),
         ("PECVD SiO₂ spacer, 238 nm", None, "#eeede9"),
-        ("Al mirror (L10), inlaid, 100 nm", None, "#c4c4c2"),
-        ("Thermal SiO₂ (D1), 1.0 µm (0.9 µm under the mirror)", None, "#e4e1d8"),
+        ("Al mirror (L10), raised, 100 nm", None, "#c4c4c2"),
+        ("Base SiO₂ (thermal), 1.0 µm nominal", None, "#e4e1d8"),
         ("HR Si, ρ > 20 kΩ·cm, ~525 µm [verify]", None, "#b9b8b2"),
     ]
     fig, ax = plt.subplots(figsize=(ps.W1, 3.4))

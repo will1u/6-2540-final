@@ -111,12 +111,12 @@ In between, the conductor looks like a Thevenin source with voltage `V C_c / (C_
 
 The floating case is the worst one. The team's rule is to keep the mirror tied to ground ([`../CLAUDE.md`](../CLAUDE.md), "Physics decisions not to undo": a floating ITO raised RF pickup, and the mirror ground via stays).
 
-> **On this chip (E2, 100 nm inlaid Al mirror):** C_c per µm from the RF rail to the slot lead is 2.132 aF/µm. Over 2240 µm that is 4.776 fF, and I = 44.53 µA (the JSON value is 44.534 µA, agreeing to 0.1 %).
+> **On this chip (E2, raised 100 nm Al mirror, 110 nm SiO₂ cap under the leads):** C_c per µm from the RF rail to the slot lead is 2.132 aF/µm. Over 2240 µm that is 4.776 fF, and I = 44.53 µA (the JSON value is 44.529 µA, agreeing to 0.1 %).
 > The nanowire window: C_RN = 0.1029 fF gives I = 0.9593 µA, equal to the JSON I_pk_uA.
 
 Where this shows up:
 - [`../sim/10b_rf_pickup_v4.py`](../sim/10b_rf_pickup_v4.py) and [`../sim/10c_mirror_thickness.py`](../sim/10c_mirror_thickness.py)
-- [`../sim/out/10c_mirror_thickness/summary.json`](../sim/out/10c_mirror_thickness/summary.json) (`al100_inlaid`, E2)
+- [`../sim/out/10c_mirror_thickness/summary.json`](../sim/out/10c_mirror_thickness/summary.json) (`al100_cap110`, E2, for the lead; `al100`, E2, for the nanowire window)
 - [`../DESIGN_LOG.md`](../DESIGN_LOG.md), steps 10 and 26
 
 ## 6. Filters on the DC lines
@@ -193,12 +193,12 @@ The lead model in [`../sim/19_lead_termination.py`](../sim/19_lead_termination.p
 *The strip model of sim 10c: pickup enters along the strip and all of it leaves through the ground end.*
 
 > **On this chip:** ωL for 2 nH at 28 MHz is 0.352 Ω.
-> The Al mirror strip (100 nm inlaid Al, E2) is grounded at one far end. Its detector end sits tens of mV from ground because the return path has resistance. For the two resistivity keys in the sim, 3e-08 and 4e-08 Ω·m:
-> - mirror current i_mirror = 3.194 mA for both;
-> - t10 = 18.825 Ω and 25.100 Ω;
-> - v_m = 30.19 mV and 40.25 mV;
-> - p = 33.93 µW and 45.23 µW.
-> Source: [`../sim/out/10c_mirror_thickness/summary.json`](../sim/out/10c_mirror_thickness/summary.json), `al100_inlaid`, E2.
+> The Al mirror strip (raised 100 nm Al, 110 nm SiO₂ cap under the leads, E2) is grounded at one far end. Its detector end sits tens of mV from ground because the return path has resistance. For the two resistivity keys in the sim, 3e-08 and 4e-08 Ω·m:
+> - mirror current i_mirror = 3.145 mA for both;
+> - t10 = 18.825 Ω and 25.100 Ω (expected, calculated; not measured);
+> - v_m = 29.72 mV and 39.63 mV;
+> - p = 32.89 µW and 43.86 µW.
+> Source: [`../sim/out/10c_mirror_thickness/summary.json`](../sim/out/10c_mirror_thickness/summary.json), `al100_cap110`, E2.
 > Model ([`../sim/10c_mirror_thickness.py`](../sim/10c_mirror_thickness.py), `derived()`): the RF current that the rail sends into the strip is a peak value, `i_mirror = ω V C_p L`, for a strip 2240 µm long plus a 140 µm tail to the via. The strip is 40 µm wide, with resistance ρ / (t × 40 µm) per length. Its current grows linearly from zero at the detector end to `i_mirror` at the via, so `v_m` is the peak swing at the detector end. The dissipation is `p = ½ i_mirror² R_eff` (peak current, time average), with `R_eff = r (L/3 + L_tail)`, where r is the resistance per length.
 
 Where this shows up:

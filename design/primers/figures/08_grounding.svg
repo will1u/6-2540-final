@@ -30,7 +30,7 @@
 <line x1="592" y1="285" x2="608" y2="285" stroke="#111111" stroke-width="2"/>
 <line x1="596" y1="290" x2="604" y2="290" stroke="#111111" stroke-width="2"/>
 <text x="110" y="242" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111" font-weight="bold">detector end</text>
-<text x="110" y="260" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">v<tspan dy="3" font-size="9">m</tspan><tspan dy="-3"> = 30.19 mV (3e-08 Ω·m)</tspan></text>
-<text x="110" y="276" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">40.25 mV (4e-08 Ω·m)</text>
-<text x="20" y="330" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">The strip carries i<tspan dy="3" font-size="9">mirror</tspan><tspan dy="-3"> = 3.194 mA to ground. Its resistance (T10 four-point test: 18.8 / 25.1 Ω)</tspan></text>
-<text x="20" y="352" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">lifts the detector end by v<tspan dy="3" font-size="9">m</tspan><tspan dy="-3">; dissipation 33.93 / 45.23 µW.</tspan></text></svg>
+<text x="110" y="260" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">v<tspan dy="3" font-size="9">m</tspan><tspan dy="-3"> = 29.72 mV (3e-08 Ω·m)</tspan></text>
+<text x="110" y="276" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#111111">39.63 mV (4e-08 Ω·m)</text>
+<text x="20" y="330" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">The strip carries i<tspan dy="3" font-size="9">mirror</tspan><tspan dy="-3"> = 3.145 mA to ground. Its resistance (expected, calculated, not measured: 18.8 / 25.1 Ω)</tspan></text>
+<text x="20" y="352" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#111111">lifts the detector end by v<tspan dy="3" font-size="9">m</tspan><tspan dy="-3">; dissipation 32.89 / 43.86 µW.</tspan></text></svg>

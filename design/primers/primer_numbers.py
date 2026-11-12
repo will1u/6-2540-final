@@ -59,7 +59,11 @@ def sim19_current(case, die, option, r_pair=0.0):
 
 meas = jload("gds/measured_v4.json")
 Z0 = meas["constants"]["Z0_ohm"]
-c10 = jload("sim/out/10c_mirror_thickness/summary.json")["al100_inlaid"]
+# Two 10c cases (design/sim/10c_mirror_thickness.py). Slot cross-section of the final stack
+# (raised 100 nm Al, 110 nm SiO2 cap under the Au leads): the leads, the mirror strip, the mirror swing.
+c10 = jload("sim/out/10c_mirror_thickness/summary.json")["al100_cap110"]
+# Raised 100 nm Al with 160 nm SiO2 over the wires: the direct pickup in the nanowire window.
+c10_win = jload("sim/out/10c_mirror_thickness/summary.json")["al100"]
 s18 = jload("sim/out/18_e1_vs_e2/summary.json")["rows"]
 
 # ---------------------------------------------------------------- 1
@@ -135,7 +139,7 @@ print(f"SNSPD slot lead, one lead, room temperature, bulk rho: E1 = {lead_e1:.2f
 # ---------------------------------------------------------------- 5
 print("== 5. Capacitive pickup ==")
 slot = c10["E2"]["slot"]
-win = c10["E2"]["window"]
+win = c10_win["E2"]["window"]
 c_per_um = slot["C_rf_lead_fF_per_um"]        # fF/um
 l_lead_um = 2240.0   # um, lead length in the trap (the outline's value; the JSON agrees to 0.1 %)
 c_lead_fF = c_per_um * l_lead_um
@@ -209,7 +213,7 @@ print(f"bond wire L = {l_bond*1e9:g} nH (sim/19_lead_termination.py, tagged [ver
       f" omega L = {OMEGA*l_bond:.3f} ohm at {F_RF/1e6:g} MHz")
 for key in ("3e-08", "4e-08"):
     r = c10["E2"]["rho"][key]
-    print(f"Al mirror strip, rho = {key} ohm m (100 nm inlaid Al, E2): i_mirror = {r['i_mirror_mA']:.3f} mA,"
+    print(f"Al mirror strip, rho = {key} ohm m (100 nm raised Al, 110 nm cap, E2): i_mirror = {r['i_mirror_mA']:.3f} mA,"
           f" t10 = {r['t10_ohm']:.3f} ohm, v_m = {r['v_m_mV']:.2f} mV, p = {r['p_uW']:.2f} uW")
 
 # ---------------------------------------------------------------- 9

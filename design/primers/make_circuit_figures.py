@@ -405,7 +405,7 @@ def fig_lead_termination():
         p.append(label(x + 28, ny + 126, "Z_{term %s}" % name, bold=True, size=13))
         p.append(ground(x, ny + 160))
     p.append(label(20, 440, "Equal terminations: no current crosses the nanowire. A mismatch sends part of the pickup through it.", size=13))
-    p.append(label(20, 462, "Values: I_{inj} = 44.5 µA (E2) / 28.6 µA (E1), L_{bond} = 2 nH [verify], L_{k} = 3.10 µH (A30), 5.94 µH (B60).", size=13))
+    p.append(label(20, 462, "Values: I_{inj} = 44.5 µA (E2) / 28.4 µA (E1), L_{bond} = 2 nH [verify], L_{k} = 3.10 µH (A30), 5.94 µH (B60).", size=13))
     # the cases tried in sim 19
     p.append(panel_title(20, 500, "Terminations tried: Z_{term A} / Z_{term B}"))
     rows = ["case 1:  50 Ω line  /  short",
@@ -445,10 +445,10 @@ def fig_grounding():
     p.append(ground(600, sy + 80))
     # detector end
     p.append(label(xs[0], sy + 52, "detector end", anchor="middle", size=12, bold=True))
-    p.append(label(xs[0], sy + 70, "v_{m} = 30.19 mV (3e-08 Ω·m)", anchor="middle", size=12))
-    p.append(label(xs[0], sy + 86, "40.25 mV (4e-08 Ω·m)", anchor="middle", size=12))
-    p.append(label(20, 330, "The strip carries i_{mirror} = 3.194 mA to ground. Its resistance (T10 four-point test: 18.8 / 25.1 Ω)", size=13))
-    p.append(label(20, 352, "lifts the detector end by v_{m}; dissipation 33.93 / 45.23 µW.", size=13))
+    p.append(label(xs[0], sy + 70, "v_{m} = 29.72 mV (3e-08 Ω·m)", anchor="middle", size=12))
+    p.append(label(xs[0], sy + 86, "39.63 mV (4e-08 Ω·m)", anchor="middle", size=12))
+    p.append(label(20, 330, "The strip carries i_{mirror} = 3.145 mA to ground. Its resistance (expected, calculated, not measured: 18.8 / 25.1 Ω)", size=13))
+    p.append(label(20, 352, "lifts the detector end by v_{m}; dissipation 32.89 / 43.86 µW.", size=13))
     return 740, 370, p
 
 
