@@ -9,8 +9,8 @@
 
 > [!note] This page is the record of the argument; the process pages hold the current values (2026-11-09)
 > [Stack](../STACK.md) and the [process pages](../TRAVELER.md#f-steps) were rewritten for v4 on 2026-11-09 (DESIGN_LOG step 36). Where this page differs from them, they are right:
-> - the SiO₂ over the wires is 160 nm, so the mirror via is ≈ 0.40 µm deep and the contact openings ≈ 160 nm (H.2 step 11v below was written with the earlier 80 nm cap and is updated to these values);
-> - the trap dies have no mirror probe opening: the mirror ground path is measured on the test die (T10 strip, T11 via chain; step 35);
+> - the SiO₂ over the wires is 160 nm (50 nm HSQ + 110 nm PECVD SiO₂ cap); off the wires the cap is the 110 nm alone, so the mirror via is 348 nm deep and the contact openings 110 nm (final stack 2026-11-12, DESIGN_LOG step 45);
+> - the trap dies have no mirror probe opening: the Au-to-Al contact is measured on the T11 via chain of the SNSPD-only die (run R1_ONE; the T10 strip is not drawn in that run);
 > - the H.5 GDS changes were made in `gds/make_chip.py` v4, with the leads in the slot (option a).
 > - The mirror thickness and step 3 were changed on 2026-11-09 (100 nm, inlaid). [process/01_FOUNDATION.md](../process/01_FOUNDATION.md) was current on 2026-11-09. It was not updated for the raised mirror of 2026-11-12 [verify].
 > - **Current values, 2026-11-12** (team decisions in [notes/decisions.md](../../../notes/decisions.md)): the mirror is 100 nm of Al, raised on the base SiO₂ (was inlaid). The SiO₂ under the electrodes is about 1.35 µm (1.0 µm thermal, 238 nm spacer, 110 nm cap: 1.348 µm). Between the Au and the Al off the wires it is 348 nm. The marks are written in Al with layer 10. The cap is 160 ± 10 nm over the wires only; the contact openings cross 110 nm. The sections below keep the 2026-11-08 and 2026-11-09 values as the record.

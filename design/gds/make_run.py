@@ -25,7 +25,7 @@ Presets (edit RUNS to make another):
 Writes run_<name>.gds (top cell RUN_<NAME>), run_<name>_map.csv and run_<name>_map.png, and prints
 the die count and layer-20 (EBL) area. Re-run make_chip.py (A30, --det60, --nodet) and make_test_die.py
 first so the die cells are current.
-Run from design/sim:  ./run.sh ../gds/make_run.py R1_ONE   (name a preset; no argument rewrites all presets)
+Run from design/sim:  ./run.sh ../gds/make_run.py R1_ONE   (no argument: R1_ONE only; name an older preset to rebuild it)
 """
 
 import csv

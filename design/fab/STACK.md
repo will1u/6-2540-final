@@ -86,6 +86,8 @@ All values are from `sim/10c_mirror_thickness.py`: case `al100_cap110` (slot cro
 
 **Optics (v4, DESIGN_LOG step 26, `09c`).** Absorption in NbN at 493 nm ≈ 0.66 with a 159–160 nm cap (±10 nm box mean 0.645; worst corner 0.596). The earlier 80 nm cap gives 0.44. `make_chip.py` and the simulation metadata state 160 nm (corrected 2026-11-09; geometry unchanged); 160 nm is the deposition target over the wires (HSQ 50 nm + cap 110 nm). The model reads ~10 % pessimistic against Hampel. These are TMM effective-medium numbers, not RCWA. `09b` (vacuum above the cap) is superseded by `09c` for v4.
 
+**Optics, RCWA scan of spacer and cap (DESIGN_LOG step 45, `sim/24b`).** At 238 nm of spacer and 160 nm of SiO₂ over the wires the NbN absorbs 0.828 (normal incidence, unpolarised). With ±10 nm on both the box mean is 0.803 and the worst corner 0.753 (both 10 nm thin). The best nominal on the grid, 240 / 160 nm, has a worst corner only 0.011 higher, so 238 nm and 160 nm are kept. NbN thickness has more effect: 6 / 7 / 8 nm gives 0.779 / 0.828 / 0.865. The SiO₂ index (1.45 to 1.48) changes the result by under 0.005. An ITO layer on top is not in this stack; if it were added, the SiO₂ over the wires would have to change first (20 nm of ITO: 0.682 at 160 nm, best 0.869 at 120 nm; 50 nm of ITO: 0.417 at 160 nm, best 0.909 at 90 nm). These are RCWA numbers; the paragraph above is the effective-medium model, which reads lower (0.66).
+
 ### (a) Readout window, top to bottom (A30; B60 has a 60 × 30 µm opening)
 
 1. Vacuum; ion at 49.98 µm planar, lowered over the window by the recess in the table above.

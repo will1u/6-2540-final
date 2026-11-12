@@ -1730,3 +1730,127 @@ No layout, no GDS and no team decision changed in this step. Done by delegated a
 - The switching-current estimates still disagree (8–9 µA against 8–20 µA; `fab/tests/02_CRYOGENIC.md`).
 - `fab/LAYOUT.md` says the test dies have no bond pads while `fab/tests/02_CRYOGENIC.md` says to bond T4 and T4b.
 - The journal reference of the Siverns helical-resonator paper differs between the arXiv page and an earlier note here.
+
+---
+
+## 2026-11-12: Step 45, final stack, chip set and the one-wafer run R1_ONE (`sim/10c`, `22b`, `24b`; `gds/make_snspd_die.py`, `make_run.py`)
+
+The team asked for three things: final layer thicknesses, with attention to the SiO₂ layers; a chip set of one SNSPD-only chip, two SNSPD + trap chips and one trap-only chip, with A30 or B60 to be settled; and a check of whether those chips can share a wafer, with the test structures slimmed. Context from the teammate notes in `fab/`: about one week of fab, and four tests (the SNSPD alone and the SNSPD with trap RF at the SNSPD test setup; the trap alone and the SNSPD in the trap chamber).
+
+Team decisions taken in this step are in `../notes/decisions.md` (five entries dated 2026-11-12): one wafer for all four chips; A30 on the chips the team needs, B60 as one spare; Al mirror raised; alignment marks in Al; SNSPD leads stay Au in the slot. Everything else below is Claude's design call or a finding, listed for adoption in `fab/OPEN_DECISIONS.md`. Sims, layouts and pages were written by delegated agents from written specifications; every acceptance check was rerun before commit.
+
+### 1. What was wrong or unsettled in the stack
+
+- **The SiO₂ cap was counted twice.** The pages gave "160 nm" both as the SiO₂ over the wires and as the PECVD SiO₂ cap. The HSQ stays on the wires only, so the PECVD cap that covers everything is 160 nm minus the HSQ, about 110 nm. Off the wires the SiO₂ between the electrode Au and the Al mirror is therefore 238 + 110 = 348 nm, not the 398 nm ("0.40 µm") that the pages, the T2v capacitor and sims 10c and 22 used.
+- **The Ti/Au contact layer (layer 22) was still Ti 10 / Au 350 nm**, the v3 lead thickness, tagged [verify for contacts]. In v4 it is contacts only, and about 20 µm of each strip lies under the solid centre-DC Au (A30: x = 175 to 195 µm) with only that 110 nm cap between a 360 nm lift-off edge and electrode 2. Todaro 2021 used Ti 5 / Au 50 nm for contacts and added 350 nm on the leads only (`research/research_notes/Trap integrated SNSPD design/todaro_slichter.md`).
+- **No simulation set the base SiO₂** (1.0 µm thermal, carried from v3). Hampel 2023 used 150 nm of PECVD SiO₂ and Todaro 2021 134 nm, both on high-resistivity Si.
+- **The spacer had never been scanned with RCWA**; sim 24 scanned the cap only.
+
+### 2. Final stack
+
+| Layer | Final | Was |
+|---|---|---|
+| Si | high-resistivity float-zone Si, ρ > 20 kΩ·cm, thickness as supplied [verify on the wafer box] | same |
+| Base SiO₂ | 1.0 µm thermal nominal; 0.5–2.0 µm accepted as supplied; PECVD SiO₂ base if the wafers are bare | 1.0 µm, no range |
+| Al mirror and alignment marks (layers 10 and 1, one exposure) | 100 ± 10 nm evaporated Al, raised, lift-off | 100 nm inlaid; marks etched into the Si |
+| SiO₂ spacer | 238 ± 10 nm PECVD SiO₂ | same |
+| NbN | 7.0 ± 0.5 nm | same |
+| Ti/Au contacts and e-beam crosses (layer 22) | Ti 5 / Au 50 nm | Ti 10 / Au 350 nm |
+| HSQ | 50 nm after develop, on the wires only | 50–70 nm |
+| SiO₂ cap | 110 nm PECVD SiO₂, blanket; 160 ± 10 nm over the wires | "160 nm", ambiguous |
+| Openings (layer 40) | 110 nm (contacts, onto Au) and 348 nm (mirror via, onto Al), one etch | 160 nm and 0.40 µm |
+| Electrode Au | E1 Ti 10 / Au 350 nm lift-off, or E2 seed + 6 µm plated; open | same |
+
+SiO₂ under the electrodes off the mirror: 1.0 + 0.238 + 0.110 = 1.348 µm. The window floor is still 238 + 7 + 160 = 405 nm above the mirror, so the trap simulations (04b, 12, 13) stand; the electrode Au did not change.
+
+Why the contact layer stays, and stays thin: it goes on the NbN before the SiO₂ cap as the etch stop for the opening etch, because the fluorine plasma that opens SiO₂ also etches NbN and 7 nm cannot stop it; and it carries the e-beam crosses, which must exist before the nanowire is written. [verify] e-beam mark contrast on 50 nm Au; Au lost in the opening over-etch (the contacts are reached after 110 nm and the etch runs on to 348 nm).
+
+### 3. Simulations
+
+**Sim 10c, one added case** (`al100_cap110`: raised 100 nm Al, 110 nm cap under the leads). The earlier rows reproduce exactly. For the final stack, E2 / E1:
+
+| Quantity | E2 | E1 |
+|---|---|---|
+| RF current along the mirror strip to ground | 3.1 mA | 3.2 mA |
+| Mirror swing at the detector end | 29.7–39.6 mV | 30.3–40.4 mV |
+| Extra nanowire current from the mirror path, upper bound | 0.72–0.96 µA | 0.73–0.97 µA |
+| Dissipation in the Al strip | 32.9–43.9 µW | 34.2–45.6 µW |
+| Common-mode RF current per slot lead | 44.5 µA | 28.4 µA |
+| Current the mirror swing adds to each lead | 4.5–6.1 µA | 4.6–6.1 µA |
+| Lead-to-mirror capacitance | 0.551 fF/µm | 0.544 fF/µm |
+
+The thinner SiO₂ under the leads raises the lead-to-mirror capacitance by 13 % (0.489 → 0.551 fF/µm) and the current the mirror adds to a lead by 11 %; everything else moves by under 1 %. The direct nanowire pickup is read from the `al100` row (160 nm over the wires): 0.96 µA (E2), 1.92 µA (E1), unchanged. The raised mirror lifts the RF null 0.13–0.16 µm (step 39).
+
+**Sim 22b, base SiO₂ sweep** (imports sim 22; reproduces its 2.590 / 2.395 pF first). A30 chip, final stack:
+
+| Base SiO₂ | C_chip cold, E2 / E1 | C_chip with the Si as a grounded conductor, E2 / E1 |
+|---|---|---|
+| 0.15 µm | 2.878 / 2.682 pF | 57.5 / 57.3 pF |
+| 0.30 µm | 2.813 / 2.617 pF | 45.1 / 44.9 pF |
+| 0.50 µm | 2.738 / 2.542 pF | 35.1 / 34.9 pF |
+| 1.00 µm | 2.589 / 2.394 pF | 22.8 / 22.6 pF |
+| 2.00 µm | 2.383 / 2.188 pF | 13.6 / 13.4 pF |
+
+- Cold, the capacitance moves 11 % above and 8 % below the 1.0 µm value across the whole range, so the base SiO₂ thickness is not critical for cold operation. That is the basis for accepting 0.5–2.0 µm as supplied.
+- With the Si conducting (the room-temperature limit), the capacitance goes roughly as 1 / thickness. A thin base SiO₂ makes any warm RF measurement worse; this is the reason not to go to the 150 nm of the reference devices without need.
+- The chip capacitance quoted on the pages stays 2.59 pF (E2) / 2.39 pF (E1).
+
+**Sim 24b, RCWA scan of spacer and cap** (`sim/24b_rcwa_stack_scan.py`, `rcwa` env). Unpolarised absorption in the NbN at 493 nm, normal incidence, on a grid of spacer 200–270 nm × SiO₂ over the wires 120–200 nm, then the ±10 nm box around each nominal, then NbN thickness, SiO₂ index and an ITO layer on top. It reproduces the two sim 24 reference values to 0.0004.
+
+| Nominal (spacer / SiO₂ over the wires) | Absorbed at nominal | ±10 nm box mean | Worst corner of the box |
+|---|---|---|---|
+| 238 / 160 nm (kept) | 0.828 | 0.803 | 0.753 |
+| 240 / 160 nm (best worst corner on the grid) | – | 0.803 | 0.764 |
+
+- **The 238 nm spacer and the 160 nm over the wires stay.** The rule was set before the run: keep them if their worst corner is within 0.02 of the best one. It is within 0.011. The worst corner is the one where spacer and cap are both 10 nm thin (0.753); both 10 nm thick gives 0.779.
+- **NbN thickness matters more than the SiO₂ tolerances:** 6 / 7 / 8 nm gives 0.779 / 0.828 / 0.865.
+- **The SiO₂ index hardly matters:** n = 1.45 / 1.463 / 1.48 gives 0.823 / 0.828 / 0.827, so PECVD SiO₂ and HSQ need not be told apart here.
+- **An ITO layer on top would change the right SiO₂ thickness** (the team note "consider if ITO will affect the calculation"). On the stack as specified, 160 nm over the wires, adding ITO lowers the absorption: 0.682 with 20 nm of ITO and 0.417 with 50 nm. Re-tuned, the best SiO₂ over the wires becomes 120 nm with 20 nm of ITO (0.869) and 90 nm with 50 nm (0.909). The ITO itself absorbs under 1 %. So ITO cannot be added later to a wafer built for no ITO; it has to be chosen before the cap is deposited. With 50 nm of HSQ left on the wires, the 90 nm case leaves only 40 nm of PECVD SiO₂ over the Ti/Au contacts [inference]. The no-ITO decision of 2026-11-07 stands; this is the number to hand if the team reopens it.
+- **How the run was cut down.** The first version converged the harmonic count at every point, as sim 24 did (101 harmonics for light polarised across the wires, about 10 s per stack on one thread, about 330 stacks). It ran for over an hour next to the other jobs and was stopped at the team's request. The script now uses a fixed 57 harmonics (1.7 s per stack). Measured at 238 / 160: 0.83383 across the wires at 57 against 0.83307 at 101, so the unpolarised numbers above are about 0.0005 high.
+
+**Limits of 24b.** Normal incidence only. One literature value for the ITO index (1.965 + 0.003i). The tolerance box varies spacer and cap, not the wire width. Nothing is compared with a measurement.
+
+Not rerun: sim 19 (lead termination; it used 44.5 / 28.3 µA), sim 23, and the trap sims.
+
+### 4. Chip set
+
+- **SNSPD + trap: A30** (existing file, not regenerated). **Trap-only: NODET** (existing file). **B60**: existing file, one spare position.
+- A30 against B60, the numbers the team had (E2): Hampel's detector is 20 × 30 µm (600 µm²); the A30 window is 900 µm², B60 1800 µm². A30 absorbs 1.47 % of the emitted photons, B60 2.71 %. A30 has 5.76 mm of nanowire, B60 11.04 mm. The RF null drops 1.19 µm over the A30 window and 2.04 µm over B60. Sims 20, 22 and 23 exist for A30 only.
+- **New SNSPD-only die, `snspd_die_v4`** (`gds/make_snspd_die.py`), 10 × 10 mm. Eight detector cells D1–D8, each the A30 detector with the A30 contact chain: NbN tab, Ti/Au strip and pad, opening in the SiO₂ cap, Au lead, Au bond pad (120 × 200 µm at y = ±4720 µm), a 30 × 30 µm window in the Au, its own Al mirror with a ground via, and four e-beam crosses at (±300, ±700) µm. The Au ground fill stands in for the centre DC over the NbN. Layer-20 datatypes 1, 2, 3, 0 (D1–D4) and 0, 5, 6, 7 (D5–D8) give dose factors 0.80 to 1.20, so the die is also the dose array. T3 (NbN bar) and T11 (Au-to-Al via chain) are copied from the test die. Au area 0.937 cm², so the plated area per die matches the trap dies.
+- **Checked independently.** `gds/check_snspd_die.py` was written from the specification by a different agent, which did not read the generator. It passes all checks; in every cell, layers 20, 22, 40 and 50 near the detector equal the A30 die translated (symmetric difference 0.0000 µm²).
+
+### 5. One wafer: run R1_ONE
+
+`run_R1_ONE` (`gds/make_run.py R1_ONE`): 3 × 3 block of 10 × 10 mm dies, 200 µm streets, 30.4 × 30.4 mm at the wafer centre. Columns, bottom to top: A30, SNSPD-only, A30; NODET, A30, NODET; A30, SNSPD-only, B60. Saw cuts at x and y = −15 300, −5 100, +5 100, +15 300 µm. Au 8.27 cm²; layer 20 0.0372 mm² on 7 dies, 21 meanders. `gds/check_run.py` (new: grid, streets, overlap, wafer radius, die cells against the die files) passes. The hashes of all earlier GDS files are unchanged.
+
+**Can the dies share a wafer?** Checked step by step: yes. No step that one die needs harms a die that does not need it.
+
+| Step | SNSPD + trap dies and SNSPD-only die | Trap-only die | Conflict |
+|---|---|---|---|
+| Base SiO₂ | same | same | none |
+| Al mirror and marks, lift-off | mirror and marks | four corner marks | none |
+| SiO₂ spacer, NbN, SiO₂ cap (blanket) | needed | receives them; the NbN is etched off again | none, if the NbN etch clears: check that an open field reads open |
+| Ti/Au contacts, e-beam, openings | written | resist only | none |
+| Electrode Au | same step | same step | wafer-wide choice of E1 or E2 |
+| Dicing | 10.2 mm pitch | same | none |
+
+So the trap-only die ends on the same SiO₂ as A30, which answers the open question of step 36. Three things could still force a second wafer, none a clash between dies: trying both E1 and E2; tool limits (the NbN sputter tool and the e-beam holder taking 100 mm; the e-beam, CF₄ etcher and PECVD accepting a wafer that carries Au from step 6) [verify]; and the trap-only die waiting for every detector step. Recommended and not yet decided: a second wafer with only layer 50 exposed from the same file, as the trap-only backup and the trial of the electrode step and wire bonding.
+
+**Flow.** Five lithography layers (Al with marks, Ti/Au, e-beam, openings, Au) instead of six; no recess etch; the traveler keeps its step numbers, with step 1 marked removed.
+
+**Test structures.** Kept: the 16 detector cells, T3, T11. Dropped, with what stands in: T1 (pad-to-pad leakage on a finished trap die), T2v and T12 (SNSPD pad to ground on every detector), T4, T4b and T8 (the cells), T6 and T10 (four-point probe on a co-loaded piece), T9 (a later run). The TEST and TEST_TRAP dies are not in this run. Witness wafers become co-loaded pieces (`fab/QUALIFICATION.md`, proposals).
+
+### 6. NbN leads (considered, not built)
+
+A team member was told that SNSPD leads can be made of NbN. Three versions were laid out: keep the Au slot leads with thin contacts (chosen); NbN from each tab into the slot so that no Ti/Au lies under the centre-DC Au; NbN along the whole slot under the SiO₂ cap with the Au strips as grounded shields. The last would remove the lead resistance (69 Ω per lead on E1 at room temperature, step 31) and enclose the leads between grounded mirror and grounded Au, at the cost of reversing the slot-lead decision, stitched 2.2 mm e-beam lines and a new pickup simulation. In no version does the contact layer go away. Recorded in `fab/variants/LOCAL_MIRROR.md`.
+
+### 7. Open after this step
+
+- Electrode Au, E1 or E2 (wafer-wide).
+- What the team's wafers are: resistivity, SiO₂ already on them, thickness.
+- Team adoption of the thickness table (base SiO₂ range, Ti 5 / Au 50 nm contacts, HSQ 50 nm with a 110 nm cap).
+- Tool limits for the single wafer; the second wafer.
+- Layer-40 overlay to layer 22 must be ≤ 1 µm (1 µm of drawn margin; the mask list said ±5 µm). The e-beam crosses sit about 760 µm from the meander, outside one write field. Dies carry no label on a fabricated layer.
+- The mirror edge still coincides with the centre-DC edge (step 39); with the raised mirror the 100 nm step lies there. Narrowing the mirror to |y| ≤ 18 µm stays an optional proposal.
+
+**Checks at the end of the step.** `check_chip.py` on A30, B60 and NODET; `check_snspd_die.py`; `check_run.py R1_ONE`; `fab/check_links.py`; `check_numbers.py` (its pointers now read the 10c cases `al100_cap110` and `al100`).

@@ -23,7 +23,7 @@
    "label": "Common-mode RF current per slot lead, E2 (uA)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100_cap110",
     "E2",
     "slot",
     "I_lead_in_trap_uA"
@@ -42,7 +42,7 @@
    "label": "Common-mode RF current per slot lead, E1 (uA)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100_cap110",
     "E1",
     "slot",
     "I_lead_in_trap_uA"
@@ -59,7 +59,7 @@
    "label": "Direct RF pickup in the nanowire, E2 (uA)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100",
     "E2",
     "window",
     "I_pk_uA"
@@ -76,7 +76,7 @@
    "label": "Direct RF pickup in the nanowire, E1 (uA)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100",
     "E1",
     "window",
     "I_pk_uA"
@@ -93,7 +93,7 @@
    "label": "RF current along the Al mirror strip to ground (mA)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100_cap110",
     "E2",
     "rho",
     "3e-08",
@@ -110,7 +110,7 @@
    "label": "Extra nanowire current through the mirror path, lower Al resistivity (uA)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100_cap110",
     "E2",
     "rho",
     "3e-08",
@@ -127,7 +127,7 @@
    "label": "Extra nanowire current through the mirror path, higher Al resistivity (uA)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100_cap110",
     "E2",
     "rho",
     "4e-08",
@@ -144,7 +144,7 @@
    "label": "Expected T10 mirror-strip resistance, lower (Ohm)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100_cap110",
     "E2",
     "rho",
     "3e-08",
@@ -477,7 +477,7 @@
    "label": "T10 mirror strip resistance, upper end (rho 4e-8 ohm m) (ohm)",
    "file": "10c_mirror_thickness/summary.json",
    "keys": [
-    "al100_inlaid",
+    "al100_cap110",
     "E2",
     "rho",
     "4e-08",

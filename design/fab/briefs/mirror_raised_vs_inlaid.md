@@ -51,7 +51,7 @@ For the raised 100 nm column, the current, swing, extra nanowire current, strip 
 ## What each option changes elsewhere
 
 - Decided 2026-11-12: step 3 of [01_FOUNDATION](../process/01_FOUNDATION.md) is resist, 100 nm Al evaporation and lift-off, with no recess etch (sub-steps 3a to 3d are not needed). The same mask is used.
-- Step 3 of [01_FOUNDATION](../process/01_FOUNDATION.md) is written as 3a to 3d for the inlaid mirror (resist, 100 nm recess, Al evaporation, lift-off). The fallback skips 3b and keeps the same mask ([01_FOUNDATION](../process/01_FOUNDATION.md), step 3).
+- Until 2026-11-12 that step was written as 3a to 3d for the inlaid mirror (resist, 100 nm recess, Al evaporation, lift-off), with the raised mirror as its fallback.
 - Witness loop W8 covers the raised mirror: residual step and edge profile after lift-off, and hillocks after 300 °C ([QUALIFICATION](../QUALIFICATION.md#w8-al-mirror-raised-step-3), "W8 Al mirror, raised (step 3)"). The raised option names step 15 and test structure T12 as the check that the Au crosses the 0.10 µm step (T12 is not in R1_ONE) ([01_FOUNDATION](../process/01_FOUNDATION.md), fallback).
 - T10 expected resistance is 18.8–25.1 Ω for both 100 nm options, and 4.2–5.6 Ω for the replaced 450 nm mirror ([tests/01_ELECTRICAL](../tests/01_ELECTRICAL.md); [LAYOUT](../LAYOUT.md)). The T10 acceptance limit is not set [verify]. T10 is not in R1_ONE (2026-11-12).
 - No GDS change was made for the 100 nm inlay: [DESIGN_LOG step 38](../../DESIGN_LOG.md) states "No GDS change; nothing was regenerated." The optional narrowing would change layer 10 in the released A30 and B60 dies ([OPEN_DECISIONS](../OPEN_DECISIONS.md), "Mirror edge on the centre-DC edge").

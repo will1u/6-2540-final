@@ -118,7 +118,7 @@ Ground rules agreed with the team:
 | NbN absorption | v4: 0.66 with a 160 nm cap, 0.44 with the drawn 80 nm (sim 09c, step 26); v3.1: 0.54 (f 0.65, EMT) |
 | Geometric collection | v4 (sim 15b, step 32), isotropic Ba⁺ emission: 2.22 % (A30, E2), 4.16 % (B60, E2); absorbed in NbN 1.47 % / 2.71 % of all emitted photons with the 160 nm cap. Todaro: 2.0 % geometric. |
 | Beam clipping (10 × 10 mm die) | ≈ 1.7e-2 at 493 nm, 3.2e-2 at 650 nm (was 1.1e-5 / 1.1e-4 on the 2.5 mm die) |
-| RF pickup bound (2-D) | v4 (sim 10c, steps 37–38): nanowire 0.96 µA (E2) / 1.92 µA (E1), plus at most 0.73–0.97 µA through the mirror path; each slot lead collects 44.5 µA (E2) / 28.6 µA (E1) of common-mode current. v3 was 1.4 µA with no ITO |
+| RF pickup bound (2-D) | v4 final stack (sim 10c, cases `al100` and `al100_cap110`, step 45): nanowire 0.96 µA (E2) / 1.92 µA (E1), plus at most 0.72–0.96 µA (E2) through the mirror path; each slot lead collects 44.5 µA (E2) / 28.4 µA (E1) of common-mode current. v3 was 1.4 µA with no ITO |
 | Simulated on the v4 fab GDS | Null 49.97 / 49.98 µm; readout incl. recess ≈ 48.8 µm (E2). 10° tilt (480 µm zones, steps 28–29): loading 7.5 V, **readout 6.3 V** (A30) / 2.2 V (B60) (fits ±10 V; v3 needed 13.2 V). NODET 7.9 V. Transport with the centre DC held at 0 V: max 6.6 V, ≤ 1.71 V per 10 µm step (7.6–8.0 V steps if the centre DC is used, because of the slot end and window). |
 | Chip RF capacitance (sim 22) | 2.59 pF (A30, E2); 2.39 pF (A30, E1); 2-D sections with ideal conductors, Si treated as lossless (DESIGN_LOG step 41) |
 | RF voltage on the centre DC with a filter capacitor (sim 23) | 6.1 V with no capacitor (A30, E2); 22 mV with 1 nF; 2.2 mV with 10 nF (DESIGN_LOG step 42) |

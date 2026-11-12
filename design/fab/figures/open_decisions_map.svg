@@ -97,7 +97,7 @@
   <text x="45" y="548">Conflicts with the 2026-11-07 no-ITO decision.</text>
   <text x="45" y="564">Sim 24b computes its effect on the optics.</text>
   <text class="r" x="45" y="584">Stands only if the team reopens the 11-07</text>
-  <text class="r" x="45" y="600">decision. Sim 24b result: [pending].</text>
+  <text class="r" x="45" y="600">decision. Sim 24b: ITO moves the best SiO₂ cap.</text>
 
   <!-- Claude's design calls -->
   <text class="b" x="30" y="634">Claude's design calls, awaiting team adoption (not team decisions)</text>
@@ -130,8 +130,8 @@
   <text class="b" x="45" y="800">SiO₂ spacer 238 ± 10 nm</text>
   <text x="45" y="820">PECVD, ≤ 300 °C, between the Al mirror and</text>
   <text x="45" y="836">the NbN. Kept from the earlier pass.</text>
-  <text x="45" y="852">Sim 24b result: [pending].</text>
-  <text class="bl" x="45" y="872">Sims 22b and 24b may refine it.</text>
+  <text x="45" y="852">Sim 24b: 0.83 absorbed; worst corner 0.75.</text>
+  <text class="bl" x="45" y="872">Best alternative gains only 0.011 (sim 24b).</text>
   <text class="bl" x="45" y="888">Team to adopt or change.</text>
 
   <rect class="call" x="370" y="778" width="330" height="120" rx="6"/>
