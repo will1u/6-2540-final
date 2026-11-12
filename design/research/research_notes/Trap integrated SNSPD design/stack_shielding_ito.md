@@ -1,8 +1,10 @@
 # Trap-integrated SNSPD: layer stack, RF shielding, optical cavity design, and ITO transparent ground for 138Ba+ (493 nm) at ~5 K
 
+> **Superseded in part (2026-11-11).** The recommended design point (line 270: Al ≥ 50 nm, SiO₂ spacer ≈ 68 nm, SiO₂ cap ≈ 88 nm, ITO 50 nm, thick SiO₂) and the ITO and 10 µm SiO₂ layers in the target stack no longer match v4. v4 has no ITO (decision 2026-11-07), a 238 nm spacer, a 160 nm cap, no 10 µm D2, and a 100 nm inlaid Al mirror. Current: [layer stack](../../../fab/STACK.md).
+
 Target stack (bottom to top): Si / thermal SiO2 / Al ground plane + mirror / SiO2 spacer (t1) / NbN nanowire (5-10 nm) / SiO2 cap (t2) / grounded ITO (t_ITO) / ~10 um PECVD SiO2 / Au electrodes.
 
-Notation: "[TMM]" marks numbers I calculated for these notes with my own normal-incidence transfer-matrix script. The script uses the optical constants cited in Q3 and an effective-medium approximation for the meander. Treat these as design estimates, not published results. The script and its inputs are in the scratchpad (see the Q3 Gaps).
+Notation: "[TMM]" marks numbers I calculated for these notes with my own normal-incidence transfer-matrix script. The script uses the optical constants cited in Q3 and an effective-medium approximation for the meander. Treat these as design estimates, not published results. The script and its inputs were scratch files and are not in the repo (see the Q3 Gaps).
 
 ---
 
@@ -283,10 +285,10 @@ Results:
 - **No cryogenic n,k data at 493 nm** for NbN or Al were found.
 - **The two NbN datasets differ by ~20% in n and k at 493 nm.** Ultrathin NbN optical constants depend on deposition (stoichiometry, thickness, substrate). Measure your own film by ellipsometry on a thickness series, as Medeiros recommends.
 - **The effective-medium TMM is not RCWA.** With a pitch of 160-200 nm vs λ/n ≈ 337 nm, the meander is only marginally sub-wavelength. Final numbers should come from RCWA, as Hampel and Todaro did, or from FDTD.
-- **Scripts and data** are in the session scratchpad:
-  - Scripts: tmm_stack.py, run1.py, run2.py, run3.py in C:\Users\willi\AppData\Local\Temp\claude\C--Users-willi-Repos-6-2540\2462feda-17d8-4bbb-b4c9-ed087db8a35f\scratchpad\
-  - NbN dataset: ...\scratchpad\gla\nbn.xlsx
-  - refractiveindex.info files: ...\scratchpad\ri\db\
+- **Scripts and data** were scratch files and are not in the repo:
+  - Scripts: tmm_stack.py, run1.py, run2.py, run3.py (the script was a scratch file and is not in the repo)
+  - NbN dataset: scratch file, not in the repo
+  - refractiveindex.info files: scratch folder, not in the repo
 
 ---
 

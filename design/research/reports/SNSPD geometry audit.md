@@ -2,6 +2,8 @@
 
 # Move the turnarounds out of the light
 
+> **Superseded in part (2026-11-11).** The v3 values in lines 7 and 43 (100 nm wires, 150 lines, 150 nm Al, 80 nm cap, 10 µm D2, bare SiO₂ window floor) are replaced in v4 by 130 nm wires, 160 lines, a 100 nm inlaid Al mirror, and a 160 nm cap with no D2. The bond-level return fix (line 335) is superseded by the on-chip Au-fill-to-Al via on layer 40 (decision 2026-11-08). The ≈0.5 pF rail-to-centre estimate (line 314) is replaced by 0.414 pF from sim 23 (`design/sim/out/23_dc_rf_coupling/summary.json`, `per_electrode.E2.centre_A30.C_c_pF`). Current: [layer stack](../../fab/STACK.md).
+
 **Bottom line.** The v3 meander is 7 nm NbN, 100 nm wires on a 200 nm pitch (fill factor f = 0.5), 150 lines along the trap axis, with square-cornered hairpins exactly at the edges of the Au window. Three things in this geometry cost efficiency and switching-current headroom, and each can be fixed in the layer-20 layout alone.
 
 - **Footprint.** The meander is the same size as the window, but light that passes the window edge refracts outward through 10 µm of SiO₂ and lands 2.5 µm (A30) to 3.9 µm (B60) beyond it. **About 20 % of the photons that pass the window miss the NbN** [team calc].
