@@ -171,6 +171,12 @@ Format: date · decision · options rejected · reason · consequences.
 - **Rejected:** grounding the Al only through Al wedge bonds at the M1 bond openings (those stay as a backup).
 - **Reason:** a mirror left floating by a missing bond is the worst case for RF pickup (Hampel Fig. 3(a); DESIGN_LOG step 10). Claude proposed this reasoning; the team accepted the change.
 - **Note:** this was decided for the die-wide Al. With the local-mirror architecture (below), the same idea grounds the local mirror strip.
+- **How the mirror reaches ground (clarified 2026-11-12, at the team's request):**
+  - The via is **not wire bonded**. It is a 100 × 100 µm opening through the 348 nm of SiO₂ (cap + spacer) at (−2140, 130) µm, under the Au ground fill. When the electrode Au is deposited, the fill's Au fills the opening and lands on the Al. That Au-on-Al contact is the whole connection.
+  - Path to ground: carrier ground → wire bonds → GND-1…4 at (±4700, ±1500) µm → Au ground fill (one continuous sheet) → via → Al mirror. The mirror is grounded by the fill's own bonds, at least two of the four.
+  - The only bonds that matter for the mirror are therefore the GND bonds; no separate mirror bond exists on the v4 dies.
+  - The via's position is a layout call (DESIGN_LOG step 28), not part of this decision: just past the RF open end, to keep the mirror path short. It is on the left because the mirror runs along the SNSPD leads, which leave through the open end; the right end is closed by the RF U-bar and feed, so the Al cannot reach ground fill there without running under RF.
+  - Cross-section: `design/fab/figures/stack_v4.svg`, panel (d) "Mirror ground via (detail)".
 - **Details:** DESIGN_LOG step 22.
 
 ## 2026-11-08 · Hampel's local mirror as a variant first
