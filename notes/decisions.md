@@ -127,6 +127,7 @@ Format: date · decision · options rejected · reason · consequences.
 - **Decision:** run the trap-only process first (R1_TRAP: no NbN, no EBL), then the full stack (R1_FULL).
 - **Rejected:** a full-stack first run.
 - **Reason:** not recorded. The run sheet states the goal: qualify the trap process and trap ions on a die without a detector, and use that NODET die as the reference for the SNSPD dies.
+- **Status:** superseded 2026-11-12 by the one-wafer run (entry "One wafer for all four chips" below).
 - **Details:** DESIGN_LOG step 16; `design/SIMPLIFICATIONS.md` S2.
 
 ## 2026-11-07 · Detector variants: 30 µm and 60 µm windows, plus a die without a detector
@@ -224,6 +225,7 @@ Format: date · decision · options rejected · reason · consequences.
   - Exposed area: B60 adds 900 µm² of window floor. The slot's exposed SiO₂ gaps under the transport path are about 20× larger, and the floor now sits 0.3 µm above the grounded mirror.
   - B60 collects about 1.9× the light of A30 (4.2 % vs 2.2 % geometric).
   The team did not say which of these points decided it.
+- **Later change:** on 2026-11-12 the team put A30 on the chips it needs and kept B60 only as a spare position (entry "Detector for the integrated chips" below).
 
 ## 2026-11-08 · Zone spacing 480 µm
 
@@ -256,6 +258,8 @@ Format: date · decision · options rejected · reason · consequences.
 
 ## 2026-11-09 · Local mirror: 100 nm Al, inlaid (replaces the 450 nm of 2026-11-08)
 
+> Changed on 2026-11-12: the mirror stays 100 nm but is raised, not inlaid. See "Local mirror: 100 nm Al, raised" below.
+
 - **Decision:** the local Al mirror (layer 10) is 100 nm of evaporated Al, inlaid in the thermal SiO₂ so that its top is level with the SiO₂ beside it. Step 3 etches a 100 nm recess, evaporates the Al and lifts it off, all with one resist.
 - **Rejected:**
   - 450 nm standing on the SiO₂ (the 2026-11-08 choice): it leaves a 0.45 µm step under the centre DC and the slot leads.
@@ -274,3 +278,55 @@ Format: date · decision · options rejected · reason · consequences.
   - The simulation is 2-D with ideal conductors and gives upper bounds.
 - **Consequences:** no layout change. Step 3 of the traveler is rewritten; the expected T10 strip resistance becomes 18.8–25.1 Ω instead of about 5 Ω; 0.9 µm of thermal SiO₂ remains under the mirror; new witness loop W8; the stack and process-flow figures show the inlaid mirror.
 - **Details:** DESIGN_LOG steps 37 and 38.
+
+## 2026-11-12 · One wafer for all four chips (run R1_ONE)
+
+- **Decision:** fabricate the four chips the team's test plan needs on one wafer, in one run:
+  - one chip with only SNSPDs;
+  - two chips with an SNSPD integrated in the trap;
+  - one chip with only the trap.
+  The wafer carries a 3 × 3 block of 10 × 10 mm dies with spares: 4 A30, 1 B60, 2 SNSPD-only, 2 trap-only (NODET).
+- **Rejected:**
+  - the two-run sequence R1_TRAP then R1_FULL (2026-11-02);
+  - a 2 × 2 block with exactly four dies and no spares;
+  - a 4 × 4 block.
+- **Reason:**
+  - The chips follow the tests in the team's plan (teammate notes, `design/fab/`): the SNSPD alone and the SNSPD with trap RF at the SNSPD test setup; the trap alone and the SNSPD in the trap chamber.
+  - The team has about one week of fab and wants the run "as easily fabricated as possible, with the least ways for complications to arise".
+  - Spares: Claude proposed the 3 × 3 block because the tools write directly, so copies add write time but no process steps, and one bad die then does not cost a test. The team accepted.
+- **Checked before deciding:** Claude went through every process step against every die type and found no step that harms a die that does not need it (DESIGN_LOG step 45). The trap-only die receives the blanket SiO₂ spacer, NbN (etched off again) and SiO₂ cap, so its electrodes sit on the same SiO₂ as the detector dies.
+- **What the team accepts with it:** one wafer is a single point of failure; the trap-only chip waits for the detector steps; E1 or E2 applies to the whole wafer. Claude recommends a second wafer with only the electrode layer exposed as a backup; the team has not decided on it.
+- **Consequences:** a new SNSPD-only die (`design/gds/make_snspd_die.py`); a new run preset `R1_ONE`; the separate test dies leave the run.
+
+## 2026-11-12 · Detector for the integrated chips: A30, with B60 as a spare
+
+- **Decision:** the two SNSPD + trap chips the team needs are A30 (30 × 30 µm window). One spare position on the wafer carries B60.
+- **Rejected:** A30 on every integrated position; one A30 and one B60 as the two needed chips.
+- **Reason:** A30 "is closer to the chip designed by Hampel" (team). The reason for keeping one B60 as a spare was not given.
+- **Numbers the team had in front of it** (repo values, 6 µm Au): Hampel's detector is 20 × 30 µm; A30 absorbs 1.47 % of the emitted photons with 5.76 mm of nanowire and lowers the RF null 1.19 µm over the window; B60 absorbs 2.71 % with 11.04 mm and lowers it 2.04 µm.
+- **Details:** DESIGN_LOG step 45.
+
+## 2026-11-12 · Local mirror: 100 nm Al, raised (replaces "inlaid" of 2026-11-09)
+
+- **Decision:** the local Al mirror is 100 nm of evaporated Al standing on the SiO₂, made by lift-off. There is no recess etch.
+- **Rejected:** the inlaid mirror of 2026-11-09 (100 nm recess etched into the SiO₂ before the Al).
+- **Reason:** about one week of fab, and the team wants the fewest ways for the run to go wrong. Claude pointed out that no source we have read covers the recess-and-lift-off step and that it needs a witness wafer first, and proposed the raised mirror, which was already the named fallback and uses the same mask. The team accepted.
+- **What we accept with it:** a 100 nm step under the centre DC and the slot leads, so the electrodes are no longer exactly flat. `design/sim/10d_mirror_step.py` (DESIGN_LOG step 39) puts the effect at 0.13–0.16 µm of extra RF-null height.
+- **Consequences:** no layout change. Step 3 loses its etch; witness loop W8 is no longer needed for the recess.
+
+## 2026-11-12 · Alignment marks in Al, written with the mirror layer
+
+- **Decision:** the alignment-mark shapes (GDS layer 1) are exposed together with the mirror layer and made in the same Al lift-off. The step that etched marks into the Si before the SiO₂ is dropped.
+- **Rejected:** keeping the Si-etched marks; leaving the choice to the teammate writing the process flow.
+- **Reason:** Claude proposed it as one lithography and one etch fewer, and so that wafers that already carry SiO₂ can be used as they are. The team accepted.
+- **Consequences:** no layout change. The trap-only dies get four small Al crosses at their corners, 4.5 mm from the trap; they still have no Al under the electrodes. Later layers align to Al marks seen through the SiO₂ [verify on the tool]; the e-beam still aligns to its own Au crosses.
+
+## 2026-11-12 · SNSPD leads stay Au in the slot; contacts thinned
+
+- **Decision:** keep the SNSPD leads as Au strips in the centre-DC slot (2026-11-08). The short Ti/Au contact strips from the NbN tabs to the slot stay where they are.
+- **Rejected for this run:**
+  - NbN from each tab into the slot, with Ti/Au only as a pad in the slot;
+  - NbN leads along the whole slot under the SiO₂ cap, with the Au strips as grounded shields.
+- **Reason:** a team member was told that SNSPD leads can also be made of NbN, and the team asked what that would change. After the options were laid out, the team chose to keep the Au leads. The grounds Claude gave for that option: no layout change to the dies that are already checked, and the gain of the short NbN version is small once the contacts are thin.
+- **Not a team decision:** the contact thickness itself (Ti 5 / Au 50 nm instead of 10 / 350 nm) is Claude's design call, listed for adoption in `design/fab/OPEN_DECISIONS.md`.
+- **Details:** DESIGN_LOG step 45.
