@@ -124,34 +124,39 @@
     <circle cx="200" cy="75" r="5" fill="#c0392b"/>
     <text class="l" x="211" y="72">ion, ≈ 48.8 µm over the window (A30, E2; sim 04b)</text>
 
-    <!-- layers: spacer sits on D1 except over the local Al -->
+    <!-- layers: base SiO2 top is flat (y 341). Al mirror raised 6 px (100 nm, exaggerated) on it;
+         spacer and cap step over the mirror edges. NbN wires sit on the spacer over the mirror. -->
     <rect class="si"  x="20" y="353" width="340" height="30"/>
     <rect class="d1"  x="20" y="341" width="340" height="12"/>
-    <rect class="sp"  x="20" y="317" width="340" height="24"/>
-    <rect class="al"  x="140" y="333" width="120" height="8"/>
-    <rect class="cap" x="20" y="306" width="340" height="11"/>
-    <use href="#wires"/>
+    <rect class="al"  x="140" y="335" width="120" height="6"/>
+    <rect class="sp"  x="20" y="317" width="120" height="24"/>
+    <rect class="sp"  x="260" y="317" width="100" height="24"/>
+    <rect class="sp"  x="140" y="311" width="120" height="24"/>
+    <rect class="cap" x="20" y="306" width="120" height="11"/>
+    <rect class="cap" x="260" y="306" width="100" height="11"/>
+    <rect class="cap" x="140" y="300" width="120" height="11"/>
+    <g transform="translate(0,-6)"><use href="#wires"/></g>
 
     <text class="g" x="28" y="232">no 10 µm D2:</text>
     <text class="g" x="28" y="247">vacuum on the cap</text>
 
     <!-- E2: 6 um plated (dashed outline); E1: 0.35 um lift-off (solid) -->
     <rect class="au2" x="20"  y="270" width="105" height="36"/>
-    <rect class="au2" x="140" y="270" width="15"  height="36"/>
-    <rect class="au2" x="245" y="270" width="15"  height="36"/>
+    <rect class="au2" x="140" y="264" width="15"  height="36"/>
+    <rect class="au2" x="245" y="264" width="15"  height="36"/>
     <rect class="au2" x="275" y="270" width="85"  height="36"/>
     <rect class="au" x="20"  y="302" width="105" height="4"/>
-    <rect class="au" x="140" y="302" width="15"  height="4"/>
-    <rect class="au" x="245" y="302" width="15"  height="4"/>
+    <rect class="au" x="140" y="296" width="15"  height="4"/>
+    <rect class="au" x="245" y="296" width="15"  height="4"/>
     <rect class="au" x="275" y="302" width="85"  height="4"/>
     <text class="l" x="72"  y="292" text-anchor="middle">RF</text>
     <text class="l" x="317" y="292" text-anchor="middle">RF</text>
     <text class="l" x="134" y="262" text-anchor="end">centre DC</text>
-    <path class="lead" d="M135,264 L146,272"/>
+    <path class="lead" d="M135,266 L146,270"/>
 
-    <path class="ray" d="M200,80 L160,306"/>
-    <path class="ray" d="M200,80 L200,306"/>
-    <path class="ray" d="M200,80 L240,306"/>
+    <path class="ray" d="M200,80 L160,300"/>
+    <path class="ray" d="M200,80 L200,300"/>
+    <path class="ray" d="M200,80 L240,300"/>
 
     <g class="mk"><circle cx="220" cy="292" r="7"/><text x="220" y="295.5">1</text></g>
     <g class="mk"><circle cx="132" cy="288" r="7"/><text x="132" y="291.5">4</text></g>
@@ -159,24 +164,24 @@
 
     <path class="lead" d="M361,288 L370,277"/><text class="l" x="372" y="280">E2: 6 µm Au (dashed)</text>
     <path class="lead" d="M361,304 L370,293"/><text class="l" x="372" y="296">E1: 0.35 µm Au</text>
-    <path class="lead" d="M361,310 L370,306"/><text class="l" x="372" y="309">cap 160 nm</text>
-    <path class="lead" d="M249,315.5 L370,319"/><text class="l" x="372" y="322">NbN 7 nm</text>
+    <path class="lead" d="M361,310 L370,306"/><text class="l" x="372" y="309">PECVD SiO₂ cap 110 nm</text>
+    <path class="lead" d="M249,309.5 L370,319"/><text class="l" x="372" y="322">NbN 7 nm</text>
     <g class="mk"><circle cx="379" cy="331" r="6.5"/><text x="379" y="334.5">3</text></g>
     <path class="lead" d="M361,325 L371,330"/><text class="l" x="390" y="335">spacer 238 nm SiO₂</text>
     <g class="mk"><circle cx="379" cy="345" r="6.5"/><text x="379" y="348.5">2</text></g>
-    <path class="lead" d="M261,337 L371,344"/><text class="l" x="390" y="349">Al 100 nm, inlaid, local</text>
+    <path class="lead" d="M261,338 L371,344"/><text class="l" x="390" y="349">Al 100 nm, raised</text>
     <path class="lead" d="M361,347 L370,359"/><text class="l" x="372" y="362">D1: 1 µm thermal SiO₂</text>
     <text class="l" x="372" y="378">HR Si (ρ &gt; 20 kΩ·cm)</text>
 
     <g class="mk"><circle cx="7" cy="401" r="7"/><text x="7" y="404.5">1</text></g>
     <text class="n" x="20" y="405">The cap/vacuum surface sits right on the stack. The cap is fixed at</text>
     <text class="n" x="20" y="420">160 ± 10 nm (sim 09c): mean absorption 0.645 over that range,</text>
-    <text class="n" x="20" y="435">worst corner 0.596.</text>
+    <text class="n" x="20" y="435">worst corner 0.596. PECVD SiO₂ cap 110 nm (160 nm over the wires with the HSQ).</text>
     <g class="mk"><circle cx="7" cy="449" r="7"/><text x="7" y="452.5">2</text></g>
     <text class="n" x="20" y="453">Al only under the centre DC (|y| ≤ 20 µm), none under the RF rails:</text>
     <text class="n" x="20" y="468">no ground plane. Needs Si with ρ &gt; 20 kΩ·cm (as Todaro, Hampel).</text>
     <g class="mk"><circle cx="7" cy="482" r="7"/><text x="7" y="485.5">3</text></g>
-    <text class="n" x="20" y="486">Same 238 nm spacer, so the same mirror.</text>
+    <text class="n" x="20" y="486">Same 238 nm spacer. The Al is raised 100 nm on the base SiO₂ (no recess).</text>
     <g class="mk"><circle cx="7" cy="500" r="7"/><text x="7" y="503.5">4</text></g>
     <text class="n" x="20" y="504">E1 (0.35 µm Au): the ion sees SiO₂ in every 5 µm gap (depth/width</text>
     <text class="n" x="20" y="519">0.07). E2 (6 µm plated, dashed): 1.2, but keeps plating.</text>

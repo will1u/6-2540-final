@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Claude-authored figure, 2026-11-09. Schematic, not to scale. Numbers from fab/STACK.md and gds/make_chip.py. -->
+<!-- Claude-authored figure, 2026-11-09; updated 2026-11-12 for the raised 100 nm Al mirror, Al marks, Ti/Au 5 / 50 nm and the 110 nm SiO2 cap. Schematic, not to scale. Numbers from fab/STACK.md and gds/make_chip.py. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 980" width="1100" height="980">
   <defs>
     <style>
@@ -30,31 +30,39 @@
   <!-- ===================== Panel (a): readout window, A30. 3 px per µm, centred on x = 550 ===================== -->
   <text class="t" x="30" y="100">(a) Across the trap at the readout window (A30)</text>
 
-  <!-- layers, bottom to top -->
+  <!-- Shared convention: base SiO2 top is flat (y 288). The Al mirror stands 6 px (100 nm, exaggerated) on it.
+       Every layer above is drawn beside the mirror at its normal level and over the mirror 6 px higher. -->
   <rect class="si" x="160" y="320" width="780" height="40"/>
   <rect class="d1" x="160" y="288" width="780" height="32"/>
-  <!-- The Al mirror is inlaid 0.10 um into the thermal SiO2, so the SiO2 cap and all the Au sit at one level. -->
-  <rect class="sp" x="160" y="278" width="780" height="10"/>
-  <rect class="al" x="490" y="288" width="120" height="6"/>
-  <rect class="cap" x="160" y="270" width="780" height="8"/>
+  <!-- Al mirror, raised, under the window and the centre DC rims -->
+  <rect class="al" x="490" y="282" width="120" height="6"/>
+  <!-- PECVD SiO2 spacer 238 nm: beside the mirror, then over it -->
+  <rect class="sp" x="160" y="278" width="330" height="10"/>
+  <rect class="sp" x="610" y="278" width="330" height="10"/>
+  <rect class="sp" x="490" y="272" width="120" height="10"/>
+  <!-- SiO2 cap (PECVD 110 nm, 160 nm over the wires with the HSQ): beside, then over the mirror -->
+  <rect class="cap" x="160" y="270" width="330" height="8"/>
+  <rect class="cap" x="610" y="270" width="330" height="8"/>
+  <rect class="cap" x="490" y="264" width="120" height="8"/>
 
-  <!-- NbN wires, 7 nm, end-on (16 rects, |y| <= 16 um) -->
+  <!-- NbN wires, 7 nm, end-on (16 rects, |y| <= 16 um), on the spacer over the mirror -->
   <g class="nb">
-    <rect x="504" y="276" width="2" height="2"/><rect x="510" y="276" width="2" height="2"/>
-    <rect x="516" y="276" width="2" height="2"/><rect x="522" y="276" width="2" height="2"/>
-    <rect x="528" y="276" width="2" height="2"/><rect x="534" y="276" width="2" height="2"/>
-    <rect x="540" y="276" width="2" height="2"/><rect x="546" y="276" width="2" height="2"/>
-    <rect x="552" y="276" width="2" height="2"/><rect x="558" y="276" width="2" height="2"/>
-    <rect x="564" y="276" width="2" height="2"/><rect x="570" y="276" width="2" height="2"/>
-    <rect x="576" y="276" width="2" height="2"/><rect x="582" y="276" width="2" height="2"/>
-    <rect x="588" y="276" width="2" height="2"/><rect x="594" y="276" width="2" height="2"/>
+    <rect x="504" y="270" width="2" height="2"/><rect x="510" y="270" width="2" height="2"/>
+    <rect x="516" y="270" width="2" height="2"/><rect x="522" y="270" width="2" height="2"/>
+    <rect x="528" y="270" width="2" height="2"/><rect x="534" y="270" width="2" height="2"/>
+    <rect x="540" y="270" width="2" height="2"/><rect x="546" y="270" width="2" height="2"/>
+    <rect x="552" y="270" width="2" height="2"/><rect x="558" y="270" width="2" height="2"/>
+    <rect x="564" y="270" width="2" height="2"/><rect x="570" y="270" width="2" height="2"/>
+    <rect x="576" y="270" width="2" height="2"/><rect x="582" y="270" width="2" height="2"/>
+    <rect x="588" y="270" width="2" height="2"/><rect x="594" y="270" width="2" height="2"/>
   </g>
 
-  <!-- Au electrodes on the cap: centre DC rims (|y| 15 to 20), RF rails (25 to 109), outer DC (114 to 130, cut at panel edge) -->
-  <rect class="au2" x="490" y="226" width="15" height="44"/>
-  <rect class="au2" x="595" y="226" width="15" height="44"/>
-  <rect class="au" x="490" y="264" width="15" height="6"/>
-  <rect class="au" x="595" y="264" width="15" height="6"/>
+  <!-- Au electrodes on the cap. Beside the mirror: RF rails and outer DC (cap top y 270).
+       Over the mirror: centre DC rims |y| 15 to 20 (cap top y 264). -->
+  <rect class="au2" x="490" y="220" width="15" height="44"/>
+  <rect class="au2" x="595" y="220" width="15" height="44"/>
+  <rect class="au" x="490" y="258" width="15" height="6"/>
+  <rect class="au" x="595" y="258" width="15" height="6"/>
 
   <rect class="au2" x="223" y="226" width="252" height="44"/>
   <rect class="au2" x="625" y="226" width="252" height="44"/>
@@ -66,9 +74,9 @@
   <rect class="au" x="160" y="264" width="48" height="6"/>
   <rect class="au" x="892" y="264" width="48" height="6"/>
 
-  <!-- ion and dimension line -->
+  <!-- ion and dimension line (to the window floor, the cap top over the mirror) -->
   <circle cx="550" cy="160" r="5" fill="#c0392b"/>
-  <path class="dim" d="M550,168 L550,224 M546,168 L554,168 M546,224 L554,224"/>
+  <path class="dim" d="M550,168 L550,256 M546,168 L554,168 M546,256 L554,256"/>
   <text class="l" x="566" y="164">ion ≈ 50 µm above the electrodes (not to scale)</text>
 
   <!-- labels (a) -->
@@ -91,8 +99,8 @@
   <text class="l" x="148" y="344" text-anchor="end">HR Si, ρ &gt; 20 kΩ·cm</text>
   <path class="lead" d="M151,341 L174,340"/>
 
-  <text class="l" x="148" y="313" text-anchor="end">thermal SiO₂ 1.0 µm</text>
-  <text class="l" x="148" y="326" text-anchor="end">(0.9 µm under the mirror)</text>
+  <text class="l" x="148" y="313" text-anchor="end">thermal SiO₂ 1.0 µm, flat top</text>
+  <text class="l" x="148" y="326" text-anchor="end">(no recess under the mirror)</text>
   <path class="lead" d="M151,310 L178,309"/>
 
   <text class="l" x="148" y="282" text-anchor="end">PECVD SiO₂ spacer</text>
@@ -101,38 +109,46 @@
 
   <text class="l" x="952" y="222">NbN 7 nm, 130 nm wires</text>
   <text class="l" x="952" y="235">on 200 nm pitch</text>
-  <path class="lead" d="M950,229 L597,276"/>
+  <path class="lead" d="M950,229 L594,271"/>
 
-  <text class="l" x="952" y="254">SiO₂ cap 160 ± 10 nm</text>
-  <text class="l" x="952" y="267">(window floor)</text>
-  <path class="lead" d="M950,262 L884,274"/>
+  <text class="l" x="952" y="254">PECVD SiO₂ cap 110 nm</text>
+  <text class="l" x="952" y="267">(160 nm over the wires</text>
+  <text class="l" x="952" y="280">with the HSQ)</text>
+  <path class="lead" d="M950,270 L884,274"/>
 
-  <text class="l" x="952" y="300">Al mirror 100 nm, inlaid</text>
-  <text class="l" x="952" y="313">|y| ≤ 20 µm</text>
-  <path class="lead" d="M950,304 L606,291"/>
+  <text class="l" x="952" y="306">Al mirror 100 nm, raised</text>
+  <text class="l" x="952" y="319">|y| ≤ 20 µm</text>
+  <path class="lead" d="M950,310 L606,285"/>
 
   <text class="g" x="160" y="378">No Al under the RF rails; no ground plane. The detector is inset: NbN under the SiO₂ cap, on the floor of the Au window.</text>
-  <text class="g" x="160" y="393">The Al mirror is inlaid in the thermal SiO₂, so the SiO₂ cap and all the Au are at one level.</text>
+  <text class="g" x="160" y="393">The Al mirror stands 100 nm proud of the flat base SiO₂ (lift-off, no recess). Each layer above it steps over the mirror edge.</text>
 
   <!-- ===================== Panel (b): slot, away from the detector, B60 / A30. 6 px per µm, centred on x = 290 ===================== -->
   <text class="t" x="30" y="418">(b) Across the slot, away from the detector (A30, B60)</text>
 
   <rect class="si" x="50" y="560" width="480" height="40"/>
   <rect class="d1" x="50" y="528" width="480" height="32"/>
-  <rect class="sp" x="50" y="518" width="480" height="10"/>
-  <rect class="al" x="170" y="528" width="240" height="6"/>
-  <rect class="cap" x="50" y="510" width="480" height="8"/>
+  <!-- Al mirror, raised 100 nm (6 px exaggerated) on the flat base SiO2 -->
+  <rect class="al" x="170" y="522" width="240" height="6"/>
+  <!-- spacer and cap follow the mirror -->
+  <rect class="sp" x="50" y="518" width="120" height="10"/>
+  <rect class="sp" x="410" y="518" width="120" height="10"/>
+  <rect class="sp" x="170" y="512" width="240" height="10"/>
+  <rect class="cap" x="50" y="510" width="120" height="8"/>
+  <rect class="cap" x="410" y="510" width="120" height="8"/>
+  <rect class="cap" x="170" y="504" width="240" height="8"/>
 
-  <!-- centre DC halves (|y| 12.5 to 20), SNSPD leads (|y| 2.5 to 7.5), RF rails (|y| 25 to 40) -->
-  <rect class="au2" x="170" y="466" width="45" height="44"/>
-  <rect class="au2" x="365" y="466" width="45" height="44"/>
-  <rect class="au" x="170" y="504" width="45" height="6"/>
-  <rect class="au" x="365" y="504" width="45" height="6"/>
+  <!-- centre DC halves (|y| 12.5 to 20) and SNSPD leads (|y| 2.5 to 7.5): over the mirror, cap top y 504.
+       RF rails (|y| 25 to 40): beside the mirror, cap top y 510. -->
+  <rect class="au2" x="170" y="460" width="45" height="44"/>
+  <rect class="au2" x="365" y="460" width="45" height="44"/>
+  <rect class="au" x="170" y="498" width="45" height="6"/>
+  <rect class="au" x="365" y="498" width="45" height="6"/>
 
-  <rect class="au2" x="245" y="466" width="30" height="44"/>
-  <rect class="au2" x="305" y="466" width="30" height="44"/>
-  <rect class="au" x="245" y="504" width="30" height="6"/>
-  <rect class="au" x="305" y="504" width="30" height="6"/>
+  <rect class="au2" x="245" y="460" width="30" height="44"/>
+  <rect class="au2" x="305" y="460" width="30" height="44"/>
+  <rect class="au" x="245" y="498" width="30" height="6"/>
+  <rect class="au" x="305" y="498" width="30" height="6"/>
 
   <rect class="au2" x="50" y="466" width="90" height="44"/>
   <rect class="au2" x="440" y="466" width="90" height="44"/>
@@ -141,10 +157,10 @@
 
   <!-- labels (b) -->
   <text class="l" x="240" y="442" text-anchor="end">SNSPD return lead</text>
-  <path class="lead" d="M242,439 L255,468"/>
+  <path class="lead" d="M242,439 L255,462"/>
 
   <text class="l" x="322" y="442">SNSPD signal lead</text>
-  <path class="lead" d="M319,439 L319,468"/>
+  <path class="lead" d="M319,439 L319,462"/>
 
   <text class="l" x="160" y="462" text-anchor="end">centre DC half 7.5 µm</text>
   <path class="lead" d="M163,459 L190,472"/>
@@ -154,52 +170,64 @@
 
   <text class="g" x="30" y="620">leads are electrode Au (layer 50), over the grounded Al mirror</text>
 
-  <!-- ===================== Panel (c): NODET die (R1_TRAP). 2 px per µm, centred on x = 820 ===================== -->
-  <text class="t" x="570" y="418">(c) NODET die (R1_TRAP): no Al, no NbN</text>
+  <!-- ===================== Panel (c): trap-only die (NODET) on the shared wafer. 2 px per µm, centred on x = 820 ===================== -->
+  <text class="t" x="570" y="418">(c) trap-only die (NODET) on the shared wafer</text>
 
   <rect class="si" x="570" y="560" width="500" height="40"/>
   <rect class="d1" x="570" y="538" width="500" height="22"/>
+  <!-- NODET gets the 238 nm spacer and the 110 nm cap (no Al, no NbN) -->
+  <rect class="sp" x="570" y="528" width="500" height="10"/>
+  <rect class="cap" x="570" y="520" width="500" height="8"/>
 
-  <rect class="au2" x="780" y="494" width="80" height="44"/>
-  <rect class="au" x="780" y="532" width="80" height="6"/>
+  <rect class="au2" x="780" y="476" width="80" height="44"/>
+  <rect class="au" x="780" y="514" width="80" height="6"/>
 
-  <rect class="au2" x="602" y="494" width="168" height="44"/>
-  <rect class="au2" x="870" y="494" width="168" height="44"/>
-  <rect class="au" x="602" y="532" width="168" height="6"/>
-  <rect class="au" x="870" y="532" width="168" height="6"/>
+  <rect class="au2" x="602" y="476" width="168" height="44"/>
+  <rect class="au2" x="870" y="476" width="168" height="44"/>
+  <rect class="au" x="602" y="514" width="168" height="6"/>
+  <rect class="au" x="870" y="514" width="168" height="6"/>
 
-  <rect class="au2" x="570" y="494" width="22" height="44"/>
-  <rect class="au2" x="1048" y="494" width="22" height="44"/>
-  <rect class="au" x="570" y="532" width="22" height="6"/>
-  <rect class="au" x="1048" y="532" width="22" height="6"/>
+  <rect class="au2" x="570" y="476" width="22" height="44"/>
+  <rect class="au2" x="1048" y="476" width="22" height="44"/>
+  <rect class="au" x="570" y="514" width="22" height="6"/>
+  <rect class="au" x="1048" y="514" width="22" height="6"/>
 
-  <text class="l" x="820" y="470" text-anchor="middle">Au on thermal SiO₂ over HR Si</text>
-  <path class="lead" d="M820,474 L820,496"/>
+  <text class="l" x="820" y="452" text-anchor="middle">Au on PECVD SiO₂ cap, over the 238 nm</text>
+  <text class="l" x="820" y="465" text-anchor="middle">spacer on thermal SiO₂ over HR Si</text>
+  <path class="lead" d="M820,469 L820,474"/>
 
   <text class="l" x="570" y="618">thermal SiO₂ 1.0 µm, on HR Si, ρ &gt; 20 kΩ·cm</text>
-  <text class="g" x="570" y="636">Whether R1_TRAP also gets a PECVD SiO₂ layer is an open item.</text>
+  <text class="g" x="570" y="636">No Al and no NbN under the Au. On the shared wafer this die gets the spacer and the cap.</text>
 
   <!-- ===================== Panel (d): mirror ground via (detail), 1 px per µm ===================== -->
   <text class="t" x="30" y="692">(d) Mirror ground via (detail)</text>
 
   <rect class="si" x="40" y="830" width="260" height="40"/>
   <rect class="d1" x="40" y="798" width="260" height="32"/>
-  <!-- as in panel (a): Al inlaid in the thermal SiO2 -->
-  <rect class="sp" x="40" y="788" width="70" height="10"/>
-  <rect class="sp" x="210" y="788" width="90" height="10"/>
-  <rect class="al" x="60" y="798" width="200" height="6"/>
-  <rect class="cap" x="40" y="780" width="70" height="8"/>
-  <rect class="cap" x="210" y="780" width="90" height="8"/>
+  <!-- Al mirror, raised 6 px (100 nm, exaggerated) on the flat base SiO2 -->
+  <rect class="al" x="60" y="792" width="200" height="6"/>
+  <!-- spacer and cap: beside the mirror at 788 / 780, over it at 782 / 774; open 110 to 210 for the via -->
+  <rect class="sp" x="40" y="788" width="20" height="10"/>
+  <rect class="sp" x="260" y="788" width="40" height="10"/>
+  <rect class="sp" x="60" y="782" width="50" height="10"/>
+  <rect class="sp" x="210" y="782" width="50" height="10"/>
+  <rect class="cap" x="40" y="780" width="20" height="8"/>
+  <rect class="cap" x="260" y="780" width="40" height="8"/>
+  <rect class="cap" x="60" y="774" width="50" height="8"/>
+  <rect class="cap" x="210" y="774" width="50" height="8"/>
 
   <!-- E2 dashed outline above the Au ground fill footprint -->
-  <rect class="au2" x="40" y="730" width="260" height="44"/>
+  <rect class="au2" x="40" y="724" width="260" height="44"/>
 
-  <!-- E1 Au ground fill: on the cap, dipping through the 100 um opening onto the Al -->
-  <path class="au" d="M40,774 L300,774 L300,780 L210,780 L210,798 L110,798 L110,780 L40,780 Z"/>
+  <!-- E1 Au ground fill: on the cap beside the mirror (774-780), over the mirror (768-774), dipping through the via to the Al -->
+  <rect class="au" x="40" y="774" width="20" height="6"/>
+  <rect class="au" x="60" y="768" width="200" height="6"/>
+  <rect class="au" x="260" y="774" width="40" height="6"/>
+  <rect class="au" x="110" y="774" width="100" height="18"/>
 
   <!-- labels (d) -->
-  <text class="l" x="40" y="716">layer 40 opening through cap + spacer, ≈ 0.40 µm</text>
-  <path class="lead" d="M160,719 L160,776"/>
+  <text class="l" x="40" y="716">layer 40 opening through cap + spacer, 348 nm</text>
+  <path class="lead" d="M160,719 L160,770"/>
 
   <text class="l" x="312" y="772">Au ground</text>
   <text class="l" x="312" y="785">fill</text>
@@ -207,7 +235,7 @@
 
   <text class="l" x="312" y="812">Al mirror</text>
   <text class="l" x="312" y="825">branch</text>
-  <path class="lead" d="M310,818 L257,801"/>
+  <path class="lead" d="M310,818 L257,795"/>
 
   <text class="l" x="312" y="846">≥ 25 µm</text>
   <text class="l" x="312" y="859">enclosure</text>
@@ -218,54 +246,55 @@
 
   <rect class="si" x="415" y="832" width="310" height="40"/>
   <rect class="d1" x="415" y="800" width="310" height="32"/>
-  <rect class="al" x="415" y="800" width="310" height="6"/>
-  <rect class="sp" x="415" y="790" width="310" height="10"/>
-  <rect class="nb" x="415" y="788" width="80" height="2"/>
-  <rect class="tiau" x="465" y="788" width="54" height="2"/>
-  <rect class="tiau" x="519" y="784" width="54" height="6"/>
+  <!-- Al mirror, raised 6 px under the whole SNSPD (its edge lies outside the panel) -->
+  <rect class="al" x="415" y="794" width="310" height="6"/>
+  <rect class="sp" x="415" y="784" width="310" height="10"/>
+  <rect class="nb" x="415" y="782" width="80" height="2"/>
+  <rect class="tiau" x="465" y="780" width="54" height="2"/>
+  <rect class="tiau" x="519" y="780" width="54" height="4"/>
 
-  <!-- cap with the 18 x 3 um opening above the pad -->
-  <rect class="cap" x="415" y="780" width="114" height="8"/>
-  <rect class="cap" x="565" y="780" width="160" height="8"/>
+  <!-- cap (110 nm) with the 18 x 3 um opening above the pad -->
+  <rect class="cap" x="415" y="774" width="114" height="8"/>
+  <rect class="cap" x="565" y="774" width="160" height="8"/>
 
   <!-- Au lead (layer 50) on the cap, dipping into the opening onto the pad -->
-  <rect class="au" x="430" y="774" width="99" height="6"/>
-  <rect class="au" x="529" y="774" width="36" height="10"/>
-  <rect class="au" x="565" y="774" width="8" height="6"/>
+  <rect class="au" x="430" y="768" width="99" height="6"/>
+  <rect class="au" x="529" y="768" width="36" height="12"/>
+  <rect class="au" x="565" y="768" width="8" height="6"/>
 
   <!-- labels (e) -->
-  <text class="l" x="400" y="712">layer 40 opening in the 160 nm cap, 18 × 3 µm</text>
-  <path class="lead" d="M547,715 L547,786"/>
+  <text class="l" x="400" y="712">layer 40 opening in the 110 nm SiO₂ cap, 18 × 3 µm</text>
+  <path class="lead" d="M547,715 L547,772"/>
 
-  <text class="l" x="400" y="736">Ti/Au contact (layer 22), 27 × 7 µm pad</text>
-  <path class="lead" d="M500,739 L500,789"/>
+  <text class="l" x="400" y="736">Ti/Au contact (layer 22, 5 / 50 nm), 27 × 7 µm pad</text>
+  <path class="lead" d="M500,739 L500,781"/>
 
   <text class="l" x="400" y="760">NbN tab</text>
-  <path class="lead" d="M420,763 L420,789"/>
+  <path class="lead" d="M420,763 L420,783"/>
 
   <text class="l" x="575" y="760">Au lead (layer 50)</text>
-  <path class="lead" d="M582,763 L570,776"/>
+  <path class="lead" d="M582,763 L570,771"/>
 
   <!-- ===================== Legend ===================== -->
   <text class="t" x="770" y="692">Legend</text>
   <rect class="si" x="770" y="700" width="22" height="12"/>
   <text class="l" x="800" y="710">Si</text>
   <rect class="d1" x="770" y="724" width="22" height="12"/>
-  <text class="l" x="800" y="734">thermal SiO₂ (D1)</text>
+  <text class="l" x="800" y="734">base SiO₂, thermal 1.0 µm (D1)</text>
   <rect class="al" x="770" y="748" width="22" height="12"/>
-  <text class="l" x="800" y="758">Al mirror (layer 10)</text>
+  <text class="l" x="800" y="758">Al mirror (layer 10), raised 100 nm</text>
   <rect class="sp" x="770" y="772" width="22" height="12"/>
-  <text class="l" x="800" y="782">PECVD SiO₂ spacer</text>
+  <text class="l" x="800" y="782">PECVD SiO₂ spacer, 238 nm</text>
   <rect class="nb" x="770" y="796" width="22" height="12"/>
   <text class="l" x="800" y="806">NbN (layer 20)</text>
   <rect class="tiau" x="770" y="820" width="22" height="12"/>
-  <text class="l" x="800" y="830">Ti/Au contact (layer 22)</text>
+  <text class="l" x="800" y="830">Ti/Au contact (layer 22), 5 / 50 nm</text>
   <rect class="cap" x="770" y="844" width="22" height="12"/>
-  <text class="l" x="800" y="854">SiO₂ cap (HSQ + PECVD)</text>
+  <text class="l" x="800" y="854">SiO₂ cap (PECVD 110 nm; HSQ on wires)</text>
   <rect class="au" x="770" y="868" width="22" height="12"/>
   <text class="l" x="800" y="878">Au E1: 0.35 µm lift-off (solid)</text>
   <rect class="au2" x="770" y="892" width="22" height="12"/>
   <text class="l" x="800" y="902">Au E2: 6 µm plated (dashed outline)</text>
 
-  <text class="g" x="30" y="944">Layers: 1 marks · 10 Al mirror · 20 NbN · 22 Ti/Au contacts · 40 openings · 50 Au. Retired and empty: 24, 30, 31, 45.</text>
+  <text class="g" x="30" y="944">Layers: 1 Al marks (written with layer 10) · 10 Al mirror · 20 NbN · 22 Ti/Au contacts · 40 openings · 50 Au. Retired and empty: 24, 30, 31, 45.</text>
 </svg>
