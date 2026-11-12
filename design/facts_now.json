@@ -1,5 +1,5 @@
 {
- "_comment": "Claude-authored. Pointers to the numbers that are true now, read by design/check_numbers.py. No values are stored here: each fact names the sim output file and key it comes from, so the checker always prints the live value. 'file' is relative to design/sim/out/. 'show' is how the number is written in the docs (Python format spec applied to the value, after 'scale'). 'must_contain' lists current-state docs (relative to the repo root) that have to quote it. 'stale' lists strings that must not appear in current-state docs any more.",
+ "_comment": "Claude-authored. Pointers to the numbers that are true now, read by design/check_numbers.py. No values are stored here: each fact names the sim output file and key it comes from, so the checker always prints the live value. 'file' is relative to design/sim/out/. 'show' is how the number is written in the docs (Python format spec applied to the value, after 'scale'). 'must_contain' lists current-state docs (relative to the repo root) that have to quote it. 'stale' lists strings that must not appear in current-state docs (.md and .svg) any more.",
  "history_files": [
   "design/DESIGN_LOG.md",
   "notes/decisions.md",
@@ -32,7 +32,9 @@
    "must_contain": [
     "design/CLAUDE.md",
     "design/AGENTS.md",
-    "design/fab/OPEN_DECISIONS.md"
+    "design/fab/OPEN_DECISIONS.md",
+    "design/fab/figures/open_decisions_map.svg",
+    "design/primers/figures/07b_lead_termination.svg"
    ]
   },
   {
@@ -47,7 +49,9 @@
    ],
    "show": ".1f",
    "must_contain": [
-    "design/fab/tests/02_CRYOGENIC.md"
+    "design/fab/tests/02_CRYOGENIC.md",
+    "design/fab/figures/open_decisions_map.svg",
+    "design/primers/figures/07b_lead_termination.svg"
    ]
   },
   {
@@ -63,6 +67,7 @@
    "show": ".2f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -79,6 +84,7 @@
    "show": ".2f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -95,7 +101,8 @@
    ],
    "show": ".1f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md"
    ]
   },
   {
@@ -111,7 +118,8 @@
    ],
    "show": ".2f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md"
    ]
   },
   {
@@ -127,7 +135,8 @@
    ],
    "show": ".2f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md"
    ]
   },
   {
@@ -143,7 +152,9 @@
    ],
    "show": ".1f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md",
+    "design/fab/variants/LOCAL_MIRROR.md"
    ]
   },
   {
@@ -157,6 +168,7 @@
    "show": ".1f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -171,6 +183,7 @@
    "show": ".1f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -184,7 +197,8 @@
    ],
    "show": ".1f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md"
    ]
   },
   {
@@ -198,7 +212,9 @@
    "show": ".1f",
    "must_contain": [
     "design/CLAUDE.md",
-    "CLAUDE_PROGRESS.md"
+    "design/AGENTS.md",
+    "CLAUDE_PROGRESS.md",
+    "design/fab/RUNSHEET_R1_TRAP.md"
    ]
   },
   {
@@ -212,6 +228,7 @@
    "show": ".1f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -226,6 +243,7 @@
    "show": ".2f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -239,7 +257,8 @@
    ],
    "show": ".2f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md"
    ]
   },
   {
@@ -252,7 +271,8 @@
    ],
    "show": ".2f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md"
    ]
   },
   {
@@ -267,6 +287,7 @@
    "scale": -1,
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -282,6 +303,7 @@
    "scale": -1,
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -297,6 +319,7 @@
    "show": ".2f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -314,6 +337,7 @@
    "show": ".2f",
    "must_contain": [
     "design/CLAUDE.md",
+    "design/AGENTS.md",
     "CLAUDE_PROGRESS.md"
    ]
   },
@@ -328,7 +352,8 @@
    ],
    "show": ".2f",
    "must_contain": [
-    "design/CLAUDE.md"
+    "design/CLAUDE.md",
+    "design/AGENTS.md"
    ]
   },
   {
@@ -342,7 +367,9 @@
    "show": ".2f",
    "must_contain": [
     "design/CLAUDE.md",
-    "CLAUDE_PROGRESS.md"
+    "design/AGENTS.md",
+    "CLAUDE_PROGRESS.md",
+    "design/fab/figures/architecture_crosssection.svg"
    ]
   },
   {
@@ -411,7 +438,9 @@
    "must_contain": [
     "design/CLAUDE.md",
     "design/AGENTS.md",
-    "design/fab/OPEN_DECISIONS.md"
+    "design/fab/OPEN_DECISIONS.md",
+    "design/primers/RF_PRIMER.md",
+    "design/primers/figures/06_dc_filter.svg"
    ]
   },
   {
@@ -441,6 +470,79 @@
     "design/CLAUDE.md",
     "design/AGENTS.md",
     "design/fab/OPEN_DECISIONS.md"
+   ]
+  },
+  {
+   "id": "t10_hi",
+   "label": "T10 mirror strip resistance, upper end (rho 4e-8 ohm m) (ohm)",
+   "file": "10c_mirror_thickness/summary.json",
+   "keys": [
+    "al100_inlaid",
+    "E2",
+    "rho",
+    "4e-08",
+    "t10_ohm"
+   ],
+   "show": ".1f",
+   "must_contain": [
+    "design/CLAUDE.md",
+    "design/AGENTS.md",
+    "design/fab/variants/LOCAL_MIRROR.md"
+   ]
+  },
+  {
+   "id": "zone_read_NODET",
+   "label": "Readout zone max |V|, NODET (V)",
+   "file": "12_final_chip/trap_die_v4_NODET/summary.json",
+   "keys": [
+    "readout",
+    "vmax"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/fab/RUNSHEET_R1_TRAP.md"
+   ]
+  },
+  {
+   "id": "transport_vmax_NODET",
+   "label": "Transport max |V|, NODET (V)",
+   "file": "12_final_chip/trap_die_v4_NODET/summary.json",
+   "keys": [
+    "transport",
+    "max_abs_V"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/fab/RUNSHEET_R1_TRAP.md"
+   ]
+  },
+  {
+   "id": "transport_step_NODET",
+   "label": "Transport max step per 10 um, NODET (V)",
+   "file": "12_final_chip/trap_die_v4_NODET/summary.json",
+   "keys": [
+    "transport",
+    "max_step_change_V"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/fab/RUNSHEET_R1_TRAP.md"
+   ]
+  },
+  {
+   "id": "centre_dc_cg",
+   "label": "Centre DC capacitance to ground, A30 on E2 (pF)",
+   "file": "23_dc_rf_coupling/summary.json",
+   "keys": [
+    "per_electrode",
+    "E2",
+    "centre_A30",
+    "C_g_pF"
+   ],
+   "show": ".2f",
+   "must_contain": [
+    "design/primers/RF_PRIMER.md",
+    "design/primers/figures/06_dc_filter.svg"
    ]
   }
  ],
@@ -524,6 +626,42 @@
   {
    "pattern": "table is not a waveform: interpolate",
    "why": "sim 21 wrote the waveform (step 40)"
+  },
+  {
+   "pattern": "318 nm",
+   "why": "v3 80 nm cap: electrode 2 sits 398 nm (238 + 160) above the mirror"
+  },
+  {
+   "pattern": "28\\.3 µA \\(E1\\)",
+   "why": "sim 10b E1 slot-lead value; sim 10c gives 28.6 uA (sim 19 still uses 28.3 as its input: say so where quoted)"
+  },
+  {
+   "pattern": "0\\.5 pF rail-to-centre",
+   "why": "audit estimate; sim 23 gives 0.414 pF"
+  },
+  {
+   "pattern": "max \\|V\\| 9\\.10 V",
+   "why": "old NODET sim 12 value; see 12_final_chip/trap_die_v4_NODET"
+  },
+  {
+   "pattern": "not rerun for this stack",
+   "why": "sims 04b, 12 and 13 were rerun on v4"
+  },
+  {
+   "pattern": "rerun 09b",
+   "why": "09b is superseded by 09c; the cap is fixed at 160 nm (step 26)"
+  },
+  {
+   "pattern": "probe pad < 10 Ω",
+   "why": "T10 is expected at 18.8-25.1 ohm (sim 10c); no trap-die mirror probe pad"
+  },
+  {
+   "pattern": "without it, 2\\.9 pF",
+   "why": "2.9 pF is the v3 thick-D2 baseline, not the no-plane chip (2.59 pF, sim 22)"
+  },
+  {
+   "pattern": ">no plane</text>",
+   "why": "2.9 pF is the v3 thick-D2 baseline, not the no-plane chip (2.59 pF, sim 22)"
   }
  ]
 }

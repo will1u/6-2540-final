@@ -3,7 +3,7 @@
 Three parts, all driven by design/facts_now.json:
   1. Print the live value of each fact, read from its sim output file under design/sim/out/.
   2. Check that each doc listed in must_contain quotes that value as a plain substring.
-  3. Scan every .md file under the repo root for the stale strings in the "stale" list.
+  3. Scan every .md and .svg file under the repo root for the stale strings in the "stale" list.
      Lines inside history files, or inside the history sections of a file, are skipped.
 
 Run:    cd design/sim && ./run.sh ../check_numbers.py
@@ -128,7 +128,7 @@ def scan_file(rel, path, rules, prefixes):
 
 
 def check_stale(stale, history_files, history_sections):
-    # Part 3: scan every .md file under the repo root.
+    # Part 3: scan every .md and .svg file under the repo root.
     flags = 0
     rules = [(re.compile(s["pattern"]), s["why"]) for s in stale]
     print("PART 3: stale strings")
@@ -136,7 +136,7 @@ def check_stale(stale, history_files, history_sections):
         dirnames[:] = [d for d in dirnames
                        if d != ".git" and rel_of(os.path.join(dirpath, d)) != "proposal"]
         for name in sorted(filenames):
-            if not name.endswith(".md"):
+            if not name.endswith((".md", ".svg")):   # figures carry numbers too
                 continue
             rel = rel_of(os.path.join(dirpath, name))
             if is_history_file(rel, history_files):

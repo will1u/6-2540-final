@@ -108,7 +108,7 @@ EDGE_AU = 100.0
 SLOT_HALF = 12.5                       # slot |y| < 12.5: gap 5 / lead 5 / gap 5 / lead 5 / gap 5
 SN_W, SN_Y = 5.0, 5.0                  # Au lead width and centre |y|
 # the NbN tab centres sit 27 um left of the meander (snspd_geom: 0.5 block + 0.5 gap + 6 taper + 20 = half a
-# 40 um tab); the slot ends 20 um left of them (A30: x = 235, 50 um before the window; B60: x = 218.5)
+# 40 um tab); the slot ends 20 um left of them (A30: x = 175, 50 um before the window; B60: x = 158.5, 51.5 um)
 X_TAB = X_READ - DET_WX / 2 - 27.0
 X_SLOT_END = X_TAB - 20.0
 X_LEAD_END = X_SLOT_END - G            # lead tips, 5 um from the solid centre DC
