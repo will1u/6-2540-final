@@ -18,8 +18,9 @@
 ## What is already fixed
 
 - 2026-11-07 · 10 × 10 mm trap die, trap centred, pads at the die edges ([decisions](../../../notes/decisions.md)). The die the carrier receives.
-- 2026-11-02 · First run is trap-only (R1_TRAP) ([decisions](../../../notes/decisions.md)), and 2026-11-08 · R1_TRAP follows the new architecture ([decisions](../../../notes/decisions.md)). The run is built from 6 NODET and 2 TEST_TRAP dies ([design/CLAUDE.md](../../CLAUDE.md), run list); the NODET die has no Al.
+- 2026-11-02 · First run is trap-only (R1_TRAP) ([decisions](../../../notes/decisions.md)), and 2026-11-08 · R1_TRAP follows the new architecture ([decisions](../../../notes/decisions.md)). R1_TRAP was built from 6 NODET and 2 TEST_TRAP dies ([design/CLAUDE.md](../../CLAUDE.md), run list). It is replaced by `R1_ONE` (2026-11-12): one wafer with 4 A30, 1 B60, 2 SNSPD-only and 2 NODET dies. The NODET die has no Al apart from four small corner crosses.
 - 2026-11-02 · Ion height 50 µm; height may differ between zones, and 2026-11-09 · Keep the 50 µm ion height ([decisions](../../../notes/decisions.md)). The height the beams are aimed at.
+- 2026-11-12 · The SNSPD-only die of `R1_ONE` also has 16 Au edge pads, 120 × 200 µm, at y = ±4720 µm ([make_snspd_die.py](../../gds/make_snspd_die.py)). The carrier and spacer rows below are about the trap die; whether the fan-out covers this die is not checked [verify].
 
 ## Numbers side by side
 
@@ -58,7 +59,7 @@ The 1.5 mm entry in the 100-pin CPGA column is a spacer used by other groups (Ta
 - The team's carrier choice, followed by a cryostat fit and a carrier-specific pin map ([OPEN_DECISIONS.md](../OPEN_DECISIONS.md), carrier row).
 - A bond diagram drawn against the real carrier, with the bond-pad report's checks: wire angle below 45°, wire length, die-to-package gap, package pad size ([report](../../research/reports/Bond%20pad%20sizing%20for%20ion%20traps.md), table row 8).
 - The spacer check named in [OPEN_DECISIONS.md](../OPEN_DECISIONS.md): actual carrier, die and spacer stack, and beam clearance.
-- The W7 bond-and-leak loop, which confirms the bonder and wedge dimensions and the carrier bond diagram ([OPEN_DECISIONS.md](../OPEN_DECISIONS.md), "Before R1_TRAP").
+- The W7 bond-and-leak loop, which confirms the bonder and wedge dimensions and the carrier bond diagram ([OPEN_DECISIONS.md](../OPEN_DECISIONS.md), "Before R1_ONE").
 
 ## Where to read
 

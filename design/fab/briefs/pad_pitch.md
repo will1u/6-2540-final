@@ -18,6 +18,7 @@
 
 - 2026-11-07 · 10 × 10 mm trap die, trap centred, pads at the die edges ([decisions](../../../notes/decisions.md)). Pads sit on the top and bottom edges and near y = 0 on the side edges.
 - 2026-11-08 · Zone spacing 480 µm ([decisions](../../../notes/decisions.md)). Step 28 records that the electrode numbers and pad rows were unchanged by it; the zones and outer DC segments were moved.
+- 2026-11-12 · The SNSPD-only die of run `R1_ONE` ([make_snspd_die.py](../../gds/make_snspd_die.py)) has 16 Au bond pads, 120 × 200 µm, at y = ±4720 µm. It is not a trap die; the pad rows in this brief describe the trap dies [verify that the fan-out covers the trap dies only].
 
 ## Numbers side by side
 

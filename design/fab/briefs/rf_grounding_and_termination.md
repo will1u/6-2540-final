@@ -22,7 +22,8 @@ Part 1 covers the DC electrodes. Part 2 covers the two SNSPD leads. The two part
 - 2026-11-08 · Architecture: local mirror, no 10 µm D2 ([decisions](../../../notes/decisions.md)). The Al mirror sits under the SNSPD and its leads only.
 - 2026-11-08 · Local-mirror lead routing: slot along the centre DC ([decisions](../../../notes/decisions.md)). The SNSPD leads are in the electrode Au, in a slot along the centre DC.
 - 2026-11-08 · On-chip vias from the Au ground fill to the Al ([decisions](../../../notes/decisions.md)). The mirror is tied to the ground fill on chip, not only by bond wires.
-- 2026-11-09 · Local mirror: 100 nm Al, inlaid (replaces the 450 nm of 2026-11-08) ([decisions](../../../notes/decisions.md)).
+- 2026-11-09 · Local mirror: 100 nm Al, inlaid (replaces the 450 nm of 2026-11-08) ([decisions](../../../notes/decisions.md)). Replaced on 2026-11-12, see below.
+- 2026-11-12 · Local mirror: 100 nm Al, raised, no recess (replaces the inlaid mirror of 2026-11-09). The SNSPD leads stay Au in the slot ([decisions](../../../notes/decisions.md)).
 - 2026-11-07 · No ITO anywhere ([decisions](../../../notes/decisions.md)).
 - 2026-11-08 · Zone spacing 480 µm ([decisions](../../../notes/decisions.md)). Zones at x = ±240 µm.
 
@@ -47,6 +48,7 @@ Source: [sim 23 summary](../../sim/out/23_dc_rf_coupling/summary.json) and [tabl
 - The C_f = 0 column is a limit: no capacitor at all. No option in the repo proposes it.
 - Outer-row null shift is the top segment alone (nearest segment at readout: electrode 12), from `null_shifts`, `top5_abs_nm`.
 - RF current through the filter capacitor, I = ωC_f V_el ([table.md](../../sim/out/23_dc_rf_coupling/table.md), "Divider and RF"): A30 E2 3728 µA (100 pF), 3850 µA (1 nF), 3862 µA (10 nF); A30 E1 2964 / 3057 / 3066 µA; NODET E2 6837 / 6890 / 6895 µA; NODET E1 6076 / 6118 / 6122 µA; outer segment, 5 mm lead, E2 138.8 / 139.3 / 139.4 µA; E1 127.3 / 127.8 / 127.8 µA.
+- Sim 23 was run on 2026-11-10, before the 2026-11-12 decision to raise the mirror. It is not re-run; the "of C_g, to the Al mirror" column comes from that stack [verify whether it changes with the raised mirror].
 - Limits in the sim docstring: 2-D, ideal conductors, no segment ends. Bond-wire and lead inductance between electrode and capacitor are ignored [inference].
 
 Filter values the repo already quotes, with their sources:
@@ -68,7 +70,7 @@ Sim 20 ([summary](../../sim/out/20_transport_timing/summary.json), `part2_nbar_b
 
 ### Part 2: termination of the two SNSPD leads
 
-Source: [sim 19 summary](../../sim/out/19_lead_termination/summary.json), die A30, R pair 0 Ω (`I_nw_uA`, `pct_of_8uA`, `pulse_note`). Script and model: [19_lead_termination.py](../../sim/19_lead_termination.py) (docstring). Its E2 input is 44.5 µA; its E1 input is 28.3 µA, while [sim 10c](../../sim/out/10c_mirror_thickness/summary.json) (`al100_inlaid.E1.slot.I_lead_in_trap_uA`) gives 28.61 µA for the current stack. The % column is of the 8 µA reference the sim uses. Lumped model, one frequency (28 MHz), upper bound.
+Source: [sim 19 summary](../../sim/out/19_lead_termination/summary.json), die A30, R pair 0 Ω (`I_nw_uA`, `pct_of_8uA`, `pulse_note`). Script and model: [19_lead_termination.py](../../sim/19_lead_termination.py) (docstring). Its E2 input is 44.5 µA; its E1 input is 28.3 µA (`OPTIONS` in the script). The earlier lead currents were 44.5 µA (E2) and 28.6 µA (E1). The decided stack gives 28.4 µA (E1) and 44.5 µA (E2) in [sim 10c](../../sim/out/10c_mirror_thickness/summary.json), case `al100_cap110`. **These sim 19 numbers are not re-run for 2026-11-12:** they were computed with the earlier lead currents, and the script's E1 input (28.3 µA) matches neither value [verify]. The % column is of the 8 µA reference the sim uses. Lumped model, one frequency (28 MHz), upper bound.
 
 | Termination (signal lead / return lead) | Nanowire RF current, E2 (µA) | % of 8 µA | Nanowire RF current, E1 (µA) | % of 8 µA | Pulse note (sim 19) |
 | --- | --- | --- | --- | --- | --- |
@@ -92,8 +94,8 @@ Source: [sim 19 summary](../../sim/out/19_lead_termination/summary.json), die A3
 | 50 Ω / 50 Ω, 10 % mismatch | 0.4001 | 5.0 | 0.2545 | 3.18 | no added filter |
 
 - Switching current in the repo, two estimates. Sim 19 uses an 8 µA reference and a bracket of 8–20 µA (`I_LO`, `I_HI`; task spec, DESIGN_LOG step 26). [02_CRYOGENIC](../tests/02_CRYOGENIC.md), expected-numbers table: I_sw at about 5 K ≈ 8–9 µA (100 nm wire, scaled from Sedykh 2025; geometry audit). The same file flags the 8–20 µA range as [verify] and says the two ranges do not agree.
-- Nanowire pickup from the 2-D model, [sim 10c](../../sim/out/10c_mirror_thickness/summary.json), `al100_inlaid`: direct pickup `E2.window.I_pk_uA` 0.959 µA, `E1.window.I_pk_uA` 1.915 µA. Extra through the mirror path, `E2.rho.3e-08.i_wire_upper_uA` 0.729 and `E2.rho.4e-08` 0.972 µA; `E1` 0.743 and 0.990 µA (rho keys as written in the file).
-- Common-mode current collected by each slot lead, `E2.slot.I_lead_in_trap_uA` 44.53 µA and `E1` 28.61 µA.
+- Nanowire pickup from the 2-D model, [sim 10c](../../sim/out/10c_mirror_thickness/summary.json), case `al100_cap110` (the decided stack): direct pickup `E2.window.I_pk_uA` 0.96 µA, `E1.window.I_pk_uA` 1.92 µA. Extra through the mirror path, `E2.rho.3e-08.i_wire_upper_uA` 0.716 µA and `E2.rho.4e-08` 0.955 µA; `E1` 0.731 and 0.974 µA (rho keys as written in the file). The inlaid stack of 2026-11-09 gave 0.729 / 0.972 µA (E2) and 0.743 / 0.990 µA (E1).
+- Common-mode current collected by each slot lead, case `al100_cap110` (the decided stack): `E2.slot.I_lead_in_trap_uA` 44.53 µA and `E1` 28.43 µA (the inlaid stack gave 44.53 and 28.61 µA).
 - Lead-pair resistance up to 140 Ω changes the sim 19 currents by less than 6 % (DESIGN_LOG step 33).
 - Bond-wire inductance 2 nH is [verify] in sim 19 (`L_BOND`). The trap L-C values (100 pF, 0.5 Ω) are task-spec [verify] (`C_TRAP`, `R_TRAP`).
 

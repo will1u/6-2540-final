@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Claude-authored figure, 2026-11-08, updated 2026-11-11. Summarises OPEN_DECISIONS.md; update both together. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 912" width="1090" height="912">
+<!-- Claude-authored figure, 2026-11-08, updated 2026-11-12. Summarises OPEN_DECISIONS.md; update both together. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 930" width="1090" height="930">
   <defs>
     <style>
       text { font-family: "Segoe UI", Helvetica, Arial, sans-serif; fill: #222; font-size: 12px; }
@@ -8,113 +8,149 @@
       .s { fill: #555; }
       .b { font-weight: 600; font-size: 13px; }
       .r { fill: #8a5a00; font-size: 11.5px; }
+      .bl { fill: #2b5a94; font-size: 11.5px; }
       .g { fill: #777; font-size: 11px; font-style: italic; }
       .open { fill: #fff4e5; stroke: #e08a00; stroke-width: 1.4; }
       .done { fill: #e8f5e9; stroke: #43a047; stroke-width: 1; }
-      .chk  { fill: #ffffff; stroke: #bbb; stroke-width: 1; stroke-dasharray: 5 3; }
+      .call { fill: #eef4fb; stroke: #3b6fb6; stroke-width: 1.2; }
     </style>
   </defs>
 
-  <rect x="0" y="0" width="1090" height="912" fill="#ffffff"/>
-  <text class="h" x="30" y="32">Open design decisions, 2026-11-11</text>
-  <text class="s" x="30" y="52">Orange = open choice · green = decided by the team (notes/decisions.md) · dashed = work before a run. Source: OPEN_DECISIONS.md.</text>
+  <rect x="0" y="0" width="1090" height="930" fill="#ffffff"/>
+  <text class="h" x="30" y="32">Open design decisions, 2026-11-12</text>
+  <text class="s" x="30" y="52">Orange = open choice · green = decided by the team (notes/decisions.md) · blue = Claude's design call, for the team to adopt or change.</text>
   <text class="g" x="1060" y="32" text-anchor="end">Claude-authored figure</text>
 
   <!-- decided -->
   <text class="b" x="30" y="84">Decided</text>
-  <rect class="done" x="30" y="94" width="330" height="28" rx="6"/>
-  <text x="45" y="113">R1_TRAP first (11-02)</text>
-  <rect class="done" x="370" y="94" width="330" height="28" rx="6"/>
-  <text x="385" y="113">No ITO; 10 × 10 mm edge-pad dies (11-07)</text>
-  <rect class="done" x="710" y="94" width="350" height="28" rx="6"/>
-  <text x="725" y="113">On-chip via from the Au fill to the Al (11-08)</text>
-  <rect class="done" x="30" y="130" width="330" height="44" rx="6"/>
-  <text class="b" x="45" y="149">Architecture: local mirror, no D2 (11-08)</text>
-  <text x="45" y="165">v4 GDS; Si with ρ &gt; 20 kΩ·cm; no ground plane</text>
-  <rect class="done" x="370" y="130" width="330" height="44" rx="6"/>
-  <text class="b" x="385" y="149">Leads: Au in a slot along the centre DC (11-08)</text>
-  <text x="385" y="165">Same step as the electrodes, as Hampel 2023</text>
-  <rect class="done" x="710" y="130" width="350" height="44" rx="6"/>
-  <text class="b" x="725" y="149">A30 + B60 kept · R1_TRAP on v4 (11-08)</text>
-  <text x="725" y="165">R1_TRAP NODET: Au on SiO₂ over HR Si, no Al</text>
+  <rect class="done" x="30" y="94" width="330" height="44" rx="6"/>
+  <text class="b" x="45" y="113">One wafer: run R1_ONE (11-12)</text>
+  <text x="45" y="131">4 A30, 1 B60 spare, 2 SNSPD, 2 NODET</text>
+  <rect class="done" x="370" y="94" width="330" height="44" rx="6"/>
+  <text class="b" x="385" y="113">Al mirror 100 nm, raised (11-12)</text>
+  <text x="385" y="131">Lift-off, no recess; marks in Al with it</text>
+  <rect class="done" x="710" y="94" width="350" height="44" rx="6"/>
+  <text class="b" x="725" y="113">Two-run plan replaced (11-12)</text>
+  <text x="725" y="131">R1_TRAP then R1_FULL (11-02) → R1_ONE</text>
+
+  <rect class="done" x="30" y="146" width="330" height="44" rx="6"/>
+  <text class="b" x="45" y="165">Architecture: local mirror, no D2 (11-08)</text>
+  <text x="45" y="183">v4 GDS; Si with ρ &gt; 20 kΩ·cm; no ground plane</text>
+  <rect class="done" x="370" y="146" width="330" height="44" rx="6"/>
+  <text class="b" x="385" y="165">Leads: Au in a slot along the centre DC</text>
+  <text x="385" y="183">Same step as the electrodes; kept 11-12</text>
+  <rect class="done" x="710" y="146" width="350" height="44" rx="6"/>
+  <text class="b" x="725" y="165">10 × 10 mm dies, edge pads (11-07)</text>
+  <text x="725" y="183">No ITO (11-07); on-chip via to the Al (11-08)</text>
 
   <!-- open choices -->
-  <text class="b" x="30" y="210">Still open</text>
+  <text class="b" x="30" y="216">Still open</text>
 
-  <rect class="open" x="30" y="220" width="330" height="120" rx="6"/>
-  <text class="b" x="45" y="242">Electrode Au</text>
-  <text x="45" y="262">E1: 0.35 µm lift-off (no plating)</text>
-  <text x="45" y="278">E2: 6 µm plated (as Todaro)</text>
-  <text x="45" y="296">Fab pages carry both branches (11-09).</text>
-  <text class="r" x="45" y="314">Resolve: SiO₂ exposed in the gaps (E1: 0.07</text>
-  <text class="r" x="45" y="329">depth/width), plating effort, resonator tests</text>
+  <rect class="open" x="30" y="226" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="248">Electrode Au (E1 vs E2)</text>
+  <text x="45" y="268">E1: 0.35 µm lift-off (no plating)</text>
+  <text x="45" y="284">E2: 6 µm plated (as Todaro)</text>
+  <text x="45" y="300">Lead current 44.5 µA (E2) / 28.4 µA (E1)</text>
+  <text class="r" x="45" y="320">Resolve: team choice. Wafer-wide: trying</text>
+  <text class="r" x="45" y="336">both needs two wafers.</text>
 
-  <rect class="open" x="370" y="220" width="330" height="120" rx="6"/>
-  <text class="b" x="385" y="242">Readout radial tilt</text>
-  <text x="385" y="262">v3 needed 13.2 V (A30) for 10°, past ±10 V.</text>
-  <text x="385" y="278">v4 needs 6.3 V (A30) / 2.2 V (B60) for 10°.</text>
-  <text x="385" y="296">Team to confirm 10°.</text>
-  <text class="r" x="385" y="314">Options: keep 10°, smaller or zero tilt,</text>
-  <text class="r" x="385" y="329">or a wider DAC range</text>
+  <rect class="open" x="370" y="226" width="330" height="120" rx="6"/>
+  <text class="b" x="385" y="248">Readout radial tilt</text>
+  <text x="385" y="268">v3 needed 13.2 V (A30) for 10°, past ±10 V.</text>
+  <text x="385" y="284">v4 needs 6.3 V (A30) / 2.2 V (B60) for 10°.</text>
+  <text x="385" y="300">Team to confirm 10°.</text>
+  <text class="r" x="385" y="320">Options: keep 10°, smaller or zero tilt,</text>
+  <text class="r" x="385" y="336">or a wider DAC range</text>
 
-  <rect class="open" x="710" y="220" width="350" height="120" rx="6"/>
-  <text class="b" x="725" y="242">RF grounding / filters</text>
-  <text x="725" y="262">Centre-DC filtering, carrier grounds, RF</text>
-  <text x="725" y="278">bypass at both SNSPD pads (v4 slot leads),</text>
-  <text x="725" y="294">symmetric termination or cancellation.</text>
-  <text class="r" x="725" y="314">Resolve: bond diagram, coupling calc,</text>
-  <text class="r" x="725" y="329">RF on/off tests</text>
+  <rect class="open" x="710" y="226" width="350" height="120" rx="6"/>
+  <text class="b" x="725" y="248">RF grounding / filters</text>
+  <text x="725" y="268">Centre-DC filtering, carrier grounds, RF</text>
+  <text x="725" y="284">bypass at both SNSPD pads (v4 slot leads),</text>
+  <text x="725" y="300">symmetric termination or cancellation.</text>
+  <text class="r" x="725" y="320">Resolve: bond diagram, filter values,</text>
+  <text class="r" x="725" y="336">RF on/off tests. Sim 19 not re-run.</text>
 
-  <!-- rows added 2026-11-11 to match OPEN_DECISIONS.md (pad pitch, carrier, spacer, ITO); bottom section moved down 272 -->
-  <rect class="open" x="30" y="356" width="330" height="120" rx="6"/>
-  <text class="b" x="45" y="378">Pad pitch / beam access</text>
-  <text x="45" y="398">Current layout 360 µm; also 180, 240, 300,</text>
-  <text x="45" y="414">400 µm. PGA84L fan-out passes (worst 20.03°).</text>
-  <text class="r" x="45" y="434">Resolve: team adoption. Proposed reason: wire</text>
-  <text class="r" x="45" y="449">angles below 45° (no other reason given).</text>
+  <rect class="open" x="30" y="358" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="380">Pad pitch / beam access</text>
+  <text x="45" y="400">Current layout 360 µm; also 180, 240, 300,</text>
+  <text x="45" y="416">400 µm. PGA84L fan-out passes (worst 20.03°).</text>
+  <text class="r" x="45" y="436">Resolve: team adoption. Proposed reason: wire</text>
+  <text class="r" x="45" y="452">angles below 45° (no other reason given).</text>
 
-  <rect class="open" x="370" y="356" width="330" height="120" rx="6"/>
-  <text class="b" x="385" y="378">Carrier</text>
-  <text x="385" y="398">PGA84L-like, 100-pin CPGA, or the lab carrier.</text>
-  <text x="385" y="414">Step 29 checks nominal PGA84L geometry only.</text>
-  <text class="r" x="385" y="434">Resolve: cryostat fit and a carrier-specific</text>
-  <text class="r" x="385" y="449">electrical pin map (fan-out IDs are not pins)</text>
+  <rect class="open" x="370" y="358" width="330" height="120" rx="6"/>
+  <text class="b" x="385" y="380">Carrier</text>
+  <text x="385" y="400">PGA84L-like, 100-pin CPGA, or the lab carrier.</text>
+  <text x="385" y="416">Step 29 checks nominal PGA84L geometry only.</text>
+  <text class="r" x="385" y="436">Resolve: cryostat fit and a carrier-specific</text>
+  <text class="r" x="385" y="452">electrical pin map (fan-out IDs are not pins)</text>
 
-  <rect class="open" x="710" y="356" width="350" height="120" rx="6"/>
-  <text class="b" x="725" y="378">Package spacer</text>
-  <text x="725" y="398">Proposed ≥ approx. 0.6 mm; die-sized or larger;</text>
-  <text x="725" y="414">Si suggested. Open proposal [verify], not adopted.</text>
-  <text class="r" x="725" y="434">Resolve: verify the actual carrier, die and</text>
-  <text class="r" x="725" y="449">spacer stack and beam clearance.</text>
+  <rect class="open" x="710" y="358" width="350" height="120" rx="6"/>
+  <text class="b" x="725" y="380">Package spacer</text>
+  <text x="725" y="400">Proposed ≥ approx. 0.6 mm; die-sized or larger;</text>
+  <text x="725" y="416">Si suggested. Open proposal [verify], not adopted.</text>
+  <text class="r" x="725" y="436">Resolve: verify the actual carrier, die and</text>
+  <text class="r" x="725" y="452">spacer stack and beam clearance.</text>
 
-  <rect class="open" x="30" y="492" width="330" height="120" rx="6"/>
-  <text class="b" x="45" y="514">ITO cap over the detector</text>
-  <text x="45" y="534">Raised in team notes as a possibility.</text>
-  <text x="45" y="550">Conflicts with the 2026-11-07 no-ITO decision.</text>
-  <text class="r" x="45" y="570">Stands only if the team reopens it.</text>
+  <rect class="open" x="30" y="490" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="512">ITO cap over the detector</text>
+  <text x="45" y="532">Raised again in this week's teammate notes.</text>
+  <text x="45" y="548">Conflicts with the 2026-11-07 no-ITO decision.</text>
+  <text x="45" y="564">Sim 24b computes its effect on the optics.</text>
+  <text class="r" x="45" y="584">Stands only if the team reopens the 11-07</text>
+  <text class="r" x="45" y="600">decision. Sim 24b result: [pending].</text>
 
-  <g transform="translate(0,272)">
-  <!-- work before runs -->
-  <text class="b" x="30" y="378">Before any v4 run (work, not choices)</text>
-  <rect class="chk" x="30" y="388" width="505" height="232" rx="6"/>
-  <text class="b" x="45" y="410">Documents and layouts</text>
-  <text x="45" y="432">· Done 11-09: traveler, R1_TRAP sheet, mask list, stack</text>
-  <text x="58" y="448">rewritten for v4 with E1 and E2 as equal branches</text>
-  <text x="45" y="470">· Done 11-09: v4 test dies (T2v, T10, T11, T12;</text>
-  <text x="58" y="486">no-Al TEST_TRAP) with an independent checker</text>
-  <text x="45" y="508">· Mirror: via moved; Al 100 nm, inlaid (decided 2026-11-09);</text>
-  <text x="58" y="524">measured on T10 / T11; set the R acceptance</text>
-  <text x="45" y="546">· Order Si with ρ &gt; 20 kΩ·cm</text>
-  <text x="45" y="568">· MIT.nano: Au tools, plating (if E2), training</text>
+  <!-- Claude's design calls -->
+  <text class="b" x="30" y="634">Claude's design calls, awaiting team adoption (not team decisions)</text>
 
-  <rect class="chk" x="555" y="388" width="505" height="232" rx="6"/>
-  <text class="b" x="570" y="410">Simulations and tests not yet rerun for v4</text>
-  <text x="570" y="432">· Done (09c): cap 160 nm → absorption 0.66 (80 nm: 0.44)</text>
-  <text x="570" y="454">· Done (10c): common-mode slot leads 44.5 µA (E2), 28.6 µA (E1)</text>
-  <text x="570" y="476">· RF loss / resonator Q with no ground plane (bench test)</text>
-  <text x="570" y="498">· Gap model: the local Al under the slot gaps and the</text>
-  <text x="583" y="514">window is not in the gds2itvg stack (ground_depth null)</text>
-  <text x="570" y="536">· Done 11-09: areas and squares measured from the GDS.</text>
-  <text x="583" y="552">Before R1_FULL: NbN recipe + W1, W2 EBL, cold tests</text>
-  </g>
+  <rect class="call" x="30" y="646" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="668">Base SiO₂: 1.0 µm thermal nominal</text>
+  <text x="45" y="688">Accept 0.5–2.0 µm as supplied. Bare wafers:</text>
+  <text x="45" y="704">thermal, or a PECVD base [verify].</text>
+  <text x="45" y="720">Cold C 2.59 pF (E2) at 1.0 µm (sim 22b).</text>
+  <text class="bl" x="45" y="740">Warm C to Si ~ 1/thickness: 22.8 pF at 1 µm.</text>
+  <text class="bl" x="45" y="756">Team to adopt or change.</text>
+
+  <rect class="call" x="370" y="646" width="330" height="120" rx="6"/>
+  <text class="b" x="385" y="668">Ti/Au contacts: Ti 5 / Au 50 nm</text>
+  <text x="385" y="688">Was 10 / 350 nm. Contacts and e-beam crosses</text>
+  <text x="385" y="704">only; the etch stop for the cap opening.</text>
+  <text x="385" y="720">About 20 µm of each strip lies under the DC Au.</text>
+  <text class="bl" x="385" y="740">[verify] mark contrast on 50 nm Au; Au lost</text>
+  <text class="bl" x="385" y="756">in the opening over-etch.</text>
+
+  <rect class="call" x="710" y="646" width="350" height="120" rx="6"/>
+  <text class="b" x="725" y="668">HSQ 50 nm on wires; SiO₂ cap 110 nm</text>
+  <text x="725" y="688">One blanket cap: 160 nm minus the HSQ left.</text>
+  <text x="725" y="704">160 ± 10 nm SiO₂ over the wires; 348 nm</text>
+  <text x="725" y="720">between Au and Al off the wires (mirror via).</text>
+  <text class="bl" x="725" y="740">Window stack as in sim 09c (160 nm).</text>
+  <text class="bl" x="725" y="756">Team to adopt or change.</text>
+
+  <rect class="call" x="30" y="778" width="330" height="120" rx="6"/>
+  <text class="b" x="45" y="800">SiO₂ spacer 238 ± 10 nm</text>
+  <text x="45" y="820">PECVD, ≤ 300 °C, between the Al mirror and</text>
+  <text x="45" y="836">the NbN. Kept from the earlier pass.</text>
+  <text x="45" y="852">Sim 24b result: [pending].</text>
+  <text class="bl" x="45" y="872">Sims 22b and 24b may refine it.</text>
+  <text class="bl" x="45" y="888">Team to adopt or change.</text>
+
+  <rect class="call" x="370" y="778" width="330" height="120" rx="6"/>
+  <text class="b" x="385" y="800">Test structures in R1_ONE</text>
+  <text x="385" y="820">Kept: 16 detector cells (SNSPD-only dies),</text>
+  <text x="385" y="836">T3 NbN bar and T11 Au-to-Al via chain.</text>
+  <text x="385" y="852">Dropped: TEST, TEST_TRAP, T1, T2v, T4, T4b,</text>
+  <text class="bl" x="385" y="872">T6, T8, T9, T10, T12. Dose datatypes stand</text>
+  <text class="bl" x="385" y="888">in for T8 [inference]. Team to adopt the list.</text>
+
+  <!-- legend -->
+  <rect class="open" x="710" y="790" width="14" height="10" rx="2"/>
+  <text x="732" y="800">Open choice</text>
+  <rect class="done" x="710" y="812" width="14" height="10" rx="2"/>
+  <text x="732" y="822">Decided by the team</text>
+  <rect class="call" x="710" y="834" width="14" height="10" rx="2"/>
+  <text x="732" y="844">Claude's design call (team to adopt)</text>
+  <text class="s" x="710" y="868">Design choices only. The checklists in OPEN_DECISIONS.md</text>
+  <text class="s" x="710" y="884">carry the work before R1_ONE and the new open items.</text>
+
+  <text class="g" x="30" y="918">Map of design choices. Source: OPEN_DECISIONS.md (design choices table). Numbers from notes/decisions.md and the sim outputs cited there.</text>
 </svg>
