@@ -252,9 +252,9 @@ NbN questions can wait for run 1b.
 From DESIGN_LOG step 25 (v4 NODET, `12_final_chip_check.py`, planar model, 53 V at 28 MHz, 0.8 MHz axial, 10° tilt in the zones) and step 2:
 
 - **Drive:** 53 V at 28 MHz gives RF-only radial 3.00 MHz and q = 0.30 on every v4 die. Depth ≈ 52 meV from step 2, with no v4 value recorded [verify].
-- **Loading zone** (GDS x = −240): ion height 49.97 µm; max |V| 9.10 V; axial 0.8 MHz target.
-- **Readout zone** (GDS x = +240): ion height 49.98 µm; max |V| 9.10 V. There is no window on this die, so no recess correction.
-- **Transport between zones:** max |V| 7.34 V; max step 1.59 V per 10 µm.
+- **Loading zone** (GDS x = −240): ion height 49.97 µm; max |V| 7.93 V; axial 0.8 MHz target.
+- **Readout zone** (GDS x = +240): ion height 49.98 µm; max |V| 7.89 V. There is no window on this die, so no recess correction.
+- **Transport between zones:** max |V| 7.20 V; max step 1.66 V per 10 µm.
 - **Radial frequencies and tilt at each zone:** not recorded for v4 NODET [verify]. The v3 values (2.89 / 2.97 MHz) do not apply.
 - **Measurements that become the run-1b reference:**
   - secular frequencies against these numbers;

@@ -46,7 +46,7 @@ Wafer ID: ________ Run: ________ Operator: ________ Generator revision: ________
   - (a) a thermal-SiO₂/Si chip, for ellipsometry with the Medeiros model and for Rsq;
   - (b) a spacer-over-Al chip from step 4 (Tc on the real stack). Its Al is the 100 nm evaporated, inlaid local-mirror film, as in the W1 stack of [QUALIFICATION](../QUALIFICATION.md) (pieces from W8).
 - **Target:** 7.0 ± 0.5 nm; Rsq ≈ 400 Ω/sq (5 nm: ≈ 600 Ω/sq) [team calc from Medeiros' fit ρ = 245 µΩ·cm with a 0.88 nm intercept; Toomey 2018 gives 600 Ω/sq at ~5 nm]; Tc ≈ 7.8–8 K (Dane 2017; Toomey 2018).
-- **Go / no-go:** Tc ≥ 7.5 K, which leaves Todaro's ≥ 25 % margin above a ≤ 6 K surface (Todaro PRL p. 2) [verify].
+- **Go / no-go:** Tc over 7 K, the team's threshold for a 5 K trap (decisions, 2026-11-02: "anything over 7K"; [decisions](../../../notes/decisions.md)). Todaro's ≥ 25 % margin above a ≤ 6 K surface would ask for 7.5 K (Todaro PRL p. 2) [verify].
 - **Hazards:**
   - **Minimise air exposure.** Start step 6 within 24 h and store in an N₂ box (Medeiros oxidation law).
   - The RF bias couples to the local Al mirror under 238 nm of SiO₂. The mirror is not grounded until the layer-40 mirror via (step 11v), so it floats during this step. Arcing or charging risk is unknown [inference]; watch the bias trace.

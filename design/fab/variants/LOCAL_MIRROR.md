@@ -45,11 +45,11 @@ Hampel gives no dimensions. Measured from Hampel Fig. 1 (arXiv v1, p. 2) against
 |---|---|---|---|
 | Along the leads | ≈ 64 µm: 13 µm behind the active area, 20 µm forward under the lead start | ≥ 270 µm along the lead channel; runs ≈ 160 µm past the RF-rail ends | Small part: x = 265 … 328 (X_READ = 300; the meander tabs end at x = 245). Large part: continues under the leads to x ≈ −2400, i.e. ≈ 400 µm past the RF open end at x = −2000 |
 | Across | 37–49 µm (visible edge to the black RF gaps) | ≈ 35–50 µm | **\|y\| ≤ 20 µm (40 µm)**: under the centre DC only. Our RF rails start at \|y\| = 25, so 50 µm is the hard limit |
-| Margin around the detector | 8–15 µm on the long sides | – | **5 µm** on the long sides (detector \|y\| ≤ 15). Narrower than Hampel's because our channel is 50 µm wide |
+| Margin around the detector | 8–15 µm on the long sides | – | **≈ 4 µm** on the long sides (detector \|y\| ≤ 16, mirror \|y\| ≤ 20). Narrower than Hampel's because our channel is 50 µm wide |
 | Under the RF rails | No | No | No, by construction |
 | Ground | CHF₃ vias + 20 nm Au, "via the trap electrodes" | same | Widen the far end (x ≈ −2500 … −2300) to reach under the Au ground fill and put the via there (H.2 step 11v). Exact spot to be checked in the GDS: the fill must enclose it ≥ 25 µm, as in step 22 |
 
-Capacitance the mirror adds to the centre DC (electrode 2), which sits 318 nm above it (spacer + HSQ/cap): 40 µm × ≈ 2.73 mm ≈ **12 pF** [team calc, ε_r 3.9]. That is harmless on a filtered DC line [inference].
+Capacitance the mirror adds to the centre DC (electrode 2), which sits 398 nm above it (238 nm spacer + 160 nm HSQ/cap): 40 µm × ≈ 2.73 mm ≈ **9.5 pF** [team calc, ε_r 3.9]. That is harmless on a filtered DC line [inference].
 
 ## H.2 Steps (changes against the [baseline recipes](../TRAVELER.md#f-steps))
 
@@ -57,12 +57,12 @@ Capacitance the mirror adds to the centre DC (electrode 2), which sits 318 nm ab
 |---|---|---|
 | 0–2 | Prep, L1 marks, 1 µm thermal SiO₂ (D1) | Same |
 | **3v** | L10 inverted: die-wide plane | **L10 drawn: local mirror only**. Evaporated Al **100 nm, inlaid**: SiO₂ recess, Al evaporation and lift-off with one resist (team decision 2026-11-09; `sim/10c`, DESIGN_LOG step 37; supersedes the 450 nm of 2026-11-08). Hampel used 50 nm e-beam Al by lift-off, not inlaid. No mark cut-outs needed |
-| 4–8 | Spacer 238 nm, NbN, L22 leads, L20 nanowire, HSQ + cap | Same order: leads before the nanowire, cap straight after. **The cap is now the top surface over the detector (vacuum above)**, so its thickness matters optically again: rerun 09b before fixing it (H.4) |
+| 4–8 | Spacer 238 nm, NbN, L22 leads, L20 nanowire, HSQ + cap | Same order: leads before the nanowire, cap straight after. **The cap is now the top surface over the detector (vacuum above)**, so its thickness matters optically again: the cap is fixed at 160 nm (sim 09c, DESIGN_LOG step 26; 09b is superseded) (H.4) |
 | 9, 10 | 10 µm D2 | **Skipped** |
-| **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: HSQ/cap + spacer ≈ 0.40 µm down to the Al. SNSPD pads: ≈ 160 nm down to the L22 Au. Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. Add a small Al probe opening on the mirror so it can be checked electrically (H.5) |
+| **11v** | L40 through ≈ 10.4 µm D2 | **L40 through the thin stack only.** Mirror ground via: HSQ/cap + spacer ≈ 0.40 µm down to the Al. SNSPD pads: ≈ 160 nm down to the L22 Au. Thin positive resist (~1.3 µm); same CHF₃/CF₄/Ar chemistry, ≈ 1 min [verify]. Stops on Al and Au. No mirror probe opening on the trap dies. The mirror is checked on the test die: T10 for the strip, T11 for the via ([step 11](../process/03_ELECTRODES.md#11-layer-40-openings-through-the-thin-stack)) |
 | **12v–15v** | Seed, nLOF mold, 6 µm plating, seed removal | **Ti/Au lift-off electrodes, L50 drawn**: LOR + positive resist, MLA. In-situ Ar pre-clean before the Ti (AlF₃ on the via floor; step 22). Ti 10 nm / Au 350 nm (Hampel 350 nm) [verify thickness]. Lift-off in NMP. Option E2: keep steps 12–15 as written and plate 6 µm on the thin stack; the cap protects the NbN under the plating resist (Todaro's damage step) [inference] |
 | 16a, 16 | L45 protect, gap etch | **Skipped** (no D2 to clear) |
-| 17–19 | Test, dice, package | Same, except: no M1 bond openings (the mirror is grounded through the fill); test fill ↔ mirror probe pad < 10 Ω; check that 350 nm evaporated Au wedge-bonds [verify] |
+| 17–19 | Test, dice, package | Same, except: no M1 bond openings (the mirror is grounded through the fill); fill ↔ mirror on the test die: T10 strip 18.8–25.1 Ω expected at 100 nm (`sim/10c`, step 37; [step 11](../process/03_ELECTRODES.md#11-layer-40-openings-through-the-thin-stack)); acceptance not set [verify]; check that 350 nm evaporated Au wedge-bonds [verify] |
 
 Thermal budget: no D2, so the long 300 °C exposure goes away.
 

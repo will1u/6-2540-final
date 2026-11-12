@@ -34,7 +34,7 @@ Thermal limit for this step and every later step: **≤ 300 °C**.
 | 3 | Lip or groove at the mirror edge | Profilometer or AFM across the T10 strip and one trap mirror | None | ≤ 20 nm [design call; verify] | See the fallback in [process/01_FOUNDATION.md](process/01_FOUNDATION.md) |
 | 3 | Lift-off complete | Optical | No Al flags or residue | No Al flags or residue [verify] | Re-do the lift-off [verify]; see the fallback if W8 fails |
 | 3 | Al sheet resistance | 4-pt on a witness | 0.30–0.40 Ω/sq expected [team calc] | [verify] | Reconcile before accepting |
-| 3 | Hillocks and whiskers on Al | Darkfield microscope | none | no features > 100 nm [verify] | Lower the deposition T, or a Ti cap on the Al in a later run (SINTEF; team decision) |
+| 3 | Hillocks and whiskers on Al | Darkfield microscope | none | no features > 100 nm [verify] | Lower the deposition T, or a Ti cap on the Al in a later run (SINTEF; a proposed mitigation, not a team decision) |
 | 3 | Mirror shape | Drawing vs as-built | \|y\| ≤ 20 µm, x = −2240 … +268 µm (A30); branch to the ground via at (−2140, 130) µm | Matches the drawing | Re-expose |
 | 3 | Mirror strip resistance | T10 four-point, test die | 18.8–25.1 Ω at 100 nm (2.51 mm × 40 µm, 62.75 squares) (`sim/10c`, [DESIGN_LOG step 37](../DESIGN_LOG.md)) | [verify]: acceptance not set | – |
 
@@ -47,7 +47,7 @@ Thermal limit for this step and every later step: **≤ 300 °C**.
 | 4 | Spacer temperature | Tool log | ≤ 300 °C | ≤ 300 °C [verify the tool's settable T] | – |
 | 5 | NbN thickness | Ellipsometry on the thermal-SiO₂ witness (Medeiros 2019 model) | 7.0 nm | 6.5–7.5 nm | Re-deposit on a new wafer |
 | 5 | **NbN Rsq** | 4-pt on the thermal-SiO₂ witness | ≈ 400 Ω/sq at 7 nm [team calc, Medeiros fit; Toomey 2018] | ±15 % [verify] | – |
-| 5 | **NbN Tc** | Dipstick / PPMS, on both witnesses (thermal SiO₂ and spacer over Al) [verify access] | 7.8–8 K (Dane 2017; Toomey 2018) | ≥ 7.5 K | – |
+| 5 | **NbN Tc** | Dipstick / PPMS, on both witnesses (thermal SiO₂ and spacer over Al) [verify access] | 7.8–8 K (Dane 2017; Toomey 2018) | Over 7 K (decisions, 2026-11-02) | – |
 | 5 | Time from NbN to step 6 | Log | within 24 h, otherwise store in an N₂ box | ≤ 24 h [inference from the Medeiros oxidation law] | Record the Nb₂O₅ growth |
 | 6 | Ti / Au contact thickness | Witness [verify] | Ti 10 nm / Au 350 nm | [verify] | – |
 | 6 | NbN develop and rinse | Log | shortest develop that clears the LOR, then ≥ 3 min running DI rinse, then IPA | Done as written (Toomey) | Do not proceed with a standing DI rinse |
