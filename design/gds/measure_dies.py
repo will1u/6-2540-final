@@ -36,9 +36,11 @@ from shapely.ops import unary_union
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FILES = ["trap_die_v4_A30.gds", "trap_die_v4_B60.gds", "trap_die_v4_NODET.gds", "test_die_v4.gds",
-         "test_die_v4_TRAP.gds", "run_R1_TRAP.gds", "run_R1_FULL.gds", "wafer_v4.gds"]
+         "test_die_v4_TRAP.gds", "snspd_die_v4.gds", "run_R1_TRAP.gds", "run_R1_FULL.gds", "run_R1_ONE.gds",
+         "wafer_v4.gds"]
 DETECTOR = ["trap_die_v4_A30.gds", "trap_die_v4_B60.gds"]
-RUNS = ["run_R1_TRAP.gds", "run_R1_FULL.gds"]
+SNSPD_DIE = "snspd_die_v4.gds"                  # eight detector cells, no trap: section 10, not the section 5 analysis
+RUNS = ["run_R1_TRAP.gds", "run_R1_FULL.gds", "run_R1_ONE.gds"]
 PLAIN = ["trap_die_v4_NODET.gds", "test_die_v4_TRAP.gds", "run_R1_TRAP.gds"]   # nothing on layers 10, 20, 22, 40
 FAB_LAYERS = [1, 10, 20, 22, 40, 50]
 EMPTY_LAYERS = [24, 30, 31, 45]
@@ -48,6 +50,7 @@ HBAR, KB = 1.0546e-34, 1.3807e-23               # sim/15_snspd_geometry.py part 
 RS, TC, Z0 = 400.0, 7.9, 50.0                   # ohm/sq, K, ohm
 LK = HBAR * RS / (np.pi * 1.76 * KB * TC)       # H per square
 RUN_EBL_MM2_MAKE_RUN = 0.0502                   # printed by make_run.py for run_R1_FULL
+RUN_EBL_MM2_MAKE_RUN_ONE = 0.0378               # printed by make_run.py R1_ONE (raw sum over die cells)
 
 EXPECT_DIE = {"trap_die_v4_A30.gds": {"lines": 160, "straight_mm": 5.76, "L_uH": 3.10, "tau_ns": 62.0},
               "trap_die_v4_B60.gds": {"lines": 160, "straight_mm": 11.04, "L_uH": 5.94, "tau_ns": 118.8}}
@@ -230,6 +233,9 @@ def acceptance(recs):
     r = recs["run_R1_FULL.gds"]["run"]["ebl_merged_mm2"]
     add("run_R1_FULL EBL area (mm^2, 2 % of make_run 0.0502)", RUN_EBL_MM2_MAKE_RUN, round(r, 6),
         abs(r / RUN_EBL_MM2_MAKE_RUN - 1) < 0.02)
+    r1 = recs["run_R1_ONE.gds"]["run"]["ebl_merged_mm2"]
+    add("run_R1_ONE EBL area (mm^2, 2 % of make_run 0.0378)", RUN_EBL_MM2_MAKE_RUN_ONE, round(r1, 6),
+        abs(r1 / RUN_EBL_MM2_MAKE_RUN_ONE - 1) < 0.02)
     for n in FILES:
         bad = [L for L in EMPTY_LAYERS if recs[n]["layers"][str(L)]["polygons"]]
         add(f"{n}: layers 24, 30, 31, 45 empty", "0 polygons", f"{bad if bad else 0} non-empty", not bad)
@@ -328,6 +334,19 @@ def write_md(recs, acc, path):
     out += ["## 9. Acceptance", "", "| Check | Expected | Measured | Pass |", "|---|---|---|---|"]
     for a in acc:
         out.append(f"| {a['item']} | {a['expected']} | {a['measured']} | {'PASS' if a['pass'] else 'FAIL'} |")
+    s = recs[SNSPD_DIE]
+    out += ["", "## 10. SNSPD-only die (snspd_die_v4.gds)", "",
+            "Eight detector cells, no trap. Section 5 (single-meander analysis) does not apply to it.", "",
+            "| Quantity | Value |", "|---|---:|",
+            f"| Layer-20 datatypes present | {len(s['layers']['20']['datatypes'])} |"]
+    for dt, v in s["layers"]["20"]["datatypes"].items():
+        out.append(f"| Layer 20, datatype {dt}: merged area, um^2 (polygons) | {v['merged_um2']:.1f} ({v['polygons']}) |")
+    out += [f"| Au (layer 50), cm^2 | {s['layers']['50']['Au_cm2']:.5f} |", "",
+            "Layer-40 openings by size (um):", "", "| Size | Count |", "|---|---:|"]
+    sizes = Counter(f"{o['size_um'][0]} x {o['size_um'][1]}" for o in s["layers"]["40"]["openings"])
+    for sz, k in sorted(sizes.items()):
+        out.append(f"| {sz} | {k} |")
+    out.append("")
     with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(out) + "\n")
 
@@ -339,7 +358,8 @@ def main():
     doc = {"generated_by": "design/gds/measure_dies.py (Claude-authored)",
            "constants": {"hbar_J_s": HBAR, "kB_J_K": KB, "Rs_ohm_per_sq": RS, "Tc_K": TC, "Z0_ohm": Z0,
                          "Lk_H_per_sq": LK, "Lk_formula": "hbar Rs / (pi * 1.76 * kB * Tc) (sim/15 part E)",
-                         "readout_x_um": READ_X, "make_run_ebl_mm2": RUN_EBL_MM2_MAKE_RUN},
+                         "readout_x_um": READ_X, "make_run_ebl_mm2": RUN_EBL_MM2_MAKE_RUN,
+                         "make_run_ebl_mm2_R1_ONE": RUN_EBL_MM2_MAKE_RUN_ONE},
            "files": recs, "acceptance": acc}
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(doc, f, indent=1)

@@ -22,7 +22,7 @@ What you are looking at: the whole 10 × 10 mm die with its pad rows, RF pad and
 
 ![Layer stack at the readout zone](fab/figures/stack_v4.svg)
 
-What you are looking at: the layers at the readout window, from the Si substrate up to the Au electrodes, with the 100 nm Al mirror on the base SiO₂ (raised, not inlaid, since 2026-11-12). The figure may not yet be redrawn for the final stack [verify].
+What you are looking at: the layers at the readout window, from the Si substrate up to the Au electrodes, with the 100 nm Al mirror on the base SiO₂ (raised, not inlaid, since 2026-11-12). The figure was redrawn for the final stack on 2026-11-12: the layers step 100 nm over each mirror edge.
 
 ## The numbers that define it
 

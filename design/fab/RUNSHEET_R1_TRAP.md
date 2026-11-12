@@ -7,6 +7,7 @@
 > This sheet now describes the **optional second wafer**, on which only layer 50 is exposed (the trap-only backup and the trial of the electrode step and of wire bonding; recommended, not yet decided by the team). Two differences from the sheet below:
 > 1. That wafer uses layer 50 of `gds/run_R1_ONE.gds`, not `gds/run_R1_TRAP.gds`.
 > 2. Its dies sit on the base SiO₂ only: no spacer, NbN or cap.
+> 3. It needs no alignment marks: layer 50 is its only layer and is aligned to the wafer flat. Skip the mark step (traveler step 1, removed from the flow on 2026-11-12) and the layer-1 job listed below.
 >
 > The die table and block size in section 1 are the old R1_TRAP ones. Die IDs for the second wafer come from `gds/run_R1_ONE_map.csv`.
 

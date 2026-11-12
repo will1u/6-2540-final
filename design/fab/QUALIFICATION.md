@@ -79,7 +79,7 @@ The team has about one week of fab. Separate witness wafers cannot run first. Ea
 
 **Purpose:** rehearse the layer-40 etches for the 348 nm SiO₂ at the mirror via and for the contact openings onto the Ti/Au pads; Au-to-Al contact at the mirror via with and without the Ar pre-clean; sidewall coverage on the via; then the electrode step.
 
-**Stack / steps:** Si / 1 µm SiO₂ / 100 nm evaporated Al, raised (from W8 pieces) / 238 nm SiO₂ spacer / PECVD SiO₂ cap, 110 nm blanket (348 nm off the wires) → layer-40 openings (348 nm to the Al at the mirror via; the depth onto a Ti/Au pad [verify: whether HSQ is on the contact tabs]) → electrode Au for the option in use (E1 lift-off, or E2 seed and plating), with and without the Ar pre-clean on the mirror via. Ti 5 / Au 50 nm contact layer (layer 22) on the piece [verify].
+**Stack / steps:** Si / 1 µm SiO₂ / 100 nm evaporated Al, raised (from W8 pieces) / 238 nm SiO₂ spacer / PECVD SiO₂ cap, 110 nm blanket (348 nm off the wires) → layer-40 openings (348 nm to the Al at the mirror via; 110 nm onto a Ti/Au contact pad: HSQ is left only where layer 20 is written, and no layer 20 lies on the contact pads) → electrode Au for the option in use (E1 lift-off, or E2 seed and plating), with and without the Ar pre-clean on the mirror via. Ti 5 / Au 50 nm contact layer (layer 22) on the piece [verify].
 
 **Test structures** (R1_ONE SNSPD-only die, probe station; the rest of the structures are not drawn):
 - T11 Au-to-Al via chain, kept (at the centre of each SNSPD-only die);

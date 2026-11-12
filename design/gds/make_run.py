@@ -11,17 +11,21 @@ Si <110> cleave directions [verify the orientation the MLA and the saw expect].
 A run is a list of columns, each a list of die types from bottom to top:
     A30 / B60  trap die with the 30 x 30 / 60 x 30 um SNSPD     (make_chip.py, --det60)
     NODET      plain trap die, no SNSPD, no Al                    (make_chip.py --nodet)
+    SNSPD      SNSPD-only die: 8 detector cells, no trap           (make_snspd_die.py, snspd_die_v4.gds)
     TEST       test-structure die, incl. the T8 EBL dose array    (make_test_die.py)
     TEST_TRAP  test die for trap-only runs: T1 and T6 only        (make_test_die.py --trap-only)
 
 Presets (edit RUNS to make another):
-    R1_TRAP  staged run 1 (SIMPLIFICATIONS.md S2): trap process only (v4: Au on SiO2 over HR Si, no Al)
-    R1_FULL  full stack: 2 A30 + 2 B60 + 2 NODET + 2 test dies
+    R1_ONE   one wafer for the four chips (team decision 2026-11-12); replaces R1_TRAP and R1_FULL as the
+             next run: 4 A30, 1 B60, 2 SNSPD, 2 NODET in a 3 x 3 block (30.4 x 30.4 mm)
+    R1_TRAP  staged run 1 (SIMPLIFICATIONS.md S2): trap process only (v4: Au on SiO2 over HR Si, no Al).
+             Kept for the record.
+    R1_FULL  full stack: 2 A30 + 2 B60 + 2 NODET + 2 test dies. Kept for the record.
 
 Writes run_<name>.gds (top cell RUN_<NAME>), run_<name>_map.csv and run_<name>_map.png, and prints
 the die count and layer-20 (EBL) area. Re-run make_chip.py (A30, --det60, --nodet) and make_test_die.py
 first so the die cells are current.
-Run from design/sim:  ./run.sh ../gds/make_run.py [R1_TRAP | R1_FULL]   (no argument: all presets)
+Run from design/sim:  ./run.sh ../gds/make_run.py R1_ONE   (name a preset; no argument rewrites all presets)
 """
 
 import csv
@@ -40,19 +44,24 @@ DIE_X, STREET = 10000.0, 200.0         # every die is 10 mm wide; heights differ
 PX = DIE_X + STREET
 SOURCES = {"A30": ("trap_die_v4_A30.gds", "TRAP_DIE_V4_A30"), "B60": ("trap_die_v4_B60.gds", "TRAP_DIE_V4_B60"),
            "NODET": ("trap_die_v4_NODET.gds", "TRAP_DIE_V4_NODET"), "TEST": ("test_die_v4.gds", "TEST_DIE_V4"),
-           "TEST_TRAP": ("test_die_v4_TRAP.gds", "TEST_DIE_V4_TRAP")}
+           "TEST_TRAP": ("test_die_v4_TRAP.gds", "TEST_DIE_V4_TRAP"),
+           "SNSPD": ("snspd_die_v4.gds", "SNSPD_DIE_V4")}
 RUNS = {
+    "R1_ONE": [["A30", "SNSPD", "A30"], ["NODET", "A30", "NODET"], ["A30", "SNSPD", "B60"]],
     "R1_TRAP": [["NODET", "TEST_TRAP", "NODET", "NODET"], ["NODET", "TEST_TRAP", "NODET", "NODET"]],
     "R1_FULL": [["A30", "TEST", "B60", "NODET"], ["NODET", "TEST", "A30", "B60"]],
 }
-COLORS = {"A30": "#d4a017", "B60": "#2a6fb0", "NODET": "#7f8c8d", "TEST": "#8e44ad", "TEST_TRAP": "#b07cc6"}
+COLORS = {"A30": "#d4a017", "B60": "#2a6fb0", "NODET": "#7f8c8d", "TEST": "#8e44ad", "TEST_TRAP": "#b07cc6",
+          "SNSPD": "#c0392b"}
 
-names = [a for a in sys.argv[1:] if a in RUNS] or list(RUNS)
+# no argument: only the next run. The older presets are rebuilt only when named, because rewriting
+# their files changes the hashes recorded in measured_v4.md.
+names = [a for a in sys.argv[1:] if a in RUNS] or ["R1_ONE"]
 for name in names:
     cols = RUNS[name]
     lib = gdstk.Library(unit=1e-6, precision=1e-9)
     cells, l20, hgt = {}, {}, {}
-    for kind in {k for col in cols for k in col}:
+    for kind in sorted({k for col in cols for k in col}):      # sorted: the cell order in the file is reproducible
         fname, cname = SOURCES[kind]
         c = {cc.name: cc for cc in gdstk.read_gds(os.path.join(HERE, fname)).cells}[cname]
         lib.add(c)
@@ -95,7 +104,7 @@ for name in names:
            title=f"run_{name}: " + ", ".join(f"{k} x{v}" for k, v in counts.items()))
     fig.savefig(os.path.join(HERE, f"run_{name}_map.png"), dpi=120)
     plt.close(fig)
-    has_det = "A30" in counts or "B60" in counts
+    has_det = "A30" in counts or "B60" in counts or "SNSPD" in counts
     print(f"wrote run_{name}.gds: {n} dies {counts}; block {(len(cols) * PX - STREET) / 1000:.1f} x "
           f"{max(col_h) / 1000:.1f} mm; layer-20 (EBL) area {ebl / 1e6:.4f} mm^2"
           + ("" if ebl or has_det else " (trap-only run: no EBL, no layer 20-22 jobs)"))

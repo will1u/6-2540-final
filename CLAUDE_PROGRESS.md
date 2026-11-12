@@ -15,7 +15,7 @@
 - Sims: `10c` new case `al100_cap110` (slot cross-section of the final stack); `22b` base SiO₂ sweep, 0.15–2.0 µm (cold chip capacitance on E2 from 2.88 to 2.38 pF; with the Si as a grounded conductor 57.5 to 13.6 pF); `24b` RCWA scan of the spacer and cap (script written; its output is not yet in `design/sim/out/`).
 - SNSPD-only die `snspd_die_v4` (eight A30 detector cells D1–D8, T3, T11) with an independent checker, `design/gds/check_snspd_die.py`: all checks pass.
 - Run `R1_ONE` (3 × 3, nine dies) with the run-level checker `design/gds/check_run.py`: all checks pass.
-- Fab, test and figure pages brought to the final stack in this pass [verify before relying on them].
+- Fab, test and figure pages brought to the final stack in this pass. The link check and the number check (`fab/check_links.py`, `check_numbers.py`) were rerun afterwards.
 
 **Open**
 - Electrode Au, E1 or E2. One choice for the whole wafer.

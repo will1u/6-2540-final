@@ -9,14 +9,15 @@
   "Lk_H_per_sq": 6.994534258973258e-11,
   "Lk_formula": "hbar Rs / (pi * 1.76 * kB * Tc) (sim/15 part E)",
   "readout_x_um": 240.0,
-  "make_run_ebl_mm2": 0.0502
+  "make_run_ebl_mm2": 0.0502,
+  "make_run_ebl_mm2_R1_ONE": 0.0378
  },
  "files": {
   "trap_die_v4_A30.gds": {
    "file": "trap_die_v4_A30.gds",
    "sha256_16": "1d4abbf88105ec23",
    "bytes": 57394,
-   "mtime_local": "2026-11-09T15:55:09",
+   "mtime_local": "2026-11-10T11:33:21",
    "top_cell": "TRAP_DIE_V4_A30",
    "direct_references_before_flatten": {},
    "outline_bbox_um": [
@@ -246,7 +247,7 @@
    "file": "trap_die_v4_B60.gds",
    "sha256_16": "89e4dc808d2ceabd",
    "bytes": 57466,
-   "mtime_local": "2026-11-09T15:55:12",
+   "mtime_local": "2026-11-10T11:33:21",
    "top_cell": "TRAP_DIE_V4_B60",
    "direct_references_before_flatten": {},
    "outline_bbox_um": [
@@ -476,7 +477,7 @@
    "file": "trap_die_v4_NODET.gds",
    "sha256_16": "d5b32c23924d7d58",
    "bytes": 20412,
-   "mtime_local": "2026-11-09T15:55:14",
+   "mtime_local": "2026-11-10T11:33:21",
    "top_cell": "TRAP_DIE_V4_NODET",
    "direct_references_before_flatten": {},
    "outline_bbox_um": [
@@ -568,7 +569,7 @@
    "file": "test_die_v4.gds",
    "sha256_16": "d7c25bd035d00e36",
    "bytes": 520478,
-   "mtime_local": "2026-11-09T16:11:21",
+   "mtime_local": "2026-11-09T16:33:22",
    "top_cell": "TEST_DIE_V4",
    "direct_references_before_flatten": {},
    "outline_bbox_um": [
@@ -1468,7 +1469,7 @@
    "file": "test_die_v4_TRAP.gds",
    "sha256_16": "b1247c80ce2b16c4",
    "bytes": 9722,
-   "mtime_local": "2026-11-09T16:11:27",
+   "mtime_local": "2026-11-09T16:33:22",
    "top_cell": "TEST_DIE_V4_TRAP",
    "direct_references_before_flatten": {},
    "outline_bbox_um": [
@@ -1553,6 +1554,528 @@
      "polygons": 1,
      "merged_um2": 25000000.0,
      "merged_mm2": 25.0
+    }
+   }
+  },
+  "snspd_die_v4.gds": {
+   "file": "snspd_die_v4.gds",
+   "sha256_16": "919f68b823714376",
+   "bytes": 280582,
+   "mtime_local": "2026-11-12T14:07:50",
+   "top_cell": "SNSPD_DIE_V4",
+   "direct_references_before_flatten": {},
+   "outline_bbox_um": [
+    [
+     -5000.0,
+     -5000.0
+    ],
+    [
+     5000.0,
+     5000.0
+    ]
+   ],
+   "outline_source": "layer 101 polygons",
+   "outline_area_um2": 100000000.0,
+   "layers_present": [
+    1,
+    10,
+    20,
+    22,
+    40,
+    50,
+    100,
+    101
+   ],
+   "layers": {
+    "1": {
+     "polygons": 8,
+     "merged_um2": 3136.0,
+     "merged_mm2": 0.003136
+    },
+    "10": {
+     "polygons": 10,
+     "merged_um2": 583360.0,
+     "merged_mm2": 0.58336
+    },
+    "20": {
+     "polygons": 2609,
+     "merged_um2": 13424.432647998707,
+     "merged_mm2": 0.013424432647998707,
+     "datatypes": {
+      "0": {
+       "polygons": 659,
+       "merged_um2": 7256.108161999677
+      },
+      "1": {
+       "polygons": 325,
+       "merged_um2": 1028.0540809998406
+      },
+      "2": {
+       "polygons": 325,
+       "merged_um2": 1028.0540809998374
+      },
+      "3": {
+       "polygons": 325,
+       "merged_um2": 1028.0540809998383
+      },
+      "5": {
+       "polygons": 325,
+       "merged_um2": 1028.054080999837
+      },
+      "6": {
+       "polygons": 325,
+       "merged_um2": 1028.0540809998374
+      },
+      "7": {
+       "polygons": 325,
+       "merged_um2": 1028.0540809998388
+      }
+     }
+    },
+    "22": {
+     "polygons": 116,
+     "merged_um2": 105899.67903999999,
+     "merged_mm2": 0.10589967903999999
+    },
+    "24": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "30": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "31": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "40": {
+     "polygons": 40,
+     "merged_um2": 170544.0,
+     "merged_mm2": 0.170544,
+     "openings": [
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -4300.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -2783.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -983.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -2783.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -983.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -2970.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -1170.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -3300.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -3100.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -2900.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -2700.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -2970.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -1170.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -2783.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -983.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -2783.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -983.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -4300.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        4300.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        817.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        2617.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        817.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        2617.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        630.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        2430.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -425.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -175.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "SNSPD contact",
+       "centre_um": [
+        175.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        425.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        630.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        2430.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        817.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        2617.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        817.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        2617.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        4300.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      }
+     ]
+    },
+    "45": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "50": {
+     "polygons": 21,
+     "merged_um2": 93667200.0,
+     "merged_mm2": 93.6672,
+     "Au_cm2": 0.9366720000000001,
+     "complement_in_outline_cm2": 0.063328
+    },
+    "100": {
+     "polygons": 104,
+     "merged_um2": 11091.796875,
+     "merged_mm2": 0.011091796874999999
+    },
+    "101": {
+     "polygons": 1,
+     "merged_um2": 100000000.0,
+     "merged_mm2": 100.0
     }
    }
   },
@@ -3651,6 +4174,1325 @@
      "TEST_DIE_V4": 2,
      "TRAP_DIE_V4_B60": 2,
      "TRAP_DIE_V4_NODET": 2
+    }
+   }
+  },
+  "run_R1_ONE.gds": {
+   "file": "run_R1_ONE.gds",
+   "sha256_16": "3a9619c5cc8acf0e",
+   "bytes": 420694,
+   "mtime_local": "2026-11-12T14:12:53",
+   "top_cell": "RUN_R1_ONE",
+   "direct_references_before_flatten": {
+    "TRAP_DIE_V4_A30": 4,
+    "SNSPD_DIE_V4": 2,
+    "TRAP_DIE_V4_NODET": 2,
+    "TRAP_DIE_V4_B60": 1
+   },
+   "outline_bbox_um": [
+    [
+     -49995.038,
+     -49998.76
+    ],
+    [
+     50000.0,
+     49998.76
+    ]
+   ],
+   "outline_source": "layer 101 polygons",
+   "outline_area_um2": 9999255812.305761,
+   "layers_present": [
+    1,
+    10,
+    20,
+    22,
+    40,
+    50,
+    100,
+    101
+   ],
+   "layers": {
+    "1": {
+     "polygons": 72,
+     "merged_um2": 28224.0,
+     "merged_mm2": 0.028224
+    },
+    "10": {
+     "polygons": 25,
+     "merged_um2": 1878980.0,
+     "merged_mm2": 1.8789799999999999
+    },
+    "20": {
+     "polygons": 6863,
+     "merged_um2": 37175.535700995315,
+     "merged_mm2": 0.03717553570099531,
+     "datatypes": {
+      "0": {
+       "polygons": 2963,
+       "merged_um2": 24838.886728997262
+      },
+      "1": {
+       "polygons": 650,
+       "merged_um2": 2056.1081619996735
+      },
+      "2": {
+       "polygons": 650,
+       "merged_um2": 2056.1081619996753
+      },
+      "3": {
+       "polygons": 650,
+       "merged_um2": 2056.1081619996753
+      },
+      "5": {
+       "polygons": 650,
+       "merged_um2": 2056.1081619996753
+      },
+      "6": {
+       "polygons": 650,
+       "merged_um2": 2056.1081619996753
+      },
+      "7": {
+       "polygons": 650,
+       "merged_um2": 2056.1081619996767
+      }
+     }
+    },
+    "22": {
+     "polygons": 352,
+     "merged_um2": 222341.30747999976,
+     "merged_mm2": 0.22234130747999975
+    },
+    "24": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "30": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "31": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "40": {
+     "polygons": 135,
+     "merged_um2": 398028.0,
+     "merged_mm2": 0.398028,
+     "openings": [
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -14500.0,
+        -14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -12340.0,
+        -10070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -14500.0,
+        -5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -14500.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -12983.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -11183.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -12983.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -11183.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -11370.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -13170.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -10625.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -10375.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -12900.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -13500.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -13300.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -13100.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -11370.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -13170.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -11183.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -12983.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -12983.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -11183.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -14500.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -14500.0,
+        5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -10043.0,
+        10195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -10043.0,
+        10205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -12340.0,
+        10330.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -14500.0,
+        14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -5900.0,
+        -14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -10043.0,
+        -10205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -10043.0,
+        -10195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -5900.0,
+        -5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -5900.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -4300.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -9383.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -7583.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -9383.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -7583.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -9570.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -7770.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -10025.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -9775.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "SNSPD contact",
+       "centre_um": [
+        157.0,
+        5.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -2140.0,
+        130.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -7770.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        -9570.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -7583.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -9383.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -7583.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        -9383.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -5900.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -4300.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -5900.0,
+        5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        -5900.0,
+        14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        5900.0,
+        -14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        8060.0,
+        -10070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        5900.0,
+        -5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        4300.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        5900.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        9217.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        7417.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        9217.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        7417.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        7230.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        9030.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "SNSPD contact",
+       "centre_um": [
+        157.0,
+        -5.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        7500.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        6900.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        7100.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        7300.0,
+        130.0
+       ],
+       "size_um": [
+        110.0,
+        110.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        7230.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        9030.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        7417.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        7417.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        9217.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        5900.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        4300.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        5900.0,
+        5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        8060.0,
+        10330.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        5900.0,
+        14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        14500.0,
+        -14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        10357.0,
+        -10205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        10357.0,
+        -10195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        14500.0,
+        -5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        14500.0,
+        -4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        11017.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        12817.0,
+        -1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        12817.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        11017.0,
+        -1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        10830.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        12630.0,
+        -1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        9775.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        10025.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        10375.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        10625.0,
+        0.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        12630.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "mirror ground via",
+       "centre_um": [
+        10830.0,
+        1070.0
+       ],
+       "size_um": [
+        100.0,
+        100.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        12817.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        11017.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        9217.0,
+        1195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        11017.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        12817.0,
+        1205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        14500.0,
+        4758.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        14500.0,
+        5442.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        10340.5,
+        10195.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "unclassified",
+       "centre_um": [
+        10340.5,
+        10205.0
+       ],
+       "size_um": [
+        18.0,
+        3.0
+       ]
+      },
+      {
+       "class": "mark cross",
+       "centre_um": [
+        14500.0,
+        14958.0
+       ],
+       "size_um": [
+        60.0,
+        24.0
+       ]
+      }
+     ]
+    },
+    "45": {
+     "polygons": 0,
+     "merged_um2": 0.0,
+     "merged_mm2": 0.0
+    },
+    "50": {
+     "polygons": 556,
+     "merged_um2": 826846824.29875,
+     "merged_mm2": 826.84682429875,
+     "Au_cm2": 8.2684682429875,
+     "complement_in_outline_cm2": 91.72408988007011
+    },
+    "100": {
+     "polygons": 701,
+     "merged_um2": 1511214.0625,
+     "merged_mm2": 1.5112140625
+    },
+    "101": {
+     "polygons": 11,
+     "merged_um2": 7852942509.038459,
+     "merged_mm2": 7852.942509038458
+    }
+   },
+   "run": {
+    "ebl_merged_mm2": 0.03717553570099531,
+    "ebl_raw_sum_mm2": 0.03777553570100573,
+    "au_cm2": 8.2684682429875,
+    "dies_expected_by_make_run": {
+     "TRAP_DIE_V4_A30": 4,
+     "SNSPD_DIE_V4": 2,
+     "TRAP_DIE_V4_NODET": 2,
+     "TRAP_DIE_V4_B60": 1
     }
    }
   },
@@ -19950,6 +21792,12 @@
    "pass": true
   },
   {
+   "item": "run_R1_ONE EBL area (mm^2, 2 % of make_run 0.0378)",
+   "expected": 0.0378,
+   "measured": 0.037176,
+   "pass": true
+  },
+  {
    "item": "trap_die_v4_A30.gds: layers 24, 30, 31, 45 empty",
    "expected": "0 polygons",
    "measured": "0 non-empty",
@@ -19980,6 +21828,12 @@
    "pass": true
   },
   {
+   "item": "snspd_die_v4.gds: layers 24, 30, 31, 45 empty",
+   "expected": "0 polygons",
+   "measured": "0 non-empty",
+   "pass": true
+  },
+  {
    "item": "run_R1_TRAP.gds: layers 24, 30, 31, 45 empty",
    "expected": "0 polygons",
    "measured": "0 non-empty",
@@ -19987,6 +21841,12 @@
   },
   {
    "item": "run_R1_FULL.gds: layers 24, 30, 31, 45 empty",
+   "expected": "0 polygons",
+   "measured": "0 non-empty",
+   "pass": true
+  },
+  {
+   "item": "run_R1_ONE.gds: layers 24, 30, 31, 45 empty",
    "expected": "0 polygons",
    "measured": "0 non-empty",
    "pass": true
