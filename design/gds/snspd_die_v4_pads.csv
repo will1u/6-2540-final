@@ -1,0 +1,21 @@
+pad,electrode,role,x_um,y_um,layer
+D1_S,D1_S,"SNSPD signal lead, inner lead, top die edge",-3100,4720,50
+D1_G,D1_G,"SNSPD return lead, outer lead, top die edge",-3460,4720,50
+D2_S,D2_S,"SNSPD signal lead, inner lead, top die edge",-1300,4720,50
+D2_G,D2_G,"SNSPD return lead, outer lead, top die edge",-1660,4720,50
+D3_S,D3_S,"SNSPD signal lead, inner lead, top die edge",500,4720,50
+D3_G,D3_G,"SNSPD return lead, outer lead, top die edge",140,4720,50
+D4_S,D4_S,"SNSPD signal lead, inner lead, top die edge",2300,4720,50
+D4_G,D4_G,"SNSPD return lead, outer lead, top die edge",1940,4720,50
+D5_S,D5_S,"SNSPD signal lead, outer lead, bottom die edge",-3460,-4720,50
+D5_G,D5_G,"SNSPD return lead, inner lead, bottom die edge",-3100,-4720,50
+D6_S,D6_S,"SNSPD signal lead, outer lead, bottom die edge",-1660,-4720,50
+D6_G,D6_G,"SNSPD return lead, inner lead, bottom die edge",-1300,-4720,50
+D7_S,D7_S,"SNSPD signal lead, outer lead, bottom die edge",140,-4720,50
+D7_G,D7_G,"SNSPD return lead, inner lead, bottom die edge",500,-4720,50
+D8_S,D8_S,"SNSPD signal lead, outer lead, bottom die edge",1940,-4720,50
+D8_G,D8_G,"SNSPD return lead, inner lead, bottom die edge",2300,-4720,50
+GND-1,ground fill,Au ground fill: bond to carrier ground,-4700,1500,50
+GND-2,ground fill,Au ground fill: bond to carrier ground,-4700,-1500,50
+GND-3,ground fill,Au ground fill: bond to carrier ground,4700,1500,50
+GND-4,ground fill,Au ground fill: bond to carrier ground,4700,-1500,50
