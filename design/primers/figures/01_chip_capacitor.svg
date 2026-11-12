@@ -30,5 +30,5 @@
 <text x="520" y="225" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b03a2e">die-wide Al plane</text>
 <text x="520" y="241.25" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b03a2e">(dropped)</text>
 <text x="520" y="257.5" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b03a2e">127 pF → 1.18 A</text>
-<text x="640" y="225" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#111111">no plane</text>
+<text x="640" y="225" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#111111">10 µm D2 baseline (v3)</text>
 <text x="640" y="241.25" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#111111">2.9 pF → 27.0 mA</text></svg>

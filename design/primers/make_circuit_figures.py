@@ -179,7 +179,7 @@ def fig_chip_capacitor():
     p.append(part("cap", 640, 70, 640, 190))
     p.append(ground(640, 190))
     p.append(label(520, 225, "die-wide Al plane\n(dropped)\n127 pF → 1.18 A", size=13, anchor="middle", color=RED))
-    p.append(label(640, 225, "no plane\n2.9 pF → 27.0 mA", size=13, anchor="middle"))
+    p.append(label(640, 225, "10 µm D2 baseline (v3)\n2.9 pF → 27.0 mA", size=13, anchor="middle"))
     return 720, 290, p
 
 
@@ -326,8 +326,8 @@ def fig_dc_filter():
     p.append(label(493, 56, "C_{c}", bold=True))
     p.append(label(475, 14, "RF rail, V", anchor="middle", size=12, color=GREY))
     # bracket labels
-    p.append(label(20, 310, "(a) Hold at RF ground: V_{el} = V·C_{c}/(C_{c}+C_{f}).", size=13))
-    p.append(label(20, 332, "     With C_{c} = 0.5 pF: 263.68 mV (100 pF), 26.49 mV (1 nF), 2.65 mV (10 nF).", size=13))
+    p.append(label(20, 310, "(a) Hold at RF ground: V_{el} = V·C_{c}/(C_{c}+C_{f}+C_{g}).", size=13))
+    p.append(label(20, 332, "     C_{c} = 0.414 pF, C_{g} = 3.21 pF (sim 23): 211.93 mV (100 pF), 21.88 mV (1 nF), 2.20 mV (10 nF).", size=13))
     p.append(label(20, 362, "(b) Cut noise: R and C_{f} low-pass, f_{c} = 1/(2πRC), τ = RC.", size=13))
     p.append(label(20, 384, "     1 kΩ and 1 nF: 159.15 kHz. The same filter slows the transport waveform.", size=13))
     return 640, 405, p
@@ -405,7 +405,7 @@ def fig_lead_termination():
         p.append(label(x + 28, ny + 126, "Z_{term %s}" % name, bold=True, size=13))
         p.append(ground(x, ny + 160))
     p.append(label(20, 440, "Equal terminations: no current crosses the nanowire. A mismatch sends part of the pickup through it.", size=13))
-    p.append(label(20, 462, "Values: I_{inj} = 44.5 µA (E2) / 28.3 µA (E1), L_{bond} = 2 nH [verify], L_{k} = 3.10 µH (A30), 5.94 µH (B60).", size=13))
+    p.append(label(20, 462, "Values: I_{inj} = 44.5 µA (E2) / 28.6 µA (E1), L_{bond} = 2 nH [verify], L_{k} = 3.10 µH (A30), 5.94 µH (B60).", size=13))
     # the cases tried in sim 19
     p.append(panel_title(20, 500, "Terminations tried: Z_{term A} / Z_{term B}"))
     rows = ["case 1:  50 Ω line  /  short",

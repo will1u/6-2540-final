@@ -8,7 +8,7 @@ One example runs through every section: the RF rail at 53 V (zero-to-peak) and 2
 cd design/sim && ./run.sh ../primers/primer_numbers.py
 ```
 
-The circuit diagrams are drawn by [`make_circuit_figures.py`](make_circuit_figures.py) into `figures/` (`./run.sh ../primers/make_circuit_figures.py`). They are schematics with this page's numbers as labels; the script computes nothing.
+The circuit diagrams are drawn by [`make_circuit_figures.py`](make_circuit_figures.py) into `figures/` (`./run.sh ../primers/make_circuit_figures.py`). They are schematics with this page's numbers as labels; the script computes nothing. The figures are numbered after the sections that use them, so section 4 has no figure.
 
 > **What to take away**
 > 1. Current per pF: `I = ω C V`. At 53 V and 28 MHz, 1 pF draws 9.32 mA.
@@ -27,11 +27,11 @@ Formula: `I = ω C V`, with `ω = 2πf`.
 
 ![The RF source drives the chip capacitance to ground; two alternative loads shown on the right](figures/01_chip_capacitor.svg)
 
-*Left: the circuit the source sees. Right: the same rail with and without the die-wide Al plane.*
+*Left: the circuit the source sees. Right: the same rail with the die-wide Al plane on the thin stack, and with the thick 10 µm D2 baseline.*
 
 > **On this chip:** ω = 1.7593e+08 rad/s at 28 MHz. I per pF at 53 V is 9.32 mA; per fF it is 9.32 µA.
 > The chip's own RF capacitance, from sim 22 with the Si treated as a lossless dielectric (the cold case): 2.59 pF for A30 on E2, which draws 24.1 mA, and 2.39 pF on E1, which draws 22.3 mA. On E2, 0.63 of the field energy is in the Si and 0.20 in the SiO₂; section 3 says why that matters.
-> The die-wide Al plane was dropped for this reason. With it, C_RF-ground = 127 pF gives 1.18 A at 53 V and 28 MHz; without it, 2.9 pF gives 27.0 mA. Source: `fab/variants/LOCAL_MIRROR.md` for the capacitances; the currents are [team calc].
+> The die-wide Al plane was dropped for this reason. On the thin stack, a plane would give C_RF-ground = 127 pF, which is 1.18 A at 53 V and 28 MHz. The thick 10 µm D2 baseline (v3) has its plane 10.3 µm below the electrodes and 2.9 pF, which is 27.0 mA. Source: `fab/variants/LOCAL_MIRROR.md` for the capacitances; the currents are [team calc].
 
 Where this shows up:
 - [`../sim/22_rf_capacitance.py`](../sim/22_rf_capacitance.py) and its [table](../sim/out/22_rf_capacitance/table.md) (the chip capacitance, section by section)
@@ -125,13 +125,13 @@ A DC filter does two jobs:
 - (a) it holds each DC electrode at RF ground, so that pickup does not make its voltage wiggle at 28 MHz;
 - (b) it keeps DAC and cable noise at the ion's motional frequencies off the electrode.
 
-Job (a) is the capacitive divider again, `V_el = V C_c / (C_c + C_f)`, where C_f is a filter capacitor to ground close to the chip. Job (b) is an RC low-pass with corner `f_c = 1 / (2π R C)`, attenuation `1 / sqrt(1 + (f / f_c)²)` at frequency f, and time constant `τ = RC = 1 / (2π f_c)`. A voltage step needs a few τ to settle. So the same filter that cuts noise also slows the transport waveform.
+Job (a) is the capacitive divider again, `V_el = V C_c / (C_c + C_f + C_g)`, where C_f is a filter capacitor to ground close to the chip and C_g is the electrode's own capacitance to ground (small once C_f is large). Job (b) is an RC low-pass with corner `f_c = 1 / (2π R C)`, attenuation `1 / sqrt(1 + (f / f_c)²)` at frequency f, and time constant `τ = RC = 1 / (2π f_c)`. A voltage step needs a few τ to settle. So the same filter that cuts noise also slows the transport waveform.
 
 ![DAC, series R, filter capacitor C_f at the electrode, and the C_c coupling from the RF rail](figures/06_dc_filter.svg)
 
 *One DC line. C_c brings RF in; C_f shunts it to ground (job a). R with C_f is the low-pass (job b).*
 
-> **On this chip:** the 0.5 pF rail-to-centre coupling is the estimate in [`../research/reports/SNSPD%20geometry%20audit.md`](../research/reports/SNSPD%20geometry%20audit.md) (lines 312–314). It is the report's estimate, not a measurement. With it, the RF voltage on the centre electrode is 263.68 mV for C_f = 100 pF, 26.49 mV for 1 nF and 2.65 mV for 10 nF.
+> **On this chip:** the centre DC couples to the rails through C_c = 0.414 pF, and it has C_g = 3.21 pF to ground ([sim 23](../sim/23_dc_rf_coupling.py), `per_electrode.E2.centre_A30`). These replace the 0.5 pF estimate from the SNSPD geometry audit that this page used earlier. With them, the RF voltage on the centre electrode is 211.93 mV for C_f = 100 pF, 21.88 mV for 1 nF and 2.20 mV for 10 nF. These are the sim's own divider values. Without C_g, the 1 nF case gives 21.95 mV.
 > Literature RC pairs quoted in the repo:
 > - 1 kΩ and 1 nF: f_c = 159.15 kHz; attenuation at the 0.8 MHz axial frequency is 0.1951.
 > - 35 kΩ and 220 pF: f_c = 20.67 kHz; attenuation at 0.8 MHz is 0.0258.
@@ -143,6 +143,7 @@ Where this shows up:
 - [`../research/research_notes/Trap%20integrated%20SNSPD%20design/fivewire_design_rules.md`](../research/research_notes/Trap%20integrated%20SNSPD%20design/fivewire_design_rules.md) (the 1 kΩ / 1 nF pair, lines 18 and 76)
 - [`../research/research_notes/Bond%20pad%20sizing%20for%20ion%20traps/pad_electrical_effects.md`](../research/research_notes/Bond%20pad%20sizing%20for%20ion%20traps/pad_electrical_effects.md) (the 35 kΩ / 220 pF pair, line 97)
 - [`../sim/20_transport_timing.py`](../sim/20_transport_timing.py)
+- [`../sim/23_dc_rf_coupling.py`](../sim/23_dc_rf_coupling.py) and its [summary](../sim/out/23_dc_rf_coupling/summary.json) (the centre DC coupling and divider; step 42)
 
 ## 7. The SNSPD as a circuit, and its readout chain
 
@@ -198,6 +199,7 @@ The lead model in [`../sim/19_lead_termination.py`](../sim/19_lead_termination.p
 > - v_m = 30.19 mV and 40.25 mV;
 > - p = 33.93 µW and 45.23 µW.
 > Source: [`../sim/out/10c_mirror_thickness/summary.json`](../sim/out/10c_mirror_thickness/summary.json), `al100_inlaid`, E2.
+> Model ([`../sim/10c_mirror_thickness.py`](../sim/10c_mirror_thickness.py), `derived()`): the RF current that the rail sends into the strip is a peak value, `i_mirror = ω V C_p L`, for a strip 2240 µm long plus a 140 µm tail to the via. The strip is 40 µm wide, with resistance ρ / (t × 40 µm) per length. Its current grows linearly from zero at the detector end to `i_mirror` at the via, so `v_m` is the peak swing at the detector end. The dissipation is `p = ½ i_mirror² R_eff` (peak current, time average), with `R_eff = r (L/3 + L_tail)`, where r is the resistance per length.
 
 Where this shows up:
 - [`../sim/10c_mirror_thickness.py`](../sim/10c_mirror_thickness.py)

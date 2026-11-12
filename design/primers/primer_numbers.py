@@ -6,7 +6,7 @@ example throughout (RF rail 53 V zero-to-peak, 28 MHz)? Which design numbers com
 Model: circuit formulas only (I = w C V, Q and power, RC corners, skin depth, a lossy-dielectric
 loss tangent, the capacitive divider, series L-C and shunt C on a 50 ohm line). No new simulation.
 Inputs: values read from sim/out/18_e1_vs_e2, sim/out/10c_mirror_thickness, sim/out/19_lead_termination,
-gds/measured_v4.json, and from the text of the repo files named in each block. Typed here: only the
+sim/out/22_rf_capacitance, sim/out/23_dc_rf_coupling, gds/measured_v4.json, and from the text of the repo files named in each block. Typed here: only the
 example values (53 V, 28 MHz, 10 pF) and the literature RC pairs, each with its source.
 Output: stdout only. Run from Git Bash: cd design/sim && ./run.sh ../primers/primer_numbers.py
 
@@ -80,10 +80,10 @@ print(f"  share of the field energy in the Si = {ch['p_Si_length_weighted']:.2f}
 txt = ltext("fab/variants/LOCAL_MIRROR.md")
 m = re.search(r"C_RF–ground ≈ ([\d.]+) pF instead of ([\d.]+) pF", txt)
 c_plane, c_thin = float(m.group(1)), float(m.group(2))
-print(f"fab/variants/LOCAL_MIRROR.md (line 19-33 area): die-wide Al plane C_RF-ground = {c_plane:g} pF,"
-      f" thin stack without it = {c_thin:g} pF")
-print(f"  I at {V_RF:g} V, {F_RF/1e6:g} MHz: {OMEGA * c_plane * 1e-12 * V_RF:.2f} A (plane),"
-      f" {OMEGA * c_thin * 1e-12 * V_RF * 1e3:.1f} mA (no plane, 2.9 pF)")
+print(f"fab/variants/LOCAL_MIRROR.md (line 19-33 area): die-wide Al plane on the thin stack C_RF-ground = {c_plane:g} pF,"
+      f" thick 10 um D2 baseline C_RF-ground = {c_thin:g} pF")
+print(f"  I = omega C V at {V_RF:g} V, {F_RF/1e6:g} MHz: {OMEGA * c_plane * 1e-12 * V_RF:.2f} A (thin stack, die-wide plane, 127 pF),"
+      f" {OMEGA * c_thin * 1e-12 * V_RF * 1e3:.1f} mA (thick 10 um D2 baseline, plane 10.3 um down, {c_thin:g} pF)")
 
 # ---------------------------------------------------------------- 2
 print("== 2. Why the drive needs a resonator ==")
@@ -151,12 +151,22 @@ print(f"nanowire window: C_RN = {c_rn:.4f} fF, I = omega C V = {i_rn:.4f} uA"
 
 # ---------------------------------------------------------------- 6
 print("== 6. Filters on the DC lines ==")
-c_c_pF = float(re.search(r"~([\d.]+) pF of rail-to-centre",
-                         ltext("research/reports/SNSPD geometry audit.md")).group(1))
-print(f"C_c = {c_c_pF:g} pF rail-to-centre (research/reports/SNSPD geometry audit.md, lines 312-314, the report's estimate)")
-for c_f in (100e-12, 1e-9, 10e-9):
-    v_div = V_RF * (c_c_pF * 1e-12) / (c_c_pF * 1e-12 + c_f)
-    print(f"  C_f = {c_f*1e12:g} pF ({c_f*1e9:g} nF), V_RF on electrode = {v_div*1e3:.2f} mV")
+# Centre DC coupling from sim 23 (design/sim/23_dc_rf_coupling.py). The divider is
+# V_el = V C_c / (C_c + C_f + C_g), where C_g is the centre DC's own capacitance to ground.
+s23 = jload("sim/out/23_dc_rf_coupling/summary.json")
+c_c_pF = s23["per_electrode"]["E2"]["centre_A30"]["C_c_pF"]
+c_g_pF = s23["per_electrode"]["E2"]["centre_A30"]["C_g_pF"]
+print(f"C_c = {c_c_pF:.3f} pF rail-to-centre, C_g = {c_g_pF:.3f} pF to ground"
+      f" (sim/out/23_dc_rf_coupling/summary.json, per_electrode.E2.centre_A30)")
+sim23_div = {d["C_f_pF"]: d["V_el_V"] for d in s23["divider"]
+             if d["electrode"] == "centre DC (A30)" and d["Au"] == "E2"}
+for c_f_pF in (100.0, 1000.0, 10000.0):
+    v_div = V_RF * c_c_pF / (c_c_pF + c_f_pF + c_g_pF)          # V
+    print(f"  C_f = {c_f_pF:g} pF, V_RF on centre DC = {v_div*1e3:.2f} mV"
+          f" (sim 23 divider: {sim23_div[c_f_pF]*1e3:.2f} mV)")
+    check(f"centre DC divider, C_f = {c_f_pF:g} pF = sim 23 divider", v_div, sim23_div[c_f_pF], 0.001)
+c_no_cg = V_RF * c_c_pF / (c_c_pF + 1000.0)
+print(f"  (without C_g, 1 nF: {c_no_cg*1e3:.2f} mV)")
 for name, r_ohm, c_f in (("1 kohm / 1 nF", 1e3, 1e-9), ("35 kohm / 220 pF", 35e3, 220e-12)):
     fc = 1 / (2 * math.pi * r_ohm * c_f)
     att = 1 / math.sqrt(1 + (0.8e6 / fc) ** 2)
