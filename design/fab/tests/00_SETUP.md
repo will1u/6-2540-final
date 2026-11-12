@@ -1,4 +1,4 @@
-> **Claude-authored.** Equipment and wiring that each test needs on the bench, for the three device kinds the team can make, 2026-11-10.
+> **Claude-authored.** Equipment and wiring that each test needs on the bench, for the three device kinds the team can make, 2026-11-10. Updated 2026-11-12 for run R1_ONE: the SNSPD-only die replaces the test die (T4 / T4b) as the SNSPD-alone device.
 
 [Test plan](../test_plan.md) · [Electrical tests](01_ELECTRICAL.md) · [Cryogenic tests](02_CRYOGENIC.md) · [Simpler testing](05_SIMPLER_TESTING.md) · [Open decisions](../OPEN_DECISIONS.md)
 
@@ -20,15 +20,20 @@ Test IDs come from [01_ELECTRICAL.md](01_ELECTRICAL.md) (a1 to a19, with its [Ru
 
 | Device | Bare die or wafer, room temperature | Packaged, room temperature | Cold, in the trap cryostat |
 |---|---|---|---|
-| **Trap alone** (NODET, R1_TRAP) | Trap die: a1, a2. TEST_TRAP on the same run: a3 (T6), a5 (T1). Source: [01 Run applicability](01_ELECTRICAL.md#run-applicability). | a1, a2 through the carrier pins. [04_PACKAGING.md](../process/04_PACKAGING.md) step 19 asks for pad-to-pad isolation without naming IDs [inference]. a10 (LCR at 1 MHz). | Trapping checklist step 1, a1 and a2 only (a7, a8 and a19 need SNSPD pads). Steps 3 to 7, 10 and 12. [04_TRAPPING.md](04_TRAPPING.md) says to omit detector actions for NODET; the steps listed are the ones with no detector action [inference]. No b-test: the b-tests are for the SNSPD. |
-| **Trap with SNSPD** (A30 or B60, R1_FULL) | Trap die: a1, a2, a7, a8, a19. Test die of the same run: a3, a5, a6, a7 (T4 / T4b), a12, a13, a14, a15 to a18 ([01 Run applicability](01_ELECTRICAL.md#run-applicability)). | a1, a2, a7 (SNS to SNG, [04_PACKAGING.md](../process/04_PACKAGING.md) step 19); a10. | Trapping checklist step 1: a1, a2, a7, a8, a19. Step 2: short repeat of b2, b4 and b6 on the trap die. Steps 3 to 12 with the detector. Test die: b1 to b5, b9 and b10 are written for the SNSPD and the T9 array, and [02_CRYOGENIC.md](02_CRYOGENIC.md) does not assign each one to a die [inference]. |
-| **SNSPD alone** | Two candidates, described below the table. (i) T4 / T4b on the test die: a7, a8. (ii) Trap die with RF off: as for the trap die. | (i) a7, a8, only if the spare SNSPD pads can be wire-bonded (open). (ii) as for the trap die. | (i) b1, b2, b3, b4, b5, b9 on T4 / T4b. (ii) b2, b4, b5, which [02](02_CRYOGENIC.md) states with RF off. RF on afterwards is b6 (b7 and b8 also need RF on [inference]). |
+| **Trap alone** (NODET, R1_ONE: 2 dies) | Trap die: a1, a2, and a20 at the wafer step (open-field check after the NbN etch). a5 (5 µm gaps) is measured pad to pad on this die; T1 is not drawn in R1_ONE. Source: [01 Run applicability](01_ELECTRICAL.md#run-applicability). | a1, a2 through the carrier pins. [04_PACKAGING.md](../process/04_PACKAGING.md) step 19 asks for pad-to-pad isolation without naming IDs [inference]. a10 (LCR at 1 MHz). | Trapping checklist step 1, a1 and a2 only (a7, a8 and a19 need SNSPD pads). Steps 3 to 7, 10 and 12. [04_TRAPPING.md](04_TRAPPING.md) says to omit detector actions for NODET; the steps listed are the ones with no detector action [inference]. No b-test: the b-tests are for the SNSPD. This is team test 3. |
+| **SNSPD with trap RF** (A30, R1_ONE: 4 dies; B60 spare: 1 die) | Trap die: a1, a2, a7, a8, a19. The A30 die has SNS and SNG bond pads; the B60 spare has the same pads. Source: [01 Run applicability](01_ELECTRICAL.md#run-applicability). | a1, a2, a7 (SNS to SNG, [04_PACKAGING.md](../process/04_PACKAGING.md) step 19); a10. | Trapping checklist step 1: a1, a2, a7, a8, a19. Step 2: short repeat of b2, b4 and b6 on the trap die. Steps 3 to 12 with the detector. This is team test 4 (A30, in the trap chamber). Team test 2 is the same A30 die with RF applied at the SNSPD test setup [verify]. |
+| **SNSPD alone** (SNSPD-only die, R1_ONE: 2 dies) | Probe station: a6 (T3), a7 and a8 on each of the 8 cells D1 to D8, a12 (cells as the dose array), a13 and a17 (T11). The cells have Au bond pads (120 × 200 µm), so they are bonded like the trap die. | a7 and a8 on the bonded cells, through the carrier pins [verify carrier and bond fit]. | Team test 1 at the SNSPD test setup [verify: not described in the repo]: b1, b2, b3, b4, b5, b9 on a cell. The trap cryostat is the other option named in [02_CRYOGENIC.md](02_CRYOGENIC.md) (dipstick or trap cryostat). RF on afterwards is b6 (b7 and b8 also need RF on [inference]). |
 
-**Candidate (i): spare SNSPDs T4 and T4b on the test die.** Facts from the repo:
+**The SNSPD-only die (R1_ONE) replaces the spare SNSPDs T4 and T4b.** Facts from the repo and the spec for `snspd_die_v4`:
+- The die has 8 detector cells (D1 to D8). Each is the A30 detector with the A30 contact chain and two Au bond pads, so it is wire bonded like the trap die. Dose datatypes 1, 2, 3, 0 (D1 to D4) and 0, 5, 6, 7 (D5 to D8) give dose factors 0.80 to 1.20.
+- The SNSPD test setup for team tests 1 and 2 is not described in the repo. The team has the trap cryostat (team report, 2026-11-10) [verify]. See question 15 in section 6.
+- The B60 meander now exists only on the one B60 trap die.
+
+**Superseded: candidate (i), spare SNSPDs T4 and T4b on the test die (R1_FULL).** Kept for the record. Facts from the repo at that time:
 - T4 is the A30 meander and T4b the B60 meander. Each sits on its own local Al mirror and has its own mirror probe pad ([LAYOUT.md](../LAYOUT.md), test structures table).
-- The test die exists only in R1_FULL. TEST_TRAP has no NbN ([GLOSSARY.md](../../GLOSSARY.md), TEST_TRAP row).
+- The test die existed only in R1_FULL, which R1_ONE replaces. TEST_TRAP has no NbN ([GLOSSARY.md](../../GLOSSARY.md), TEST_TRAP row).
 - Whether the SNSPD pads can be wire-bonded is an open item: [OPEN_DECISIONS.md](../OPEN_DECISIONS.md#before-r1_full) ("Confirm test-die detector pads can be bonded for cold tests").
-- The repo disagrees with itself here. [LAYOUT.md](../LAYOUT.md) line 67 says "Test dies have no bond pads". [02_CRYOGENIC.md](02_CRYOGENIC.md) line 11 says to bond the SNSPD and mirror probe pads "as laid out in `test_die_v4.gds` [verify pad sizes and bond fit]".
+- The repo disagreed with itself here. [LAYOUT.md](../LAYOUT.md) line 67 said "Test dies have no bond pads". [02_CRYOGENIC.md](02_CRYOGENIC.md) line 11 says to bond the SNSPD and mirror probe pads "as laid out in `test_die_v4.gds` [verify pad sizes and bond fit]".
 - [02_CRYOGENIC.md](02_CRYOGENIC.md) line 11 names "a dipstick or the trap cryostat" for the cold test. The team has the trap cryostat only (team report, 2026-11-10) [verify].
 
 **Candidate (ii): an A30 or B60 trap die in the trap carrier with RF off.** The die already has the SNS and SNG bond pads ([LAYOUT.md](../LAYOUT.md), readout zone table; the pads sit at (−4750, ±100) µm). So the repo has no new layout for this candidate. Turning the RF on afterwards is b6 ([02_CRYOGENIC.md](02_CRYOGENIC.md), b6). The carrier and socket are open (section 6, question 1).
@@ -130,9 +135,9 @@ Only instruments that the repo's test pages or the trapping checklist name are l
 
 | Item | Used by which tests | Spec the repo asks for | Where the repo says it comes from | Have it? |
 |---|---|---|---|---|
-| Probe station, ProbeStation-Summit-11000 | a1, a2, a3, a5, a6, a7, a8, a12 to a19 on the wafer and test dies | Manual probing [verify]; probe one end of each pad and bond the other | [01_ELECTRICAL.md](01_ELECTRICAL.md) (Tool); [RUNSHEET_R1_TRAP.md](../RUNSHEET_R1_TRAP.md) step 17; [design/CLAUDE.md](../../CLAUDE.md) names MIT.nano as the fab facility. The repo does not say which tool room has the probe station. | [verify] |
+| Probe station, ProbeStation-Summit-11000 | a1, a2, a5, a6, a7, a8, a12, a13, a17 and a19 on the wafer, trap and SNSPD-only dies (a3, a14, a15, a16 and a18 are not in R1_ONE) | Manual probing [verify]; probe one end of each pad and bond the other | [01_ELECTRICAL.md](01_ELECTRICAL.md) (Tool); [RUNSHEET_R1_TRAP.md](../RUNSHEET_R1_TRAP.md) step 17; [design/CLAUDE.md](../../CLAUDE.md) names MIT.nano as the fab facility. The repo does not say which tool room has the probe station. | [verify] |
 | Source-measure units (SMU) | a1 (300 V), a2 (50 V, ≤ 100 nA), a3 (1 mA), a5 (50 V; 300 V on sacrificial dies only), a6 (≤ 1 µA), a7 (≤ 1 V, ≤ 100 nA), a8 (≤ 1 V, > 1 GΩ), a12 and a14 (≤ 1 V, ≤ 100 nA), a13 (10 mA), a15 (50 V), a19 (≤ 10 V to C) | Voltage and current limits as listed; SNSPD never above 1 V or 100 nA | [01_ELECTRICAL.md](01_ELECTRICAL.md) (per-test stimulus lines; safety rules) | [verify] |
-| LCR meter at 1 MHz | a10 (packaged), a15 (T2v capacitance) | 1 MHz. "LCR availability" flagged in a15. | [01_ELECTRICAL.md](01_ELECTRICAL.md) a10, a15; [GLOSSARY.md](../../GLOSSARY.md) (LCR) | [verify] |
+| LCR meter at 1 MHz | a10 (packaged). a15 (T2v capacitance) is not in R1_ONE | 1 MHz. "LCR availability" flagged in a15. | [01_ELECTRICAL.md](01_ELECTRICAL.md) a10, a15; [GLOSSARY.md](../../GLOSSARY.md) (LCR) | [verify] |
 | Optical microscope (darkfield for hillocks) | Optical inspection (no test ID; [05_SIMPLER_TESTING.md](05_SIMPLER_TESTING.md) tier 0); chipping check at dicing; hillock check on Al | Chipping < 50 µm [verify]; Au and Al ≥ 90 µm from the dicing edge; darkfield for hillocks and particles | [RUNSHEET_R1_TRAP.md](../RUNSHEET_R1_TRAP.md) step 18; [04_PACKAGING.md](../process/04_PACKAGING.md) step 18; [process_checks.md](../process_checks.md) rows 0 and 3 | [verify] |
 | Trap cryostat (about 5 K, with the Ba oven, lasers and ARTIQ control) | b1 to b10; trapping checklist | Base temperature; b2 runs from base to 7 K; b10 at 2 K and 5 K | [02_CRYOGENIC.md](02_CRYOGENIC.md) b2 and b10; the 5 K figure is a team report, 2026-11-10 | [verify] |
 | Thermometry near the chip | b1 (R vs T), b2 (I_sw vs T), b8 (ΔT), b10 (2 K and 5 K) | Not named in the repo. Temperature is needed for b8 (ΔT) and to set b2 at each temperature. | [02_CRYOGENIC.md](02_CRYOGENIC.md) (table rows); no thermometer named [inference] | [verify] |
@@ -164,7 +169,7 @@ Only instruments that the repo's test pages or the trapping checklist name are l
 |---|---|---|---|---|---|---|---|
 | a1 RF leakage | ● | | ● | ● | ● | | |
 | a2 DC leakage | ● | | ● | ● | | | |
-| a3 Continuity | ● | | | | | | |
+| a3 Continuity (not in R1_ONE) | ● | | | | | | |
 | a5 Gap leakage | ● | | | | | | |
 | a6 NbN Rsq | ● | | | | | | |
 | a7 Meander R | ● | | ● | | ● | | |
@@ -172,11 +177,11 @@ Only instruments that the repo's test pages or the trapping checklist name are l
 | a10 RF capacitance | | ● | ● | | | | |
 | a12 Dose array | ● | | | | | | |
 | a13 Ground link | ● | | | | | | |
-| a14 Geometry array | ● | | | | | | |
-| a15 Dielectric capacitor | ● | ● | | | | | |
-| a16 Al strip | ● | | | | | | |
+| a14 Geometry array (not in R1_ONE) | ● | | | | | | |
+| a15 Dielectric capacitor (not in R1_ONE) | ● | ● | | | | | |
+| a16 Al strip (not in R1_ONE) | ● | | | | | | |
 | a17 Via chain | ● | | | | | | |
-| a18 Lead continuity | ● | | | | | | |
+| a18 Lead continuity (not in R1_ONE) | ● | | | | | | |
 | a19 SNSPD lead to C | ● | | | ● | ● | | |
 | b1 R vs T | | | | ● | | | |
 | b2 I–V and I_sw | | | | ● | ● | | |
@@ -187,7 +192,7 @@ Only instruments that the repo's test pages or the trapping checklist name are l
 | b7 Clicks, bias off | | | | | ● | ● | ● |
 | b8 RF heating | | | | ● | ● | ● | |
 | b9 Bias gating | | | | | ● | | ● |
-| b10 T9 array | | | | ● | ● | | ● |
+| b10 T9 array (not in R1_ONE) | | | | ● | ● | | ● |
 
 Notes to the matrix:
 - The cryostat columns are marked for the cold tests (b-tests) and for the pre-cool repeats in [04_TRAPPING.md](04_TRAPPING.md) step 1 (a1, a2, a7, a8, a19). Other a-tests are room-temperature tests.
@@ -199,7 +204,7 @@ Notes to the matrix:
 Smallest set of columns that covers each device:
 - **Trap alone (NODET):** a1, a2, a3, a5 and a10 need the probe station, the LCR meter and the carrier breakout. The trapping checklist for NODET adds the cryostat DC lines, the RF resonator and the light.
 - **Trap with SNSPD (A30 or B60):** the trap-die tests a1, a2, a7, a8, a19 and a10, and the cold b2, b4 and b6, need all seven columns. The cold tests need the cryostat RF column, the RF resonator for b6 to b8, and the light for b4 and b6.
-- **SNSPD alone:** candidate (i), T4 / T4b, needs the probe station (a7, a8), the cryostat DC lines and readout chain (b1 to b5 and b9), and light (b4, b9). Candidate (ii), the trap die with RF off, needs the carrier breakout, the cryostat DC lines and readout chain, and light. Adding b6 to b8 for either candidate adds the RF resonator.
+- **SNSPD alone (R1_ONE SNSPD-only die):** the probe station (a6, a7, a8, a12, a13, a17), the cryostat DC lines and readout chain (b1 to b5 and b9), and light (b4, b9). Superseded: candidate (i), T4 / T4b, needed the same. Candidate (ii), the trap die with RF off, needs the carrier breakout, the cryostat DC lines and readout chain, and light. Adding b6 to b8 for either candidate adds the RF resonator.
 
 ## 6. Questions for the lab
 
@@ -210,10 +215,11 @@ Smallest set of columns that covers each device:
 5. Is there an RF resonator? If there is one, what is its type, what is its frequency (the repo uses 28 MHz), what is its loaded Q with a trap die mounted, and how is the voltage calibrated? ([04_TRAPPING.md](04_TRAPPING.md) step 1; [OPEN_DECISIONS.md](../OPEN_DECISIONS.md).)
 6. Is there a temperature sensor on or near the chip? What is the base temperature? (b2 runs from base to 7 K; b10 uses 2 K and 5 K.)
 7. Can the 493 nm flood reach the detector through a window or a fibre, attenuated? If not, can an LED be mounted inside the cryostat? (Slichter 2017, Sec. 4 and Fig. 4, mounted an LED on the cold stage 36 mm from the chip; Hampel 2023, pages 2 to 3, used cryogenic LEDs for flood illumination; neither had an ion. Both checked against the PDF; [T2 note](../../research/research_notes/Test%20setup%202026-11/T2_snspd_bench_tests.md).)
-8. Can the test die be mounted and bonded in the same carrier as a trap die? ([LAYOUT.md](../LAYOUT.md) line 67 says test dies have no bond pads; [02_CRYOGENIC.md](02_CRYOGENIC.md) line 11 says to bond them.)
+8. Can the SNSPD-only die be mounted and bonded in the same carrier as a trap die? The R1_ONE SNSPD-only die has Au bond pads on each cell (120 × 200 µm), which answers the layout question ([LAYOUT.md](../LAYOUT.md) line 67 predates it). Carrier and bond fit remain open [verify].
 9. What are the DAC model, its update rate and its resolution? The repo sets ±10 V and asks for an update rate above 0.8 MHz. ([CLAUDE.md](../../CLAUDE.md); [OPEN_DECISIONS.md](../OPEN_DECISIONS.md).)
 10. How many DC and RF feedthroughs does the cryostat have, and what is the RF loss through them at 28 MHz? The drive needed for 53 V at the chip depends on it.
 11. Is there a room-temperature check of the SNSPD pads at the lab before cooling (a7 and a8 need an SMU at ≤ 1 V)? The repo names only the probe station in [01_ELECTRICAL.md](01_ELECTRICAL.md) and does not describe a lab check.
 12. What is the bandwidth of an oscilloscope that can sit after the amplifier (b3)?
 13. Which lasers are available for the cooling, photoionisation and deshelving wavelengths listed in [04_TRAPPING.md](04_TRAPPING.md) steps 5 and 11?
-14. Is an LCR meter at 1 MHz available for packaged dies (a10) and for the T2v capacitor (a15)? The page flags "LCR availability" [verify].
+14. Is an LCR meter at 1 MHz available for packaged dies (a10) and for the T2v capacitor (a15)? The page flags "LCR availability" [verify]. In R1_ONE only a10 needs it.
+15. What is the SNSPD test setup for team tests 1 and 2 (the SNSPD alone, and the A30 with RF applied)? The repo names only the trap cryostat and a dipstick ([02_CRYOGENIC.md](02_CRYOGENIC.md) line 11). Which carrier and which cold stage hold the SNSPD-only die?

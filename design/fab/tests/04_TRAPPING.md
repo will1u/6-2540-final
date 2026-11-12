@@ -1,10 +1,10 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; run R1_ONE 2026-11-12 (the A30 die is team test 4; the NODET die is team test 3; the R1_TRAP and R1_FULL die lists are superseded).
 
 # First trapping checklist
 
 [Test plan](../test_plan.md) · [Fab overview](../README.md) · [Open decisions](../OPEN_DECISIONS.md)
 
-For NODET, use [R1_TRAP expected values](../RUNSHEET_R1_TRAP.md#4-first-trapping-on-a-nodet-die-expected-values) and omit detector actions. The checklist below is for integrated-detector operation.
+For the NODET die of R1_ONE (team test 3), use [R1_TRAP expected values](../RUNSHEET_R1_TRAP.md#4-first-trapping-on-a-nodet-die-expected-values) (the same trap design) and omit detector actions. The checklist below is for integrated-detector operation: the A30 die of R1_ONE (team test 4). The B60 die is a spare and is not in the R1_ONE plan.
 
 1. **Pre-cool**
    - Pad isolation through the feedthroughs (repeat a1, a2, a7; a8 and a19 on the SNSPD pads of A30 and B60).
@@ -37,12 +37,13 @@ For NODET, use [R1_TRAP expected values](../RUNSHEET_R1_TRAP.md#4-first-trapping
 9. **Micromotion at readout**
    - RF-photon correlation from the SNSPD timestamps.
    - Compare the compensation fields with the loading zone and with the window electrostatics. The window recess lowers the null over the window by **1.19 µm (A30, E2)** or **≤ 0.37 µm (E1)**; for B60, **2.04 µm (E2)** or **≤ 0.55 µm (E1)** (DESIGN_LOG steps 25–26; sim 15b). The null height over the window is then ≈ 48.8 µm (A30, E2), ≥ 49.6 µm (A30, E1), ≈ 47.9 µm (B60, E2), ≥ 49.4 µm (B60, E1) against the planar 49.98 µm at readout [team calc].
+   - [verify for R1_ONE] The window and recess numbers above come from the sims run before the 2026-11-12 facts (the mirror is raised, and the SiO₂ off the wires is 348 nm). They were not re-run for R1_ONE.
    - Predicted residual micromotion after undoing the drop with a 10° tilt set [team calc, DESIGN_LOG step 29]: A30 ≈ 55 nm (E1) / 173 nm (E2); B60 ≈ 81 nm (E1) / 291 nm (E2).
 10. **Ion height at readout:** vertical beam scan, against the predictions in step 9 (planar 49.97 / 49.98 µm at loading / readout; DESIGN_LOG steps 13, 25–29).
 11. **Readout fidelity**
     - Prepare bright (S₁/₂) and dark (shelved to D₅/₂, method per the lab; 614 nm deshelve).
     - Compare threshold and adaptive analysis against Todaro (F = 0.9991 in a mean of 46 µs, adaptive; 0.9988 at 125 µs, threshold; PRL p. 4).
-12. **Heating:** sideband or Doppler-recooling heating rate at the loading zone vs the readout zone, bias off and on. Click-kick heating vs click rate (Todaro: 0.009(5) quanta/click unshielded). v4 has no conducting film over the window: the window floor is the 160 nm SiO₂ cap, and the Au window walls are 0.35 µm (E1) or 6 µm (E2) deep. Compare with Todaro's unshielded value and with NODET.
+12. **Heating:** sideband or Doppler-recooling heating rate at the loading zone vs the readout zone, bias off and on. Click-kick heating vs click rate (Todaro: 0.009(5) quanta/click unshielded). v4 has no conducting film over the window: the window floor is 160 nm SiO₂ over the NbN wires (HSQ 50 nm plus PECVD cap 110 nm), and the Au window walls are 0.35 µm (E1) or 6 µm (E2) deep. Compare with Todaro's unshielded value and with NODET.
 
 ### Plots to make
 

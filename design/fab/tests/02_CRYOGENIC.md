@@ -1,4 +1,4 @@
-> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09.
+> **Claude-authored.** Rewritten for v4 2026-11-09; mirror 100 nm inlaid 2026-11-09; run R1_ONE and raised mirror 2026-11-12 (the inlaid mirror and the T4 / T4b test die are superseded).
 
 # Cryogenic detector tests
 
@@ -7,9 +7,13 @@
 > [!note] Provisional expectations
 > Values below are v4 where the v4 layout or simulations give one. The inductance and switching-current ranges use the v3.1 meander, which the v4 layout keeps (130 / 200 nm lines and pitch, 160 lines). The [geometry audit](../../research/reports/SNSPD%20geometry%20audit.md) questions the margin near 5 K. Reconcile against the released GDS and measure the plateau before sign-off.
 
-**Order:**
-1. **Test die**: T4 (A30 meander) or T4b (B60 meander) spare SNSPD, under the v4 detector stack (local Al mirror, 238 nm SiO₂ spacer, NbN, HSQ + SiO₂ cap at 160 ± 10 nm), the same stack as the trap-die detectors. Each has its own mirror probe pad. Bond the SNSPD pads and the mirror probe pad as laid out in `test_die_v4.gds` [verify pad sizes and bond fit], and test in a dipstick or the trap cryostat [verify available cryostat].
-2. **Trap die** in the trap cryostat with the RF resonator connected.
+**Order (R1_ONE, the team's four tests):**
+1. **Test 1, SNSPD alone:** the **SNSPD-only die** (`snspd_die_v4`). Use one of its 8 detector cells D1 to D8 (A30 detector, dose factors in [01_ELECTRICAL.md](01_ELECTRICAL.md) a12). Each cell has two Au bond pads (120 × 200 µm), so it is wire bonded like the trap die. The stack is local Al mirror (raised, 100 nm), 238 nm SiO₂ spacer, NbN, HSQ + SiO₂ cap (160 ± 10 nm over the wires). Test at the SNSPD test setup [verify: not described in the repo] or in the trap cryostat [verify available cryostat].
+2. **Test 2, SNSPD with trap RF applied:** the **A30 die** at the SNSPD test setup [verify], with the RF resonator connected.
+3. **Test 3, trap alone:** the **NODET die** in the trap chamber. No b-test (the b-tests are for the SNSPD); see [00_SETUP.md](00_SETUP.md).
+4. **Test 4, SNSPD in the trap chamber:** the **A30 die** in the trap cryostat with the RF resonator connected.
+
+Superseded (R1_FULL): the test die T4 (A30 meander) or T4b (B60 meander) spare SNSPD, bonded as laid out in `test_die_v4.gds`. The cold test on it was in a dipstick or the trap cryostat.
 
 **Expected numbers** [team calc unless noted]:
 
@@ -19,7 +23,7 @@
 | L_k | ≈ 3.3 µH for the v3.1 A30 meander at 70 pH/sq (7 nm NbN, dirty BCS; sim/15), so τ = L/50 Ω ≈ 66 ns (B60 ≈ 6.3 µH, 126 ns) |
 | I_sw at ~5 K | **≈ 8–9 µA** for a 100 nm wire (Sedykh 2025's ≈ 15 µA at 2.2 K, Tc 7.5 K, scaled to 5 K; geometry audit), ≈ 1.1× that for the 130 nm wire with turn crowding [team calc, rough]. The older 15–25 µA came from heated NbN (Tc ≈ 10.9 K) and is optimistic |
 | Pulse height | ≈ 50 Ω × I_b ≈ 0.75–1.25 mV |
-| RF pickup, nanowire | v4 simulations (sim 10b, DESIGN_LOG step 26): **0.96 µA (E2) / 1.92 µA (E1)** in the nanowire, 2-D. The mirror path adds at most 0.73–0.97 µA on E2 and 0.74–0.99 µA on E1 with the 100 nm inlaid Al (`sim/10c`, DESIGN_LOG step 37). About 3.2 mA of RF current flows along the mirror strip to ground and dissipates 34–47 µW in it at room-temperature resistivity; no thermal model, so watch the switching current against RF amplitude as the sign of heating |
+| RF pickup, nanowire | v4 simulations (sim 10b, DESIGN_LOG step 26): **0.96 µA (E2) / 1.92 µA (E1)** in the nanowire, 2-D. The mirror path adds at most 0.73–0.97 µA on E2 and 0.74–0.99 µA on E1 with the 100 nm inlaid Al (`sim/10c`, DESIGN_LOG step 37). The R1_ONE mirror is 100 nm Al raised, not inlaid; sim 10c was run for the inlaid case, and the raised case was not re-simulated for pickup [inference]. About 3.2 mA of RF current flows along the mirror strip to ground and dissipates 34–47 µW in it at room-temperature resistivity; no thermal model, so watch the switching current against RF amplitude as the sign of heating |
 | RF pickup, lead model | Sim 19, lumped: a plain 50 Ω line on the signal lead with the return grounded gives **≈ 4.1 µA (E2) / 2.6 µA (E1)** through the A30 nanowire (upper bound). Each slot lead collects ≈ 44.5 µA (E2) / 28.6 µA (E1) of common-mode 28 MHz current over its 2.24 mm length (`sim/10c`, DESIGN_LOG step 37; sim 18 / step 28 gave 28.3 µA for E1) |
 | Reference for the RF comparison | sim 19 expresses its results as a percentage of an 8 µA switching current; its notes give 8–20 µA as the range [team calc, upper bound]. The I_sw row above is 8–9 µA, so the two ranges do not agree [verify] |
 
@@ -27,7 +31,7 @@ The termination at SNS and SNG is an **open decision** ([OPEN_DECISIONS](../OPEN
 
 | # | Measurement | Conditions | Plot | Compare with |
 |---|---|---|---|---|
-| b1 | R(T) through Tc (meander and T3) | cooldown | R vs T | Witness Tc |
+| b1 | R(T) through Tc (cell and T3; R1_ONE: T3 on the SNSPD-only die) | cooldown | R vs T | Witness Tc |
 | b2 | I–V, I_sw, latching current | RF off; T = base … 7 K | I_sw vs T | Hampel Fig. 3(d) (6 K operation) |
 | b3 | Pulse shape | scope after the amplifier | Mean pulse; fitted τ, hence L_k | Hampel: 25 ns, 1.3 µH |
 | b4 | **Count rate vs bias, 493 nm flood** (LED/laser through a fibre or window, attenuated) | RF off | Count rate vs I_b/I_sw (plateau?) | Todaro PRL Fig. 2; Hampel Fig. 3 |
@@ -36,7 +40,7 @@ The termination at SNS and SNG is an **open decision** ([OPEN_DECISIONS](../OPEN
 | b7 | Clicks with bias off | RF on, light on and off | Rate vs V_RF | Todaro PRL p. 4 (detector pulses with RF on and bias off) |
 | b8 | RF heating | I_sw measured ≤ 10 µs after the RF switches off, against the b2 I_sw(T) calibration | ΔT vs V_RF | Hampel: ~0.5 K after 45 V at 70 MHz. Expect less at 28 MHz [inference: dissipation ∝ (ωV)²] |
 | b9 | Bias gating | 10 µs bias ramps (Todaro thesis Sec. 6.3.1: 11 µs) | Count rate and DCR during and after the ramp | – |
-| b10 | **T9 geometry array** (step 24) | RF off; b2 at 2 K and 5 K, then b4/b5 on the meanders | I_sw ratios: rounded/sharp 100 nm (turn effect), 130/100 nm meanders, each meander / its straight reference (crowding factor R), long/short 130 nm (length or defects); 493 nm plateau vs width | Clem & Berggren 2011 Eq. 100 (R ≈ 0.5–0.65 predicted for sharp turns); Akhlaghi 2012 Fig. 2; Lusche 2013 Fig. 5. **Decides whether 130 nm keeps a saturated plateau at 493 nm and 5 K** |
+| b10 | **T9 geometry array** (step 24). **Not in R1_ONE** (a later run); the R1_ONE cells give no geometry comparison | RF off; b2 at 2 K and 5 K, then b4/b5 on the meanders | I_sw ratios: rounded/sharp 100 nm (turn effect), 130/100 nm meanders, each meander / its straight reference (crowding factor R), long/short 130 nm (length or defects); 493 nm plateau vs width | Clem & Berggren 2011 Eq. 100 (R ≈ 0.5–0.65 predicted for sharp turns); Akhlaghi 2012 Fig. 2; Lusche 2013 Fig. 5. **Decides whether 130 nm keeps a saturated plateau at 493 nm and 5 K** |
 
 Ba⁺ (q/m ≈ 0.0072 e/u) lies below Hampel's stated range of q/m ≥ 0.01 e/u. b6 is the direct test of that envelope at our 53–70 V and 28 MHz (research report implication 8).
 
