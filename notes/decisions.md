@@ -303,6 +303,7 @@ Format: date · decision · options rejected · reason · consequences.
 - **Decision:** the two SNSPD + trap chips the team needs are A30 (30 × 30 µm window). One spare position on the wafer carries B60.
 - **Rejected:** A30 on every integrated position; one A30 and one B60 as the two needed chips.
 - **Reason:** A30 "is closer to the chip designed by Hampel" (team). The reason for keeping one B60 as a spare was not given.
+- **Confirmed:** asked directly at the end of the session whether A30 is final for the two integrated chips, with one B60 die as a spare, the team answered yes.
 - **Numbers the team had in front of it** (repo values, 6 µm Au): Hampel's detector is 20 × 30 µm; A30 absorbs 1.47 % of the emitted photons with 5.76 mm of nanowire and lowers the RF null 1.19 µm over the window; B60 absorbs 2.71 % with 11.04 mm and lowers it 2.04 µm.
 - **Details:** DESIGN_LOG step 45.
 
@@ -345,6 +346,7 @@ Format: date · decision · options rejected · reason · consequences.
   - Openings: 110 nm at the contacts, 348 nm at the mirror ground via, in one etch.
   - Test structures in this run: the 16 detector cells of the SNSPD-only dies, T3 and T11 only.
 - **How it was decided:** the team asked Claude to finalize the layer thicknesses, paying attention specifically to the SiO₂ layers, and to plan any simulations itself. Claude proposed this table in its plan and the team approved the plan. The team also chose two of the items explicitly: the raised mirror, and "keep Au leads, thin contacts".
+- **Confirmed:** asked directly at the end of the session whether the stack is final as logged, the team answered yes.
 - **Rejected:**
   - Ti 10 / Au 350 nm contacts (the value carried from v3, when that layer was the leads).
   - Reading "160 nm" as the thickness of the PECVD SiO₂ cap itself; it is the total over the wires.
