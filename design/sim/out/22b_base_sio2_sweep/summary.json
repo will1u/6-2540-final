@@ -1,0 +1,181 @@
+{
+ "acceptance": {
+  "E2": {
+   "C_chip_pF": 2.5899961902154116,
+   "want_C_chip_pF": 2.59,
+   "C_chip_groundSi_pF": 22.627644879602332,
+   "want_groundSi_pF": 22.628,
+   "PASS": true
+  },
+  "E1": {
+   "C_chip_pF": 2.3946700244896393,
+   "want_C_chip_pF": 2.395,
+   "C_chip_groundSi_pF": 22.409662411750812,
+   "want_groundSi_pF": 22.41,
+   "PASS": true
+  }
+ },
+ "cases": [
+  {
+   "die": "E2",
+   "t_au": 6.0,
+   "t_base": 0.15,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.878236703945308,
+   "C_chip_groundSi_pF": 57.54215005715645,
+   "p_Si_length_weighted": 0.7411492682738358,
+   "p_SiO2_length_weighted": 0.1092230755541256,
+   "I_mA": 26.837389940120218
+  },
+  {
+   "die": "E2",
+   "t_au": 6.0,
+   "t_base": 0.3,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.8128835630626687,
+   "C_chip_groundSi_pF": 45.12450552022308,
+   "p_Si_length_weighted": 0.717255978594351,
+   "p_SiO2_length_weighted": 0.12982836275278617,
+   "I_mA": 26.228021112575608
+  },
+  {
+   "die": "E2",
+   "t_au": 6.0,
+   "t_base": 0.5,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.7378611191584814,
+   "C_chip_groundSi_pF": 35.13384100081291,
+   "p_Si_length_weighted": 0.6896057494404969,
+   "p_SiO2_length_weighted": 0.15355676445566624,
+   "I_mA": 25.528493315380324
+  },
+  {
+   "die": "E2",
+   "t_au": 6.0,
+   "t_base": 1.0,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.5889050134685974,
+   "C_chip_groundSi_pF": 22.77329860022371,
+   "p_Si_length_weighted": 0.6334398512986774,
+   "p_SiO2_length_weighted": 0.20130776354099503,
+   "I_mA": 24.13958979438724
+  },
+  {
+   "die": "E2",
+   "t_au": 6.0,
+   "t_base": 2.0,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.3825875754612196,
+   "C_chip_groundSi_pF": 13.571669012120765,
+   "p_Si_length_weighted": 0.5510769280753776,
+   "p_SiO2_length_weighted": 0.2701041867286251,
+   "I_mA": 22.215835042854547
+  },
+  {
+   "die": "E1",
+   "t_au": 0.35,
+   "t_base": 0.15,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.681828344144304,
+   "C_chip_groundSi_pF": 57.30688180412583,
+   "p_Si_length_weighted": 0.7888347147014474,
+   "p_SiO2_length_weighted": 0.11774806139383255,
+   "I_mA": 25.006029881284988
+  },
+  {
+   "die": "E1",
+   "t_au": 0.35,
+   "t_base": 0.3,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.616594226558936,
+   "C_chip_groundSi_pF": 44.8931843517595,
+   "p_Si_length_weighted": 0.7644481961837765,
+   "p_SiO2_length_weighted": 0.13997033045090332,
+   "I_mA": 24.397770856362403
+  },
+  {
+   "die": "E1",
+   "t_au": 0.35,
+   "t_base": 0.5,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.5418234984338857,
+   "C_chip_groundSi_pF": 34.90707926320538,
+   "p_Si_length_weighted": 0.7362100417866371,
+   "p_SiO2_length_weighted": 0.1656074727520167,
+   "I_mA": 23.70059011926455
+  },
+  {
+   "die": "E1",
+   "t_au": 0.35,
+   "t_base": 1.0,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.3935688520390648,
+   "C_chip_groundSi_pF": 22.555165077706974,
+   "p_Si_length_weighted": 0.678733438360339,
+   "p_SiO2_length_weighted": 0.21744363306199224,
+   "I_mA": 22.318227177996167
+  },
+  {
+   "die": "E1",
+   "t_au": 0.35,
+   "t_base": 2.0,
+   "t_cap": 0.11,
+   "kind": "sweep",
+   "C_chip_pF": 2.1882120241496823,
+   "C_chip_groundSi_pF": 13.363488469925453,
+   "p_Si_length_weighted": 0.5939980886504521,
+   "p_SiO2_length_weighted": 0.29293731852728017,
+   "I_mA": 20.403429392470382
+  },
+  {
+   "die": "E2",
+   "t_au": 6.0,
+   "t_base": 1.0,
+   "t_cap": 0.16,
+   "kind": "comparison",
+   "C_chip_pF": 2.578433837388173,
+   "C_chip_groundSi_pF": 22.009890608731858,
+   "p_Si_length_weighted": 0.6288812671229842,
+   "p_SiO2_length_weighted": 0.20521984029944923,
+   "I_mA": 24.041953962276274
+  },
+  {
+   "die": "E1",
+   "t_au": 0.35,
+   "t_base": 1.0,
+   "t_cap": 0.16,
+   "kind": "comparison",
+   "C_chip_pF": 2.3831641796691727,
+   "C_chip_groundSi_pF": 21.792445536480127,
+   "p_Si_length_weighted": 0.674041788976413,
+   "p_SiO2_length_weighted": 0.2216927473389957,
+   "I_mA": 22.22121144290835
+  }
+ ],
+ "grid_check": {
+  "section": "plain",
+  "t_base_um": 0.15,
+  "t_cap_um": 0.11,
+  "t_au_um": 6.0,
+  "coarse_pF_per_mm": 0.27535615152387255,
+  "half_spacing_pF_per_mm": 0.2749709834471979,
+  "rel_change": 0.0013987996075012874
+ },
+ "inputs": {
+  "T_SP": 0.238,
+  "T_AL": 0.1,
+  "T_CAP_SWEEP": 0.11,
+  "T_CAP_COMP": 0.16,
+  "V_RF": 53.0,
+  "F_RF": 28000000.0
+ }
+}
