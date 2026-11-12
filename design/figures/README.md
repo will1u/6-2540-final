@@ -2,7 +2,7 @@
 
 | Figure file | Script and function | Data file(s) read | What is plotted (axis names only) |
 |---|---|---|---|
-| `report/die_map.pdf`, `.png`, `.svg` | `make_die_map.py` (module level) | `design/gds/trap_die_v4_A30.gds`, `design/gds/trap_die_v4_A30_pads.csv`, `design/gds/trap_die_v4_A30_sim.json` | (a) x (mm), y (mm); (b) x (µm), y (µm) |
+| `report/die_map.pdf`, `.png`, `.svg` | `make_die_map.py` (module level) | `design/gds/trap_die_v4_A30.gds` (the v4 A30 die as `make_chip.py` writes it by default; layer 50 is unioned and the centre DC is the U-shaped piece), `design/gds/trap_die_v4_A30_pads.csv`, `design/gds/trap_die_v4_A30_sim.json` | (a) x (mm), y (mm); (b) x (µm), y (µm) |
 | `report/rf_null_height.pdf`, `.png` | `make_report_figures.py` `fig_rf_null_height` | `design/sim/out/12_final_chip/{trap_die_v4_A30,trap_die_v4_A30_E1,trap_die_v4_NODET}/summary.json`, `design/gds/trap_die_v4_A30_sim.json` | axial position from the readout zone (µm); RF null height (µm) |
 | `report/transport_static.pdf`, `.png` | `make_report_figures.py` `fig_transport_static` | `design/sim/out/12_final_chip/trap_die_v4_A30_V2zero/waveforms.csv` | ion position (µm); electrode voltage (V) |
 | `report/collection_vs_height.pdf`, `.png` | `make_report_figures.py` `fig_collection_vs_height` | `design/sim/out/17_height_tradeoff/summary.json` | ion height (µm); geometric collection (%) |

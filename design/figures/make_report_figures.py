@@ -4,11 +4,14 @@ Plots only: axis names, tick labels, legends and short in-plot annotations. No t
 Reads existing JSON and CSV files; runs no simulation.
 
 Figures (one function each, written to design/figures/report/<name>.pdf and .png):
-  rf_null_height       RF null height along the trap axis (sim 12, summary.json null_along_axis)
-  transport_static     static transport voltages vs ion position (sim 12, trap_die_v4_A30_V2zero waveforms.csv)
-  collection_vs_height geometric collection vs ion height (sim 17, summary.json table_A)
-  termination          RF current through the nanowire per lead termination (sim 19, summary.json)
-  stack                readout-zone layer stack, thicknesses from design/fab/STACK.md
+  rf_null_height           fig_rf_null_height: RF null height along the trap axis (sim 12, summary.json null_along_axis)
+  transport_static         fig_transport_static: static transport voltages vs ion position (sim 12, trap_die_v4_A30_V2zero waveforms.csv)
+  collection_vs_height     fig_collection_vs_height: geometric collection vs ion height (sim 17, summary.json table_A)
+  termination              fig_termination: RF current through the nanowire per lead termination (sim 19, summary.json)
+  stack                    fig_stack: readout-zone layer stack, thicknesses from design/fab/STACK.md
+  transport_waveform       fig_transport_waveform: ion position and electrode voltages vs time (sim 21, waveform.csv)
+  rf_capacitance_sections  fig_rf_capacitance_sections: RF capacitance to ground per configuration (sim 22, summary.json)
+The die map (die_map.pdf, .png, .svg) is made by make_die_map.py, not by this file.
 Skipped: absorption_vs_cap. sim 09c summary.json keeps only the best values and band ends, not the scan
 arrays, so the cap scan cannot be replotted without rerunning it (not done here).
 

@@ -81,7 +81,7 @@ def main():
     gnd_idx = max(range(len(parts)), key=lambda i: parts[i].area)
     print(f"layer 50 pieces: {len(parts)}; RF piece {rf_idx} (area {parts[rf_idx].area:.0f} um2); "
           f"ground piece {gnd_idx} (area {parts[gnd_idx].area:.0f} um2)")
-    centre_dc = parts[7]          # electrode 2 on A30: the strip at |y| < 20 um across the trap
+    centre_dc = parts[7]          # electrode 2 on A30: a U around the lead slot (|y| < 20 um; slot |y| < 12.5 um, to x = X_SLOT_END, 175 um; make_chip.py)
 
     die = np.array(top.get_polygons(depth=None, layer=101, datatype=0)[0].points)
     with open(SIMJ) as fh:

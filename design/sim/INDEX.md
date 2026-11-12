@@ -1,5 +1,7 @@
 > **Claude-authored.** Index of the simulation scripts in `design/sim/`: what each asked, its headline number, whether it still applies, and which decision or page it fed, 2026-11-10.
 
+Numbers 07 and 08 were never used: no script, output or commit exists for either.
+
 1. **How to use this folder**
    - Run a script with `cd design/sim && ./run.sh <script>.py`. For the one-time `electrode` environment setup, see [design/CLAUDE.md](../CLAUDE.md) ("Setting up the electrode repo").
    - Sim 24 uses the separate `rcwa` conda env, not `electrode`; the setup is in its docstring (`24_rcwa_meander.py`).
@@ -16,7 +18,7 @@
 | `02_baseline_gds2itvg.py` | Does the gds2itvg model of the baseline trap (no window) match the analytic model? | `profile.null_z` = 50.095 µm (device-stack profile; `midline.null_z` = 50.055 µm) | any version (baseline check; older 16-segment geometry) | 2 | Check that the solver is trusted before 03 to 05 | `out/02_baseline/` |
 | `03_segment_pitch.py` | Which outer DC segment pitch gives control at h = 50 µm? | List of 5 rows, one per pitch. The 100 µm row: `[2].vmax_confine_1MHz` = 11.287 V, `[2].vmax_tilt_10deg` = 1.708 V | any version, but the pitch it chose (100 µm) became 120 µm in step 28 | 3 | Segment pitch, now 120 µm (step 28) | `out/03_segment_pitch/` |
 | `04_window_validation.py` | Are the planar window results (05) right? 2-D finite-difference check | `full.null_z` = 47.783 µm (no window, 2-D model) | v2-era validation | 6 | Check on 05 (window inside the centre DC rule, step 6) | `out/04_validation/` |
-| `04b_window_3d_fd.py` | How much does a finite window pocket lower the RF null? 3-D finite-difference check | `summary_mirror_t6.json`, `"30x30 mirror_t6".dh[0]` = −1.1877 µm (ion height change over the window centre; `mirror_t6` = 6 µm Au over the grounded Al mirror) | `mirror_t6` and `mirror_t1` cases: v4 (current). Other cases (`ito6`, `oxide`, base summary): v2/v3 | 6 (cases); 17, 25, 26 (v4) | Window drop used by 12 and 13; the 16 pad check. The v4 E2 value agrees with `13_dc_height_tuning_v4` (see row 13) | `out/04b_window_3d/` |
+| `04b_window_3d_fd.py` | How much does a finite window pocket lower the RF null? 3-D finite-difference check | `summary_mirror_t6.json`, `"30x30 mirror_t6".dh[0]` = −1.1877 µm (ion height change over the window centre; `mirror_t6` = 6 µm Au over the grounded Al mirror) | `mirror_t6` and `mirror_t1` cases: v4 (current); `mirror_t6` = 6 µm Au, `mirror_t1` = 1 µm Au, the upper bound for E1 (0.35 µm is below the 1 µm grid). Other cases, all v2/v3: `ito6` = window with the SiO₂ left in place and ITO on it at the floor, tied to the RF ground (`summary_ito6.json`, v2); `oxide` = window with the SiO₂ left in place and no ITO, so the floor is bare SiO₂ with a grounded plane 10 µm below (`summary_oxide.json`, v3); base `summary.json` = the no-window reference plus `etched` pockets (SiO₂ removed down to the grounded floor) | 6 (cases); 17, 25, 26 (v4) | Window drop used by 12 and 13; the 16 pad check. The v4 E2 value agrees with `13_dc_height_tuning_v4` (see row 13) | `out/04b_window_3d/` |
 | `05_window_variants.py` | What does a missing patch of electrode metal (the window) do to the trap? | `summary_wx30.json`, `results["V1_wy30\|profile"].dc_vmax` = 0.860 V vs `results["V0\|profile"].dc_vmax` = 7.221 V (no window) | v2 only | 6 | Rule to keep the window inside the centre DC electrode ([design/CLAUDE.md](../CLAUDE.md), physics decisions; step 6) | `out/05_window/` |
 | `06_detector_size.py` | Collection vs window size vs nanowire length | List of 4 rows keyed by window; `[0].collection_pct` = 0.9838 % (20 × 20 µm window) | v3 only | 7 | Window sizes A30 and B60 (steps 7 and 24) | `out/06_detector_size/` |
 | `09_optical_stack_tmm.py` | NbN absorption at 493 nm with the ITO-stack transfer matrix | `etched_window.nominal_best.A_nominal` = 0.6306 (etched window, ITO 65 nm) | v2 only (ITO stack) | 9 | Input to 09b; the ITO retirement (step 17) | `out/09_optical_stack_tmm/` |
@@ -92,7 +94,7 @@
    | `out/12_final_chip/trap_die_v3_A30`, `_B60`, `_NODET`, `_UNIFORM` | v3 | Sim 14 reads the `_UNIFORM` and `_NODET` summaries (line 104). |
    | `out/12_final_chip/pad180/` | v4, 180 µm pad rows | Sim 16 reads it as its baseline (lines 21, 58). |
    | `out/13_dc_height_tuning/` | v3 | Written by 13 for v3; not read by other code. |
-   | `out/13_dc_height_tuning_v4_pad180/` | v4, 180 µm pad rows | No script reads it by name (no hit in 16). [verify] whether 13 writes it under a pad180 run. |
+   | `out/13_dc_height_tuning_v4_pad180/` | v4, 180 µm pad rows | The first v4 sim 13 outputs (same files as commit `c997cff`), copied here by commit `d53eb20` before the step 29 rerun on the 360 µm layout. No script writes or reads it. |
    | `out/05_window/` | v2 | Not read by code; the v2 window result. |
    | `out/06_detector_size/` | v3 | Not read by code. |
    | `out/09b_itoD2_matching/` | v3 | Not read by code; the ITO-on-D2 matching result. |
@@ -108,3 +110,13 @@
    - [x] Transport: a playable waveform is done (step 40, [DESIGN_LOG](../DESIGN_LOG.md)). The DAC and filter values in it are [verify]; the lab's hardware is not known.
    - [x] Chip RF capacitance: computed (step 41, [DESIGN_LOG](../DESIGN_LOG.md)); the RF heating in step 31 scales with its square.
    - [ ] Not measured: the loss tangent of the SiO₂ films (sets the cold Q of the chip, step 41), and the Au film resistivity at 4 K ([fab/OPEN_DECISIONS.md](../fab/OPEN_DECISIONS.md), "Design choices" and "Before any v4 run").
+
+7. **Other files in `out/`**
+
+   Loose files in `out/` that no table above lists. No code reads them.
+   - `16_pad_pitch_check/13_comparison.json` and `16_pad_pitch_check/13_log_pad360.txt`: the sim 13 rerun on the 360 µm pad layout (step 29). No script in the tree writes them; commit `d53eb20` added them. `fab/briefs/pad_pitch.md` links to the JSON.
+   - `09c_log.txt` and `10b_log.txt`: console logs of sim 09c and sim 10b (commit `ef35574`).
+   - `13_log_v4.txt`: console log of the v4 run of sim 13 (commit `c997cff`).
+   - `14_log.txt`: console log of sim 14, its FW and U lines (commit `ca1b6bd`).
+   - `04b_mirror_t1_log.txt` and `04b_mirror_t6_log.txt`: console logs of `04b_window_3d_fd.py mirror_t1` and `mirror_t6` (commit `c997cff`).
+   - `12_log_v4_*.txt`: listed in section 4 (read by sim 16).

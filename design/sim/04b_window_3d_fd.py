@@ -40,7 +40,7 @@ XM, YM, ZB, ZT = 160.0, 160.0, -16.0, 130.0
 C, A, G, T_AU, EPS = 40.0, 84.0, 5.0, 6.0, 3.9
 # v4 local mirror (DESIGN_LOG step 25): "./run.sh 04b_window_3d_fd.py mirror_t6" (or mirror_t1).
 # Au T_AU um thick on ~1.3 um SiO2 over HR Si (eps 11.7 at 28 MHz, above its ~8 MHz relaxation frequency),
-# no ground plane under the rails. The window floor is the cap 0.32 um above the grounded Al mirror, so
+# no ground plane under the rails. The window floor is the cap 0.40 um (238 nm spacer + 160 nm cap) above the grounded Al mirror, so
 # it is a grounded floor at z = -T_AU (as 'ito6', which was tied to RF ground). The box bottom (grounded)
 # moves to 40 um below the Au. E1 (0.35 um Au) is below the 1 um grid: mirror_t1 is its upper bound.
 MIRROR = len(sys.argv) > 1 and sys.argv[1].startswith("mirror_t")
