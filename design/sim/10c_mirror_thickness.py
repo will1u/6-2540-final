@@ -9,6 +9,12 @@ lead-to-mirror capacitance per um). From the slot capacitance it then estimates 
 (V_m, 10b's formula), the strip current, its dissipation, the extra nanowire current, the lead common mode from the
 mirror swing, and a small-patch micromotion amplitude for two window areas.
 
+Case al100_cap110 is the slot cross-section of the final stack (decided 2026-11-12): a raised 100 nm Al mirror on
+1.0 um of base SiO2, with only the 110 nm blanket PECVD SiO2 cap (plus the 238 nm spacer) between the Au leads and the
+Al, because HSQ stays on the NbN wires only. Use its mirror current, mirror swing, strip dissipation, lead currents and
+lead-to-mirror capacitance. Its direct nanowire current is NOT representative: over the wires the SiO2 is 160 nm, so
+use the al100 row for that.
+
 Limits: 2-D model; ideal conductors; omega V C is an upper bound on induced current; room-temperature Al resistivity
 (3 and 4 uOhm cm); no thermal model; micromotion is a small-patch estimate (uniform field over one window area),
 not a trap-wide value.
@@ -57,6 +63,9 @@ CASES = (
     ("al450", 0.160, 0.450, 1.0),
     ("al450_inlaid", 0.160, 0.450, 0.55),
     ("al100_inlaid", 0.160, 0.100, 0.90),
+    # slot cross-section of the final stack (2026-11-12): raised 100 nm Al on 1.0 um base SiO2, 110 nm cap only
+    # (HSQ on the NbN wires only). Not representative for the nanowire current; see the docstring.
+    ("al100_cap110", 0.110, 0.100, 1.0),
 )
 
 H_ION = 50e-6                                  # ion height, m
