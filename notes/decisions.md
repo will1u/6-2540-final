@@ -328,5 +328,36 @@ Format: date · decision · options rejected · reason · consequences.
   - NbN from each tab into the slot, with Ti/Au only as a pad in the slot;
   - NbN leads along the whole slot under the SiO₂ cap, with the Au strips as grounded shields.
 - **Reason:** a team member was told that SNSPD leads can also be made of NbN, and the team asked what that would change. After the options were laid out, the team chose to keep the Au leads. The grounds Claude gave for that option: no layout change to the dies that are already checked, and the gain of the short NbN version is small once the contacts are thin.
-- **Not a team decision:** the contact thickness itself (Ti 5 / Au 50 nm instead of 10 / 350 nm) is Claude's design call, listed for adoption in `design/fab/OPEN_DECISIONS.md`.
+- **Contact thickness:** the option the team chose was "keep Au leads, thin contacts", which sets the Ti/Au contact layer to Ti 5 / Au 50 nm instead of 10 / 350 nm. Claude proposed the value; see the entry "Final layer stack" below.
 - **Details:** DESIGN_LOG step 45.
+
+## 2026-11-12 · Final layer stack
+
+- **Decision:** the layer thicknesses for run R1_ONE, bottom to top:
+  - Si: high-resistivity float-zone, ρ > 20 kΩ·cm, thickness as supplied.
+  - Base SiO₂: 1.0 µm thermal nominal; 0.5–2.0 µm accepted as supplied; a PECVD SiO₂ base if the wafers are bare.
+  - Al mirror and alignment marks: 100 ± 10 nm evaporated Al, raised, lift-off (entries above).
+  - SiO₂ spacer: 238 ± 10 nm PECVD SiO₂.
+  - NbN: 7.0 ± 0.5 nm.
+  - Ti/Au contacts and e-beam crosses: Ti 5 / Au 50 nm.
+  - HSQ: 50 nm after develop, left on the wires only.
+  - SiO₂ cap: 110 nm PECVD SiO₂ everywhere, which gives 160 ± 10 nm of SiO₂ over the wires.
+  - Openings: 110 nm at the contacts, 348 nm at the mirror ground via, in one etch.
+  - Test structures in this run: the 16 detector cells of the SNSPD-only dies, T3 and T11 only.
+- **How it was decided:** the team asked Claude to finalize the layer thicknesses, paying attention specifically to the SiO₂ layers, and to plan any simulations itself. Claude proposed this table in its plan and the team approved the plan. The team also chose two of the items explicitly: the raised mirror, and "keep Au leads, thin contacts".
+- **Rejected:**
+  - Ti 10 / Au 350 nm contacts (the value carried from v3, when that layer was the leads).
+  - Reading "160 nm" as the thickness of the PECVD SiO₂ cap itself; it is the total over the wires.
+  - Moving the spacer to 240 nm, the best nominal of the RCWA scan (it gains 0.011 at the worst tolerance corner).
+  - Thinning the base SiO₂ to the 150 nm and 134 nm of the reference devices.
+- **Reason:** the reasons are Claude's analysis, which the team accepted with the plan; the team gave none of its own beyond wanting the stack final and as easy to fabricate as possible.
+  - The HSQ stays on the wires only, so the cap that covers everything is 160 nm minus the HSQ. Off the wires 348 nm of SiO₂ lies between the Au and the Al, not 398 nm.
+  - About 20 µm of each contact strip lies under the centre-DC Au with only that cap between, so the contacts have to be thin.
+  - RCWA (`design/sim/24b_rcwa_stack_scan.py`): 0.828 absorbed at 238 nm / 160 nm; 0.753 at the worst ±10 nm corner.
+  - Base SiO₂ (`design/sim/22b_base_sio2_sweep.py`): cold, the chip capacitance moves only from 2.88 to 2.38 pF over 0.15–2.0 µm; with the Si conducting it goes from 57.5 to 13.6 pF, so thinner than 0.5 µm is not accepted without need.
+- **Not part of this decision, still open:**
+  - Electrode Au, E1 (Ti 10 / Au 350 nm, lift-off) or E2 (seed + 6 µm plated). The team left it open on 2026-11-12; the thickness of each option is fixed.
+  - What the team's wafers are (resistivity, SiO₂ already on them, thickness).
+  - ITO: not in the stack (2026-11-07). The same scan shows an ITO layer on top would need a thinner SiO₂ cap (120 nm with 20 nm of ITO, 90 nm with 50 nm), so it cannot be added afterwards.
+  - To verify on the tools: e-beam mark contrast on 50 nm Au; Au lost in the opening over-etch; layer-40 overlay ≤ 1 µm.
+- **Details:** DESIGN_LOG step 45; `design/fab/STACK.md`.

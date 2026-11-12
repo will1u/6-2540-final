@@ -53,7 +53,7 @@ The zone and transport voltages are equal to 0.01 V at the precision shown, as [
 
 ## What each option changes elsewhere
 
-- Both branches share the contact layer, Ti 5 nm / Au 50 nm on layer 22 (Claude's design call 2026-11-12, not yet adopted), which is separate from the electrode Au. Both branches also share the 100 nm raised Al mirror, so the electrode Au crosses its edge step on both. Whether that crossing holds on each branch is a check ([verify]), not a difference between them.
+- Both branches share the contact layer, Ti 5 nm / Au 50 nm on layer 22 (final stack, decided 2026-11-12), which is separate from the electrode Au. Both branches also share the 100 nm raised Al mirror, so the electrode Au crosses its edge step on both. Whether that crossing holds on each branch is a check ([verify]), not a difference between them.
 - Fab steps 12 to 15 are written twice, one branch per option ([03_ELECTRODES](../process/03_ELECTRODES.md), headings "E1" and "E2"). Step 13 on E1 is a Ti 10 nm / Au 350 nm evaporation; step 13 on E2 is the plating mold (≥ 8 µm); step 14 on E2 is the 6 µm plating.
 - Layer 50 resist: LOR plus positive resist on E1 ([03_ELECTRODES](../process/03_ELECTRODES.md), E1 step 12); AZ nLOF 2070, ≥ 8 µm, on E2 (E2 step 13).
 - Tools named in the branches: E1 uses the EBeam-Temescal-FC2800 evaporator and NMP lift-off, both [verify]; E2 uses the plating tool Plating-U04, [chemistry unverified] ([03_ELECTRODES](../process/03_ELECTRODES.md), table "E1 vs E2 at a glance").

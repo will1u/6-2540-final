@@ -18,7 +18,7 @@
 
   <rect x="0" y="0" width="1090" height="930" fill="#ffffff"/>
   <text class="h" x="30" y="32">Open design decisions, 2026-11-12</text>
-  <text class="s" x="30" y="52">Orange = open choice · green = decided by the team (notes/decisions.md) · blue = Claude's design call, for the team to adopt or change.</text>
+  <text class="s" x="30" y="52">Orange = open choice · green = decided by the team (notes/decisions.md) · blue = final stack value, proposed by Claude and approved by the team 2026-11-12.</text>
   <text class="g" x="1060" y="32" text-anchor="end">Claude-authored figure</text>
 
   <!-- decided -->
@@ -100,7 +100,7 @@
   <text class="r" x="45" y="600">decision. Sim 24b: ITO moves the best SiO₂ cap.</text>
 
   <!-- Claude's design calls -->
-  <text class="b" x="30" y="634">Claude's design calls, awaiting team adoption (not team decisions)</text>
+  <text class="b" x="30" y="634">Final stack values (proposed by Claude, approved by the team 2026-11-12)</text>
 
   <rect class="call" x="30" y="646" width="330" height="120" rx="6"/>
   <text class="b" x="45" y="668">Base SiO₂: 1.0 µm thermal nominal</text>
@@ -108,7 +108,7 @@
   <text x="45" y="704">thermal, or a PECVD base [verify].</text>
   <text x="45" y="720">Cold C 2.59 pF (E2) at 1.0 µm (sim 22b).</text>
   <text class="bl" x="45" y="740">Warm C to Si ~ 1/thickness: 22.8 pF at 1 µm.</text>
-  <text class="bl" x="45" y="756">Team to adopt or change.</text>
+  <text class="bl" x="45" y="756">Approved 2026-11-12.</text>
 
   <rect class="call" x="370" y="646" width="330" height="120" rx="6"/>
   <text class="b" x="385" y="668">Ti/Au contacts: Ti 5 / Au 50 nm</text>
@@ -124,7 +124,7 @@
   <text x="725" y="704">160 ± 10 nm SiO₂ over the wires; 348 nm</text>
   <text x="725" y="720">between Au and Al off the wires (mirror via).</text>
   <text class="bl" x="725" y="740">Window stack as in sim 09c (160 nm).</text>
-  <text class="bl" x="725" y="756">Team to adopt or change.</text>
+  <text class="bl" x="725" y="756">Approved 2026-11-12.</text>
 
   <rect class="call" x="30" y="778" width="330" height="120" rx="6"/>
   <text class="b" x="45" y="800">SiO₂ spacer 238 ± 10 nm</text>
@@ -132,7 +132,7 @@
   <text x="45" y="836">the NbN. Kept from the earlier pass.</text>
   <text x="45" y="852">Sim 24b: 0.83 absorbed; worst corner 0.75.</text>
   <text class="bl" x="45" y="872">Best alternative gains only 0.011 (sim 24b).</text>
-  <text class="bl" x="45" y="888">Team to adopt or change.</text>
+  <text class="bl" x="45" y="888">Approved 2026-11-12.</text>
 
   <rect class="call" x="370" y="778" width="330" height="120" rx="6"/>
   <text class="b" x="385" y="800">Test structures in R1_ONE</text>
@@ -140,7 +140,7 @@
   <text x="385" y="836">T3 NbN bar and T11 Au-to-Al via chain.</text>
   <text x="385" y="852">Dropped: TEST, TEST_TRAP, T1, T2v, T4, T4b,</text>
   <text class="bl" x="385" y="872">T6, T8, T9, T10, T12. Dose datatypes stand</text>
-  <text class="bl" x="385" y="888">in for T8 [inference]. Team to adopt the list.</text>
+  <text class="bl" x="385" y="888">in for T8 [inference]. Approved 2026-11-12.</text>
 
   <!-- legend -->
   <rect class="open" x="710" y="790" width="14" height="10" rx="2"/>
@@ -148,7 +148,7 @@
   <rect class="done" x="710" y="812" width="14" height="10" rx="2"/>
   <text x="732" y="822">Decided by the team</text>
   <rect class="call" x="710" y="834" width="14" height="10" rx="2"/>
-  <text x="732" y="844">Claude's design call (team to adopt)</text>
+  <text x="732" y="844">Final stack value (approved 2026-11-12)</text>
   <text class="s" x="710" y="868">Design choices only. The checklists in OPEN_DECISIONS.md</text>
   <text class="s" x="710" y="884">carry the work before R1_ONE and the new open items.</text>
 

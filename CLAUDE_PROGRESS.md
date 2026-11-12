@@ -20,10 +20,10 @@
 **Open**
 - Electrode Au, E1 or E2. One choice for the whole wafer.
 - What the team's wafers are (Si thickness, and whether they carry base SiO₂). Not known.
-- Thickness table (final stack): Claude's design calls, awaiting team adoption ([OPEN_DECISIONS](design/fab/OPEN_DECISIONS.md)).
+- Thickness table (final stack): decided 2026-11-12 ([decisions](notes/decisions.md), entry "Final layer stack"); proposed by Claude, approved by the team with the plan.
 - Tool limits for the single wafer: NbN sputter and e-beam must take a 100 mm wafer; e-beam, CF₄ etch and PECVD must take a wafer that already carries Au contacts [verify].
 - Optional second wafer with only layer 50 exposed (trap-only backup; trial of the electrode step and wire bonding). Not decided.
-- Contact thickness Ti 5 / Au 50 nm: Claude's call, not yet adopted.
+- Contact thickness Ti 5 / Au 50 nm: part of the final stack; e-beam mark contrast and over-etch on 50 nm Au still to verify.
 - The open items below still apply.
 
 ## Where things stand
@@ -251,4 +251,4 @@ Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decisi
 | R1_TRAP first, then R1_FULL (run 1a, run 1b) | One wafer, four chip types: R1_ONE (9 dies) | Team decision 2026-11-12: about one week of fab; fewest ways for the run to go wrong |
 | Inlaid 100 nm Al mirror (100 nm recess in the SiO₂, 2026-11-09) | Raised 100 nm Al, lift-off, no recess | Team decision 2026-11-12; no source read covers the recess and lift-off step |
 | Si-etched alignment marks (process step 1) and Al mirror marks (layer 1 with step 3) | Alignment marks in Al, written with the mirror layer | Claude's proposal, accepted by the team 2026-11-12: one lithography and one etch fewer |
-| Ti 10 / Au 350 nm contacts (layer 22) | Ti 5 / Au 50 nm contacts | Claude's call, not yet adopted; 350 nm has no job in v4 (contact layer, e-beam crosses) |
+| Ti 10 / Au 350 nm contacts (layer 22) | Ti 5 / Au 50 nm contacts | Final stack, team decision 2026-11-12 (proposed by Claude); 350 nm has no job in v4 (contact layer, e-beam crosses) |

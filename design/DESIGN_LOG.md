@@ -1737,7 +1737,7 @@ No layout, no GDS and no team decision changed in this step. Done by delegated a
 
 The team asked for three things: final layer thicknesses, with attention to the SiO₂ layers; a chip set of one SNSPD-only chip, two SNSPD + trap chips and one trap-only chip, with A30 or B60 to be settled; and a check of whether those chips can share a wafer, with the test structures slimmed. Context from the teammate notes in `fab/`: about one week of fab, and four tests (the SNSPD alone and the SNSPD with trap RF at the SNSPD test setup; the trap alone and the SNSPD in the trap chamber).
 
-Team decisions taken in this step are in `../notes/decisions.md` (five entries dated 2026-11-12): one wafer for all four chips; A30 on the chips the team needs, B60 as one spare; Al mirror raised; alignment marks in Al; SNSPD leads stay Au in the slot. Everything else below is Claude's design call or a finding, listed for adoption in `fab/OPEN_DECISIONS.md`. Sims, layouts and pages were written by delegated agents from written specifications; every acceptance check was rerun before commit.
+Team decisions taken in this step are in `../notes/decisions.md` (six entries dated 2026-11-12): one wafer for all four chips; A30 on the chips the team needs, B60 as one spare; Al mirror raised; alignment marks in Al; SNSPD leads stay Au in the slot; and the final layer stack, which Claude proposed in its plan and the team approved. The analysis behind the stack values is Claude's. Sims, layouts and pages were written by delegated agents from written specifications; every acceptance check was rerun before commit.
 
 ### 1. What was wrong or unsettled in the stack
 
@@ -1848,7 +1848,6 @@ A team member was told that SNSPD leads can be made of NbN. Three versions were 
 
 - Electrode Au, E1 or E2 (wafer-wide).
 - What the team's wafers are: resistivity, SiO₂ already on them, thickness.
-- Team adoption of the thickness table (base SiO₂ range, Ti 5 / Au 50 nm contacts, HSQ 50 nm with a 110 nm cap).
 - Tool limits for the single wafer; the second wafer.
 - Layer-40 overlay to layer 22 must be ≤ 1 µm (1 µm of drawn margin; the mask list said ±5 µm). The e-beam crosses sit about 760 µm from the meander, outside one write field. Dies carry no label on a fabricated layer.
 - The mirror edge still coincides with the centre-DC edge (step 39); with the raised mirror the 100 nm step lies there. Narrowing the mirror to |y| ≤ 18 µm stays an optional proposal.
