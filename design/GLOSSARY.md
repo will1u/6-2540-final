@@ -10,12 +10,14 @@ How to use this page: find the label in its section, read the one-line meaning, 
 |---|---|---|
 | A30 | Trap die with a 30 × 30 µm Au readout window over the NbN detector (v4). | [VARIANTS](fab/VARIANTS.md) |
 | B60 | Trap die with a 60 × 30 µm Au window over the same v4 detector stack; longer meander. | [VARIANTS](fab/VARIANTS.md) |
-| NODET | Trap die with no SNSPD, no window (solid centre DC) and no Al. The R1_TRAP die. | [CLAUDE](CLAUDE.md) (line 79); [LAYOUT](fab/LAYOUT.md) |
+| NODET | Trap die with no SNSPD, no window (solid centre DC) and no Al. The trap-only chip of R1_ONE (2 dies); it was the R1_TRAP die. | [CLAUDE](CLAUDE.md) (line 79); [LAYOUT](fab/LAYOUT.md) |
 | UNIFORM | Equal-depth DC segments with no leads. Simulation reference only; never fabricate. | [VARIANTS](fab/VARIANTS.md) |
-| TEST | Test die (10 × 2.5 mm, not a trap) with T1 to T12 structures for process, dose and geometry comparisons. The current files are `test_die_v4.gds` and `test_die_v4_TRAP.gds` (DESIGN_LOG step 35). | [VARIANTS](fab/VARIANTS.md); [LAYOUT](fab/LAYOUT.md) |
-| TEST_TRAP | Test die with only T1 and T6, on layers 1 and 50. No NbN and no Al. | [VARIANTS](fab/VARIANTS.md) |
-| R1_TRAP | First run (run 1a): 6 NODET and 2 TEST_TRAP dies, trap only, no Al, NbN or EBL. | [VARIANTS](fab/VARIANTS.md) |
-| R1_FULL | Second run (run 1b): 2 A30, 2 B60, 2 NODET and 2 TEST dies on the full v4 stack. Planned after trap-process qualification. | [VARIANTS](fab/VARIANTS.md) |
+| TEST | Test die (10 × 2.5 mm, not a trap) with T1 to T12 structures for process, dose and geometry comparisons. The current files are `test_die_v4.gds` and `test_die_v4_TRAP.gds` (DESIGN_LOG step 35). Not in R1_ONE; files kept. | [VARIANTS](fab/VARIANTS.md); [LAYOUT](fab/LAYOUT.md) |
+| TEST_TRAP | Test die with only T1 and T6, on layers 1 and 50. No NbN and no Al. Not in R1_ONE; file kept (`test_die_v4_TRAP.gds`). | [VARIANTS](fab/VARIANTS.md) |
+| R1_TRAP | Superseded for the next run by R1_ONE (2026-11-12); file kept. Was the first run (run 1a): 6 NODET and 2 TEST_TRAP dies, trap only, no Al, NbN or EBL. | [VARIANTS](fab/VARIANTS.md) |
+| R1_FULL | Second run (run 1b): 2 A30, 2 B60, 2 NODET and 2 TEST dies on the full v4 stack. Superseded for the next run by R1_ONE (2026-11-12); file kept. Was run 1b, planned after trap-process qualification. | [VARIANTS](fab/VARIANTS.md) |
+| R1_ONE | The next run (2026-11-12): one wafer, a 3 × 3 block of 10 × 10 mm dies: 4 A30, 1 B60 (spare), 2 SNSPD-only, 2 NODET (9 dies). Map in `gds/run_R1_ONE_map.csv`. Replaces R1_TRAP and R1_FULL for the next run. | [decisions](../notes/decisions.md) (2026-11-12); [run map](gds/run_R1_ONE_map.csv) |
+| SNSPD-only die (`snspd_die_v4`) | 10 × 10 mm die with no trap electrodes: eight A30 detector cells D1–D8 (each with its contact chain, own Al mirror and ground via), 16 Au bond pads, T3 and T11. Cells D1–D4 sit at y = +1200 µm and D5–D8 at −1200 µm. Pads per cell: `D<k>_S` (signal lead) and `D<k>_G` (return lead), k = 1 to 8. | [make_snspd_die.py](gds/make_snspd_die.py); pad list `gds/snspd_die_v4_pads.csv` |
 
 ## Electrode options and versions
 
@@ -27,7 +29,7 @@ How to use this page: find the label in its section, read the one-line meaning, 
 | v2 | Narrow 10 × 2.5 mm die with the two-ITO window. Archived in `gds/archive_v2_narrow/`. Do not use. | [CLAUDE](CLAUDE.md) (line 89) |
 | v3 | 10 × 10 mm die with no ITO, a die-wide Al plane under 10 µm of D2. Superseded 2026-11-08; archived in `gds/archive_v3_baseline/`; not for fab. | [CLAUDE](CLAUDE.md) (line 80); [VARIANTS](fab/VARIANTS.md) (line 8) |
 | v3.1 | Detector geometry revision: 130 nm wires, 200 nm pitch NbN meander, 160 lines. Used in both v3 and v4 generators. | [VARIANTS](fab/VARIANTS.md) (Detector revision); [CLAUDE](CLAUDE.md) (line 168) |
-| v4 | Current local-mirror architecture (team decision 2026-11-08): Au electrodes on thin SiO₂ over high-resistivity Si, Al mirror only under the detector and its leads, no D2. The SiO₂ cap over the wires is 160 ± 10 nm (DESIGN_LOG steps 26 and 35; it was 80 nm before). | [CLAUDE](CLAUDE.md) (line 12); [VARIANTS](fab/VARIANTS.md) |
+| v4 | Current local-mirror architecture (team decision 2026-11-08): Au electrodes on thin SiO₂ over high-resistivity Si, Al mirror only under the detector and its leads, no D2. The SiO₂ cap over the wires is 160 ± 10 nm (DESIGN_LOG steps 26 and 35; it was 80 nm before). The mirror is raised, not inlaid, since 2026-11-12. | [CLAUDE](CLAUDE.md) (line 12); [VARIANTS](fab/VARIANTS.md) |
 
 ## File-name suffixes
 
@@ -45,22 +47,33 @@ How to use this page: find the label in its section, read the one-line meaning, 
 
 | Term               | Meaning                                                                                                            | Defined in                                                                 |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| 1 (MARK)           | Si alignment marks, about 1 µm etch.                                                                               | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
-| 10 (M1)            | Evaporated Al, 100 nm, inlaid in the thermal SiO₂: the local mirror under the detector (A30, B60).                 | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
+| 1 (MARK)           | Alignment-mark shapes, written in Al together with layer 10 (one exposure, one lift-off; since 2026-11-12). The old Si etch of about 1 µm is dropped.                                                                               | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
+| 10 (M1)            | Evaporated Al, 100 nm, raised on the base SiO₂ (lift-off, no recess; since 2026-11-12): the local mirror under the detector and its leads (A30, B60, SNSPD-only die).                 | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
 | 20 (NbN)           | NbN meander and contact tabs. Datatype 0 is the nominal dose; datatypes 1–7 are the T8 dose array.                 | [CLAUDE](CLAUDE.md) (Layers table)                                         |
-| 22 (Ti/Au)         | Ti/Au contacts from the NbN tabs into the slot, and EBL marks. Called LEAD in [layer_map](gds/layer_map.md).       | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
+| 22 (Ti/Au)         | Ti 5 nm / Au 50 nm contacts from the NbN tabs into the slot, and e-beam crosses (since 2026-11-12; was Ti 10 / Au 350 nm). Called LEAD in [layer_map](gds/layer_map.md).       | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
 | 24                 | M1 via layer of v2. Retired in v3; must stay empty.                                                                | [CLAUDE](CLAUDE.md) (Layers table)                                         |
 | 30                 | Top ITO layer. Retired in v3; must stay empty.                                                                     | [CLAUDE](CLAUDE.md) (Layers table)                                         |
 | 31                 | Buried ITO layer. Retired in v3; must stay empty.                                                                  | [CLAUDE](CLAUDE.md) (Layers table)                                         |
-| 40                 | Openings through the SiO₂: SNSPD contacts and the mirror ground via. Called OPEN in [layer_map](gds/layer_map.md). | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
+| 40                 | Openings through the SiO₂, one etch: contact openings through 110 nm of SiO₂ onto the Au contact pads, and the mirror ground via through 348 nm of SiO₂ onto the Al. Called OPEN in [layer_map](gds/layer_map.md). | [CLAUDE](CLAUDE.md) (Layers table); [layer_map](gds/layer_map.md)          |
 | 45                 | PROTECT layer of v3 (gap-etch patch). Retired in v4; must stay empty.                                              | [CLAUDE](CLAUDE.md) (Layers table); [LAYOUT](fab/LAYOUT.md)                |
 | 50 (Au)            | Electrodes, ground fill, pads and the SNSPD leads in the slot. The layer gds2itvg simulates.                       | [CLAUDE](CLAUDE.md) (Layers table)                                         |
 | 100                | Notes (text). Not fabricated.                                                                                      | [CLAUDE](CLAUDE.md) (Layers table)                                         |
 | 101                | Die and wafer outlines. Not fabricated.                                                                            | [CLAUDE](CLAUDE.md) (Layers table)                                         |
 | M1                 | Name of layer 10.                                                                                                  | [CLAUDE](CLAUDE.md) (Names)                                                |
 | L22, L40, L45, L50 | Short names for layers 22, 40, 45 and 50 used in the fab pages.                                                    | [LAYOUT](fab/LAYOUT.md)                                                    |
-| D1                 | Thermal SiO₂, 1.0 µm, on both sides (traveler step 2).                                                             | [TRAVELER](fab/TRAVELER.md) (step 2)                                       |
+| D1                 | Thermal SiO₂, 1.0 µm, on both sides (traveler step 2). This is the base SiO₂ (see "Stack and sim cases").                                                             | [TRAVELER](fab/TRAVELER.md) (step 2)                                       |
 | D2                 | 10 µm deposited SiO₂ of v3. Gone in v4 (no 10 µm SiO₂).                                                            | [fab README](fab/README.md) (line 8); [VARIANTS](fab/VARIANTS.md) (line 8) |
+
+## Stack and sim cases
+
+| Term | Meaning | Defined in |
+|---|---|---|
+| base SiO₂ | The SiO₂ under the Al mirror and under the spacer. Thermal, 1.0 µm nominal; 0.5–2.0 µm accepted as supplied. If the team's wafers are bare, a base is needed (thermal, or PECVD). Called D1 and "thermal SiO₂" on the older pages. What the wafers carry is not known yet [verify]. | [TRAVELER](fab/TRAVELER.md) (step 2); [sim 22b](sim/INDEX.md) |
+| final stack | The layer set of 2026-11-12, bottom to top: base SiO₂ 1.0 µm nominal; 100 ± 10 nm Al mirror, raised, lift-off; 238 ± 10 nm PECVD SiO₂ spacer; NbN 7.0 ± 0.5 nm; Ti 5 nm / Au 50 nm contacts; HSQ 50 nm (target) on the wires only; 110 nm PECVD SiO₂ cap, so 160 ± 10 nm over the wires; electrode Au (E1 or E2, open). | [decisions](../notes/decisions.md) (2026-11-12) |
+| local mirror | The Al under the SNSPD and its leads. Now 100 nm, raised on the SiO₂, lift-off, no recess (2026-11-12). Before that: inlaid in a 100 nm recess (2026-11-09); 450 nm (2026-11-08). | [decisions](../notes/decisions.md) |
+| al100_cap110 | Sim 10c case: the slot cross-section of the final stack, raised 100 nm Al with the 110 nm cap under the leads. Quote it for the mirror and the leads. | [sim INDEX](sim/INDEX.md) (row 10c) |
+| al100 | Sim 10c case: raised 100 nm Al with 160 nm of SiO₂ over the wires. Quote it for the direct nanowire pickup. | [sim INDEX](sim/INDEX.md) (row 10c) |
+| al100_inlaid | Sim 10c case: the inlaid mirror of 2026-11-09. Superseded; do not quote it as current. | [sim INDEX](sim/INDEX.md) (row 10c) |
 
 ## Electrode and pad numbers
 
@@ -93,20 +106,20 @@ How to use this page: find the label in its section, read the one-line meaning, 
 
 | Term | Meaning | Defined in |
 |---|---|---|
-| T1 | Au comb with 5 µm gaps: DC leakage and flashover across the trap gap. On TEST and TEST_TRAP. | [LAYOUT](fab/LAYOUT.md) (line 71) |
+| T1 | Au comb with 5 µm gaps: DC leakage and flashover across the trap gap. On TEST and TEST_TRAP; not in R1_ONE. | [LAYOUT](fab/LAYOUT.md) (line 71) |
 | T2 | Retired: the v3 Au / D2 / Al capacitor. Replaced by T2v. | [OPEN_DECISIONS](fab/OPEN_DECISIONS.md) (line 30) |
-| T2v | Au / 0.40 µm SiO₂ / Al capacitor: 200 µm Au plate over a 240 µm Al plate. About 3.5 pF [team calc]. | [LAYOUT](fab/LAYOUT.md) (line 72) |
-| T3 | NbN 4-wire bar: Rsq and Tc of the patterned NbN film. | [LAYOUT](fab/LAYOUT.md) (line 73) |
-| T4 | Spare SNSPD with the A30 meander on its own local Al mirror, with a mirror probe pad. | [LAYOUT](fab/LAYOUT.md) (line 74) |
-| T4b | Spare SNSPD with the B60 meander on its own local Al mirror. | [LAYOUT](fab/LAYOUT.md) (line 75) |
+| T2v | Au / 0.40 µm SiO₂ / Al capacitor: 200 µm Au plate over a 240 µm Al plate. About 3.5 pF [team calc]. Not in R1_ONE. | [LAYOUT](fab/LAYOUT.md) (line 72) |
+| T3 | NbN 4-wire bar: Rsq and Tc of the patterned NbN film. In R1_ONE on the SNSPD-only dies; probe station only. | [LAYOUT](fab/LAYOUT.md) (line 73) |
+| T4 | Spare SNSPD with the A30 meander on its own local Al mirror, with a mirror probe pad. Not in R1_ONE; the detector cells D1–D8 on the SNSPD-only die are the SNSPDs of the run [inference]. | [LAYOUT](fab/LAYOUT.md) (line 74) |
+| T4b | Spare SNSPD with the B60 meander on its own local Al mirror. Not in R1_ONE. | [LAYOUT](fab/LAYOUT.md) (line 75) |
 | T5 | Retired; removed from the test die. | [CLAUDE_PROGRESS](../CLAUDE_PROGRESS.md) (line 103) |
-| T6 | Au continuity loop, 6 µm line, two pads. On TEST and TEST_TRAP. | [LAYOUT](fab/LAYOUT.md) (line 76) |
+| T6 | Au continuity loop, 6 µm line, two pads. On TEST and TEST_TRAP; not in R1_ONE. | [LAYOUT](fab/LAYOUT.md) (line 76) |
 | T7 | Retired; removed from the test die. | [CLAUDE_PROGRESS](../CLAUDE_PROGRESS.md) (line 103) |
-| T8 | EBL dose array: seven A30 meanders on NbN datatypes 1–7, dose factors 0.80 to 1.20 × nominal. | [LAYOUT](fab/LAYOUT.md) (line 77) |
-| T9 | Geometry array: wire width and pitch variants, turn shape, length series, straight references. | [LAYOUT](fab/LAYOUT.md) (line 78) |
-| T10 | Al mirror strip, four-point, over 2510 µm. Expected 18.8–25.1 Ω at 100 nm Al [team calc]. | [LAYOUT](fab/LAYOUT.md) (line 79) |
-| T11 | Au-to-Al via chain: four vias in series. | [LAYOUT](fab/LAYOUT.md) (line 80) |
-| T12 | Two 5 µm Au leads 5 µm apart over an Al strip, modelling the SNSPD leads in the slot. | [LAYOUT](fab/LAYOUT.md) (line 81) |
+| T8 | EBL dose array: seven A30 meanders on NbN datatypes 1–7, dose factors 0.80 to 1.20 × nominal. Not in R1_ONE; the SNSPD-only die has its own dose variation across its eight cells (layer-20 datatypes 0–3 and 5–7). | [LAYOUT](fab/LAYOUT.md) (line 77) |
+| T9 | Geometry array: wire width and pitch variants, turn shape, length series, straight references. Not in R1_ONE. | [LAYOUT](fab/LAYOUT.md) (line 78) |
+| T10 | Al mirror strip, four-point, over 2510 µm. Expected 18.8–25.1 Ω at 100 nm Al [team calc]. Not in R1_ONE. | [LAYOUT](fab/LAYOUT.md) (line 79) |
+| T11 | Au-to-Al via chain: four vias in series. In R1_ONE on the SNSPD-only die; probe station only. | [LAYOUT](fab/LAYOUT.md) (line 80) |
+| T12 | Two 5 µm Au leads 5 µm apart over an Al strip, modelling the SNSPD leads in the slot. Not in R1_ONE. | [LAYOUT](fab/LAYOUT.md) (line 81) |
 
 ## Tests (a, b)
 
@@ -159,8 +172,8 @@ The a-tests are room-temperature electrical tests. The b-tests are cryogenic det
 | W2 | HSQ dose, develop and CF₄ etch on the real stack; mark recognition and overlay. | [QUALIFICATION](fab/QUALIFICATION.md) (W2 heading) |
 | W3 | Layer-40 openings, Au-to-Al contact and electrode rehearsal, with no NbN. | [QUALIFICATION](fab/QUALIFICATION.md) (W3 heading) |
 | W5 | Plating calibration for the 6 µm Au. E2 only. | [QUALIFICATION](fab/QUALIFICATION.md) (W5 heading) |
-| W7 | Bond-and-leak test on dummy pads. R1_TRAP and R1_FULL, both options. | [QUALIFICATION](fab/QUALIFICATION.md) (W7 heading) |
-| W8 | Inlaid 100 nm Al mirror on a dummy wafer: recess, lift-off, planar surface. | [QUALIFICATION](fab/QUALIFICATION.md) (W8 heading) |
+| W7 | Bond-and-leak test on dummy pads. R1_ONE, both options. | [QUALIFICATION](fab/QUALIFICATION.md) (W7 heading) |
+| W8 | Hillock check only, on a co-loaded piece (2026-11-12). The mirror is raised, so the inlaid recess and planar-surface test is dropped. | [QUALIFICATION](fab/QUALIFICATION.md) (W8 heading) |
 | E1 lift-off loop | Lift-off of 0.35 µm Au over 5 µm gaps, and wedge bonding. E1 only. | [QUALIFICATION](fab/QUALIFICATION.md) (E1 lift-off heading) |
 | W4, W6 | Do not exist in the current v4 plan. There is no W4 or W6 heading in QUALIFICATION. | [QUALIFICATION](fab/QUALIFICATION.md) |
 
@@ -170,7 +183,7 @@ Two numbering schemes both use the word "step". They are different things.
 
 | Term | Meaning | Defined in |
 |---|---|---|
-| Process step 0–19 | Row number in the fabrication traveler, for example process step 3 = inlaid Al local mirror. Tables such as "R1_TRAP uses steps 0, 1, 2, 12–15, 17, 18 and 19" use these. | [TRAVELER](fab/TRAVELER.md) |
+| Process step 0–19 | Row number in the fabrication traveler, for example process step 3 = Al local mirror (raised since 2026-11-12; inlaid before that). Tables such as "R1_TRAP uses steps 0, 1, 2, 12–15, 17, 18 and 19" use these. | [TRAVELER](fab/TRAVELER.md) |
 | Design-log step | Numbered entry in the design log, headed "Step N, …", for example "Step 3, outer DC segment pitch". Notes cite it as "DESIGN_LOG step 25" or "(step 36)". | [DESIGN_LOG](DESIGN_LOG.md) |
 | How to tell them apart | If the text says "traveler", "process" or lists runs and dies, the number is a process step. If it says "DESIGN_LOG", "sim/" or sits next to a simulation, it is a design-log step. The design log starts at step 0 and new steps are appended at the end; process steps stop at 19. | [TRAVELER](fab/TRAVELER.md); [DESIGN_LOG](DESIGN_LOG.md) |
 
@@ -234,8 +247,8 @@ Values come from the Key design numbers section of [CLAUDE](CLAUDE.md) or from [
 | Micromotion | Ion motion at the RF frequency, which grows when the ion sits off the RF null. Over the readout window the ion sits off the null when DC fields push it back up; sim 13 reports the resulting amplitude (`sim/out/13_dc_height_tuning_v4/summary.json`, key `a_mm_nm`). | [DESIGN_LOG](DESIGN_LOG.md) |
 | Radial tilt | Tilt of the DC confining field in the radial plane: 10° in the zones. | [CLAUDE](CLAUDE.md) (Key design numbers) |
 | I_sw | NbN switching current: ≈ 8–9 µA for a 100 nm wire at about 5 K [team calc, rough]. [sim 19](sim/19_lead_termination.py) uses 8–20 µA `[verify]`. | [02_CRYOGENIC](fab/tests/02_CRYOGENIC.md) |
-| L_k | Kinetic inductance: ≈ 3.3 µH for the v3.1 A30 meander at 70 pH/sq (7 nm NbN); τ = L/50 Ω ≈ 66 ns. | [02_CRYOGENIC](fab/tests/02_CRYOGENIC.md) |
+| L_k | Kinetic inductance: 3.10 µH for the v4 A30 meander (3.0991 µH from the released file, `gds/measured_v4.md`); τ = L/50 Ω = 62.0 ns (61.98 ns). | [02_CRYOGENIC](fab/tests/02_CRYOGENIC.md) |
 | R_sq | Sheet resistance of a thin film, in Ω per square. No value in the two designated sources; the value used in the tests is in [01_ELECTRICAL](fab/tests/01_ELECTRICAL.md) (a7). | [01_ELECTRICAL](fab/tests/01_ELECTRICAL.md) |
 | Tc | Superconducting critical temperature of the NbN: ≈ 7.8–8 K. | [02_CRYOGENIC](fab/tests/02_CRYOGENIC.md) |
 | C_RN | RF-to-wire capacitance used in the sim 10 pickup model. The letters are not expanded in the repo. No value in the two designated sources. | [DESIGN_LOG](DESIGN_LOG.md) (step 10) |
-| Common-mode current | RF current that flows the same way in both SNSPD leads. Each slot lead collects ≈ 44.5 µA (E2) and ≈ 28.6 µA (E1) at 28 MHz over the 2.24 mm of lead between the RF rails (`sim/out/10c_mirror_thickness/summary.json`, `al100_inlaid`; 2-D upper bound). | [02_CRYOGENIC](fab/tests/02_CRYOGENIC.md) |
+| Common-mode current | RF current that flows the same way in both SNSPD leads. Each slot lead collects ≈ 44.5 µA (E2) and ≈ 28.4 µA (E1) at 28 MHz over the 2.24 mm of lead between the RF rails (`sim/out/10c_mirror_thickness/summary.json`, `al100_cap110`; 2-D upper bound). | [02_CRYOGENIC](fab/tests/02_CRYOGENIC.md) |

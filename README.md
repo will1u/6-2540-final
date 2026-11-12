@@ -12,7 +12,7 @@ Final project for MIT 6.2540: a microfabricated surface-electrode ion trap. The 
 | What the team has decided, and why | [notes/decisions.md](notes/decisions.md) |
 | What is still open | [design/fab/OPEN_DECISIONS.md](design/fab/OPEN_DECISIONS.md) |
 | Current status and the done list | [CLAUDE_PROGRESS.md](CLAUDE_PROGRESS.md) |
-| The meaning of a label (A30, NODET, E1/E2, R1_TRAP, ...) | [design/GLOSSARY.md](design/GLOSSARY.md) |
+| The meaning of a label (A30, NODET, E1/E2, R1_ONE, ...) | [design/GLOSSARY.md](design/GLOSSARY.md) |
 | Every simulation, with its question and headline number | [design/sim/INDEX.md](design/sim/INDEX.md) |
 | The fabrication process | [design/fab/README.md](design/fab/README.md) |
 | The full design history, latest steps first | [design/DESIGN_LOG.md](design/DESIGN_LOG.md) |
@@ -24,7 +24,7 @@ Final project for MIT 6.2540: a microfabricated surface-electrode ion trap. The 
 | `proposal/` | Project proposal: `main.tex` (REVTeX 4.2) and `references.bib` | Team |
 | `notes/decisions.md` | Decision log: each design choice, the options rejected and the team's reason | Team's decisions; Claude writes the entries |
 | `design/` | Design package: GDS generators, simulations, fab documents, literature report, primers. Index: [design/README.md](design/README.md) | Claude, at the team's request |
-| `design/gds/` | Layout generators and checkers (`make_chip.py`, `check_chip.py`, ...) and the generated GDS files | |
+| `design/gds/` | Layout generators and checkers (`make_chip.py`, `check_chip.py`, `make_snspd_die.py`, `make_run.py`, `check_run.py`, ...) and the generated GDS files | |
 | `design/sim/` | Numbered simulation scripts; outputs in `design/sim/out/<script>/` (tracked) | |
 | `design/fab/` | Process pages, run sheet, test plan, decision briefs (linked Obsidian notes) | |
 | `design/research/` | Literature report and the research notes behind it | |
@@ -66,12 +66,38 @@ cd design/sim
 
 The last one simulates the fabrication GDS and takes about 3 minutes per die. The order for regenerating every layout is in [design/CLAUDE.md](design/CLAUDE.md), "Regenerating and checking".
 
+For the 2026-11-12 pass (the SNSPD-only die and the run R1_ONE):
+
+```bash
+cd design/sim
+./run.sh ../gds/make_snspd_die.py
+./run.sh ../gds/check_snspd_die.py
+./run.sh ../gds/make_run.py R1_ONE
+./run.sh ../gds/check_run.py R1_ONE
+```
+
+Sim 24b (`24b_rcwa_stack_scan.py`) needs the separate `rcwa` env, as sim 24 does.
+
+## New files, 2026-11-12
+
+| File | What it is |
+|---|---|
+| `design/gds/make_snspd_die.py` | Generates `snspd_die_v4.gds`, the SNSPD-only die: eight A30 detector cells D1–D8, T3, T11 |
+| `design/gds/check_snspd_die.py` | Independent checker for that die |
+| `design/gds/check_run.py` | Run-level checker, for `R1_ONE` |
+| `design/gds/make_run.py` | Now takes a run name; `R1_ONE` is the next run (3 × 3 block, 9 dies) |
+| `design/sim/22b_base_sio2_sweep.py` | Chip RF capacitance against base SiO₂ thickness |
+| `design/sim/24b_rcwa_stack_scan.py` | RCWA scan of the spacer and cap (`rcwa` env) |
+| `design/sim/10c_mirror_thickness.py`, case `al100_cap110` | Slot cross-section of the final stack |
+
 ## Checks before committing
 
 | After changing | Run (from `design/sim`) | Must print |
 |---|---|---|
 | A trap die | `./run.sh ../gds/check_chip.py trap_die_v4_<variant>` | `ALL CHECKS PASS` |
 | A test die | `./run.sh ../gds/make_test_die.py`, then `./run.sh ../gds/check_test_die.py test_die_v4` | `SELF-CHECK PASS`, `ALL CHECKS PASS` |
+| The SNSPD-only die | `./run.sh ../gds/check_snspd_die.py` (from `design/sim`) | `ALL CHECKS PASS` |
+| The run R1_ONE | `./run.sh ../gds/check_run.py R1_ONE` (from `design/sim`) | `ALL CHECKS PASS` |
 | Any page under `design/` | `./run.sh ../fab/check_links.py ..` | 0 broken links |
 | Any page or simulation output | `./run.sh ../check_numbers.py` | `ALL NUMBERS CONSISTENT` |
 

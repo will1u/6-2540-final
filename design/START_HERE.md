@@ -1,4 +1,4 @@
-> **Claude-authored.** Start page: a map of the chip design package, with its key numbers, decisions, open items, tests and links, 2026-11-10.
+> **Claude-authored.** Start page: a map of the chip design package, with its key numbers, decisions, open items, tests and links. Last updated 2026-11-12 for the one-wafer pass (final stack, four chip types, run R1_ONE).
 
 # Start here
 
@@ -9,10 +9,10 @@
 - The chip traps one ¹³⁸Ba⁺ ion at a target height of 50 µm and detects its 493 nm fluorescence ([progress goal table](../CLAUDE_PROGRESS.md)).
 - The detector is an NbN superconducting nanowire single-photon detector (SNSPD, [glossary](GLOSSARY.md#acronyms)) under the readout zone. The loading zone and the readout zone are 480 µm apart.
 - The electrodes are two RF rails, a centre DC electrode (electrode 2) and segmented outer DC electrodes on a 10 × 10 mm die ([CLAUDE.md](CLAUDE.md), "What this folder is").
-- The materials are Au electrodes on about 1.3 µm of SiO₂ over high-resistivity Si, with a local Al mirror under the SNSPD and its leads only ([CLAUDE.md](CLAUDE.md), "Key design numbers").
-- The chip is built as small R&D runs at MIT.nano. The first run, R1_TRAP, is trap only, with no detector ([progress](../CLAUDE_PROGRESS.md), deliverables).
+- The materials are Au electrodes on about 1.35 µm of SiO₂ over high-resistivity Si, with a 100 nm Al mirror, raised on the SiO₂, under the SNSPD and its leads only (2026-11-12; the stack is in the table below). The SiO₂ base is 1.0 µm nominal, and what the team's wafers carry is not known yet [verify] ([CLAUDE.md](CLAUDE.md), "Key design numbers").
+- The chip is built as small R&D runs at MIT.nano. The first run is R1_ONE: one wafer with four chip types in a 3 × 3 block (2026-11-12). It replaces R1_TRAP and R1_FULL as the next run ([progress](../CLAUDE_PROGRESS.md)).
 
-Labels used above: **A30** is the trap die with a 30 × 30 µm detector window; **B60** has a 60 × 30 µm window; **NODET** is the die with no detector ([glossary](GLOSSARY.md#dies-and-runs)); **E1** (0.35 µm evaporated Au) and **E2** (6 µm plated Au) are the two electrode options, and the team has not chosen between them ([glossary](GLOSSARY.md#electrode-options-and-versions)).
+Labels used above: **A30** is the trap die with a 30 × 30 µm detector window; **B60** has a 60 × 30 µm window; **NODET** is the die with no detector ([glossary](GLOSSARY.md#dies-and-runs)); **SNSPD-only die** (`snspd_die_v4`) has eight detector cells D1–D8 and no trap electrodes. On R1_ONE the four chip types are 4 A30, 1 B60 (spare), 2 SNSPD-only and 2 NODET; **E1** (0.35 µm evaporated Au) and **E2** (6 µm plated Au) are the two electrode options, and the team has not chosen between them ([glossary](GLOSSARY.md#electrode-options-and-versions)).
 
 ## What it looks like
 
@@ -22,7 +22,7 @@ What you are looking at: the whole 10 × 10 mm die with its pad rows, RF pad and
 
 ![Layer stack at the readout zone](fab/figures/stack_v4.svg)
 
-What you are looking at: the layers at the readout window, from the Si substrate up to the Au electrodes, with the 100 nm Al mirror inlaid in the SiO₂.
+What you are looking at: the layers at the readout window, from the Si substrate up to the Au electrodes, with the 100 nm Al mirror on the base SiO₂ (raised, not inlaid, since 2026-11-12). The figure may not yet be redrawn for the final stack [verify].
 
 ## The numbers that define it
 
@@ -40,7 +40,9 @@ What you are looking at: the layers at the readout window, from the Si substrate
 | Geometric collection, E2 | A30 2.22 %; B60 4.16 % of emitted 493 nm photons | [sim/out/15b_collection_v4/summary.json](sim/out/15b_collection_v4/summary.json) (`cases.A30_E2_null+drop.collection_pct`, `cases.B60_E2_null+drop.collection_pct`) |
 | Absorbed fraction, E2, 160 nm cap | A30 1.47 %; B60 2.71 % of all emitted photons | [sim/out/15b_collection_v4/summary.json](sim/out/15b_collection_v4/summary.json) (`caps.160.absorbed_of_emitted_pct`) |
 | NbN absorption, 160 nm SiO₂ cap | 0.66 (effective-medium theory; the value the collection rows use). RCWA at normal incidence gives 0.83 ([sim 24](sim/out/24_rcwa_meander/table.md), DESIGN_LOG step 43) | [sim/out/09c_localmirror_optics/summary.json](sim/out/09c_localmirror_optics/summary.json) (`v4_best_cap_spacer238.A`) |
-| RF pickup in the nanowire | 0.96 µA (E2); 1.92 µA (E1); 2-D bound | [sim/out/10c_mirror_thickness/summary.json](sim/out/10c_mirror_thickness/summary.json) (`al100_inlaid.E2.window.I_pk_uA`, `al100_inlaid.E1.window.I_pk_uA`) |
+| RF pickup in the nanowire | 0.96 µA (E2); 1.92 µA (E1); 2-D bound | [sim/out/10c_mirror_thickness/summary.json](sim/out/10c_mirror_thickness/summary.json) (`al100.E2.window.I_pk_uA`, `al100.E1.window.I_pk_uA`; case `al100`, raised 100 nm Al with 160 nm over the wires) |
+| Final stack over the Si (2026-11-12) | Base SiO₂ 1.0 µm nominal (0.5–2.0 µm accepted); 100 ± 10 nm Al mirror, raised, lift-off; 238 ± 10 nm PECVD SiO₂ spacer; NbN 7.0 ± 0.5 nm; Ti 5 nm / Au 50 nm contacts; HSQ 50 nm on the wires; 110 nm PECVD SiO₂ cap, so 160 ± 10 nm over the wires. Derived: about 1.35 µm of SiO₂ under the electrodes off the mirror; 348 nm between the Au and the Al off the wires | Claude's design calls for the thicknesses, listed in [OPEN_DECISIONS](fab/OPEN_DECISIONS.md); the raised mirror is the team's, in [decisions](../notes/decisions.md) (2026-11-12). Sim support: `al100_cap110` (sim 10c) and [sim 22b](sim/INDEX.md) |
+| Slot-lead common-mode current (sim 10c) | 44.5 µA per lead (E2); 28.4 µA (E1), case `al100_cap110` | [sim/out/10c_mirror_thickness/summary.json](sim/out/10c_mirror_thickness/summary.json) (`al100_cap110.E2.slot.I_lead_in_trap_uA`) |
 | Chip RF capacitance, A30 | 2.59 pF on E2; 2.39 pF on E1; Si treated as lossless (the cold case) | [sim/out/22_rf_capacitance/summary.json](sim/out/22_rf_capacitance/summary.json) (`configs.A30_E2.chip.C_chip_pF`, `configs.A30_E1.chip.C_chip_pF`) |
 | Die size | 10 × 10 mm | [CLAUDE.md](CLAUDE.md), "Conventions" |
 
@@ -59,27 +61,36 @@ What you are looking at: the layers at the readout window, from the Si substrate
 | 2026-11-02 | Process: ground-plane flow, plated Au electrodes | "a simpler design we could go for, ... in between difficulty of a pure single layer trap vs actual multilayering" | Superseded (2026-11-08, local mirror) |
 | 2026-11-02 | SNSPD material: NbN, e-beam patterned | "the detector needs a T_c well above the ~5 K operating temperature ("anything over 7K")" | Stands |
 | 2026-11-02 | SNSPD protection: SiO₂ cap, Al ground plane, grounded ITO window | "against laser scatter, RF pickup and dielectric charging" | Superseded in part (ITO removed 2026-11-07; Al replaced 2026-11-08) |
-| 2026-11-02 | First run is trap only (R1_TRAP) | Reason not recorded | Stands |
-| 2026-11-07 | Detector variants: A30, B60 and NODET | Reason not recorded | Stands (B60 kept 2026-11-08) |
+| 2026-11-02 | First run is trap only (R1_TRAP) | Reason not recorded | Superseded 2026-11-12 (R1_ONE) |
+| 2026-11-07 | Detector variants: A30, B60 and NODET | Reason not recorded. 2026-11-12: A30 on the integrated chips, because it "is closer to the chip designed by Hampel"; B60 kept as one spare, reason for the spare not given | Stands (B60 kept 2026-11-08 and as the spare, 2026-11-12) |
 | 2026-11-07 | No ITO anywhere | "switch to an Al mirror to implement the Hampel design" | Stands |
 | 2026-11-07 | 10 × 10 mm trap die, trap centred, pads at the die edges | "to fit the lab's form factor" | Stands |
 | 2026-11-08 | On-chip vias from the Au ground fill to the Al | "a mirror left floating by a missing bond is the worst case for RF pickup" | Stands (applied to the local mirror) |
 | 2026-11-08 | Hampel's local mirror as a variant first | Reason not recorded | Superseded (same day, architecture entry) |
 | 2026-11-08 | Architecture: local mirror, no 10 µm D2 | "with vacuum directly above the cap, the cap can be tuned as a matching layer"; "NIST traps without one on Si with ρ > 20 kΩ·cm" | Stands (mirror thickness changed 2026-11-09) |
 | 2026-11-08 | Lead routing: slot along the centre DC | "it matches Hampel and puts the leads in a step the process already has" | Stands |
-| 2026-11-08 | R1_TRAP follows the new architecture | "R1_TRAP should qualify the process the SNSPD dies will use" | Stands |
+| 2026-11-08 | R1_TRAP follows the new architecture | "R1_TRAP should qualify the process the SNSPD dies will use" | Superseded for the next run, 2026-11-12 (R1_ONE) |
 | 2026-11-08 | Detector allocation: A30 only, drop B60 | "The 60 µm window lowers the ion more"; "A larger exposed window floor has more area to become contaminated" | Reversed the same day |
 | 2026-11-08 | Detector allocation: keep B60 | Reconsidered after the v4 numbers; "The team did not say which of these points decided it" | Stands |
 | 2026-11-08 | Zone spacing 480 µm | "480 µm matches the laser setup the team has in its system now" | Stands |
 | 2026-11-08 | Local mirror Al 450 nm thick | "lower the resistance of the mirror's path to ground" | Superseded (2026-11-09, 100 nm inlaid) |
 | 2026-11-09 | Keep the 50 µm ion height | Adopted the DESIGN_LOG step 30 analysis: "Going to 40 µm with the same window gives 1.44× the light" | Stands |
-| 2026-11-09 | Local mirror: 100 nm Al, inlaid | "We want the built electrodes to be the flat, coplanar geometry that every simulation assumes" | Stands; to be proven on witness W8 |
+| 2026-11-09 | Local mirror: 100 nm Al, inlaid | "We want the built electrodes to be the flat, coplanar geometry that every simulation assumes" | Superseded 2026-11-12 (raised, no recess) |
+| 2026-11-12 | One wafer for all four chips: run R1_ONE, a 3 × 3 block (4 A30, 1 B60, 2 SNSPD-only, 2 NODET) | Fewest ways for the run to go wrong in about one week of fab; the four chips follow the team's tests ([decisions](../notes/decisions.md)) | Stands |
+| 2026-11-12 | Detector for the integrated chips: A30, with B60 as one spare | A30 "is closer to the chip designed by Hampel"; the reason for the spare is not given ([decisions](../notes/decisions.md)) | Stands |
+| 2026-11-12 | Local mirror: 100 nm Al, raised on the SiO₂, no recess (replaces inlaid) | Fewest ways for the run to go wrong; raised was the named fallback, with the same mask ([decisions](../notes/decisions.md)) | Stands; W8 no longer needed for the recess |
+| 2026-11-12 | Alignment marks written in Al with the mirror layer; Si-etched marks dropped | One lithography and one etch fewer; wafers that already carry SiO₂ can be used as they are ([decisions](../notes/decisions.md)) | Stands |
+| 2026-11-12 | SNSPD leads stay Au in the slot; NbN leads not used in this run | No layout change to the checked dies; the short NbN version gains little once the contacts are thin ([decisions](../notes/decisions.md)) | Stands; the contact thickness (Ti 5 / Au 50 nm) is Claude's call, awaiting team adoption |
 
 ## What is still open
 
 | Question | Options the repo names | Brief |
 |---|---|---|
-| Electrode Au | E1: 0.35 µm lift-off; E2: 6 µm plated | [E1 vs E2](fab/briefs/E1_vs_E2.md) |
+| Electrode Au | E1: 0.35 µm lift-off; E2: 6 µm plated. One choice for the whole wafer | [E1 vs E2](fab/briefs/E1_vs_E2.md) |
+| What the team's wafers are | Not known: Si thickness and whether the wafers carry SiO₂ (bare wafers need a base SiO₂, thermal or PECVD) | [OPEN_DECISIONS](fab/OPEN_DECISIONS.md) |
+| Thickness table (final stack) | Adopt or change the values in section "The numbers that define it" (Claude's design calls; not yet the team's) | [OPEN_DECISIONS](fab/OPEN_DECISIONS.md) |
+| Tool limits for the single wafer | NbN sputter and e-beam must take a 100 mm wafer; e-beam, CF₄ etch and PECVD must take a wafer that already carries Au contacts [verify] | [OPEN_DECISIONS](fab/OPEN_DECISIONS.md) |
+| Second wafer with only layer 50 | Not decided. Claude recommends it as the trap-only backup and as the trial of the electrode step and of wire bonding | [OPEN_DECISIONS](fab/OPEN_DECISIONS.md) |
 | Readout radial tilt | Keep 10°; smaller tilt; zero tilt; wider DAC range | [readout tilt](fab/briefs/readout_tilt.md) |
 | RF grounding / filters | Centre-DC filtering; carrier grounds; symmetric detector termination or cancellation; RF bypass at the SNSPD lead pads (v4) | [RF grounding and termination](fab/briefs/rf_grounding_and_termination.md) |
 | Pad pitch / beam access | 360 µm (current layout); 180, 240, 300, 400 µm | [pad pitch](fab/briefs/pad_pitch.md) |
@@ -88,7 +99,7 @@ What you are looking at: the layers at the readout window, from the Si substrate
 
 Largest open items from "Before any v4 run" that are not design choices:
 
-- Inlaid mirror, witness loop W8 (recess, lift-off, hillocks): [qualification](fab/QUALIFICATION.md). Also see the [mirror brief](fab/briefs/mirror_raised_vs_inlaid.md).
+- Mirror: raised 100 nm (2026-11-12). Witness loop W8 is now a hillock check only, on a co-loaded piece [verify]: [qualification](fab/QUALIFICATION.md). Also see the [mirror brief](fab/briefs/mirror_raised_vs_inlaid.md).
 - Facility questions for MIT.nano staff: [facility confirmations](fab/QUALIFICATION.md#facility-confirmations).
 - Transport waveform hardware values tagged [verify]: DAC update rate 1 MHz, 16 bit over ±10 V, filter corners 50 kHz and 200 kHz ([sim 21 script](sim/21_transport_waveform.py), [DAC row](fab/tests/00_SETUP.md)).
 
@@ -109,7 +120,8 @@ Largest open items from "Before any v4 run" that are not design choices:
 | see why something was decided | [notes/decisions.md](../notes/decisions.md) |
 | rerun or check a simulation | Set up the repo: [CLAUDE.md](CLAUDE.md), "Setting up the electrode repo". Then [sim/INDEX.md](sim/INDEX.md) |
 | change a layout | [CLAUDE.md](CLAUDE.md), "Regenerating and checking" |
-| follow the fabrication steps | [fab/TRAVELER.md](fab/TRAVELER.md), then [fab/RUNSHEET_R1_TRAP.md](fab/RUNSHEET_R1_TRAP.md) |
+| follow the fabrication steps | [fab/TRAVELER.md](fab/TRAVELER.md), then [fab/RUNSHEET_R1_TRAP.md](fab/RUNSHEET_R1_TRAP.md) (that sheet is for R1_TRAP, now superseded; the R1_ONE run plan is [fab/RUN_PLAN.md](fab/RUN_PLAN.md)) |
+| build or check the run R1_ONE, or the SNSPD-only die | [design/README.md](README.md), "Running" |
 | plan a test | [fab/test_plan.md](fab/test_plan.md) |
 | understand the RF and filtering background | [primers/RF_PRIMER.md](primers/RF_PRIMER.md) |
 | find a figure for the report | [figures/README.md](figures/README.md) |

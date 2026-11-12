@@ -1,23 +1,42 @@
 # Claude progress: five-wire Ba⁺ trap with an integrated NbN SNSPD
 
-> **Claude-authored running status.** Last update: 2026-11-10 (readability pass and DESIGN_LOG steps 40–43: start-here page, glossary, simulation index, RF primer, test-setup pages, decision briefs, report figures; new sims 21–24).
+> **Claude-authored running status.** Last update: 2026-11-12 (one-wafer pass: final stack, four chip types on one wafer, run R1_ONE, slim tests; DESIGN_LOG step 45). The 2026-11-10 pass is in the history below.
 > - New here? Start at [design/START_HERE.md](design/START_HERE.md).
 > - Full detail with numbers and citations for every step: [design log](design/DESIGN_LOG.md) (numbered design steps and documentation updates).
 > - New team member? Set up the `electrode` repo first: `design/CLAUDE.md`, "Setting up the electrode repo".
 > - Folder index and how to run: `design/README.md`.
 
+## This pass (2026-11-12): current state
+
+**Goal.** Fix the final stack (raised 100 nm Al mirror, alignment marks in Al, Ti 5 / Au 50 nm contacts, 110 nm PECVD SiO₂ cap); put four chip types on one wafer (run `R1_ONE`); keep only the test structures the team's plan needs. Team decisions: five entries dated 2026-11-12 in [notes/decisions.md](notes/decisions.md).
+
+**Done**
+- Decisions logged: one wafer for all four chips (R1_ONE, 4 A30, 1 B60, 2 SNSPD-only, 2 NODET); A30 on the integrated chips with B60 as one spare; raised 100 nm Al mirror, no recess; alignment marks in Al; Au slot leads kept.
+- Sims: `10c` new case `al100_cap110` (slot cross-section of the final stack); `22b` base SiO₂ sweep, 0.15–2.0 µm (cold chip capacitance on E2 from 2.88 to 2.38 pF; with the Si as a grounded conductor 57.5 to 13.6 pF); `24b` RCWA scan of the spacer and cap (script written; its output is not yet in `design/sim/out/`).
+- SNSPD-only die `snspd_die_v4` (eight A30 detector cells D1–D8, T3, T11) with an independent checker, `design/gds/check_snspd_die.py`: all checks pass.
+- Run `R1_ONE` (3 × 3, nine dies) with the run-level checker `design/gds/check_run.py`: all checks pass.
+- Fab, test and figure pages brought to the final stack in this pass [verify before relying on them].
+
+**Open**
+- Electrode Au, E1 or E2. One choice for the whole wafer.
+- What the team's wafers are (Si thickness, and whether they carry base SiO₂). Not known.
+- Thickness table (final stack): Claude's design calls, awaiting team adoption ([OPEN_DECISIONS](design/fab/OPEN_DECISIONS.md)).
+- Tool limits for the single wafer: NbN sputter and e-beam must take a 100 mm wafer; e-beam, CF₄ etch and PECVD must take a wafer that already carries Au contacts [verify].
+- Optional second wafer with only layer 50 exposed (trap-only backup; trial of the electrode step and wire bonding). Not decided.
+- Contact thickness Ti 5 / Au 50 nm: Claude's call, not yet adopted.
+- The open items below still apply.
+
 ## Where things stand
 
-- **Architecture:** v4 has a local Al mirror under the SNSPD with no ground plane, Au leads in a slot along the centre DC, and the trap dies A30, B60 and NODET pass `check_chip.py` ([stack figure](design/fab/figures/stack_v4.svg)).
-- **First run:** R1_TRAP is trap only (6 NODET and 2 trap-only test dies) and is run 1a, chosen first ([run sheet](design/fab/RUNSHEET_R1_TRAP.md)).
-- **Mirror (team decision, 2026-11-09):** the Al mirror is 100 nm thick and inlaid in a 100 nm recess in the SiO₂ ([team decisions](notes/decisions.md)).
+- **Architecture:** v4 has a 100 nm Al mirror, raised on the SiO₂ under the SNSPD (2026-11-12), with no ground plane and Au leads in a slot along the centre DC. The dies A30, B60 and NODET pass `check_chip.py`; the SNSPD-only die passes `check_snspd_die.py` ([stack figure](design/fab/figures/stack_v4.svg), not yet redrawn for the final stack [verify]).
+- **First run:** R1_ONE, one wafer in a 3 × 3 block: 4 A30, 1 B60 (spare), 2 SNSPD-only, 2 NODET (team decision, 2026-11-12). It replaces R1_TRAP and R1_FULL as the next run; their files are kept ([run plan](design/fab/RUN_PLAN.md)).
+- **Mirror (team decision, 2026-11-12):** 100 nm Al, evaporated, raised on the SiO₂, lift-off, no recess. The alignment marks are written in Al with the mirror layer.
 - **Ion height (team decision, 2026-11-09):** the ion height stays at 50 µm ([team decisions](notes/decisions.md)).
 - **Electrode Au, E1 or E2:** open, with both branches written out on the fab pages ([brief](design/fab/briefs/E1_vs_E2.md)).
 - **Readout tilt:** open; the v4 A30 readout fits a 10° tilt at 6.3 V ([brief](design/fab/briefs/readout_tilt.md)).
 - **RF grounding and lead termination:** open; no filter or termination values are chosen ([brief](design/fab/briefs/rf_grounding_and_termination.md)).
 - **Pad pitch:** the generated 360 µm layout is not yet adopted by the team ([brief](design/fab/briefs/pad_pitch.md)).
 - **Carrier and spacer:** the carrier (84-pin, 100-pin or the lab carrier) and the spacer are open ([brief](design/fab/briefs/carrier_and_spacer.md)).
-- **Mirror, raised or inlaid:** open, with the raised 100 nm mirror as the named fallback ([brief](design/fab/briefs/mirror_raised_vs_inlaid.md)).
 - **Testing:** planned in the [test plan](design/fab/test_plan.md), with the [setup page](design/fab/tests/00_SETUP.md) and the [simpler testing page](design/fab/tests/05_SIMPLER_TESTING.md).
 - **What blocks a run:** the witness loops and facility questions in [qualification](design/fab/QUALIFICATION.md) are not yet done.
 
@@ -68,14 +87,15 @@ Ground rules agreed with the team:
 | What | File |
 |---|---|
 | Trap dies (10 × 10 mm) | `design/gds/trap_die_v4_A30.gds` (30 × 30 µm SNSPD, local mirror, slot leads), `trap_die_v4_B60.gds` (60 × 30 µm), `trap_die_v4_NODET.gds` (plain trap, no SNSPD, no Al). v3 (incl. B60) in `gds/archive_v3_baseline/` |
-| Test die (10 × 2.5 mm) | `design/gds/test_die_v4.gds`: T1 Au comb, T2v Au / SiO₂ / Al capacitor, T3 NbN bar, T4/T4b spare SNSPDs on local Al mirrors, T6 Au loop, T8 EBL dose array, T9 geometry array, T10 Al mirror strip (four-point), T11 Au-to-Al via chain, T12 twin Au leads over Al. `test_die_v4_TRAP.gds`: T1 and T6 only. Both pass `check_test_die.py`. v3 test dies in `gds/archive_v3_baseline/` |
-| R&D runs | `design/gds/run_R1_TRAP.gds` (6 NODET + 2 trap-only test dies; **run 1a, chosen first**; sheet `design/fab/RUNSHEET_R1_TRAP.md`) and `run_R1_FULL.gds` (2 A30 + 2 B60 + 2 NODET + 2 TEST): 8 dies, 20.2 × 33.1 mm block at the centre of a 100 mm wafer (`make_run.py`) |
+| Test die (10 × 2.5 mm; not in R1_ONE, files kept) | `design/gds/test_die_v4.gds`: T1 Au comb, T2v Au / SiO₂ / Al capacitor, T3 NbN bar, T4/T4b spare SNSPDs on local Al mirrors, T6 Au loop, T8 EBL dose array, T9 geometry array, T10 Al mirror strip (four-point), T11 Au-to-Al via chain, T12 twin Au leads over Al. `test_die_v4_TRAP.gds`: T1 and T6 only. Both pass `check_test_die.py`. v3 test dies in `gds/archive_v3_baseline/` |
+| R&D runs | **`design/gds/run_R1_ONE.gds`** (2026-11-12, the next run): 9 dies in a 3 × 3 block (4 A30, 1 B60, 2 SNSPD-only, 2 NODET), 10.2 mm saw pitch, checked by `check_run.py R1_ONE`. Superseded for the next run, files kept: `run_R1_TRAP.gds` (6 NODET + 2 trap-only test dies; sheet `design/fab/RUNSHEET_R1_TRAP.md`) and `run_R1_FULL.gds` (2 A30 + 2 B60 + 2 NODET + 2 TEST): 8 dies, 20.2 × 33.1 mm block at the centre of a 100 mm wafer (`make_run.py`) |
+| SNSPD-only die (2026-11-12) | `design/gds/snspd_die_v4.gds`, 10 × 10 mm: eight A30 detector cells D1–D8 with their contact chains and Au bond pads, T3, T11. `make_snspd_die.py`, independent checker `check_snspd_die.py` |
 | Full wafer (reference) | `design/gds/wafer_v4.gds` + `wafer_v4_map.csv/png`: 56 dies, columns of [A30, B60, A30, TEST] |
 | Pad lists | `design/gds/*_pads.csv` |
 | Layer map | `design/gds/layer_map.md` |
 | Simulation layouts | `design/gds/*_sim.json` (read by gds2itvg) |
 | Generators / checks | `make_chip.py`, `make_test_die.py`, `make_run.py`, `make_wafer.py`; `check_chip.py` (DRC + connectivity + fab consistency + no ITO + no pads in the beam-exit corners; **all pass** on v4 A30, B60 and NODET); `check_test_die.py` (written from the specification, independent of the generator); `measure_dies.py` → `measured_v4.md` (areas, meander squares, file hashes) |
-| Simulations | `design/sim/01…24_*.py` (outputs in `design/sim/out/`). New 2026-11-09: `15b` collection on v4, `17` height trade-off, `18` E1 vs E2, `19` lead termination, `20` transport timing. New 2026-11-10: `21` transport waveform, `22` chip RF capacitance, `23` DC-to-RF coupling, `24` RCWA of the meander |
+| Simulations | `design/sim/01…24_*.py` (outputs in `design/sim/out/`). New 2026-11-12: `22b` base SiO₂ sweep, `24b` RCWA scan of the spacer and cap (`rcwa` env), and the `10c` case `al100_cap110`. New 2026-11-09: `15b` collection on v4, `17` height trade-off, `18` E1 vs E2, `19` lead termination, `20` transport timing. New 2026-11-10: `21` transport waveform, `22` chip RF capacitance, `23` DC-to-RF coupling, `24` RCWA of the meander |
 | Literature | `design/research/reports/Trap integrated SNSPD design.md`, `design/references_design.bib`; pointers from 2026-11-09 in `design/research/research_notes/Loose ends 2026-11/` |
 | Fab | `design/fab/TRAVELER.md` (v4 index), `process/01…04`, `RUNSHEET_R1_TRAP.md`, `mask_list.md`, `process_checks.md`, `test_plan.md`, `figures/stack_v4.svg`, `figures/process_flow_v4.svg`; `check_links.py` checks the links between them |
 | Entry page and glossary | `design/START_HERE.md`, `design/GLOSSARY.md` |
@@ -89,7 +109,7 @@ Ground rules agreed with the team:
 
 | Item | Value |
 |---|---|
-| Geometry | Centre DC 40 µm (A30: 25 µm lead slot), RF rails 84 µm, gaps 5 µm; Au (E1 0.35 / E2 6 µm, open) on ~1.3 µm SiO₂ over HR Si; local Al mirror, no ground plane (v4) |
+| Geometry | Centre DC 40 µm (A30: 25 µm lead slot), RF rails 84 µm, gaps 5 µm; Au (E1 0.35 / E2 6 µm, open) on about 1.35 µm SiO₂ over HR Si (final stack, 2026-11-12: base 1.0 µm nominal, spacer 238 nm, cap 110 nm); local Al mirror, no ground plane (v4) |
 | RF drive | 53 V at 28 MHz → radial 3.0 MHz, q 0.30, depth ≈ 52 meV |
 | Outer segments | 15 + 15 at 120 µm pitch (100 µm before step 28) |
 | Zone spacing | Loading ↔ readout 480 µm (team decision 2026-11-08, laser setup; was 600 µm) |
@@ -116,7 +136,7 @@ Ground rules agreed with the team:
 - [ ] Before tape-out, run the witness wafers in [qualification](design/fab/QUALIFICATION.md). Also confirm:
   - the Plating-U04 bath;
   - the Dane NbN recipe (Berggren group);
-- [ ] Before R1_TRAP (v4): no D2 stress or gap-etch loops any more; W5 plating only if E2; W7 bond-and-leak on the v4 stack.
+- [ ] Before R1_ONE (v4): no D2 stress or gap-etch loops any more; W5 plating only if E2; W7 bond-and-leak on the v4 stack. W8 is no longer needed for a mirror recess (the mirror is raised).
 - [ ] Ask MIT.nano staff the facility questions in [facility questions](design/fab/QUALIFICATION.md#facility-confirmations): which tools accept Au, NbN sputter access, gold plating tank.
 - [ ] Check whether T4/T4b on the test die can be wire-bonded for the cold SNSPD test (marked [verify] in `test_plan.md` (b)).
 - [ ] Ask the lab the 14 questions in the [test setup page](design/fab/tests/00_SETUP.md#6-questions-for-the-lab) (carrier, DC and coaxial lines, resonator, thermometry, light on the detector, DAC).
@@ -127,6 +147,13 @@ Ground rules agreed with the team:
   - measured loss tangent of the SiO₂ films (none measured, step 41) and measured Au resistivity at 4 K (no literature value found, step 31).
 
 ## History
+
+### 2026-11-12, one-wafer pass: status moved from the top
+
+Earlier status, kept here when the current state moved to the top:
+- **First run (2026-11-02, 2026-11-08):** R1_TRAP is trap only (6 NODET and 2 trap-only test dies) and is run 1a, chosen first ([run sheet](design/fab/RUNSHEET_R1_TRAP.md)). Superseded on 2026-11-12 by R1_ONE.
+- **Mirror (team decision, 2026-11-09):** the Al mirror is 100 nm thick and inlaid in a 100 nm recess in the SiO₂ ([team decisions](notes/decisions.md)). Superseded on 2026-11-12: raised, no recess.
+- **Mirror, raised or inlaid:** open on 2026-11-10, with the raised 100 nm mirror as the named fallback ([brief](design/fab/briefs/mirror_raised_vs_inlaid.md)). Closed on 2026-11-12 with the raised mirror.
 
 ### 2026-11-09, loose-ends pass (DESIGN_LOG steps 30–39)
 
@@ -221,3 +248,7 @@ Start with [open decisions](design/fab/OPEN_DECISIONS.md) and the [team's decisi
 | Narrow 10 × 2.5 mm die | 10 × 10 mm die, trap centred, pads at the edges | Team decision 2026-11-07 |
 | Die-wide Al ground plane under 10 µm D2 (v3) | Local Al mirror, no D2, leads in a centre-DC slot (v4) | Team decision 2026-11-08: better optics with vacuum above the cap; NIST traps without a plane on HR Si |
 | A30 + B60 | A30 only, then A30 + B60 again | Team decisions 2026-11-08 (B60 kept after the v4 numbers) |
+| R1_TRAP first, then R1_FULL (run 1a, run 1b) | One wafer, four chip types: R1_ONE (9 dies) | Team decision 2026-11-12: about one week of fab; fewest ways for the run to go wrong |
+| Inlaid 100 nm Al mirror (100 nm recess in the SiO₂, 2026-11-09) | Raised 100 nm Al, lift-off, no recess | Team decision 2026-11-12; no source read covers the recess and lift-off step |
+| Si-etched alignment marks (process step 1) and Al mirror marks (layer 1 with step 3) | Alignment marks in Al, written with the mirror layer | Claude's proposal, accepted by the team 2026-11-12: one lithography and one etch fewer |
+| Ti 10 / Au 350 nm contacts (layer 22) | Ti 5 / Au 50 nm contacts | Claude's call, not yet adopted; 350 nm has no job in v4 (contact layer, e-beam crosses) |

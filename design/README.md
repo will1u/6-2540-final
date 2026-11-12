@@ -25,10 +25,12 @@ For fabrication review, start with [fab overview](fab/README.md), [variants](fab
 | `sim/` | Simulation scripts, numbered in the order they were run. Outputs go to `sim/out/<script>/`. |
 | `SIMPLIFICATIONS.md` | Wafer layout and run-size options; possible design simplifications and the tests that would check each one (a plan; nothing run). |
 | `gds/make_chip.py` | Generates the v4 10 × 10 mm trap dies (local mirror, no D2; DESIGN_LOG step 25): `trap_die_v4_A30.gds`; `--nodet` builds the plain trap die without an SNSPD or Al (`trap_die_v4_NODET.gds`, the R1_TRAP die); `--uniform` builds `trap_die_v4_UNIFORM.gds`, a simulation-only reference (never for fab). It also writes the simulation layouts (`*_sim.json` for E2 6 µm Au, `*_E1_sim.json` for E1 0.35 µm Au, and `*_simfloor.gds`, sim only) and the pad list (`*_pads.csv`). The v3 baseline dies (incl. B60) are in `gds/archive_v3_baseline/`. |
-| `gds/make_test_die.py` | 10 × 2.5 mm test-structure die for the v4 stack (`test_die_v4.gds`): T1, T2v, T3, T4/T4b, T6, T8 (EBL dose array), T9 (geometry array), T10 (Al mirror strip), T11 (Au-to-Al via chain), T12 (twin Au leads over Al). `--trap-only` writes `test_die_v4_TRAP.gds` (T1 and T6, no Al) for trap-only runs. The v3 test dies are in `gds/archive_v3_baseline/`. |
+| `gds/make_test_die.py` | 10 × 2.5 mm test-structure die for the v4 stack (`test_die_v4.gds`): T1, T2v, T3, T4/T4b, T6, T8 (EBL dose array), T9 (geometry array), T10 (Al mirror strip), T11 (Au-to-Al via chain), T12 (twin Au leads over Al). `--trap-only` writes `test_die_v4_TRAP.gds` (T1 and T6, no Al) for trap-only runs. The v3 test dies are in `gds/archive_v3_baseline/`. **Superseded for the next run: not in R1_ONE; the files are kept.** |
 | `gds/check_test_die.py` | Independent checks on the test dies (spacing, connectivity, openings, mirrors), written from the specification and not from the generator. |
 | `gds/measure_dies.py` | Read-only measurement of the released GDS files: area per layer, meander squares and inductance, file hashes. Writes `gds/measured_v4.md`, which the fab pages cite. |
-| `gds/make_run.py` | Small R&D run layouts for MIT.nano: `run_R1_TRAP.gds`, `run_R1_FULL.gds` (8 dies at the wafer centre, map CSV/PNG). |
+| `gds/make_run.py` | Small R&D run layouts for MIT.nano. **`run_R1_ONE.gds`** (2026-11-12: 3 × 3 block of 9 dies, the next run; `make_run.py R1_ONE`, map CSV/PNG). `run_R1_TRAP.gds` and `run_R1_FULL.gds` are superseded for the next run (files kept). |
+| `gds/check_run.py` | Run-level checks on a run file, for example `check_run.py R1_ONE`: grid, streets, overlap, wafer radius, and that each die in the run matches its die file. |
+| `gds/make_snspd_die.py`, `gds/check_snspd_die.py` | The SNSPD-only die `snspd_die_v4.gds` (2026-11-12): eight A30 detector cells D1–D8 with the A30 contact chain, Au bond pads, T3 and T11. The checker is independent of the generator. |
 | `gds/make_wafer.py` | Full-wafer reference layout (`wafer_v4.gds`, 56 dies, map CSV/PNG). |
 | `gds/archive_v1_square/`, `gds/archive_v2_narrow/` | Superseded layouts: v1 square die (DESIGN_LOG step 8), v2 narrow die with the two-ITO window (steps 12–16). |
 | `gds/check_chip.py` | DRC, connectivity and short checks on a generated GDS, plus preview PNGs. |
@@ -45,6 +47,15 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 
 ```bash
 ./run.sh ../gds/make_chip.py && ./run.sh ../gds/check_chip.py trap_die_v4_A30
+```
+
+Regenerate and check the 2026-11-12 pass (run from `design/sim`; `make_snspd_die.py` and `make_run.py R1_ONE` write files, so the checks come after them):
+
+```bash
+./run.sh ../gds/make_snspd_die.py
+./run.sh ../gds/check_snspd_die.py
+./run.sh ../gds/make_run.py R1_ONE
+./run.sh ../gds/check_run.py R1_ONE
 ```
 
 ```bash
@@ -73,7 +84,7 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 | `13_dc_height_tuning.py` | Can DC voltages push the ion back up over the readout window? DC needed and excess micromotion vs upward shift, at 0° and 10° radial tilt. |
 | `14_staircase_check.py` | Staircase fingers + leads vs plain equal-depth segments (`trap_die_v3_UNIFORM`, read from `gds/archive_v3_baseline/`) and the electrode repo's five-wire example: unit potentials, symmetry, zone voltages, transport. |
 | `09c_localmirror_optics.py`, `10b_rf_pickup_v4.py` | v4 versions of 09 and 10: NbN absorption with vacuum above the cap (sets the 160 nm cap); RF pickup with the slot leads and the local mirror. |
-| `10c_mirror_thickness.py` | 10b's solver over Al mirror thicknesses 50–450 nm and an inlaid mirror: strip current, swing, extra nanowire current, strip dissipation, lead common mode, micromotion estimate (step 37). |
+| `10c_mirror_thickness.py` | 10b's solver over Al mirror thicknesses 50–450 nm and an inlaid mirror: strip current, swing, extra nanowire current, strip dissipation, lead common mode, micromotion estimate (step 37). Case `al100_cap110` (2026-11-12): the slot cross-section of the final stack, raised 100 nm Al with a 110 nm cap under the leads (use for the mirror and leads); case `al100` is the direct nanowire pickup (step 45). |
 | `10d_mirror_step.py` | The same solver on the full cross-section with a raised mirror (0, 100, 450 nm) and a sideways-misaligned mirror (0, 2, 5 µm): shift of the RF null, change in q, micromotion if not re-tuned (step 39). Options `--one`, `--au E1\|E2`. |
 | `15_snspd_geometry.py` | SNSPD geometry budget on the v3 stack: collection, refraction footprint, absorption vs fill factor, turn crowding, kinetic inductance. |
 | `15b_collection_v4.py` | Collection and NbN absorption on the v4 stack, for A30/B60 and both electrode options. |
@@ -85,6 +96,8 @@ Everything uses the `electrode` conda env, which has gds2itvg, gdstk, shapely an
 | `21_transport_waveform.py` | Can the static transport table become a voltage-versus-time waveform a DAC could play? (step 40; headline numbers in [sim/INDEX.md](sim/INDEX.md)) |
 | `22_rf_capacitance.py` | Chip RF capacitance, dielectric loss and the resonator numbers (step 41) |
 | `23_dc_rf_coupling.py` | RF coupling from the rails onto the DC electrodes, and the effect of a filter capacitor (step 42) |
+| `22b_base_sio2_sweep.py` | Chip RF capacitance against base SiO₂ thickness, 0.15–2.0 µm, for the final stack; imports sim 22 (step 45) |
 | `24_rcwa_meander.py` | RCWA of the NbN meander absorption at normal incidence, in the separate `rcwa` env (step 43) |
+| `24b_rcwa_stack_scan.py` | RCWA scan of the spacer and the cap (160 nm over the wires), in the same `rcwa` env as sim 24 (step 45) |
 
 Full index of all scripts, with headline numbers and validity: [sim/INDEX.md](sim/INDEX.md).
